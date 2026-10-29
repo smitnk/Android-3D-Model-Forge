@@ -1,1 +1,1 @@
-run 2 cancelled sha=d70a2649a0a66163f92f8f92c7d92c643d143b0a artifact=animation-2 id=
+run 3 success sha=f19ba91f08701a6725e639988f4ae4c9f807cb00 artifact=animation-3 id=12930104724
