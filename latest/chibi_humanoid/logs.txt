@@ -1,0 +1,25 @@
+Blender 4.2.3 LTS
+	build date: 2024-10-14
+	build time: 23:31:34
+	build commit date: 2024-10-14
+	build commit time: 15:20
+	build hash: 0e22e4fcea03
+	build branch: blender-v4.2-release
+	build platform: Linux
+	build type: Release
+	build c flags:  -Wall -Werror=implicit-function-declaration -Wstrict-prototypes -Werror=return-type -Werror=vla -Wmissing-prototypes -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wlogical-op -Wundef -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Wformat-signedness -Wrestrict -Wno-stringop-overread -Wno-stringop-overflow -Wnonnull -Wabsolute-value -Wuninitialized -Wredundant-decls -Wshadow -Wimplicit-fallthrough=5 -Wno-error=unused-but-set-variable  -march=x86-64-v2 -std=gnu11 -pipe -fPIC -funsigned-char -fno-strict-aliasing -ffp-contract=off  
+	build c++ flags:  -Wuninitialized -Wredundant-decls -Wall -Wno-invalid-offsetof -Wno-sign-compare -Wlogical-op -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Werror=return-type -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wundef -Wcomma-subscript -Wformat-signedness -Wrestrict -Wno-suggest-override -Wuninitialized -Wno-stringop-overread -Wno-stringop-overflow -Wimplicit-fallthrough=5 -Wundef -Wmissing-declarations  -march=x86-64-v2 -pipe -fPIC -funsigned-char -fno-strict-aliasing -ffp-contract=off  
+	build link flags:  -Wl,--version-script='/home/blender/git/blender-v420/blender.git/source/creator/symbols_unix.map'
+	build system: CMake
+test_missing_material_counted (test_glb_inspect.TestGLBInspect.test_missing_material_counted) ... ok
+test_rejects_bad_magic (test_glb_inspect.TestGLBInspect.test_rejects_bad_magic) ... ok
+test_rejects_length_mismatch (test_glb_inspect.TestGLBInspect.test_rejects_length_mismatch) ... ok
+test_report_renders (test_glb_inspect.TestGLBInspect.test_report_renders) ... ok
+test_valid_triangle (test_glb_inspect.TestGLBInspect.test_valid_triangle) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
+T-pose self-check failed: {'arm_angle_deg_L': 53.015, 'arm_angle_deg_R': 51.92, 'pass': False}
