@@ -95,7 +95,7 @@ def build(a, material, part):
         body.ellipsoid((h(0.46) * x, -h(0.045), SHOULDER_Z), h(0.025), h(0.025), h(0.02))  # thumb, forward
         body.capsule((h(0.082) * x, 0, h(0.31)), (h(0.085) * x, 0, h(0.09)), h(0.054))  # leg (gap kept)
         body.ellipsoid((h(0.10) * x, -h(0.03), h(0.04)), h(0.078), h(0.14), h(0.045))  # foot, toe forward
-    body_obj = body.to_mesh_object("Body", 0.4)
+    body_obj = body.to_mesh_object("Body", 1.0)  # no decimation: it empties straight tubes (arms)
 
     parts = [head_obj, body_obj]
     lo = min(v.co.z for o in parts for v in o.data.vertices)
