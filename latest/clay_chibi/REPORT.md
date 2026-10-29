@@ -30,16 +30,16 @@
 - ✅ `centered` center x 0.0000, y -0.0130
 - ✅ `upright` height 1.295 > depth 0.496
 - ✅ `no_degenerate_parts` 
-- ✅ `geom_tpose_arm_L` forearm/hand 0.50 deg from horizontal vs upper arm (max 8.0)
-- ✅ `geom_arm_is_limb_L` arm band vertical thickness 0.050 m
-- ✅ `geom_leg_vertical_L` leg centre drift 0.0187 m between lower and upper leg
+- ✅ `geom_tpose_arm_L` forearm/hand 0.33 deg from horizontal vs upper arm (max 8.0)
+- ✅ `geom_arm_is_limb_L` arm band vertical thickness 0.065 m
+- ✅ `geom_leg_vertical_L` leg centre drift 0.0125 m between lower and upper leg
 - ✅ `geom_foot_forward_L` foot length 0.230 > width 0.154, toe at y -0.150
-- ✅ `geom_tpose_arm_R` forearm/hand 0.56 deg from horizontal vs upper arm (max 8.0)
-- ✅ `geom_arm_is_limb_R` arm band vertical thickness 0.051 m
-- ✅ `geom_leg_vertical_R` leg centre drift 0.0181 m between lower and upper leg
+- ✅ `geom_tpose_arm_R` forearm/hand 0.76 deg from horizontal vs upper arm (max 8.0)
+- ✅ `geom_arm_is_limb_R` arm band vertical thickness 0.065 m
+- ✅ `geom_leg_vertical_R` leg centre drift 0.0116 m between lower and upper leg
 - ✅ `geom_foot_forward_R` foot length 0.230 > width 0.154, toe at y -0.150
-- ✅ `geom_left_right_symmetry` hand mirror error 0.00082 m
-- ✅ `geom_chibi_head` head+neck above shoulders = 46% of height
+- ✅ `geom_left_right_symmetry` hand mirror error 0.00026 m
+- ✅ `geom_head_size` head+neck above shoulders = 46% of height
 - ✅ `geom_faces_forward` front-most head point at x 0.003, y -0.261 (Blender -Y = glTF +Z front)
 - ✅ `geom_tpose_span` span 0.984 m vs height 1.295 m
 - ✅ `skin_in_glb` 1 skins, 2 skinned primitives

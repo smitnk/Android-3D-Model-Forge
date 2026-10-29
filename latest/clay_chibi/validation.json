@@ -70,17 +70,17 @@
     {
       "check": "geom_tpose_arm_L",
       "pass": true,
-      "detail": "forearm/hand 0.50 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 0.33 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_L",
       "pass": true,
-      "detail": "arm band vertical thickness 0.050 m"
+      "detail": "arm band vertical thickness 0.065 m"
     },
     {
       "check": "geom_leg_vertical_L",
       "pass": true,
-      "detail": "leg centre drift 0.0187 m between lower and upper leg"
+      "detail": "leg centre drift 0.0125 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_L",
@@ -90,17 +90,17 @@
     {
       "check": "geom_tpose_arm_R",
       "pass": true,
-      "detail": "forearm/hand 0.56 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 0.76 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_R",
       "pass": true,
-      "detail": "arm band vertical thickness 0.051 m"
+      "detail": "arm band vertical thickness 0.065 m"
     },
     {
       "check": "geom_leg_vertical_R",
       "pass": true,
-      "detail": "leg centre drift 0.0181 m between lower and upper leg"
+      "detail": "leg centre drift 0.0116 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_R",
@@ -110,10 +110,10 @@
     {
       "check": "geom_left_right_symmetry",
       "pass": true,
-      "detail": "hand mirror error 0.00082 m"
+      "detail": "hand mirror error 0.00026 m"
     },
     {
-      "check": "geom_chibi_head",
+      "check": "geom_head_size",
       "pass": true,
       "detail": "head+neck above shoulders = 46% of height"
     },

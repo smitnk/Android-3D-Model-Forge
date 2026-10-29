@@ -21,17 +21,17 @@ test_valid_triangle (test_glb_inspect.TestGLBInspect.test_valid_triangle) ... ok
 Ran 5 tests in 0.001s
 
 OK
-08:56:05 | INFO: Starting glTF 2.0 export
-08:56:05 | INFO: Extracting primitive: Body
-08:56:05 | INFO: Primitives created: 1
-08:56:05 | INFO: Extracting primitive: Head
-08:56:05 | INFO: Primitives created: 1
-08:56:05 | INFO: Finished glTF 2.0 export in 0.08051753044128418 s
+09:02:03 | INFO: Starting glTF 2.0 export
+09:02:03 | INFO: Extracting primitive: Body
+09:02:03 | INFO: Primitives created: 1
+09:02:03 | INFO: Extracting primitive: Head
+09:02:03 | INFO: Primitives created: 1
+09:02:03 | INFO: Finished glTF 2.0 export in 0.1009969711303711 s
 Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 Info: Total files 0 | Changed 0 | Failed 0
 Fra:1 Mem:19.43M (Peak 19.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
-Fra:1 Mem:19.43M (Peak 19.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
-Fra:1 Mem:19.84M (Peak 19.84M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:19.65M (Peak 19.65M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:19.65M (Peak 19.65M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
 Fra:1 Mem:21.89M (Peak 21.89M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
 Fra:1 Mem:19.86M (Peak 21.89M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
 Fra:1 Mem:19.87M (Peak 21.89M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
@@ -69,11 +69,11 @@ Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, 
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, ViewLayer | Updating Device | Writing constant memory
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:68.37M (Peak 68.37M) | Time:00:00.25 | Remaining:00:11.46 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:16.78 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:16.78 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Finished
+Fra:1 Mem:68.37M (Peak 68.37M) | Time:00:00.34 | Remaining:00:15.48 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:21.91 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:21.91 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Finished
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/clay-chibi-front.png'
-Time: 00:16.83 (Saving: 00:00.04)
+Time: 00:21.97 (Saving: 00:00.05)
 
 Fra:1 Mem:19.43M (Peak 19.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
 Fra:1 Mem:19.43M (Peak 19.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
@@ -115,15 +115,15 @@ Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, 
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, ViewLayer | Updating Device | Writing constant memory
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:68.37M (Peak 68.37M) | Time:00:00.27 | Remaining:00:12.52 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:17.69 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:17.69 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Finished
+Fra:1 Mem:68.37M (Peak 68.37M) | Time:00:00.36 | Remaining:00:16.80 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:22.90 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:22.90 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Finished
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/clay-chibi-three-quarter.png'
-Time: 00:17.74 (Saving: 00:00.04)
+Time: 00:22.95 (Saving: 00:00.05)
 
 Fra:1 Mem:19.43M (Peak 19.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
-Fra:1 Mem:19.43M (Peak 19.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
-Fra:1 Mem:19.62M (Peak 19.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:19.65M (Peak 19.65M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
+Fra:1 Mem:19.65M (Peak 19.65M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
 Fra:1 Mem:21.89M (Peak 21.89M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
 Fra:1 Mem:19.86M (Peak 21.89M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
 Fra:1 Mem:19.87M (Peak 21.89M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
@@ -144,8 +144,8 @@ Fra:1 Mem:20.71M (Peak 21.89M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, 
 Fra:1 Mem:20.71M (Peak 21.89M) | Time:00:00.00 | Mem:0.21M, Peak:0.21M | Scene, ViewLayer | Updating Scene BVH | Building
 Fra:1 Mem:20.71M (Peak 21.89M) | Time:00:00.00 | Mem:0.21M, Peak:0.21M | Scene, ViewLayer | Updating Scene BVH | Building BVH
 Fra:1 Mem:20.71M (Peak 21.89M) | Time:00:00.00 | Mem:1.32M, Peak:1.32M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
-Fra:1 Mem:20.71M (Peak 21.89M) | Time:00:00.00 | Mem:2.65M, Peak:3.76M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
-Fra:1 Mem:20.71M (Peak 21.89M) | Time:00:00.00 | Mem:2.65M, Peak:3.76M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:20.71M (Peak 21.89M) | Time:00:00.01 | Mem:2.65M, Peak:3.76M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:20.71M (Peak 21.89M) | Time:00:00.01 | Mem:2.65M, Peak:3.76M | Scene, ViewLayer | Updating Mesh | Computing normals
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:2.65M, Peak:3.76M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.90M, Peak:3.90M | Scene, ViewLayer | Updating Objects Flags
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.90M, Peak:3.90M | Scene, ViewLayer | Updating Primitive Offsets
@@ -161,11 +161,11 @@ Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, 
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, ViewLayer | Updating Device | Writing constant memory
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
 Fra:1 Mem:21.97M (Peak 21.97M) | Time:00:00.01 | Mem:3.99M, Peak:3.99M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:68.37M (Peak 68.37M) | Time:00:00.21 | Remaining:00:09.57 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:15.23 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:15.23 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Finished
+Fra:1 Mem:68.37M (Peak 68.37M) | Time:00:00.29 | Remaining:00:13.23 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:19.71 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:87.91M (Peak 117.21M) | Time:00:19.71 | Mem:50.38M, Peak:50.38M | Scene, ViewLayer | Finished
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/clay-chibi-back.png'
-Time: 00:15.28 (Saving: 00:00.04)
+Time: 00:19.76 (Saving: 00:00.05)
 
 clay_chibi: carved 824 eye-socket vertices
 INFO Draco mesh compression is available, use library at /home/runner/blender/4.2/python/lib/python3.11/site-packages/libextern_draco.so
@@ -205,8 +205,8 @@ Info: Saved "clay-chibi.blend"
     "skinning": "blended distance weights"
   },
   "tpose_selfcheck": {
-    "arm_angle_deg_L": 0.521,
-    "arm_angle_deg_R": 0.028,
+    "arm_angle_deg_L": 0.074,
+    "arm_angle_deg_R": 0.182,
     "pass": true
   },
   "deformation_selftest": {
@@ -291,10 +291,10 @@ Blender quit
   "skinned_primitives": 2,
   "generator": "Khronos glTF Blender I/O v4.2.70"
 }
-08:56:56 | INFO: Data are loaded, start creating Blender stuff
-08:56:56 | INFO: Blender create Mesh node Body
-08:56:56 | INFO: Blender create Mesh node Head
-08:56:56 | INFO: glTF import finished in 0.06s
+09:03:09 | INFO: Data are loaded, start creating Blender stuff
+09:03:09 | INFO: Blender create Mesh node Body
+09:03:09 | INFO: Blender create Mesh node Head
+09:03:09 | INFO: glTF import finished in 0.08s
 [PASS] glb_exists_nonempty out/clay-chibi.glb
 [PASS] glb_structure_valid 2 meshes, 18223 verts, 36442 tris
 [PASS] materials_present Clay
@@ -308,16 +308,16 @@ Blender quit
 [PASS] centered center x 0.0000, y -0.0130
 [PASS] upright height 1.295 > depth 0.496
 [PASS] no_degenerate_parts 
-[PASS] geom_tpose_arm_L forearm/hand 0.50 deg from horizontal vs upper arm (max 8.0)
-[PASS] geom_arm_is_limb_L arm band vertical thickness 0.050 m
-[PASS] geom_leg_vertical_L leg centre drift 0.0187 m between lower and upper leg
+[PASS] geom_tpose_arm_L forearm/hand 0.33 deg from horizontal vs upper arm (max 8.0)
+[PASS] geom_arm_is_limb_L arm band vertical thickness 0.065 m
+[PASS] geom_leg_vertical_L leg centre drift 0.0125 m between lower and upper leg
 [PASS] geom_foot_forward_L foot length 0.230 > width 0.154, toe at y -0.150
-[PASS] geom_tpose_arm_R forearm/hand 0.56 deg from horizontal vs upper arm (max 8.0)
-[PASS] geom_arm_is_limb_R arm band vertical thickness 0.051 m
-[PASS] geom_leg_vertical_R leg centre drift 0.0181 m between lower and upper leg
+[PASS] geom_tpose_arm_R forearm/hand 0.76 deg from horizontal vs upper arm (max 8.0)
+[PASS] geom_arm_is_limb_R arm band vertical thickness 0.065 m
+[PASS] geom_leg_vertical_R leg centre drift 0.0116 m between lower and upper leg
 [PASS] geom_foot_forward_R foot length 0.230 > width 0.154, toe at y -0.150
-[PASS] geom_left_right_symmetry hand mirror error 0.00082 m
-[PASS] geom_chibi_head head+neck above shoulders = 46% of height
+[PASS] geom_left_right_symmetry hand mirror error 0.00026 m
+[PASS] geom_head_size head+neck above shoulders = 46% of height
 [PASS] geom_faces_forward front-most head point at x 0.003, y -0.261 (Blender -Y = glTF +Z front)
 [PASS] geom_tpose_span span 0.984 m vs height 1.295 m
 [PASS] skin_in_glb 1 skins, 2 skinned primitives
@@ -334,9 +334,9 @@ Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 Blender quit
 From https://github.com/smitnk/Android-3D-Model-Forge
  * branch            main       -> FETCH_HEAD
- + 68690bc...06d0cef main       -> origin/main  (forced update)
+ + 8f9737f...5480b49 main       -> origin/main  (forced update)
 Switched to a new branch 'publish'
-[publish 39442bb] Update clay_chibi preview from run 10 [skip ci]
- 4 files changed, 19 insertions(+), 19 deletions(-)
+[publish 8d94b44] Update clay_chibi preview from run 11 [skip ci]
+ 4 files changed, 8 insertions(+), 8 deletions(-)
 To https://github.com/smitnk/Android-3D-Model-Forge
-   06d0cef..39442bb  HEAD -> main
+   5480b49..8d94b44  HEAD -> main
