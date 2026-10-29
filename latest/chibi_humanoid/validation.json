@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "665584 bytes"
+      "detail": "667472 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -70,7 +70,7 @@
     {
       "check": "geom_tpose_arm_L",
       "pass": true,
-      "detail": "forearm/hand 0.69 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 0.26 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_L",
@@ -80,7 +80,7 @@
     {
       "check": "geom_leg_vertical_L",
       "pass": true,
-      "detail": "leg centre drift 0.0022 m between lower and upper leg"
+      "detail": "leg centre drift 0.0029 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_L",
@@ -90,7 +90,7 @@
     {
       "check": "geom_tpose_arm_R",
       "pass": true,
-      "detail": "forearm/hand 0.69 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 0.26 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_R",
@@ -100,7 +100,7 @@
     {
       "check": "geom_leg_vertical_R",
       "pass": true,
-      "detail": "leg centre drift 0.0034 m between lower and upper leg"
+      "detail": "leg centre drift 0.0039 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_R",
@@ -113,7 +113,7 @@
       "detail": "hand mirror error 0.00000 m"
     },
     {
-      "check": "geom_chibi_head",
+      "check": "geom_head_size",
       "pass": true,
       "detail": "head+neck above shoulders = 52% of height"
     },
@@ -240,7 +240,7 @@
   ],
   "summary": {
     "valid": true,
-    "bytes": 665584,
+    "bytes": 667472,
     "meshes": 42,
     "mesh_nodes": [
       "Ear_L",

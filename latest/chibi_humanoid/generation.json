@@ -41,8 +41,8 @@
     "skinning": "rigid per-part"
   },
   "tpose_selfcheck": {
-    "arm_angle_deg_L": 0.788,
-    "arm_angle_deg_R": 0.788,
+    "arm_angle_deg_L": 0.687,
+    "arm_angle_deg_R": 0.687,
     "pass": true
   },
   "deformation_selftest": {
