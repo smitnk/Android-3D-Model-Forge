@@ -1,0 +1,200 @@
+name: Render Animation Video
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Published model (used when model_path and model_url are empty)"
+        type: choice
+        options: [forge-kid, gorilla, round-buddy]
+        default: forge-kid
+      model_path:
+        description: "OR repository path to a .glb/.blend (e.g. assets/my.glb)"
+        type: string
+        default: ""
+      model_url:
+        description: "OR https URL of a .glb"
+        type: string
+        default: ""
+      caption:
+        description: "Caption words (shown one at a time; '|' separates phrases)"
+        type: string
+        default: "Meet the Forge crew | walking in | say hello | jump for joy"
+      duration:
+        description: "Seconds"
+        type: string
+        default: "8"
+      fps:
+        type: string
+        default: "24"
+      resolution:
+        description: "WIDTHxHEIGHT (portrait)"
+        type: string
+        default: "720x1280"
+      samples:
+        description: "Cycles samples per pixel (CPU)"
+        type: string
+        default: "24"
+  push:
+    branches: [main]
+    paths: ["animation/**", ".github/workflows/render-animation.yml"]
+
+permissions:
+  contents: write   # only to write logs to the ci-results branch (no videos are committed)
+
+concurrency:
+  group: render-animation
+  cancel-in-progress: true
+
+env:
+  BLENDER_VERSION: "4.2.3"
+  BLENDER_SERIES: "4.2"
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve settings
+        id: cfg
+        env:
+          MODEL: ${{ inputs.model || 'forge-kid' }}
+          MODEL_PATH: ${{ inputs.model_path }}
+          MODEL_URL: ${{ inputs.model_url }}
+          DURATION: ${{ inputs.duration || '8' }}
+          FPS: ${{ inputs.fps || '24' }}
+          RES: ${{ inputs.resolution || '720x1280' }}
+          SAMPLES: ${{ inputs.samples || '24' }}
+          MSG: ${{ github.event.head_commit.message }}
+        run: |
+          set -euo pipefail
+          # a push whose message contains [quick] renders a short low-res test first
+          if [[ "$MSG" == *"[quick]"* ]]; then DURATION=2; RES=360x640; SAMPLES=8; fi
+          [[ "$DURATION" =~ ^[0-9]+(\.[0-9]+)?$ ]] || { echo "::error::bad duration"; exit 1; }
+          [[ "$FPS" =~ ^[0-9]+$ && "$FPS" -ge 1 && "$FPS" -le 60 ]] || { echo "::error::bad fps"; exit 1; }
+          [[ "$RES" =~ ^([0-9]+)x([0-9]+)$ ]] || { echo "::error::resolution must be WIDTHxHEIGHT"; exit 1; }
+          W=${BASH_REMATCH[1]}; H=${BASH_REMATCH[2]}
+          (( W % 2 == 0 && H % 2 == 0 && W <= 2160 && H <= 3840 )) || { echo "::error::resolution must be even and <= 2160x3840"; exit 1; }
+          [[ "$SAMPLES" =~ ^[0-9]+$ && "$SAMPLES" -le 512 ]] || { echo "::error::bad samples"; exit 1; }
+          mkdir -p in
+          if [ -n "$MODEL_PATH" ]; then
+            [[ "$MODEL_PATH" != *..* && -f "$MODEL_PATH" ]] || { echo "::error::model_path not found: $MODEL_PATH"; exit 1; }
+            src="$MODEL_PATH"
+          else
+            url="${MODEL_URL:-https://github.com/${{ github.repository }}/releases/download/model-latest/${MODEL}.glb}"
+            [[ "$url" == https://* && "$url" == *.glb* ]] || { echo "::error::model_url must be an https .glb URL"; exit 1; }
+            curl -fsSL --retry 3 --max-filesize 200000000 -o in/model.glb "$url"
+            src=in/model.glb
+          fi
+          head -c 4 "$src" | grep -q glTF || [[ "$src" == *.blend ]] || { echo "::error::input is not a GLB"; exit 1; }
+          echo "Model: $src  ${DURATION}s ${FPS}fps ${W}x${H} samples=$SAMPLES" | tee logs.txt
+          { echo "src=$src"; echo "duration=$DURATION"; echo "fps=$FPS"; echo "w=$W"; echo "h=$H"; echo "samples=$SAMPLES"; } >> "$GITHUB_OUTPUT"
+
+      - name: Restore cached Blender
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/blender
+          key: blender-${{ env.BLENDER_VERSION }}-linux-x64
+
+      - name: Download pinned Blender
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          base="https://download.blender.org/release/Blender${BLENDER_SERIES}"
+          file="blender-${BLENDER_VERSION}-linux-x64.tar.xz"
+          curl -fsSL --retry 3 -o "/tmp/$file" "$base/$file"
+          mkdir -p ~/blender
+          tar -xf "/tmp/$file" -C ~/blender --strip-components=1
+
+      - name: Install runtime libraries and FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libxkbcommon0 libsm6 libice6 libegl1 > /dev/null
+          ffmpeg -version | head -1 | tee -a logs.txt
+          ~/blender/blender --version | head -1 | tee -a logs.txt
+
+      - name: Unit tests
+        run: python3 -m unittest tests.test_timeline -v 2>&1 | tee -a logs.txt
+
+      - name: Build scene and render frames (Cycles CPU)
+        env:
+          CAPTION: ${{ inputs.caption || 'Meet the Forge crew | walking in | say hello | jump for joy' }}
+        run: |
+          set -o pipefail
+          start=$(date +%s)
+          ~/blender/blender -b --factory-startup --python-exit-code 1 --python animation/make_video.py -- \
+            --model "${{ steps.cfg.outputs.src }}" --out anim_out --fps ${{ steps.cfg.outputs.fps }} \
+            --duration ${{ steps.cfg.outputs.duration }} --width ${{ steps.cfg.outputs.w }} \
+            --height ${{ steps.cfg.outputs.h }} --samples ${{ steps.cfg.outputs.samples }} \
+            --caption "$CAPTION" 2>&1 | grep -v "^Fra:" | tee -a logs.txt
+          echo "Render time: $(( $(date +%s) - start ))s" | tee -a logs.txt
+
+      - name: Check frames
+        run: |
+          set -euo pipefail
+          n=$(ls anim_out/frames/*.png | wc -l)
+          want=$(python3 -c "print(round(${{ steps.cfg.outputs.fps }}*${{ steps.cfg.outputs.duration }}))")
+          echo "Frames: $n / $want" | tee -a logs.txt
+          [ "$n" -eq "$want" ] || { echo "::error::frame count mismatch"; exit 1; }
+          # a frame with the character in it is far larger than an empty transparent one
+          small=$(find anim_out/frames -name '*.png' -size -3k | wc -l)
+          [ "$small" -eq 0 ] || { echo "::error::$small empty-looking frames"; exit 1; }
+
+      - name: Encode MP4 (H.264, yuv420p, faststart) and preview
+        env:
+          CAPTION: ${{ inputs.caption || 'Meet the Forge crew | walking in | say hello | jump for joy' }}
+        run: |
+          set -euo pipefail
+          fps=${{ steps.cfg.outputs.fps }}
+          caps=$(python3 animation/timeline.py --caption "$CAPTION" --duration ${{ steps.cfg.outputs.duration }} --height ${{ steps.cfg.outputs.h }})
+          mkdir -p video
+          ffmpeg -v error -y -framerate "$fps" -i anim_out/frames/%04d.png -loop 1 -framerate "$fps" -i anim_out/background.ppm \
+            -filter_complex "[1:v][0:v]overlay=shortest=1,${caps},format=yuv420p[v]" -map "[v]" \
+            -c:v libx264 -preset veryfast -crf 20 -movflags +faststart video/forge-animation.mp4
+          ffprobe -v error -show_entries stream=codec_name,width,height,pix_fmt,nb_frames:format=duration -of default=nw=1 video/forge-animation.mp4 | tee -a logs.txt
+          ffprobe -v error -show_entries stream=codec_name -of csv=p=0 video/forge-animation.mp4 | grep -qx h264
+          ffmpeg -v error -y -ss "$(python3 -c "print(${{ steps.cfg.outputs.duration }}*0.5)")" -i video/forge-animation.mp4 -frames:v 1 video/preview.png
+          cp anim_out/scene_check.json logs.txt video/
+          rm -rf anim_out/frames   # frames are no longer needed once the MP4 is verified
+
+      - name: Upload video artifact
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: animation-${{ github.run_number }}
+          path: video/
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## Animation render"
+            echo "Artifact: **animation-${{ github.run_number }}** (scroll down to Artifacts to download)"
+            echo '```'; cat logs.txt 2>/dev/null | grep -E "PASS|FAIL|rig:|Render time|Frames|codec|width|height|duration|Model" ; echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # The Actions API is not readable from agent sessions, so results also go to the ci-results branch
+      # (logs, check JSON and the small preview image only; the MP4 stays an artifact).
+      - name: Write results to ci-results branch
+        if: always()
+        env:
+          STATUS: ${{ job.status }}
+          ART_ID: ${{ steps.upload.outputs.artifact-id }}
+        run: |
+          mkdir -p /tmp/ci
+          cp logs.txt /tmp/ci/ 2>/dev/null || true
+          cp video/scene_check.json video/preview.png /tmp/ci/ 2>/dev/null || true
+          echo "run ${{ github.run_number }} $STATUS sha=${{ github.sha }} artifact=animation-${{ github.run_number }} id=$ART_ID" > /tmp/ci/STATUS.txt
+          git fetch origin ci-results 2>/dev/null
+          git worktree add -B ci-results /tmp/wt origin/ci-results 2>/dev/null || {
+            git worktree add --detach /tmp/wt && cd /tmp/wt && git checkout --orphan ci-results && git rm -rqf . ; cd -; }
+          d=/tmp/wt/latest/animation; rm -rf "$d" && mkdir -p "$d" && cp /tmp/ci/* "$d"/
+          cd /tmp/wt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "Animation run ${{ github.run_number }}: $STATUS" && git push -q origin ci-results
