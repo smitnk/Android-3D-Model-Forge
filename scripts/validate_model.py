@@ -223,9 +223,10 @@ def geometry_tpose(c, pts, height, head_ratio, limb_ratio, long_feet=True):
         c.add("geom_head_size", top - shoulder_z > head_ratio * height,
               f"head+neck above shoulders = {100 * (top - shoulder_z) / height:.0f}% of height")
         upper = [p for p in pts if p.z > shoulder_z]
-        front = min(upper, key=lambda p: p.y)
+        ymin = min(p.y for p in upper)
+        front = _mean([p for p in upper if p.y < ymin + 0.01])  # front-most patch (a flat face has no single tip)
         c.add("geom_faces_forward", abs(front.x) < 0.03 and front.y < -0.1,
-              f"front-most head point at x {front.x:.3f}, y {front.y:.3f} (Blender -Y = glTF +Z front)")
+              f"front-most head patch centred at x {front.x:.3f}, y {front.y:.3f} (Blender -Y = glTF +Z front)")
     span = max(p.x for p in pts) - min(p.x for p in pts)
     c.add("geom_tpose_span", span >= 0.7 * height, f"span {span:.3f} m vs height {height:.3f} m")
 
