@@ -11,15 +11,15 @@ import bmesh
 import bpy
 from mathutils import Vector
 
-SHOULDER_Z = 0.66   # proportions measured from the reference sheet: shoulders at ~51% of height
+SHOULDER_Z = 0.70   # proportions measured from the reference sheet: shoulders at ~51% of height
 FIELD = 0.575  # metaball surface sits at ~0.575 * radius for stiffness 2, threshold 0.6
 
 
 def bones():
     b = [("root", (0, 0, 0), (0, 0, 0.10), None),
          ("pelvis", (0, 0, 0.33), (0, 0, 0.45), "root"),
-         ("spine", (0, 0, 0.45), (0, 0, 0.66), "pelvis"),
-         ("neck", (0, 0, 0.66), (0, 0, 0.80), "spine"),
+         ("spine", (0, 0, 0.45), (0, 0, 0.70), "pelvis"),
+         ("neck", (0, 0, 0.70), (0, 0, 0.80), "spine"),
          ("head", (0, 0, 0.80), (0, 0, 1.30), "neck")]
     for s, x in (("L", 1), ("R", -1)):
         b += [(f"upper_arm.{s}", (0.05 * x, 0, SHOULDER_Z), (0.20 * x, 0, SHOULDER_Z), "spine"),
@@ -63,7 +63,7 @@ class Meta:
         e = self._el("CUBE", co, round_r)
         e.size_x, e.size_y, e.size_z = hx, hy, hz
 
-    def to_mesh_object(self, name, decimate):
+    def to_mesh_object(self, name, decimate, before_decimate=None):
         dg = bpy.context.evaluated_depsgraph_get()
         me = bpy.data.meshes.new_from_object(self.obj.evaluated_get(dg))
         bpy.data.objects.remove(self.obj)
@@ -71,6 +71,8 @@ class Meta:
         me.name = name
         obj = bpy.data.objects.new(name, me)
         bpy.context.scene.collection.objects.link(obj)
+        if before_decimate:
+            before_decimate(obj)
         if decimate < 1.0:  # metaball meshes are dense; collapse keeps the shape
             mod = obj.modifiers.new("dec", "DECIMATE")
             mod.ratio = decimate
@@ -88,7 +90,7 @@ def carve_eye_sockets(obj, depth=0.026):
     bm = bmesh.new()
     bm.from_mesh(obj.data)
     bm.normal_update()
-    cu, cv, a, b, tilt = 0.092, 0.935, 0.066, 0.036, math.radians(18)
+    cu, cv, a, b, tilt = 0.095, 0.94, 0.072, 0.04, math.radians(18)
     moves = []
     for v in bm.verts:
         if v.co.y > -0.05:
@@ -105,6 +107,12 @@ def carve_eye_sockets(obj, depth=0.026):
             moves.append((v, -v.normal * depth * (t * t * (3 - 2 * t))))
     for v, d in moves:
         v.co += d
+    # relax the carved area plus a 2-ring border so the socket rim is smooth, not stair-stepped
+    region = {v for v, _ in moves}
+    for _ in range(2):
+        region |= {e.other_vert(v) for v in list(region) for e in v.link_edges}
+    bmesh.ops.smooth_vert(bm, verts=list(region), factor=0.5, repeat=4,
+                          use_axis_x=True, use_axis_y=True, use_axis_z=True)
     bm.to_mesh(obj.data)
     bm.free()
     return len(moves)
@@ -113,34 +121,34 @@ def carve_eye_sockets(obj, depth=0.026):
 def build(a, material):
     clay = material("Clay", a.skin or "#8F8B86", 0.8)
 
-    head = Meta("HeadMeta", 0.009)
+    head = Meta("HeadMeta", 0.006)
     head.ellipsoid((0, 0.005, 1.08), 0.25, 0.23, 0.215)       # wide round cranium (~40% of height)
     head.ellipsoid((0, -0.01, 0.93), 0.175, 0.16, 0.145)      # jaw / cheeks, soft rounded chin
     head.capsule((0, -0.19, 0.905), (0, -0.235, 0.855), 0.026)  # pointed wedge nose between the eyes
-    head_obj = head.to_mesh_object("Head", 0.5)
-    carved = carve_eye_sockets(head_obj)
+    carved = []
+    head_obj = head.to_mesh_object("Head", 0.3, lambda o: carved.append(carve_eye_sockets(o)))
 
     body = Meta("BodyMeta", 0.0065)
-    body.capsule((0, 0, 0.63), (0, 0, 0.83), 0.022)            # thin neck (top hidden inside head)
-    body.ellipsoid((0, 0, 0.60), 0.072, 0.056, 0.065)          # small chest
+    body.capsule((0, 0, 0.66), (0, 0, 0.84), 0.03)             # short neck (top hidden inside head)
+    body.ellipsoid((0, 0, 0.63), 0.085, 0.058, 0.08)           # chest, sloping into the shoulders
     body.ellipsoid((0, 0, 0.51), 0.05, 0.043, 0.06)            # narrow waist
     body.ellipsoid((0, 0.005, 0.41), 0.095, 0.068, 0.07)       # hips
     for x in (1, -1):
         body.ellipsoid((0.042 * x, 0.035, 0.39), 0.046, 0.042, 0.052)  # glutes
         # arm: horizontal along X (T-pose), thin with a forearm swell
-        body.capsule((0.04 * x, 0, SHOULDER_Z), (0.20 * x, 0, SHOULDER_Z), 0.022)
-        body.ellipsoid((0.265 * x, 0, SHOULDER_Z), 0.065, 0.027, 0.029)
-        body.capsule((0.20 * x, 0, SHOULDER_Z), (0.37 * x, 0, SHOULDER_Z), 0.017)
-        body.ellipsoid((0.40 * x, 0, SHOULDER_Z), 0.032, 0.029, 0.014)  # palm (faces down)
-        for y in (-0.021, -0.007, 0.007, 0.021):
-            body.capsule((0.425 * x, y, SHOULDER_Z), (0.47 * x, y * 1.15, SHOULDER_Z), 0.0095)
-        body.capsule((0.39 * x, -0.027, SHOULDER_Z + 0.002), (0.418 * x, -0.05, SHOULDER_Z + 0.002), 0.0095)
+        body.capsule((0.04 * x, 0, SHOULDER_Z), (0.20 * x, 0, SHOULDER_Z), 0.025)
+        body.ellipsoid((0.265 * x, 0, SHOULDER_Z), 0.065, 0.031, 0.033)
+        body.capsule((0.20 * x, 0, SHOULDER_Z), (0.36 * x, 0, SHOULDER_Z), 0.02)
+        body.ellipsoid((0.395 * x, 0, SHOULDER_Z), 0.04, 0.036, 0.017)  # palm (faces down)
+        for y in (-0.026, -0.009, 0.009, 0.026):
+            body.capsule((0.425 * x, y, SHOULDER_Z), (0.48 * x, y * 1.15, SHOULDER_Z), 0.012)
+        body.capsule((0.38 * x, -0.032, SHOULDER_Z + 0.002), (0.415 * x, -0.062, SHOULDER_Z + 0.002), 0.012)
         # leg: slim thigh flaring into a wide calf that fuses into a big block boot (toe toward -Y)
         body.capsule((0.05 * x, 0, 0.39), (0.06 * x, 0, 0.26), 0.036)
-        body.ball((0.066 * x, 0, 0.23), 0.042)
-        body.ball((0.072 * x, 0, 0.19), 0.05)
-        body.ball((0.078 * x, 0, 0.15), 0.058)
-        body.box((0.085 * x, -0.04, 0.075), 0.05, 0.09, 0.05, 0.025)
+        body.ball((0.066 * x, 0, 0.24), 0.045)
+        body.ball((0.072 * x, 0.005, 0.20), 0.055)
+        body.ball((0.078 * x, 0.01, 0.16), 0.065)    # calf flares into the boot shaft
+        body.box((0.085 * x, -0.035, 0.08), 0.052, 0.09, 0.055, 0.025)
     body_obj = body.to_mesh_object("Body", 0.35)
 
     parts = [head_obj, body_obj]
@@ -154,5 +162,5 @@ def build(a, material):
         o.data.materials.append(clay)
     head_obj["bone"] = "head"
     body_obj["bone"] = ""  # empty = blended distance weights, see generate_model.auto_weights
-    print(f"clay_chibi: carved {carved} eye-socket vertices")
+    print(f"clay_chibi: carved {carved[0]} eye-socket vertices")
     return parts

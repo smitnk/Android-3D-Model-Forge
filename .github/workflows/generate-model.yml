@@ -168,6 +168,7 @@ jobs:
           gh release view model-latest >/dev/null 2>&1 || \
             gh release create model-latest --target "${GITHUB_REF_NAME}" --title "Latest generated model" \
               --notes "Automatically published by the Generate 3D Model workflow. See REPORT.md for validation results."
+          gh release delete-asset model-latest REPORT.md -y 2>/dev/null || true  # legacy shared report
           gh release upload model-latest out/*.glb out/*.png "out/$slug-REPORT.md" --clobber
           ls out/*.blend >/dev/null 2>&1 && gh release upload model-latest out/*.blend --clobber || true
 
