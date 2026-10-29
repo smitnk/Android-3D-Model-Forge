@@ -120,7 +120,7 @@
     {
       "check": "geom_faces_forward",
       "pass": true,
-      "detail": "front-most head point at x 0.003, y -0.261 (Blender -Y = glTF +Z front)"
+      "detail": "front-most head patch centred at x 0.000, y -0.256 (Blender -Y = glTF +Z front)"
     },
     {
       "check": "geom_tpose_span",
