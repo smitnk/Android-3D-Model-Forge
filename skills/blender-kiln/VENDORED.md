@@ -3,7 +3,7 @@
 - Upstream: https://github.com/elithril/blender-kiln
 - Commit: 4b170be2756d87d0d5a1b8e7aebef5fd61c7f771 (2026-10-12)
 - License: MIT, Copyright (c) 2026 Nicolas Dolphens (see `LICENSE` in this folder)
-- Copied: `SKILL.md`, `README.md`, `LICENSE`, `references/`, `tools/`. Not copied: `bench/`, `docs/`, `site/`,
+- Copied: `SKILL.md`, `README.md`, `LICENSE`, `references/`, `tools/` (upstream keeps these in `plugin/` behind symlinks; real files copied here). Not copied: `bench/`, `docs/`, `site/`,
   `examples/`, `plugin/`, logo (large or not needed). Files are unmodified.
 
 ## How Android-3D-Model-Forge uses it

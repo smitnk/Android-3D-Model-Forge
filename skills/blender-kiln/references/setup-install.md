@@ -1,0 +1,75 @@
+# Setup — Local Installation Guide
+
+**Never required.** kiln's default is scripted modeling, with no AI model; when the
+user picks AI, a free Space comes first (`ai-generation.md`). Install only for offline
+work. **Hunyuan3D-2's licence, below, does not apply in the EU, the UK or South Korea**
+(first line of its `LICENSE`): show that and get a yes before installing. The
+measured MIT alternative, TRELLIS.2 on Apple Silicon, is in `ai-generation.md`.
+
+## Model Selection
+
+```
+Choose model storage location:
+  Default: ~/.hunyuan3d/models/
+  Custom:  [enter path]
+
+Available models:
+  1. hunyuan3d-dit-v2-mini       (0.6B params, ~6 GB VRAM)  — balanced quality
+  2. hunyuan3d-dit-v2-mini-fast  (0.6B params, ~6 GB VRAM)  — faster, slightly lower quality
+  3. hunyuan3d-dit-v2-mini-turbo (0.6B params, ~6 GB VRAM)  — fastest, preview quality
+
+Which models to download? (1,2,3 or "all")
+```
+
+## Installation Commands (cross-platform)
+
+```bash
+# Clone repo
+git clone https://github.com/Tencent/Hunyuan3D-2.git {models_path}/Hunyuan3D-2
+cd {models_path}/Hunyuan3D-2
+
+# Install dependencies
+# A bare pip3 fails on any PEP 668 Python (Homebrew, most Linux distros).
+python3 -m venv {models_path}/venv
+{models_path}/venv/bin/pip install -r requirements.txt
+{models_path}/venv/bin/pip install -e .
+
+# Download model weights (via huggingface_hub)
+python3 -c "
+from huggingface_hub import snapshot_download
+# Run with {models_path}/venv/bin/python, not the system python3.
+snapshot_download('tencent/Hunyuan3D-2mini', local_dir='{models_path}/Hunyuan3D-2mini')
+"
+
+# (CUDA only) Compile texture generation extensions
+# Skip on Mac/no-CUDA — texture will be handled by skill's TEXTURING phase
+cd hy3dgen/texgen/custom_rasterizer && python3 setup.py install && cd ../../..
+cd hy3dgen/texgen/differentiable_renderer && bash compile_mesh_painter.sh && cd ../../..
+```
+
+## Windows-specific Notes
+
+- Use backslash paths or forward slashes in Python
+- May need Visual Studio Build Tools for CUDA extension compilation
+- `bash compile_mesh_painter.sh` → use Git Bash or WSL
+
+## Post-install Validation
+
+```python
+python3 -c "
+import torch
+from hy3dgen.shapegen import Hunyuan3DDiTFlowMatchingPipeline
+device = 'cuda' if torch.cuda.is_available() else ('mps' if torch.backends.mps.is_available() else 'cpu')
+print(f'Device: {device}')
+pipeline = Hunyuan3DDiTFlowMatchingPipeline.from_pretrained(
+    '{models_path}/Hunyuan3D-2mini',
+    subfolder='hunyuan3d-dit-v2-mini-turbo',
+    use_safetensors=True,
+    device=device
+)
+print('✅ Shape generation ready')
+"
+```
+
+**If validation passes:** "✅ Local backend ready. Shape generation on {device}."
+**If CUDA not available:** "⚠️ No NVIDIA GPU detected. Shape generation will use {mps/cpu} (slower). Texture generation unavailable locally — skill will texture via Blender (phase TEXTURING)."

@@ -1,0 +1,356 @@
+# Texturing Strategy Reference
+
+> Cross-reference: `references/uv-materials.md` for UV unwrapping, PBR channel packing, and the `create_pbr_material()` helper.
+
+## When This Applies
+- Mesh is white/untextured (AI generation without texture)
+- Materials are insufficient or missing
+- SKIP if: asset has textures from marketplace or Hunyuan3D texture succeeded, or scripted modeling with materials already assigned
+
+## Strategy 1 — Geometric Analysis + PolyHaven (recommended for props)
+
+### Step 1: Geometric Analysis
+Via `execute_blender_code`, analyze each face:
+
+```python
+import bmesh
+import bpy
+from mathutils import Vector
+
+obj = bpy.context.active_object
+bm = bmesh.new()
+bm.from_mesh(obj.data)
+
+# Classify faces by normal direction + position in bounding box
+bbox = obj.bound_box
+min_z = min(v[2] for v in bbox)
+max_z = max(v[2] for v in bbox)
+height = max_z - min_z
+
+for face in bm.faces:
+    z_ratio = (face.calc_center_median().z - min_z) / height
+    is_horizontal = abs(face.normal.z) > 0.7
+    is_vertical = abs(face.normal.z) < 0.3
+    
+    # Classification heuristics:
+    # - horizontal + top half → seat/surface
+    # - vertical + bottom quarter → legs
+    # - vertical + top half → backrest/back
+    # - horizontal + bottom → underside
+```
+
+### Step 2: Create Material Slots
+```python
+# Create colored materials for visualization
+colors = [
+    ("zone_A", (0.8, 0.2, 0.2, 1)),  # red
+    ("zone_B", (0.2, 0.2, 0.8, 1)),  # blue
+    ("zone_C", (0.2, 0.8, 0.2, 1)),  # green
+    ("zone_D", (0.8, 0.8, 0.2, 1)),  # yellow
+]
+
+for name, color in colors:
+    mat = bpy.data.materials.new(name=name)
+    mat.diffuse_color = color
+    obj.data.materials.append(mat)
+
+# Assign faces to material slots based on classification
+for face in bm.faces:
+    face.material_index = classified_zone  # 0, 1, 2, 3...
+
+bm.to_mesh(obj.data)
+```
+
+### Step 3: Visual Labeling
+- `get_viewport_screenshot()` with colored zones visible
+- Claude identifies zones: "red = seat (wood), blue = legs (wood), green = cushion (fabric)"
+- Propose material mapping to user
+
+### Step 4: User Validation
+Present identified zones and proposed materials. User can adjust.
+
+### Step 5: PolyHaven Texture Search
+Rule 23 first: `get_polyhaven_status()`. Then, for each zone:
+- `search_polyhaven_assets` with `asset_type='textures'` and material keywords
+- Present ~5 options with links
+- User picks per zone
+
+### Step 6: Apply Textures
+
+**Use the addon's own tools — do not hand-build the node graph.**
+
+```
+download_polyhaven_asset(asset_id=..., asset_type='textures',
+                         resolution='1k', file_format='jpg')
+    → imports every available map as a material
+    → measured on american_walnut_veneer: AO, arm, Diffuse, Displacement,
+      nor_dx, nor_gl, Rough
+
+set_texture(object_name=..., texture_id=...)
+    → builds the material on the object: 16 nodes, colorspaces already
+      set to Non-Color where they must be
+```
+
+Hand-writing `ShaderNodeTexImage` chains reproduces a fraction of that and gets
+the colorspaces wrong more often than not. Only fall back to it if `set_texture`
+fails.
+
+**Then rename (rule 25).** `set_texture` names the material
+`<texture_id>_material_<object>`, which is not the `M_Type_Variant` convention:
+
+```python
+obj.data.materials[0].name = "M_Wood_Walnut"
+```
+
+### Step 7: Iterate
+User can request changes: "wood too light" → search alternative, swap texture.
+
+## Strategy 2 — Procedural Blender Materials
+
+For stylized/cartoon/low-poly where PBR textures are overkill:
+
+```python
+mat = bpy.data.materials.new(name="M_Wood_Stylized")
+bsdf = mat.node_tree.nodes.get("Principled BSDF")
+bsdf.inputs["Base Color"].default_value = (0.45, 0.28, 0.14, 1.0)  # warm brown
+bsdf.inputs["Roughness"].default_value = 0.7
+bsdf.inputs["Metallic"].default_value = 0.0
+```
+
+No image textures, just values. Fast, lightweight, style-consistent.
+
+### Shader Recipes (Principled BSDF)
+
+Ready-to-use recipes for common materials. All based on Principled BSDF for GLTF export compatibility.
+
+#### Metal
+```python
+mat = bpy.data.materials.new(name="M_Metal_Gold")
+bsdf = mat.node_tree.nodes.get("Principled BSDF")
+bsdf.inputs["Base Color"].default_value = (1.0, 0.766, 0.336, 1.0)  # gold tint
+bsdf.inputs["Metallic"].default_value = 1.0
+bsdf.inputs["Roughness"].default_value = 0.2  # 0.1=mirror, 0.4=brushed
+```
+Variations: silver `(0.972, 0.960, 0.915)`, copper `(0.955, 0.637, 0.538)`, iron `(0.560, 0.570, 0.580)`.
+
+#### Glass / Transparent
+```python
+mat = bpy.data.materials.new(name="M_Glass_Clear")
+bsdf = mat.node_tree.nodes.get("Principled BSDF")
+bsdf.inputs["Base Color"].default_value = (1.0, 1.0, 1.0, 1.0)
+bsdf.inputs["Transmission Weight"].default_value = 1.0
+bsdf.inputs["Roughness"].default_value = 0.0   # 0=clear, >0=frosted
+bsdf.inputs["IOR"].default_value = 1.45         # 1.45-1.52 for glass
+```
+> ⚠️ `Transmission Weight` is the Blender 4.x+ name. Previously `Transmission`.
+
+#### Skin / Subsurface Scattering
+```python
+mat = bpy.data.materials.new(name="M_Skin_Human")
+bsdf = mat.node_tree.nodes.get("Principled BSDF")
+bsdf.inputs["Base Color"].default_value = (0.8, 0.6, 0.5, 1.0)  # skin tone
+bsdf.inputs["Subsurface Weight"].default_value = 0.5
+bsdf.inputs["Subsurface Radius"].default_value = (1.0, 0.2, 0.1)  # RGB scatter
+bsdf.inputs["Roughness"].default_value = 0.4
+bsdf.inputs["Metallic"].default_value = 0.0
+```
+> ⚠️ SSS does NOT export to GLTF. For the web, bake the visual result into a base color texture.
+> In Cycles, use Random Walk for the best quality.
+
+#### Emission / Neon
+```python
+mat = bpy.data.materials.new(name="M_Neon_Blue")
+bsdf = mat.node_tree.nodes.get("Principled BSDF")
+bsdf.inputs["Emission Color"].default_value = (0.0, 0.5, 1.0, 1.0)
+bsdf.inputs["Emission Strength"].default_value = 5.0  # 1-50+
+```
+> Emission DOES export to GLTF (`emissiveFactor` + `emissiveTexture`).
+
+#### Toon / Cel Shading (EEVEE only)
+```python
+# ⚠️ Shader to RGB = EEVEE only, does NOT export to GLTF
+# Use only for Blender preview/render, not for web export
+mat = bpy.data.materials.new(name="M_Toon")
+nodes = mat.node_tree.nodes
+links = mat.node_tree.links
+bsdf = nodes.get("Principled BSDF")
+bsdf.inputs["Base Color"].default_value = (0.8, 0.2, 0.2, 1.0)
+# Shader to RGB → Color Ramp (Constant interpolation) → Material Output
+s2rgb = nodes.new("ShaderNodeShaderToRGB")
+ramp = nodes.new("ShaderNodeValToRGB")
+ramp.color_ramp.interpolation = 'CONSTANT'
+# 3 bands: shadow, midtone, highlight
+ramp.color_ramp.elements[0].position = 0.3
+ramp.color_ramp.elements[1].position = 0.7
+output = nodes.get("Material Output")
+links.new(bsdf.outputs["BSDF"], s2rgb.inputs["Shader"])
+links.new(s2rgb.outputs["Color"], ramp.inputs["Fac"])
+links.new(ramp.outputs["Color"], output.inputs["Surface"])
+```
+
+#### Fabric / Textile
+```python
+mat = bpy.data.materials.new(name="M_Fabric_Cotton")
+bsdf = mat.node_tree.nodes.get("Principled BSDF")
+bsdf.inputs["Base Color"].default_value = (0.3, 0.15, 0.08, 1.0)
+bsdf.inputs["Roughness"].default_value = 0.9
+bsdf.inputs["Metallic"].default_value = 0.0
+# Sheen for fabric micro-fiber effect (Blender 4.x+)
+bsdf.inputs["Sheen Weight"].default_value = 0.5
+bsdf.inputs["Sheen Roughness"].default_value = 0.5
+```
+
+### GLTF Export Compatibility of Principled BSDF Properties
+
+| Property | Exported to GLTF? | Notes |
+|---|---|---|
+| Base Color | ✅ | `baseColorFactor` / `baseColorTexture` |
+| Metallic | ✅ | `metallicFactor` |
+| Roughness | ✅ | `roughnessFactor` |
+| Normal Map | ✅ | `normalTexture` |
+| Emission | ✅ | `emissiveFactor` / `emissiveTexture` |
+| Alpha / Transmission | ✅ partially | `KHR_materials_transmission` extension |
+| IOR | ✅ | `KHR_materials_ior` extension |
+| Subsurface (SSS) | ❌ | Bake to base color |
+| Sheen | ✅ | `KHR_materials_sheen` extension |
+| Clearcoat | ✅ | `KHR_materials_clearcoat` extension |
+| Toon (Shader to RGB) | ❌ | EEVEE only, not exportable |
+
+### GLTF Export Compatibility of TEXTURE MAPS
+
+The table above covers Principled BSDF *properties*. Texture *maps* are a separate
+question, and the PolyHaven workflow in Strategy 1 downloads maps glTF cannot
+carry. Measured end to end on `american_walnut_veneer` — 7 maps downloaded, **3
+survived**:
+
+| Map | Exported to GLTF? | Becomes |
+|---|---|---|
+| Diffuse / albedo | ✅ | `pbrMetallicRoughness.baseColorTexture` |
+| Roughness | ✅ | `pbrMetallicRoughness.metallicRoughnessTexture` |
+| Normal (`nor_gl`) | ✅ | `normalTexture` |
+| **Ambient occlusion** | ❌ | glTF *has* an `occlusionTexture` slot, but Blender only fills it from an ARM-packed arrangement. A standalone AO map is dropped silently |
+| **Displacement / height** | ❌ | glTF has no displacement slot at all. Bake into the normal map or drop it deliberately |
+| **ARM (packed ORM)** | ❌ | Left unused by `set_texture`'s graph |
+| Metallic | ✅ | packed into `metallicRoughnessTexture` |
+
+Watch the exporter's own console output. This warning means information was lost:
+
+```
+WARNING: More than one shader node tex image used for a texture.
+The resulting glTF sampler will behave like the first shader node tex image.
+```
+
+**Rule 19's audit has to work at the map level, not the node level.** Listing
+procedural node types cannot see any of the losses above: `Displacement` is a real
+node that gets silently dropped, and the AO loss is not a node-type problem at all
+— the node is fine, it just never reaches a glTF slot. Compare the maps the
+material *has* against the slots the exported glTF actually *filled*.
+
+## Strategy 2b — Bake Procedural to Image Textures
+
+To capture procedural materials before GLTF export. Useful when the asset has rich Blender materials (Noise, Voronoi, Color Ramp) that would be lost on export.
+
+### When to use
+- The pre-export material audit (validation-checklist.md) detects procedural nodes
+- The asset comes from scripted modeling with procedural materials
+- You want to preserve the visual variation of procedurals in the final GLB
+
+### Bake Workflow
+
+```python
+import bpy, os
+
+def bake_channel(obj, channel_type, output_path, resolution=1024):
+    """
+    Bake a material channel to an image texture.
+    channel_type: 'DIFFUSE', 'ROUGHNESS', 'NORMAL', 'EMIT'
+    """
+    # Ensure Cycles is active (required for baking)
+    bpy.context.scene.render.engine = 'CYCLES'
+    bpy.context.scene.cycles.samples = 64  # enough for bake
+    
+    # Select and activate the object
+    bpy.ops.object.select_all(action='DESELECT')
+    obj.select_set(True)
+    bpy.context.view_layer.objects.active = obj
+    
+    # Create bake target image
+    img_name = f"{obj.name}_{channel_type.lower()}_baked"
+    bake_img = bpy.data.images.new(img_name, width=resolution, height=resolution)
+    if channel_type in ('ROUGHNESS', 'NORMAL'):
+        bake_img.colorspace_settings.name = 'Non-Color'
+    
+    # Add image texture node to each material (set as active for bake target)
+    for slot in obj.material_slots:
+        if not slot.material or not slot.material.node_tree:   # use_nodes goes in 6.0
+            continue
+        nodes = slot.material.node_tree.nodes
+        img_node = nodes.new('ShaderNodeTexImage')
+        img_node.image = bake_img
+        img_node.name = "__bake_target__"
+        nodes.active = img_node
+    
+    # Ensure UVs exist
+    if not obj.data.uv_layers:
+        bpy.ops.object.mode_set(mode='EDIT')
+        bpy.ops.uv.smart_project(angle_limit=66, island_margin=0.02)
+        bpy.ops.object.mode_set(mode='OBJECT')
+    
+    # Bake
+    bpy.ops.object.bake(type=channel_type, save_mode='INTERNAL')
+    
+    # Save
+    bake_img.filepath_raw = output_path
+    bake_img.file_format = 'PNG'
+    bake_img.save()
+    
+    # Cleanup temp nodes
+    for slot in obj.material_slots:
+        if slot.material and slot.material.node_tree:          # use_nodes goes in 6.0
+            nodes = slot.material.node_tree.nodes
+            temp = nodes.get("__bake_target__")
+            if temp:
+                nodes.remove(temp)
+    
+    print(f"✅ Baked {channel_type} → {output_path}")
+    return bake_img
+
+# Usage:
+# obj = bpy.context.active_object
+# bake_channel(obj, 'ROUGHNESS', '/tmp/roughness_baked.png', 1024)
+# bake_channel(obj, 'NORMAL', '/tmp/normal_baked.png', 1024)
+# bake_channel(obj, 'DIFFUSE', '/tmp/diffuse_baked.png', 1024)
+```
+
+### After the bake
+1. Reconnect the baked images to the Principled BSDF inputs
+2. Remove the procedural nodes
+3. Re-run the material audit to confirm compatibility
+4. `get_viewport_screenshot()` to visually compare before/after
+
+---
+
+## Strategy 3 — Assisted Manual Texturing
+
+Skill prepares the terrain:
+1. Auto-unwrap UVs (`bpy.ops.uv.smart_project()`)
+2. Material slots created and named by zone
+3. User textures manually in Blender or their own tools
+
+## Strategy 4 — Try Another Space
+
+If current HuggingFace Space doesn't support texture generation:
+- Inform user
+- Offer to try a different Space URL
+- If no working Space → fall back to Strategy 1 or 2
+
+## Choosing a Strategy
+
+| Situation | Recommended Strategy |
+|---|---|
+| White mesh + realistic style | Strategy 1 (PolyHaven) |
+| White mesh + stylized/cartoon | Strategy 2 (procedural) |
+| User wants full control | Strategy 3 (manual assisted) |
+| Another Space might work | Strategy 4 (retry) |
+
+Always present options and let user choose.

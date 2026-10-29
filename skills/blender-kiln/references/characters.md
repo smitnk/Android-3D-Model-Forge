@@ -1,0 +1,718 @@
+# Characters Reference (Phase 2)
+
+> Rigging, skinning, animation, retopology, export. Patterns, anti-patterns, and sharp edges.
+
+---
+
+## Current State in Kiln
+
+Character **generation** works via the main pipeline (AI or scripted). T-pose is enforced by Iron Rule #13.
+
+**Implemented:** T-pose generation, basic cleanup (`SK_` prefix), texturing (approximate).
+**Phase 2 scope:** retopology, rigging, skinning, animation, blend shapes, character-specific texturing.
+
+---
+
+## T-Pose Requirements
+
+When a character is flagged for rigging:
+- Arms extended horizontally, palms facing down
+- Legs slightly apart (~shoulder width)
+- Neutral face expression
+- Fingers slightly spread (not clenched)
+- Thumbs pointing forward
+
+**Why T-pose over A-pose:** T-pose is more universally compatible with auto-riggers (Mixamo, Rigify, AccuRIG). A-pose gives better shoulder deformation but requires manual setup.
+
+---
+
+## Converting a pose to T-pose
+
+Rule 13 wants a T-pose. Free libraries do not supply one — measured on three
+models, none was:
+
+| Model | Licence | Vertices | Measured pose |
+|---|---|---:|---|
+| Khronos `RiggedFigure` | CC-BY 4.0 | 370 | A-pose, -26.8 deg |
+| Khronos `CesiumMan` | CC-BY 4.0 | 3,273 | A-pose, -28.2 deg |
+| Blender Human Base Meshes | **CC0** | 10,582 | I-pose, -70.8 deg |
+
+A-pose and arms-down are the modelling conventions; T-pose is a *rigging*
+convention. So converting is the normal path.
+
+### The method that works
+
+Build a throwaway rig only to obtain **arm weights**, then rotate the vertices
+yourself about the shoulder, scaled by each vertex's arm weight. The weighting is
+what gives a smooth shoulder instead of a crease. Discard the rig afterwards.
+
+```python
+ANG = math.radians(71.9)          # measured shoulder->hand angle
+SH  = Vector((0.198, 0.0, 1.318)) # measured shoulder
+for sf, sgn in (("L", 1), ("R", -1)):
+    gi = {g.name: g.index for g in mesh.vertex_groups}
+    idx = [gi[n] for n in (f"UpperArm_{sf}", f"LowerArm_{sf}") if n in gi]
+    pivot = Vector((sgn * SH.x, 0.0, SH.z))
+    for v in mesh.data.vertices:
+        w = min(sum(g.weight for g in v.groups if g.group in idx), 1.0)
+        if w < 0.01:
+            continue
+        v.co = pivot + Matrix.Rotation(-sgn * ANG * w, 4, "Y") @ (v.co - pivot)
+mesh.data.update()
+```
+
+**Check the rotation arithmetically before running it.** Two lines of trigonometry
+settle the sign, and getting it wrong is not obvious from the code:
+
+```python
+for s in (+1, -1):
+    c, sn = math.cos(s*ANG), math.sin(s*ANG)
+    print(math.degrees(math.atan2(-dx*sn + dz*c, dx*c + dz*sn)))
+# -71.9 deg takes the wrist from (0.199, -0.608) to (0.640, 0.000): horizontal.
+# +71.9 deg takes it to -143.8 deg: further down.
+```
+
+### Three approaches that do not work
+
+Each cost a cycle before the method above:
+
+- **Selecting arm vertices geometrically.** The shoulder pivot gets estimated from
+  the widest slice, and on a stylised figure the head block is wider than the
+  torso threshold, so the pivot lands on the skull. Result: -26.8 deg became
+  -56.3 deg.
+- **Posing the arm with Euler angles on a bone.** A bone's local axes depend on
+  its roll, which you did not set. Testing all three and keeping the largest
+  displacement picked an axis that lifted the tip by 5.6 cm — not the right one.
+  Result: arms at -87.6 deg, wingspan collapsed from 0.88 m to 0.55 m.
+- **Right axis, wrong sign.** Pushed the arms further down, to -79.7 deg.
+
+The verification that catches all three: **wingspan ≈ height** after conversion.
+
+### Where to get a CC0 humanoid
+
+Blender publishes **Human Base Meshes** (CC0): eight full bodies, realistic and
+stylised, male and female.
+`https://download.blender.org/demo/asset-bundles/human-base-meshes/` — 48 MB.
+
+Two traps in that bundle:
+
+- The asset entries named `realistic_body_male` and so on are **cameras**, used
+  for asset previews. The geometry lives under `GEO-body_male_realistic`.
+- An object appended as a dependency can end up in **no collection at all**, so it
+  never appears in the viewport. `visible_get()` returns False and
+  `users_collection` is empty; link it to `scene.collection.objects` by hand.
+
+## Rigging Patterns
+
+### 1. Joint Orientation
+
+**Rule:** All joints in a chain must have a consistent local axis pointing down the bone (typically X or Y), with the secondary axis aligned to the bend plane.
+
+```python
+import bpy
+from mathutils import Vector
+
+# Verify joint orientation consistency
+armature = bpy.data.objects['SK_Character'].data
+for bone in armature.edit_bones:
+    if bone.parent:
+        # Bone axis should point from head to tail
+        direction = (bone.tail - bone.head).normalized()
+        print(f"{bone.name}: axis={direction}, roll={bone.roll:.2f}")
+```
+
+**Anti-pattern:** Random joint orientations → unpredictable rotation values, IK solving issues, animation retargeting failures.
+
+### 2. Twist Bones
+
+**Rule:** Add twist bones to forearms and upper legs to distribute twist deformation. Minimum 1 twist bone per segment, 2 for high-quality.
+
+```
+Arm chain: Shoulder → UpperArm → UpperArm_Twist → ForeArm → ForeArm_Twist → Hand
+Leg chain: Thigh → Thigh_Twist → Shin → Shin_Twist → Foot
+```
+
+**Why:** Without twist bones, rotating a hand 180° creates the "candy wrapper" effect — the mesh collapses between shoulder and wrist.
+
+### 3. Control Rig Architecture
+
+**Three-layer system:**
+
+| Layer | Purpose | Naming |
+|---|---|---|
+| **Deform bones** | Actually drive the mesh (vertex groups) | `DEF_Spine`, `DEF_UpperArm_L` |
+| **Control bones** | Animator interacts with these | `CTRL_Spine`, `CTRL_Hand_L` |
+| **Mechanism bones** | Helpers (pole targets, twist drivers, constraints) | `MCH_ArmIK_L`, `MCH_Twist_L` |
+
+**Anti-pattern:** Using deform bones as controls → animators break the rig, no separation of concerns.
+
+### 4. FK/IK System
+
+**A freshly generated Rigify rig ignores its own FK controls.** Every limb ships
+with `IK_FK = 0.0` on its parent bone, which means IK drives the chain and
+rotating `upper_arm_fk.L` does exactly nothing — no error, no warning, the mesh
+simply does not move. Measured: 0 of 370 vertices displaced. Flip the limb first:
+
+```python
+for n in ("upper_arm_parent.L", "upper_arm_parent.R",
+          "thigh_parent.L", "thigh_parent.R"):
+    rig.pose.bones[n]["IK_FK"] = 1.0     # 0 = IK drives, 1 = FK drives
+```
+
+With that set, the same pose moved 221 of 370 vertices. This is the first thing
+to check when a Rigify pose "does not apply".
+
+
+```python
+# IK constraint setup pattern
+import bpy
+
+def setup_ik_chain(armature_obj, bone_name, chain_length, pole_target_name):
+    bpy.context.view_layer.objects.active = armature_obj
+    bpy.ops.object.mode_set(mode='POSE')
+    
+    pose_bone = armature_obj.pose.bones[bone_name]
+    ik = pose_bone.constraints.new('IK')
+    ik.chain_count = chain_length
+    
+    if pole_target_name:
+        ik.pole_target = armature_obj
+        ik.pole_subtarget = pole_target_name
+        ik.pole_angle = 0  # Adjust per limb
+    
+    bpy.ops.object.mode_set(mode='OBJECT')
+```
+
+**FK/IK switch:** Use a custom property on the control bone (0.0 = FK, 1.0 = IK) with driven constraints.
+
+### 5. Facial Rigging (Blend Shapes / Shape Keys)
+
+**Minimum set for basic facial animation (ARKit compatible):**
+
+| Shape Key | Description |
+|---|---|
+| `Basis` | Neutral face (always index 0) |
+| `jawOpen` | Mouth open |
+| `mouthSmile_L` / `_R` | Smile left/right |
+| `mouthFrown_L` / `_R` | Frown left/right |
+| `eyeBlink_L` / `_R` | Eye close left/right |
+| `browUp_L` / `_R` | Eyebrow raise |
+| `browDown_L` / `_R` | Eyebrow lower |
+
+```python
+# Create shape key
+obj = bpy.data.objects['SK_Character']
+obj.shape_key_add(name='Basis')  # Must be first
+sk = obj.shape_key_add(name='jawOpen')
+# Modify sk.data[vertex_index].co for each affected vertex
+```
+
+**Anti-pattern:** Modifying vertex order after creating shape keys → all blend shapes break silently.
+
+### 6. Weight Painting
+
+```python
+# Auto-weights from armature
+bpy.ops.object.select_all(action='DESELECT')
+mesh_obj = bpy.data.objects['SK_Character']
+armature_obj = bpy.data.objects['SK_Character_Armature']
+mesh_obj.select_set(True)
+armature_obj.select_set(True)
+bpy.context.view_layer.objects.active = armature_obj
+bpy.ops.object.parent_set(type='ARMATURE_AUTO')
+```
+
+**Post auto-weights cleanup checklist:**
+1. Check for vertices with zero total weight (will stay in place) 
+2. Check for vertices weighted to wrong bones (e.g., leg vertices on spine)
+3. Normalize all weights (`bpy.ops.object.vertex_group_normalize_all()`)
+4. Limit total influences per vertex (4 max for mobile, 8 for desktop)
+
+### 7. Spine Deformation
+
+**Minimum 3 spine bones** for believable bending: `DEF_Spine`, `DEF_Spine1`, `DEF_Spine2`, `DEF_Chest`.
+
+**Preserve volume:** Use Corrective Smooth modifier or driven blend shapes on extreme poses.
+
+### 8. Root Motion
+
+**Root bone placement:**
+- Name: `Root` (always)
+- Position: origin (0, 0, 0), on the ground plane
+- Orientation: aligned to world axes
+- Purpose: carries all locomotion translation/rotation
+
+**Anti-pattern:** Root bone at hip height → ground-relative calculations break in game engines.
+
+### 9. Animation Retargeting
+
+For Mixamo → custom rig retargeting:
+1. Ensure bone names follow a mappable convention
+2. Match rest poses (T-pose to T-pose)
+3. Use Blender's bone mapping or a retargeting addon
+
+### 10. Blender 5.x — Bone Collections (replaces Bone Layers)
+
+Since Blender 4.0+, bone layers (32 numeric slots) have been replaced by **Bone Collections** (named, hierarchical, unlimited).
+
+```python
+import bpy
+
+armature = bpy.data.armatures['SK_Character']
+
+# Create bone collections
+deform_col = armature.collections.new(name="DEF")
+ctrl_col = armature.collections.new(name="CTRL") 
+mech_col = armature.collections.new(name="MCH")
+
+# Assign bones to collections (in Edit Mode)
+bpy.ops.object.mode_set(mode='EDIT')
+for bone in armature.edit_bones:
+    if bone.name.startswith("DEF_"):
+        deform_col.assign(bone)
+    elif bone.name.startswith("CTRL_"):
+        ctrl_col.assign(bone)
+    elif bone.name.startswith("MCH_"):
+        mech_col.assign(bone)
+bpy.ops.object.mode_set(mode='OBJECT')
+
+# Hide mechanism bones in the viewport
+mech_col.is_visible = False
+```
+
+Verified verbatim on Blender 5.0.1: the three collections are created, `DEF`
+receives its bones, and `MCH` hides.
+
+**Advantage:** A bone can belong to multiple collections. Allows fine-grained control over visibility and selection for animators.
+
+### 11. Blender 5.x — Layered Actions (Action Slots)
+
+Blender 4.4+ replaced the flat action with **layered actions**: an action holds
+layers, layers hold strips, and a strip holds one *channelbag* per slot. The
+F-curves live in the channelbag.
+
+**Creating and assigning an action** — this part is unchanged:
+
+```python
+action = bpy.data.actions.new(name="A_Character_Walk")
+obj = bpy.data.objects['SK_Character']
+obj.animation_data_create()
+obj.animation_data.action = action
+```
+
+Measured on Blender 5.0.1, that leaves the action **empty**: `len(action.slots) == 0`
+and `len(action.layers) == 0`. Nothing is animated yet.
+
+**The trap.** The next thing to reach for no longer exists:
+
+```python
+action.fcurves.new("location", index=1)
+# AttributeError: 'Action' object has no attribute 'fcurves'
+```
+
+Every pre-4.4 snippet on the internet uses `action.fcurves`, and it fails on any
+current Blender. Nothing in the error hints at slots.
+
+**What works.** Let `keyframe_insert` build the structure, then walk down to the
+F-curves:
+
+```python
+obj.location = (0, 0, 0); obj.keyframe_insert("location", frame=1)
+obj.location = (0, 1, 0); obj.keyframe_insert("location", frame=24)
+
+def fcurves(obj):
+    """Blender 4.4+: F-curves live in a channelbag, one per slot per strip."""
+    action = obj.animation_data.action
+    for layer in action.layers:
+        for strip in layer.strips:
+            for slot in action.slots:
+                bag = strip.channelbag(slot)
+                if bag:
+                    yield from bag.fcurves
+
+# e.g. constant speed, no easing — matters whenever motion must stay in sync
+# with something else (wheel rotation against distance travelled, footfalls
+# against root motion)
+for fc in fcurves(obj):
+    for kp in fc.keyframe_points:
+        kp.interpolation = 'LINEAR'
+```
+
+`keyframe_insert` reuses the assigned action, so the curves land in
+`A_Character_Walk` — verified: 1 slot, 1 layer, 3 F-curves of 2 keyframes each.
+
+### 12. Mode Switching Gotchas
+
+Common pitfalls when switching modes (critical for rig scripting):
+
+| Pitfall | Detail | Solution |
+|---|---|---|
+| Edit bones ≠ Pose bones | `armature.edit_bones` (Edit Mode) vs `obj.pose.bones` (Pose Mode). Different properties. | Always check the active mode |
+| Bone roll in Edit Mode only | `edit_bone.roll` only exists in Edit Mode | Switch to Edit before modifying rolls |
+| Constraints in Pose Mode | Constraints are configured on `pose_bone.constraints`, not on edit_bone | Switch to Pose Mode |
+| Shape keys in Object Mode | `keyframe_insert` on shape keys requires Object Mode | Check the mode before keyframing |
+| Data lost on switch | Some pending operations are lost if you switch without `update()` | `bpy.context.view_layer.update()` after modifications |
+
+### 13. Corrective Blend Shapes (Corrective Smooth)
+
+Driven shape keys that activate at extreme joint angles to fix deformation artifacts:
+
+```python
+# Add driver: shape key value driven by bone rotation
+sk = obj.data.shape_keys.key_blocks['shoulder_corrective_L']
+driver = sk.driver_add('value').driver
+driver.type = 'SCRIPTED'
+var = driver.variables.new()
+var.name = 'rot'
+var.type = 'TRANSFORMS'
+var.targets[0].id = armature_obj
+var.targets[0].bone_target = 'DEF_UpperArm_L'
+var.targets[0].transform_type = 'ROT_X'
+driver.expression = 'max(0, rot - 0.5) * 2'  # Activates past 30°
+```
+
+---
+
+## Anti-Patterns
+
+| # | Anti-Pattern | Consequence | Solution |
+|---|---|---|---|
+| 1 | Random joint orientations | Unpredictable IK, broken retargeting | Consistent axis convention across the entire chain |
+| 2 | No twist bones | Candy wrapper (mesh collapse) | 1-2 twist bones per arm/leg segment |
+| 3 | Deform bones = control bones | Animators break the rig | 3-layer architecture (DEF/CTRL/MCH) |
+| 4 | Root bone at hip level | Ground calculations broken in engines | Root at (0,0,0) on the ground plane |
+| 5 | Modifying vertex order after shape keys | Shape keys silently broken | Finalize the mesh BEFORE shape keys |
+| 6 | More than 4 influences/vertex (mobile) | Artifacts on mobile GPU | Limit and normalize weights |
+| 7 | Scale ≠ 1 on the armature | Deformed animations on export | Apply scale before rigging |
+| 8 | Bones without deform enabled that influence the mesh | Orphan vertices | Check the deform flag on each bone |
+| 9 | Bone names with spaces/accents | FBX/GLTF export issues | `CamelCase` or `snake_case` convention |
+| 10 | Skipping weight normalization | Vertices that "float" | `normalize_all()` after each weight painting pass |
+
+---
+
+## Sharp Edges — Export Gotchas
+
+### 🔴 Critique
+
+**FBX Bind Pose:** Blender does NOT export an explicit bind pose in FBX. Unity/Unreal recalculate from the rest pose. If the Blender rest pose ≠ T-pose, deformation will be incorrect in the engine.
+- **Fix:** Always apply the pose as rest pose BEFORE export: `bpy.ops.pose.armature_apply(selected=False)`
+
+**Weight Normalization Culling:** Some engines (Unity) silently discard influences < 0.01. Vertices with many micro-influences lose total weight.
+- **Fix:** Limit to 4 max influences, normalize, then re-check.
+
+**Joint Limit Export:** Blender joint limits (`ik_min_x`, `ik_max_x`) are NOT exported in GLTF. Only partially in FBX.
+- **Fix:** Recreate the limits in the target engine.
+
+### 🟠 Important
+
+**Mobile Bone Limits:** Mobile GPUs typically support **75 bones max** per draw call (uniform buffer limit). Beyond that, the mesh is automatically split = extra draw calls = performance drop.
+- **Recommended budget:** 50-65 bones for mobile, 150+ for desktop.
+
+**Shoulder Deformation:** The clavicle alone is not enough. Add a `Shoulder` bone between clavicle and upper arm, with a partial driver (30-50% of the upper arm rotation).
+
+**Candy Wrapper:** Occurs when a segment (forearm) rotates > 90° without twist bones. Most visible on forearms and thighs.
+- **Fix:** Twist bones (see pattern #2 above).
+
+**Humanoid vs Generic (Unity):** 
+- **Humanoid**: automatic Mixamo/mocap retargeting, but forces Unity's bone structure. Requires mappable bone names.
+- **Generic**: preserves the exact rig, no auto retargeting. Better for non-humanoid creatures.
+
+### 🟡 Attention
+
+**FBX Axis Conversion:** Blender = Z-up, Unity = Y-up. The FBX exporter compensates, but may create an extra root node with -90° rotation. Verify in the engine.
+
+**Blend Shape Vertex Order:** If the mesh is modified AFTER shape key creation (merge, delete vertices), vertex indices change, resulting in randomly deformed shape keys. **Always finalize geometry before shape keys.**
+
+**Animation Compression:** Engines compress animations on import. Verify that critical curves (root motion, IK targets) are not over-compressed. Reduce tolerance for these tracks.
+
+**Scale in the Skeleton:** NEVER animate bone scale except for special effects (squash & stretch). Scale propagated through the hierarchy causes shearing artifacts.
+
+---
+
+## Validation Script
+
+Verified against a rig seeded with each defect it claims to catch: non-unit
+armature scale, a second root bone, a bone name with spaces, 5 influences on a
+vertex, unweighted vertices, and shape keys alongside an unapplied modifier.
+**6 of 6 detected**, no false negatives.
+
+
+```python
+import bpy
+
+def validate_character_rig(armature_obj):
+    """Run before export. Returns list of warnings."""
+    warnings = []
+    armature = armature_obj.data
+    
+    # Check scale
+    if any(abs(s - 1.0) > 0.001 for s in armature_obj.scale):
+        warnings.append("🔴 Armature scale ≠ 1.0. Apply scale first.")
+    
+    # Check root bone
+    # Only DEFORMING parentless bones are a problem. A control rig legitimately
+    # has several parentless mechanism bones — a generated Rigify human has 10,
+    # none of which deform.
+    root_bones = [b for b in armature.bones if not b.parent and b.use_deform]
+    if len(root_bones) > 1:
+        warnings.append(f"🔴 {len(root_bones)} deforming root bones: {[b.name for b in root_bones]}")
+    elif len(root_bones) == 1 and root_bones[0].name not in ('Root', 'root'):
+        warnings.append(f"🟡 Root bone named '{root_bones[0].name}', expected 'Root'.")
+
+    # Count DEFORM bones, not total. The budget applies to what the skin palette
+    # carries, and a control rig is mostly controls: the same Rigify human is 706
+    # bones but 160 deforming.
+    deform_count = sum(1 for b in armature.bones if b.use_deform)
+    total_count = len(armature.bones)
+    if deform_count > 75:
+        warnings.append(f"🟠 {deform_count} deform bones. Mobile limit ~75 per draw call.")
+    if total_count > deform_count * 2:
+        warnings.append(
+            f"🟡 {total_count} bones total for {deform_count} deforming. glTF exports "
+            f"ALL of them as joints by default — pass export_def_bones=True. Measured "
+            f"on a Rigify human: 865 joints / 255 kB becomes 319 joints / 98 kB.")
+
+    # Hyphens are fine: they are Rigify's own convention (DEF-spine, MCH-torso) and
+    # survive glTF and FBX intact — verified, 486 hyphenated node names in the GLB.
+    # Spaces and everything else are the real risk.
+    import re
+    for bone in armature.bones:
+        if re.search(r'[^a-zA-Z0-9_.\-]', bone.name):
+            warnings.append(f"🟡 Bone '{bone.name}' has special characters. May cause export issues.")
+    
+    # Check vertex groups on child meshes
+    for child in armature_obj.children:
+        if child.type != 'MESH':
+            continue
+        
+        # Check max influences per vertex
+        max_influences = 0
+        for v in child.data.vertices:
+            influences = len([g for g in v.groups if g.weight > 0.01])
+            max_influences = max(max_influences, influences)
+        if max_influences > 4:
+            warnings.append(f"🟠 Mesh '{child.name}': max {max_influences} influences/vertex. Mobile max = 4.")
+        
+        # Check for unweighted vertices
+        unweighted = sum(1 for v in child.data.vertices if len(v.groups) == 0)
+        if unweighted > 0:
+            warnings.append(f"🔴 Mesh '{child.name}': {unweighted} vertices without weight. Will remain in place.")
+        
+        # Check for shape keys + non-applied modifiers
+        if child.data.shape_keys and len(child.modifiers) > 0:
+            mod_names = [m.name for m in child.modifiers if m.type not in ('ARMATURE', 'CORRECTIVE_SMOOTH')]
+            if mod_names:
+                warnings.append(f"🟡 Mesh '{child.name}': shape keys + unapplied modifiers ({mod_names}). Apply modifiers first.")
+    
+    return warnings
+
+# Usage:
+# armature = bpy.data.objects['SK_Character_Armature']
+# for w in validate_character_rig(armature):
+#     print(w)
+```
+
+---
+
+## Auto-Rigging Tools
+
+| Tool | Type | Best for | Notes |
+|---|---|---|---|
+| **Mixamo** | Web service (free) | Standard humanoids | Upload mesh, auto-rig + 2500 animations. Requires Adobe account. |
+| **Rigify** | Blender addon (built-in) | All types | Configurable meta-rig, production-ready. Free and offline — see below. |
+| **AccuRIG** (Reallusion) | Desktop app (free) | Detailed humanoids | Better results than Mixamo on hands/fingers. |
+| **Auto-Rig Pro** | Blender addon (paid ~$40) | Production | Smart retopo + rig + game-ready export. |
+
+### Match the rig's density to the mesh's
+
+Before choosing a rig, divide **vertices by deform bones**. Automatic weights need
+enough geometry around each bone to localise its influence; below roughly 5
+vertices per deform bone they cannot, and the result is mush no amount of
+weight-painting fixes cheaply.
+
+Measured on the same 370-vertex stylised figure, same pose, same camera:
+
+| | Rigify human | Rig sized to the mesh |
+|---|---:|---:|
+| Deform bones | 160 | 13 |
+| Vertices per deform bone | **2.3** | **28.5** |
+| Deform bones influencing nothing | **107 of 160** | 0 |
+| Max influences per vertex | 9 | 6 |
+| Result | head detaches at the neck, limbs collapse into the torso | volume held, pose readable |
+
+The 107 dead bones are the tell: `parent_set(type='ARMATURE_AUTO')` had no
+geometry to give them, so they sit in the skin palette doing nothing while the
+vertices that *are* weighted get smeared across eight or nine bones each.
+
+**So:** reach for a Rigify human when the mesh has the topology to carry it —
+order of thousands of vertices, loops at the joints. For a low-poly or stylised
+figure, build the 12-20 bones the silhouette actually needs. Check the ratio
+first; it costs one line.
+
+```python
+ratio = len(mesh.data.vertices) / sum(1 for b in rig.data.bones if b.use_deform)
+```
+
+### Animation-ready skeleton
+
+A rig that only has to hold a pose can be coarse. A rig that will be **animated** —
+by hand, by a motion library, or by a text-to-motion model — needs a joint at every
+place the animal actually bends. A leg made of one bone cannot fold a knee, whatever
+drives it: on a free low-poly cat rigged that way (one bone per leg, one for the
+body), every generated crouch had to rotate the whole leg about the hip.
+
+Place the joints at the bends, and name them the way motion data names them:
+
+| Part | Chain (Mixamo-style names) |
+|---|---|
+| Spine | `Hips` → `Spine` → `Spine1` → `Neck` → `Head` → `HeadTop_End` |
+| Hind / leg | `LeftUpLeg` → `LeftLeg` → `LeftFoot` → `LeftToeBase` (and `Right…`) |
+| Fore / arm | `LeftArm` → `LeftForeArm` → `LeftHand` → `LeftFingers` (parented to `Spine1`) |
+| Tail | `Tail1` → `Tail2` → … (parented to `Hips`) |
+
+Names matter beyond tidiness: motion models condition on them. UniMate's offline
+labeller read 24 of these 26 names directly (`LeftUpLeg` → *Left Thigh*) and guessed
+the other 2 (`…Fingers` → *Finger*). For a four-legged animal, 4 labels still need a
+hand: the training data labels a hind leg *Thigh / Shin / Fetlock / Foot*, so
+`…Foot` → *Fetlock* and `…ToeBase` → *Foot*.
+
+To place the joints on a mesh you did not model, take the centroid of the leg's
+vertices in thin horizontal slices at the heights of the bends — on the cat, slices
+at 22 cm (knee and elbow), 9-10 cm (hock and wrist) and 3 cm (paw).
+
+Measured on a 466-vertex low-poly cat with this 26-bone skeleton: **17.9 vertices per
+deform bone, 0 bones influencing nothing** — inside rule 26.
+
+**Rig the welded mesh, never the split one.** Low-poly exports split every edge so
+each face can carry its own normal. Weighted as shipped, every copy of a vertex gets
+its own weights, and the first pose opens the mesh at each joint. CLEANUP's weld
+(rule 10, `references/validation-checklist.md` § Merge by Distance) removes the split
+and keeps the shading, so a mesh that went through it is ready to weight:
+
+| Same cat, same 26 bones, same pose | Vertices | Corners bent > 5° (shading) | Widest tear |
+|---|---:|---:|---:|
+| Weighted as shipped (split edges) | 1,856 | 26.7% | **12.5 cm** — 2,798 vertex pairs pulled apart, 14.4% of the cat |
+| Plain merge, then weighted | 466 | **94.5%** — re-smoothed | 0 |
+| **Rule 10 weld (normals kept), then weighted** | 466 | 26.7% — unchanged | **0** |
+
+The glTF exporter splits the vertices again where the kept normals differ (466 →
+1,875 in the file) and gives each copy the same weights, so the tear does not come
+back on export.
+
+**Skin rigid parts, or fold them in.** Eyes, a helmet, a prop in a hand often hang off
+a bone by parenting. Blender moves them, but tools that read skin weights only drop
+them — UniMate's preprocessing left a dragon's eyes floating. `tools/bind_rigid_parts.py`
+joins them into the skin at rest pose, 100% to their bone (read posed, the bone's pose
+is applied twice: the eyes landed 1.5 m off the face).
+
+**Then pose it before trusting it.** Bend every leg joint, the spine and the tail
+about 40°, and measure — a screenshot hides a tear the width of a face:
+
+```python
+import numpy as np
+from collections import defaultdict
+
+def widest_tear(mesh):
+    """Largest distance, once posed, between vertices that coincide at rest."""
+    rest = np.array([v.co[:] for v in mesh.data.vertices])
+    dg = bpy.context.evaluated_depsgraph_get()
+    posed = np.array([v.co[:] for v in mesh.evaluated_get(dg).data.vertices])
+    same = defaultdict(list)
+    for i, p in enumerate(np.round(rest, 5)):
+        same[tuple(p)].append(i)
+    gaps = [np.linalg.norm(posed[a] - posed[b])
+            for g in same.values() if len(g) > 1 for a in g for b in g if a < b]
+    return max(gaps, default=0.0)          # 0.0 on a correctly weighted mesh
+```
+
+### Rigify from Python
+
+The only free, built-in, offline option. Three calls:
+
+```python
+import bpy
+
+# addon_utils.enable() is NOT enough — it loads the module but leaves the
+# RigifyParameters property group incomplete, and generation then dies on
+# "'RigifyParameters' object has no attribute 'make_custom_pivot'", which says
+# nothing about the real cause. Use the preferences operator.
+bpy.ops.preferences.addon_enable(module="rigify")
+
+bpy.ops.object.armature_human_metarig_add()   # 159-bone metarig, editable
+bpy.ops.pose.rigify_generate()                # -> full control rig
+```
+
+Measured on Blender 5.0.1: the generated human rig is **706 bones, 160 of them
+deforming, across 23 bone collections** (Face, Torso, `Arm.L (IK)`, `Arm.L (FK)`,
+Fingers…). Position the metarig on your mesh first — generating is cheap and
+repeatable, editing a generated rig is not.
+
+Two consequences for export, both easy to miss:
+
+- Pass `export_def_bones=True` to the glTF exporter. Without it every control and
+  mechanism bone ships as a joint.
+- **A deform bone parented to a control bone is fine.** The exporter re-parents it
+  to its nearest deforming ancestor — measured on Blender 5.2.2: `DEF-tip` under
+  `CTRL-mid` under `DEF-root` exports as `DEF-tip` under `DEF-root`. Do not
+  re-parent by hand before export.
+- **The exporter hides unweighted vertices.** It binds them to a synthetic joint
+  named `neutral_bone` and the file validates — measured. Run the validator above
+  before exporting: after the export, a vertex with no weight no longer looks like
+  one. Automatic weights skip disconnected parts (a belt, a pouch — 48 vertices on
+  the bench's villager), which is exactly where this happens.
+- Rigify names bones `DEF-spine`, `MCH-torso`. Those hyphens are fine — verified
+  through both glTF and FBX.
+
+## Retopology Tools
+
+| Tool | Type | Best for |
+|---|---|---|
+| **Quad Remesher** | Blender addon (paid) | Best quality auto-retopo |
+| **InstantMeshes** | Standalone (free) | Fast, open-source |
+| **Blender Remesh** | Built-in | Quick prototyping (voxel remesh) |
+| **OpenSubdiv** | Built-in | Subdivision for low-poly to high-poly |
+
+---
+
+## Kiln Integration
+
+### In the main pipeline
+
+Phase [5] CLEANUP for characters:
+1. Standard cleanup (merge doubles, normals, transforms)
+2. Verify T-pose if rigging is planned
+3. Retopology if AI mesh (typically too dense for rigging)
+4. `validate_character_rig()` if armature is present
+
+### Character-specific export
+
+```python
+# Character export settings (GLTF)
+bpy.ops.export_scene.gltf(
+    filepath=output_path,
+    export_format='GLB',
+    export_apply=False,
+    export_animations=True,
+    export_nla_strips=True,
+    export_skins=True,         # vertex groups / skinning
+    export_morph=True,         # blend shapes / shape keys
+    export_draco_mesh_compression_enable=False,
+)
+```
+
+```python
+# Character export settings (FBX — Unity/Unreal)
+bpy.ops.export_scene.fbx(
+    filepath=output_path,
+    use_selection=True,
+    apply_scale_options='FBX_SCALE_ALL',
+    apply_unit_scale=True,
+    bake_space_transform=True,
+    use_armature_deform_only=True,  # skip helper bones (MCH_*)
+    add_leaf_bones=False,           # Unity doesn't need leaf bones
+    bake_anim=True,
+    bake_anim_use_all_actions=True,
+    path_mode='COPY',
+    embed_textures=True,
+)
+```
