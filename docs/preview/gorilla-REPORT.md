@@ -13,7 +13,7 @@
 | Vertices / triangles (GLB) | 46386 / 90784 |
 | Materials | DrawingBack, DrawingFront |
 | Rig | 17 bones, blended distance weights skinning |
-| GLB size | 3098 KB |
+| GLB size | 3070 KB |
 
 ## Checks
 
@@ -21,7 +21,7 @@
 - ✅ `glb_structure_valid` 1 meshes, 46386 verts, 90784 tris
 - ✅ `materials_present` DrawingBack, DrawingFront
 - ✅ `materials_assigned` 0 primitives without material
-- ✅ `size_reasonable` 3172796 bytes
+- ✅ `size_reasonable` 3143816 bytes
 - ✅ `expected_parts_present` 1 parts
 - ✅ `geometry_finite` 
 - ✅ `bbox_nonzero` size (2.35, 0.67, 1.496) m
