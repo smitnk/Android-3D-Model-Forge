@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "666324 bytes"
+      "detail": "669336 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -40,12 +40,12 @@
     {
       "check": "bbox_nonzero",
       "pass": true,
-      "detail": "size (1.119, 0.554, 1.29) m"
+      "detail": "size (1.119, 0.554, 1.345) m"
     },
     {
       "check": "scale_usable",
       "pass": true,
-      "detail": "height 1.290 m (expected 0.5-3.0)"
+      "detail": "height 1.345 m (expected 0.5-3.0)"
     },
     {
       "check": "grounded",
@@ -60,7 +60,7 @@
     {
       "check": "upright",
       "pass": true,
-      "detail": "height 1.290 > depth 0.554"
+      "detail": "height 1.345 > depth 0.554"
     },
     {
       "check": "no_degenerate_parts",
@@ -120,7 +120,7 @@
     {
       "check": "tpose_arm_span",
       "pass": true,
-      "detail": "span 1.119 m vs height 1.290 m"
+      "detail": "span 1.119 m vs height 1.345 m"
     },
     {
       "check": "left_right_symmetry",
@@ -135,7 +135,7 @@
     {
       "check": "chibi_proportions",
       "pass": true,
-      "detail": "head is 38% of height"
+      "detail": "head is 37% of height"
     },
     {
       "check": "skin_in_glb",
@@ -180,7 +180,7 @@
   ],
   "summary": {
     "valid": true,
-    "bytes": 666324,
+    "bytes": 669336,
     "meshes": 42,
     "mesh_nodes": [
       "Ear_L",
@@ -265,11 +265,11 @@
     "generator": "Khronos glTF Blender I/O v4.2.70"
   },
   "dimensions_m": {
-    "height": 1.2895,
+    "height": 1.3448,
     "size_xyz": [
       1.1191,
       0.5541,
-      1.2895
+      1.3448
     ],
     "bbox_min": [
       -0.5596,
@@ -279,7 +279,7 @@
     "bbox_max": [
       0.5596,
       0.2991,
-      1.2896
+      1.3449
     ]
   },
   "rig": {
