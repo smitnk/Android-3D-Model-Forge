@@ -38,11 +38,7 @@ on:
         type: boolean
         default: false
   push:
-    branches: [main]
-    paths:
-      - "scripts/**"
-      - "assets/reference/**"
-      - ".github/workflows/generate-model.yml"
+    branches: [main]   # the plan job decides what (if anything) to build; doc-only pushes build nothing
 
 permissions:
   contents: write   # needed only for publishing previews/release
