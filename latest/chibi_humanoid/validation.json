@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "664456 bytes"
+      "detail": "667472 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -240,7 +240,7 @@
   ],
   "summary": {
     "valid": true,
-    "bytes": 664456,
+    "bytes": 667472,
     "meshes": 42,
     "mesh_nodes": [
       "Ear_L",
