@@ -18,207 +18,129 @@ test_report_renders (test_glb_inspect.TestGLBInspect.test_report_renders) ... ok
 test_valid_triangle (test_glb_inspect.TestGLBInspect.test_valid_triangle) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.001s
+Ran 5 tests in 0.000s
 
 OK
-08:22:48 | INFO: Starting glTF 2.0 export
-08:22:48 | INFO: Extracting primitive: Ear_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Ear_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Eye_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Eye_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Eyebrow_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Eyebrow_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: EyeShine_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: EyeShine_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Forearm_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Forearm_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Hair
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: HairTuft_0
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: HairTuft_1
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: HairTuft_2
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: HairTuft_3
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: HairTuft_4
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: HairTuft_5
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Hand_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Hand_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Head
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Mouth
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Neck
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Nose
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Pupil_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Pupil_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Shin_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Shin_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Shoe_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Shoe_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Shorts
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: ShortsLeg_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: ShortsLeg_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Sole_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Sole_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Thumb_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Thumb_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: Torso
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: UpperArm_L
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Extracting primitive: UpperArm_R
-08:22:48 | INFO: Primitives created: 1
-08:22:48 | INFO: Finished glTF 2.0 export in 0.12742829322814941 s
+08:24:39 | INFO: Starting glTF 2.0 export
+08:24:39 | INFO: Extracting primitive: Ear_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Ear_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Eye_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Eye_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Eyebrow_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Eyebrow_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: EyeShine_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: EyeShine_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Forearm_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Forearm_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Hair
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: HairTuft_0
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: HairTuft_1
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: HairTuft_2
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: HairTuft_3
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: HairTuft_4
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: HairTuft_5
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Hand_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Hand_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Head
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Mouth
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Neck
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Nose
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Pupil_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Pupil_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Shin_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Shin_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Shoe_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Shoe_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Shorts
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: ShortsLeg_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: ShortsLeg_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Sole_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Sole_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Thumb_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Thumb_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: Torso
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: UpperArm_L
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Extracting primitive: UpperArm_R
+08:24:39 | INFO: Primitives created: 1
+08:24:39 | INFO: Finished glTF 2.0 export in 0.07921886444091797 s
 Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 Info: Total files 0 | Changed 0 | Failed 0
 Fra:1 Mem:19.33M (Peak 19.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
-Fra:1 Mem:19.34M (Peak 19.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Ear_L
+Fra:1 Mem:19.33M (Peak 19.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Ear_L
 Fra:1 Mem:19.42M (Peak 19.42M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eye_L
 Fra:1 Mem:19.46M (Peak 19.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Pupil_L
 Fra:1 Mem:19.48M (Peak 19.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | EyeShine_L
-Fra:1 Mem:19.49M (Peak 19.49M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eyebrow_L
-Fra:1 Mem:19.52M (Peak 19.52M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Ear_R
-Fra:1 Mem:19.53M (Peak 19.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eye_R
-Fra:1 Mem:19.55M (Peak 19.55M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sole_R
-Fra:1 Mem:19.62M (Peak 19.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Pupil_R
+Fra:1 Mem:19.48M (Peak 19.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eyebrow_L
+Fra:1 Mem:19.53M (Peak 19.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Ear_R
+Fra:1 Mem:19.55M (Peak 19.55M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:19.56M (Peak 19.56M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eye_R
+Fra:1 Mem:19.56M (Peak 19.56M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sole_R
 Fra:1 Mem:19.63M (Peak 19.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | EyeShine_R
-Fra:1 Mem:19.68M (Peak 19.68M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eyebrow_R
-Fra:1 Mem:19.72M (Peak 19.72M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shin_R
-Fra:1 Mem:19.75M (Peak 19.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Mouth
-Fra:1 Mem:19.76M (Peak 19.76M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShortsLeg_R
-Fra:1 Mem:19.80M (Peak 19.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hair
-Fra:1 Mem:20.02M (Peak 20.02M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Thumb_R
-Fra:1 Mem:20.06M (Peak 20.06M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hand_R
-Fra:1 Mem:20.12M (Peak 20.12M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Forearm_R
-Fra:1 Mem:20.18M (Peak 20.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | UpperArm_R
-Fra:1 Mem:20.24M (Peak 20.24M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sole_L
-Fra:1 Mem:20.34M (Peak 20.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_0
-Fra:1 Mem:20.35M (Peak 20.35M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shoe_L
-Fra:1 Mem:20.36M (Peak 20.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_1
-Fra:1 Mem:20.42M (Peak 20.42M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_2
-Fra:1 Mem:20.43M (Peak 20.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_3
-Fra:1 Mem:20.40M (Peak 20.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_4
-Fra:1 Mem:20.43M (Peak 20.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Neck
+Fra:1 Mem:19.63M (Peak 19.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shoe_R
+Fra:1 Mem:19.69M (Peak 19.69M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shin_R
+Fra:1 Mem:19.69M (Peak 19.69M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShortsLeg_R
+Fra:1 Mem:19.75M (Peak 19.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Thumb_R
+Fra:1 Mem:19.76M (Peak 19.76M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hand_R
+Fra:1 Mem:19.79M (Peak 19.79M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Forearm_R
+Fra:1 Mem:19.85M (Peak 19.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | UpperArm_R
+Fra:1 Mem:19.91M (Peak 19.91M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sole_L
+Fra:1 Mem:19.96M (Peak 19.96M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shoe_L
+Fra:1 Mem:20.02M (Peak 20.02M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shin_L
+Fra:1 Mem:20.03M (Peak 20.03M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShortsLeg_L
+Fra:1 Mem:20.04M (Peak 20.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Nose
+Fra:1 Mem:20.11M (Peak 20.11M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Mouth
+Fra:1 Mem:20.17M (Peak 20.17M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Thumb_L
+Fra:1 Mem:20.17M (Peak 20.17M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hair
+Fra:1 Mem:20.23M (Peak 20.23M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_0
+Fra:1 Mem:20.23M (Peak 20.23M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_1
+Fra:1 Mem:20.39M (Peak 20.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_2
+Fra:1 Mem:20.39M (Peak 20.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_3
+Fra:1 Mem:20.43M (Peak 20.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_4
+Fra:1 Mem:20.43M (Peak 20.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_5
+Fra:1 Mem:20.44M (Peak 20.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Neck
 Fra:1 Mem:20.44M (Peak 20.44M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Torso
-Fra:1 Mem:20.53M (Peak 20.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shorts
-Fra:1 Mem:20.62M (Peak 20.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | UpperArm_L
-Fra:1 Mem:20.68M (Peak 20.68M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Forearm_L
-Fra:1 Mem:20.74M (Peak 20.74M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hand_L
-Fra:1 Mem:20.77M (Peak 20.77M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Thumb_L
-Fra:1 Mem:20.78M (Peak 20.78M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShortsLeg_L
-Fra:1 Mem:20.85M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
-Fra:1 Mem:17.92M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
-Fra:1 Mem:17.92M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
-Fra:1 Mem:17.92M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
-Fra:1 Mem:17.92M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
-Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.01 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Procedurals
-Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.01 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Background
-Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.01 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Camera
-Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.01 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes Flags
-Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.01 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects
-Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.01 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
-Fra:1 Mem:18.02M (Peak 20.85M) | Time:00:00.01 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
-Fra:1 Mem:18.02M (Peak 20.85M) | Time:00:00.01 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Particle Systems
-Fra:1 Mem:18.02M (Peak 20.85M) | Time:00:00.01 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
-Fra:1 Mem:18.02M (Peak 20.85M) | Time:00:00.01 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Meshes
-Fra:1 Mem:18.39M (Peak 20.85M) | Time:00:00.01 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Mesh | Computing attributes
-Fra:1 Mem:18.54M (Peak 20.85M) | Time:00:00.01 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
-Fra:1 Mem:18.53M (Peak 20.85M) | Time:00:00.01 | Mem:0.16M, Peak:0.16M | Scene, ViewLayer | Updating Scene BVH | Building
-Fra:1 Mem:18.53M (Peak 20.85M) | Time:00:00.01 | Mem:0.16M, Peak:0.16M | Scene, ViewLayer | Updating Scene BVH | Building BVH
-Fra:1 Mem:18.53M (Peak 20.85M) | Time:00:00.01 | Mem:0.90M, Peak:0.90M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
-Fra:1 Mem:18.53M (Peak 20.85M) | Time:00:00.01 | Mem:1.71M, Peak:2.45M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
-Fra:1 Mem:18.53M (Peak 20.85M) | Time:00:00.01 | Mem:1.71M, Peak:2.45M | Scene, ViewLayer | Updating Mesh | Computing normals
-Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.01 | Mem:1.71M, Peak:2.45M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
-Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.01 | Mem:2.55M, Peak:2.55M | Scene, ViewLayer | Updating Objects Flags
-Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.01 | Mem:2.55M, Peak:2.55M | Scene, ViewLayer | Updating Primitive Offsets
-Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.01 | Mem:2.55M, Peak:2.55M | Scene, ViewLayer | Updating Images
-Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.01 | Mem:2.55M, Peak:2.55M | Scene, ViewLayer | Updating Camera Volume
-Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.01 | Mem:2.55M, Peak:2.55M | Scene, ViewLayer | Updating Lookup Tables
-Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.01 | Mem:2.63M, Peak:2.63M | Scene, ViewLayer | Updating Lights
-Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.01 | Mem:2.63M, Peak:2.63M | Scene, ViewLayer | Updating Lights | Computing tree
-Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.01 | Mem:2.63M, Peak:2.63M | Scene, ViewLayer | Updating Integrator
-Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.01 | Mem:2.63M, Peak:2.63M | Scene, ViewLayer | Updating Film
-Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.01 | Mem:2.55M, Peak:2.63M | Scene, ViewLayer | Updating Lookup Tables
-Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.01 | Mem:2.64M, Peak:2.64M | Scene, ViewLayer | Updating Baking
-Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.01 | Mem:2.64M, Peak:2.64M | Scene, ViewLayer | Updating Device | Writing constant memory
-Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.01 | Mem:2.64M, Peak:2.64M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
-Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.01 | Mem:2.64M, Peak:2.64M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:65.78M (Peak 65.78M) | Time:00:00.33 | Remaining:00:15.13 | Mem:49.02M, Peak:49.02M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:85.31M (Peak 114.61M) | Time:00:22.33 | Mem:49.02M, Peak:49.02M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:85.31M (Peak 114.61M) | Time:00:22.33 | Mem:49.02M, Peak:49.02M | Scene, ViewLayer | Finished
-Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/forge-kid-front.png'
-Time: 00:22.39 (Saving: 00:00.06)
-
-Fra:1 Mem:19.33M (Peak 19.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
-Fra:1 Mem:19.33M (Peak 19.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eye_L
-Fra:1 Mem:19.45M (Peak 19.45M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Pupil_L
-Fra:1 Mem:19.46M (Peak 19.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | EyeShine_L
-Fra:1 Mem:19.47M (Peak 19.47M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eyebrow_L
-Fra:1 Mem:19.52M (Peak 19.52M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Ear_R
-Fra:1 Mem:19.55M (Peak 19.55M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eye_R
-Fra:1 Mem:19.56M (Peak 19.56M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Pupil_R
-Fra:1 Mem:19.58M (Peak 19.58M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
-Fra:1 Mem:19.59M (Peak 19.59M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | EyeShine_R
-Fra:1 Mem:19.60M (Peak 19.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sole_R
-Fra:1 Mem:19.64M (Peak 19.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eyebrow_R
-Fra:1 Mem:19.69M (Peak 19.69M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Mouth
-Fra:1 Mem:19.74M (Peak 19.74M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shoe_R
-Fra:1 Mem:19.76M (Peak 19.76M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hair
-Fra:1 Mem:19.76M (Peak 19.76M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_0
-Fra:1 Mem:19.83M (Peak 19.83M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_1
-Fra:1 Mem:19.85M (Peak 19.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_2
-Fra:1 Mem:19.86M (Peak 19.86M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_3
-Fra:1 Mem:19.87M (Peak 19.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_4
-Fra:1 Mem:20.00M (Peak 20.00M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_5
-Fra:1 Mem:19.99M (Peak 20.00M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shin_R
-Fra:1 Mem:20.00M (Peak 20.00M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Neck
-Fra:1 Mem:20.00M (Peak 20.00M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Torso
-Fra:1 Mem:20.04M (Peak 20.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShortsLeg_R
-Fra:1 Mem:20.11M (Peak 20.11M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shorts
-Fra:1 Mem:20.31M (Peak 20.31M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Thumb_R
-Fra:1 Mem:20.33M (Peak 20.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hand_R
-Fra:1 Mem:20.37M (Peak 20.37M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | UpperArm_L
-Fra:1 Mem:20.39M (Peak 20.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Forearm_R
-Fra:1 Mem:20.49M (Peak 20.49M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Forearm_L
-Fra:1 Mem:20.54M (Peak 20.54M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | UpperArm_R
-Fra:1 Mem:20.62M (Peak 20.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hand_L
-Fra:1 Mem:20.69M (Peak 20.69M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Thumb_L
-Fra:1 Mem:20.72M (Peak 20.72M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sole_L
-Fra:1 Mem:20.77M (Peak 20.77M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShortsLeg_L
-Fra:1 Mem:20.81M (Peak 20.81M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shin_L
-Fra:1 Mem:20.83M (Peak 20.83M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shoe_L
+Fra:1 Mem:20.50M (Peak 20.50M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shorts
+Fra:1 Mem:20.61M (Peak 20.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hand_L
+Fra:1 Mem:20.67M (Peak 20.67M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | UpperArm_L
+Fra:1 Mem:20.69M (Peak 20.69M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Forearm_L
 Fra:1 Mem:20.85M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
 Fra:1 Mem:17.92M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
 Fra:1 Mem:17.92M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
@@ -256,11 +178,89 @@ Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.01 | Mem:2.64M, Peak:2.64M | Scene, 
 Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.01 | Mem:2.64M, Peak:2.64M | Scene, ViewLayer | Updating Device | Writing constant memory
 Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.01 | Mem:2.64M, Peak:2.64M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
 Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.01 | Mem:2.64M, Peak:2.64M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:65.78M (Peak 65.78M) | Time:00:00.36 | Remaining:00:16.56 | Mem:49.02M, Peak:49.02M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:85.31M (Peak 114.61M) | Time:00:23.28 | Mem:49.02M, Peak:49.02M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:85.31M (Peak 114.61M) | Time:00:23.28 | Mem:49.02M, Peak:49.02M | Scene, ViewLayer | Finished
+Fra:1 Mem:65.78M (Peak 65.78M) | Time:00:00.22 | Remaining:00:09.81 | Mem:49.02M, Peak:49.02M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:85.31M (Peak 114.61M) | Time:00:11.99 | Mem:49.02M, Peak:49.02M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:85.31M (Peak 114.61M) | Time:00:11.99 | Mem:49.02M, Peak:49.02M | Scene, ViewLayer | Finished
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/forge-kid-front.png'
+Time: 00:12.03 (Saving: 00:00.03)
+
+Fra:1 Mem:19.33M (Peak 19.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
+Fra:1 Mem:19.40M (Peak 19.40M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eye_L
+Fra:1 Mem:19.46M (Peak 19.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Pupil_L
+Fra:1 Mem:19.48M (Peak 19.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eyebrow_L
+Fra:1 Mem:19.48M (Peak 19.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sole_R
+Fra:1 Mem:19.49M (Peak 19.49M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Ear_R
+Fra:1 Mem:19.55M (Peak 19.55M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eye_R
+Fra:1 Mem:19.58M (Peak 19.58M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Pupil_R
+Fra:1 Mem:19.60M (Peak 19.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | EyeShine_R
+Fra:1 Mem:19.61M (Peak 19.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Eyebrow_R
+Fra:1 Mem:19.62M (Peak 19.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Nose
+Fra:1 Mem:19.71M (Peak 19.71M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Mouth
+Fra:1 Mem:19.75M (Peak 19.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hair
+Fra:1 Mem:19.74M (Peak 19.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shin_R
+Fra:1 Mem:19.80M (Peak 19.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_0
+Fra:1 Mem:19.84M (Peak 19.84M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShortsLeg_R
+Fra:1 Mem:20.08M (Peak 20.08M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_1
+Fra:1 Mem:20.12M (Peak 20.12M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Thumb_R
+Fra:1 Mem:20.13M (Peak 20.13M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hand_R
+Fra:1 Mem:20.16M (Peak 20.16M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Forearm_R
+Fra:1 Mem:20.17M (Peak 20.17M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_2
+Fra:1 Mem:20.26M (Peak 20.26M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_3
+Fra:1 Mem:20.26M (Peak 20.26M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_4
+Fra:1 Mem:20.31M (Peak 20.31M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | HairTuft_5
+Fra:1 Mem:20.28M (Peak 20.31M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | UpperArm_R
+Fra:1 Mem:20.28M (Peak 20.31M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Torso
+Fra:1 Mem:20.41M (Peak 20.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shorts
+Fra:1 Mem:20.49M (Peak 20.49M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sole_L
+Fra:1 Mem:20.56M (Peak 20.56M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | UpperArm_L
+Fra:1 Mem:20.57M (Peak 20.57M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shoe_L
+Fra:1 Mem:20.67M (Peak 20.67M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Forearm_L
+Fra:1 Mem:20.73M (Peak 20.73M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Hand_L
+Fra:1 Mem:20.76M (Peak 20.76M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shin_L
+Fra:1 Mem:20.77M (Peak 20.77M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShortsLeg_L
+Fra:1 Mem:20.81M (Peak 20.81M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Thumb_L
+Fra:1 Mem:20.85M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:17.92M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:17.92M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:17.92M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:17.92M (Peak 20.85M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:18.01M (Peak 20.85M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:18.02M (Peak 20.85M) | Time:00:00.00 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:18.02M (Peak 20.85M) | Time:00:00.00 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:18.02M (Peak 20.85M) | Time:00:00.00 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:18.02M (Peak 20.85M) | Time:00:00.00 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:18.39M (Peak 20.85M) | Time:00:00.00 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:18.54M (Peak 20.85M) | Time:00:00.00 | Mem:0.02M, Peak:0.02M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:18.53M (Peak 20.85M) | Time:00:00.00 | Mem:0.16M, Peak:0.16M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:18.53M (Peak 20.85M) | Time:00:00.00 | Mem:0.16M, Peak:0.16M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:18.53M (Peak 20.85M) | Time:00:00.00 | Mem:0.90M, Peak:0.90M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:18.53M (Peak 20.85M) | Time:00:00.00 | Mem:1.79M, Peak:2.53M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:18.53M (Peak 20.85M) | Time:00:00.00 | Mem:1.79M, Peak:2.53M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.00 | Mem:1.79M, Peak:2.53M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.00 | Mem:2.63M, Peak:2.63M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.00 | Mem:2.63M, Peak:2.63M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.00 | Mem:2.63M, Peak:2.63M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.00 | Mem:2.63M, Peak:2.63M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.00 | Mem:2.63M, Peak:2.63M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.00 | Mem:2.71M, Peak:2.71M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.00 | Mem:2.71M, Peak:2.71M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.00 | Mem:2.71M, Peak:2.71M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:19.37M (Peak 20.85M) | Time:00:00.00 | Mem:2.71M, Peak:2.71M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.00 | Mem:2.63M, Peak:2.71M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.00 | Mem:2.71M, Peak:2.71M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.00 | Mem:2.71M, Peak:2.71M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.00 | Mem:2.71M, Peak:2.71M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:19.38M (Peak 20.85M) | Time:00:00.00 | Mem:2.71M, Peak:2.71M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:65.78M (Peak 65.78M) | Time:00:00.21 | Remaining:00:09.50 | Mem:49.10M, Peak:49.10M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:85.31M (Peak 114.61M) | Time:00:11.99 | Mem:49.10M, Peak:49.10M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:85.31M (Peak 114.61M) | Time:00:11.99 | Mem:49.10M, Peak:49.10M | Scene, ViewLayer | Finished
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/forge-kid-three-quarter.png'
-Time: 00:23.34 (Saving: 00:00.05)
+Time: 00:12.03 (Saving: 00:00.03)
 
 INFO Draco mesh compression is available, use library at /home/runner/blender/4.2/python/lib/python3.11/site-packages/libextern_draco.so
 
@@ -429,48 +429,47 @@ Blender quit
   "skinned_primitives": 39,
   "generator": "Khronos glTF Blender I/O v4.2.70"
 }
-08:23:34 | INFO: Data are loaded, start creating Blender stuff
-08:23:34 | INFO: Blender create Mesh node Ear_L
-08:23:34 | INFO: Blender create Mesh node Ear_R
-08:23:34 | INFO: Blender create Mesh node Eye_L
-08:23:34 | INFO: Blender create Mesh node Eye_R
-08:23:34 | INFO: Blender create Mesh node Eyebrow_L
-08:23:34 | INFO: Blender create Mesh node Eyebrow_R
-08:23:34 | INFO: Blender create Mesh node EyeShine_L
-08:23:34 | INFO: Blender create Mesh node EyeShine_R
-08:23:34 | INFO: Blender create Mesh node Forearm_L
-08:23:34 | INFO: Blender create Mesh node Forearm_R
-08:23:34 | INFO: Blender create Mesh node Hair
-08:23:34 | INFO: Blender create Mesh node HairTuft_0
-08:23:34 | INFO: Blender create Mesh node HairTuft_1
-08:23:34 | INFO: Blender create Mesh node HairTuft_2
-08:23:34 | INFO: Blender create Mesh node HairTuft_3
-08:23:34 | INFO: Blender create Mesh node HairTuft_4
-08:23:34 | INFO: Blender create Mesh node HairTuft_5
-08:23:34 | INFO: Blender create Mesh node Hand_L
-08:23:34 | INFO: Blender create Mesh node Hand_R
-08:23:34 | INFO: Blender create Mesh node Head
-08:23:34 | INFO: Blender create Mesh node Mouth
-08:23:34 | INFO: Blender create Mesh node Neck
-08:23:34 | INFO: Blender create Mesh node Nose
-08:23:34 | INFO: Blender create Mesh node Pupil_L
-08:23:34 | INFO: Blender create Mesh node Pupil_R
-08:23:34 | INFO: Blender create Mesh node Shin_L
-08:23:34 | INFO: Blender create Mesh node Shin_R
-08:23:34 | INFO: Blender create Mesh node Shoe_L
-08:23:34 | INFO: Blender create Mesh node Shoe_R
-08:23:34 | INFO: Blender create Mesh node Shorts
-08:23:34 | INFO: Blender create Mesh node ShortsLeg_L
-08:23:34 | INFO: Blender create Mesh node ShortsLeg_R
-08:23:34 | INFO: Blender create Mesh node Sole_L
-08:23:34 | INFO: Blender create Mesh node Sole_R
-08:23:34 | INFO: Blender create Mesh node Thumb_L
-08:23:34 | INFO: Blender create Mesh node Thumb_R
-08:23:34 | INFO: Blender create Mesh node Torso
-08:23:34 | INFO: Blender create Mesh node UpperArm_L
-08:23:34 | INFO: Blender create Mesh node UpperArm_R
-08:23:34 | INFO: glTF import finished in 0.09s
-Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
+08:25:04 | INFO: Data are loaded, start creating Blender stuff
+08:25:04 | INFO: Blender create Mesh node Ear_L
+08:25:04 | INFO: Blender create Mesh node Ear_R
+08:25:04 | INFO: Blender create Mesh node Eye_L
+08:25:04 | INFO: Blender create Mesh node Eye_R
+08:25:04 | INFO: Blender create Mesh node Eyebrow_L
+08:25:04 | INFO: Blender create Mesh node Eyebrow_R
+08:25:04 | INFO: Blender create Mesh node EyeShine_L
+08:25:04 | INFO: Blender create Mesh node EyeShine_R
+08:25:04 | INFO: Blender create Mesh node Forearm_L
+08:25:04 | INFO: Blender create Mesh node Forearm_R
+08:25:04 | INFO: Blender create Mesh node Hair
+08:25:04 | INFO: Blender create Mesh node HairTuft_0
+08:25:04 | INFO: Blender create Mesh node HairTuft_1
+08:25:04 | INFO: Blender create Mesh node HairTuft_2
+08:25:04 | INFO: Blender create Mesh node HairTuft_3
+08:25:04 | INFO: Blender create Mesh node HairTuft_4
+08:25:04 | INFO: Blender create Mesh node HairTuft_5
+08:25:04 | INFO: Blender create Mesh node Hand_L
+08:25:04 | INFO: Blender create Mesh node Hand_R
+08:25:04 | INFO: Blender create Mesh node Head
+08:25:04 | INFO: Blender create Mesh node Mouth
+08:25:04 | INFO: Blender create Mesh node Neck
+08:25:04 | INFO: Blender create Mesh node Nose
+08:25:04 | INFO: Blender create Mesh node Pupil_L
+08:25:04 | INFO: Blender create Mesh node Pupil_R
+08:25:04 | INFO: Blender create Mesh node Shin_L
+08:25:04 | INFO: Blender create Mesh node Shin_R
+08:25:04 | INFO: Blender create Mesh node Shoe_L
+08:25:04 | INFO: Blender create Mesh node Shoe_R
+08:25:04 | INFO: Blender create Mesh node Shorts
+08:25:04 | INFO: Blender create Mesh node ShortsLeg_L
+08:25:04 | INFO: Blender create Mesh node ShortsLeg_R
+08:25:04 | INFO: Blender create Mesh node Sole_L
+08:25:04 | INFO: Blender create Mesh node Sole_R
+08:25:04 | INFO: Blender create Mesh node Thumb_L
+08:25:04 | INFO: Blender create Mesh node Thumb_R
+08:25:04 | INFO: Blender create Mesh node Torso
+08:25:04 | INFO: Blender create Mesh node UpperArm_L
+08:25:04 | INFO: Blender create Mesh node UpperArm_R
+08:25:04 | INFO: glTF import finished in 0.05s
 [PASS] glb_exists_nonempty out/forge-kid.glb
 [PASS] glb_structure_valid 39 meshes, 12228 verts, 24300 tris
 [PASS] materials_present Brow, EyeWhite, Hair, Mouth, Pupil, Shirt, Shoe, Shorts, Skin, Sole
@@ -478,11 +477,11 @@ Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 [PASS] size_reasonable 660224 bytes
 [PASS] expected_parts_present 27 parts
 [PASS] geometry_finite 
-[PASS] bbox_nonzero size (1.902, 2.0, 2.29) m
-[PASS] scale_usable height 2.290 m (expected 0.5-3.0)
-[FAIL] grounded min z -1.0000
-[PASS] centered center x 0.0000, y 0.0000
-[PASS] upright height 2.290 > depth 2.000
+[PASS] bbox_nonzero size (1.119, 0.554, 1.29) m
+[PASS] scale_usable height 1.290 m (expected 0.5-3.0)
+[PASS] grounded min z 0.0001
+[PASS] centered center x 0.0000, y 0.0220
+[PASS] upright height 1.290 > depth 0.554
 [PASS] no_degenerate_parts 
 [PASS] tpose_arm_horizontal_L arm angle 0.00 deg from horizontal (max 8.0)
 [PASS] tpose_upperarm_along_x_L x-extent 0.210 vs z-extent 0.107
@@ -494,16 +493,19 @@ Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 [PASS] tpose_elbow_straight_R forearm angle 0.00 deg
 [PASS] leg_straight_vertical_R shin z/x 0.190/0.090, shin-shoe dx 0.0000
 [PASS] foot_points_forward_R shoe depth 0.219 > width 0.119
-[FAIL] tpose_arm_span span 1.119 m vs height 2.290 m
+[PASS] tpose_arm_span span 1.119 m vs height 1.290 m
 [PASS] left_right_symmetry max mirror error 0.00000 m
 [PASS] faces_forward nose y -0.240 in front of head centre y 0.000 (Blender -Y = glTF +Z front)
-[FAIL] chibi_proportions head is 22% of height
+[PASS] chibi_proportions head is 38% of height
 [PASS] skin_in_glb 1 skins, 39 skinned primitives
 [PASS] armature_present 1 armatures
 [PASS] expected_bones 17 bones
-[FAIL] meshes_bound_to_armature unbound: ['Icosphere']
+[PASS] meshes_bound_to_armature all meshes skinned
 [PASS] rest_pose_arm_bones_horizontal_L upper_arm->hand dir (1.0, 0.0, 0.0)
 [PASS] rest_pose_leg_bones_vertical_L thigh->foot dir (0.0, -0.0, -1.0)
 [PASS] rest_pose_arm_bones_horizontal_R upper_arm->hand dir (-1.0, 0.0, 0.0)
 [PASS] rest_pose_leg_bones_vertical_R thigh->foot dir (0.0, -0.0, -1.0)
-VALIDATION FAIL: 31/35 checks passed
+VALIDATION PASS: 35/35 checks passed
+Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
+
+Blender quit

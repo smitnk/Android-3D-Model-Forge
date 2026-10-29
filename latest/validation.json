@@ -1,5 +1,5 @@
 {
-  "overall": "FAIL",
+  "overall": "PASS",
   "glb": "forge-kid.glb",
   "checks": [
     {
@@ -40,27 +40,27 @@
     {
       "check": "bbox_nonzero",
       "pass": true,
-      "detail": "size (1.902, 2.0, 2.29) m"
+      "detail": "size (1.119, 0.554, 1.29) m"
     },
     {
       "check": "scale_usable",
       "pass": true,
-      "detail": "height 2.290 m (expected 0.5-3.0)"
+      "detail": "height 1.290 m (expected 0.5-3.0)"
     },
     {
       "check": "grounded",
-      "pass": false,
-      "detail": "min z -1.0000"
+      "pass": true,
+      "detail": "min z 0.0001"
     },
     {
       "check": "centered",
       "pass": true,
-      "detail": "center x 0.0000, y 0.0000"
+      "detail": "center x 0.0000, y 0.0220"
     },
     {
       "check": "upright",
       "pass": true,
-      "detail": "height 2.290 > depth 2.000"
+      "detail": "height 1.290 > depth 0.554"
     },
     {
       "check": "no_degenerate_parts",
@@ -119,8 +119,8 @@
     },
     {
       "check": "tpose_arm_span",
-      "pass": false,
-      "detail": "span 1.119 m vs height 2.290 m"
+      "pass": true,
+      "detail": "span 1.119 m vs height 1.290 m"
     },
     {
       "check": "left_right_symmetry",
@@ -134,8 +134,8 @@
     },
     {
       "check": "chibi_proportions",
-      "pass": false,
-      "detail": "head is 22% of height"
+      "pass": true,
+      "detail": "head is 38% of height"
     },
     {
       "check": "skin_in_glb",
@@ -154,8 +154,8 @@
     },
     {
       "check": "meshes_bound_to_armature",
-      "pass": false,
-      "detail": "unbound: ['Icosphere']"
+      "pass": true,
+      "detail": "all meshes skinned"
     },
     {
       "check": "rest_pose_arm_bones_horizontal_L",
@@ -262,20 +262,20 @@
     "generator": "Khronos glTF Blender I/O v4.2.70"
   },
   "dimensions_m": {
-    "height": 2.2896,
+    "height": 1.2895,
     "size_xyz": [
-      1.9021,
-      2.0,
-      2.2896
+      1.1191,
+      0.5541,
+      1.2895
     ],
     "bbox_min": [
-      -0.9511,
-      -1.0,
-      -1.0
+      -0.5596,
+      -0.255,
+      0.0001
     ],
     "bbox_max": [
-      0.9511,
-      1.0,
+      0.5596,
+      0.2991,
       1.2896
     ]
   },
