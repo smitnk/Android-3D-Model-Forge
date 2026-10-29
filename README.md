@@ -64,8 +64,10 @@ You need only a GitHub account and a phone or browser. The AI writes the generat
    > `validate_model.py` and the workflow, push to `main`, read the CI result on the `ci-results` branch,
    > fix any failure, compare the previews with the reference, and add the model to the README gallery.
 
-5. **Wait for the cloud build** (~5 minutes). Every push to `main` that touches `scripts/` or
-   `assets/reference/` runs Blender, checks the model (T-pose, scale, symmetry, rig, file structure) and publishes it.
+5. **Wait for the cloud build** (~5 minutes). A push builds **only the model whose own files changed**
+   (`scripts/<name>.py` or `assets/reference/<name>/`): Blender builds it, checks it (T-pose, scale, symmetry, rig,
+   file structure) and publishes it. Changes to shared code build nothing unless the commit message says
+   `[build: <name>]` or `[build-all]`; a manual **Run workflow** builds the model you pick.
 6. **Download** your model from the gallery / Release (ZIP with GLB + BLEND), or from the run's **Artifacts**.
 7. **Iterate:** tell the agent what looks wrong ("head too small", "feet too flat"); it edits the generator and
    pushes again.

@@ -36,6 +36,12 @@ variants, smooth (blended) joint weights. Never claim these work until implement
 | `.github/workflows/validate-model.yml` | Fast checks without Blender |
 | `references/` | Modeling and export guidelines (read before changing geometry) |
 
+## What a push builds
+
+Pushes to `main` build only the models whose own files changed (`scripts/changed_models.py` maps
+`scripts/<type>.py` and `assets/reference/<name>/` to a model). A new model must be added to `OWN` and `PUBLISHED`
+there. Shared-code changes build nothing unless the commit message contains `[build: <type>, ...]` or `[build-all]`.
+
 ## Running from the GitHub website (phone friendly)
 
 1. Open the repository → **Actions** tab → **Generate 3D Model** (left list; on mobile tap "All workflows").
