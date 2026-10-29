@@ -35,6 +35,7 @@ def parse_args():
     p.add_argument("--height", type=int, default=1280)
     p.add_argument("--samples", type=int, default=24)
     p.add_argument("--caption", default=timeline.DEFAULT_CAPTION)
+    p.add_argument("--frames", default="", help="render only FIRST-LAST (1-based, inclusive)")
     p.add_argument("--check-only", action="store_true", help="build and check the scene, do not render")
     return p.parse_args(argv)
 
@@ -255,7 +256,13 @@ def main():
     sc.cycles.device = "CPU"
     sc.cycles.samples = a.samples
     sc.cycles.use_denoising = True
+    sc.cycles.max_bounces, sc.cycles.diffuse_bounces, sc.cycles.glossy_bounces = 4, 2, 2
+    sc.cycles.transmission_bounces = sc.cycles.transparent_max_bounces = 4
+    sc.render.use_persistent_data = True  # keep BVH between frames
     sc.render.film_transparent = True
+    if a.frames:  # render only this chunk (the workflow splits frames across parallel jobs)
+        lo, hi = (int(x) for x in a.frames.split("-"))
+        sc.frame_start, sc.frame_end = max(lo, 1), min(hi, sc.frame_end)
     sc.render.image_settings.file_format = "PNG"
     sc.render.image_settings.color_mode = "RGBA"
     sc.render.filepath = os.path.join(os.path.abspath(a.out), "frames", "")

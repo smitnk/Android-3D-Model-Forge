@@ -34,7 +34,7 @@ on:
       samples:
         description: "Cycles samples per pixel (CPU)"
         type: string
-        default: "24"
+        default: "16"
   push:
     branches: [main]
     paths: ["animation/**", ".github/workflows/render-animation.yml"]
@@ -51,13 +51,18 @@ env:
   BLENDER_SERIES: "4.2"
 
 jobs:
+  # CPU Cycles is slow, so frames are split across parallel runners and joined by the encode job.
   render:
     runs-on: ubuntu-24.04
-    timeout-minutes: 90
+    timeout-minutes: 75
+    strategy:
+      fail-fast: true
+      matrix:
+        chunk: [0, 1, 2, 3]
     steps:
       - uses: actions/checkout@v4
 
-      - name: Resolve settings
+      - name: Validate inputs and fetch model
         id: cfg
         env:
           MODEL: ${{ inputs.model || 'forge-kid' }}
@@ -66,31 +71,10 @@ jobs:
           DURATION: ${{ inputs.duration || '8' }}
           FPS: ${{ inputs.fps || '24' }}
           RES: ${{ inputs.resolution || '720x1280' }}
-          SAMPLES: ${{ inputs.samples || '24' }}
+          SAMPLES: ${{ inputs.samples || '16' }}
           MSG: ${{ github.event.head_commit.message }}
-        run: |
-          set -euo pipefail
-          # a push whose message contains [quick] renders a short low-res test first
-          if [[ "$MSG" == *"[quick]"* ]]; then DURATION=2; RES=360x640; SAMPLES=8; fi
-          [[ "$DURATION" =~ ^[0-9]+(\.[0-9]+)?$ ]] || { echo "::error::bad duration"; exit 1; }
-          [[ "$FPS" =~ ^[0-9]+$ && "$FPS" -ge 1 && "$FPS" -le 60 ]] || { echo "::error::bad fps"; exit 1; }
-          [[ "$RES" =~ ^([0-9]+)x([0-9]+)$ ]] || { echo "::error::resolution must be WIDTHxHEIGHT"; exit 1; }
-          W=${BASH_REMATCH[1]}; H=${BASH_REMATCH[2]}
-          (( W % 2 == 0 && H % 2 == 0 && W <= 2160 && H <= 3840 )) || { echo "::error::resolution must be even and <= 2160x3840"; exit 1; }
-          [[ "$SAMPLES" =~ ^[0-9]+$ && "$SAMPLES" -le 512 ]] || { echo "::error::bad samples"; exit 1; }
-          mkdir -p in
-          if [ -n "$MODEL_PATH" ]; then
-            [[ "$MODEL_PATH" != *..* && -f "$MODEL_PATH" ]] || { echo "::error::model_path not found: $MODEL_PATH"; exit 1; }
-            src="$MODEL_PATH"
-          else
-            url="${MODEL_URL:-https://github.com/${{ github.repository }}/releases/download/model-latest/${MODEL}.glb}"
-            [[ "$url" == https://* && "$url" == *.glb* ]] || { echo "::error::model_url must be an https .glb URL"; exit 1; }
-            curl -fsSL --retry 3 --max-filesize 200000000 -o in/model.glb "$url"
-            src=in/model.glb
-          fi
-          head -c 4 "$src" | grep -q glTF || [[ "$src" == *.blend ]] || { echo "::error::input is not a GLB"; exit 1; }
-          echo "Model: $src  ${DURATION}s ${FPS}fps ${W}x${H} samples=$SAMPLES" | tee logs.txt
-          { echo "src=$src"; echo "duration=$DURATION"; echo "fps=$FPS"; echo "w=$W"; echo "h=$H"; echo "samples=$SAMPLES"; } >> "$GITHUB_OUTPUT"
+          REPO: ${{ github.repository }}
+        run: bash animation/resolve_input.sh 2>&1 | tee logs.txt
 
       - name: Restore cached Blender
         id: cache
@@ -109,56 +93,86 @@ jobs:
           mkdir -p ~/blender
           tar -xf "/tmp/$file" -C ~/blender --strip-components=1
 
-      - name: Install runtime libraries and FFmpeg
+      - name: Install runtime libraries
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libxkbcommon0 libsm6 libice6 libegl1 > /dev/null
-          ffmpeg -version | head -1 | tee -a logs.txt
+          sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libxkbcommon0 libsm6 libice6 libegl1 > /dev/null
           ~/blender/blender --version | head -1 | tee -a logs.txt
 
       - name: Unit tests
+        if: matrix.chunk == 0
         run: python3 -m unittest tests.test_timeline -v 2>&1 | tee -a logs.txt
 
-      - name: Build scene and render frames (Cycles CPU)
+      - name: Build scene and render this chunk (Cycles CPU)
         env:
           CAPTION: ${{ inputs.caption || 'Meet the Forge crew | walking in | say hello | jump for joy' }}
         run: |
-          set -o pipefail
+          set -euo pipefail
+          n=$(python3 -c "print(round(${{ steps.cfg.outputs.fps }}*${{ steps.cfg.outputs.duration }}))")
+          per=$(( (n + 3) / 4 )); lo=$(( ${{ matrix.chunk }} * per + 1 )); hi=$(( lo + per - 1 )); (( hi > n )) && hi=$n
+          echo "Chunk ${{ matrix.chunk }}: frames $lo-$hi of $n" | tee -a logs.txt
           start=$(date +%s)
           ~/blender/blender -b --factory-startup --python-exit-code 1 --python animation/make_video.py -- \
             --model "${{ steps.cfg.outputs.src }}" --out anim_out --fps ${{ steps.cfg.outputs.fps }} \
             --duration ${{ steps.cfg.outputs.duration }} --width ${{ steps.cfg.outputs.w }} \
             --height ${{ steps.cfg.outputs.h }} --samples ${{ steps.cfg.outputs.samples }} \
-            --caption "$CAPTION" 2>&1 | grep -v "^Fra:" | tee -a logs.txt
-          echo "Render time: $(( $(date +%s) - start ))s" | tee -a logs.txt
-
-      - name: Check frames
-        run: |
-          set -euo pipefail
-          n=$(ls anim_out/frames/*.png | wc -l)
-          want=$(python3 -c "print(round(${{ steps.cfg.outputs.fps }}*${{ steps.cfg.outputs.duration }}))")
-          echo "Frames: $n / $want" | tee -a logs.txt
-          [ "$n" -eq "$want" ] || { echo "::error::frame count mismatch"; exit 1; }
+            --caption "$CAPTION" --frames "$lo-$hi" 2>&1 | grep -v "^Fra:" | tee -a logs.txt
+          echo "Render time chunk ${{ matrix.chunk }}: $(( $(date +%s) - start ))s" | tee -a logs.txt
+          got=$(ls anim_out/frames/*.png | wc -l)
+          [ "$got" -eq $(( hi - lo + 1 )) ] || { echo "::error::chunk rendered $got frames"; exit 1; }
           # a frame with the character in it is far larger than an empty transparent one
           small=$(find anim_out/frames -name '*.png' -size -3k | wc -l)
           [ "$small" -eq 0 ] || { echo "::error::$small empty-looking frames"; exit 1; }
+          mv logs.txt anim_out/logs-${{ matrix.chunk }}.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frames-${{ matrix.chunk }}
+          path: anim_out/
+          retention-days: 1
+          if-no-files-found: error
+
+  encode:
+    needs: render
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail if any render chunk failed
+        if: needs.render.result != 'success'
+        run: echo "::error::render result ${{ needs.render.result }}" && exit 1
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: frames-*
+          path: anim_out
+          merge-multiple: true
 
       - name: Encode MP4 (H.264, yuv420p, faststart) and preview
         env:
           CAPTION: ${{ inputs.caption || 'Meet the Forge crew | walking in | say hello | jump for joy' }}
         run: |
           set -euo pipefail
-          fps=${{ steps.cfg.outputs.fps }}
-          caps=$(python3 animation/timeline.py --caption "$CAPTION" --duration ${{ steps.cfg.outputs.duration }} --height ${{ steps.cfg.outputs.h }})
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core > /dev/null
+          cat anim_out/logs-*.txt > logs.txt
+          fps=$(python3 -c "import json;print(json.load(open('anim_out/scene_check.json'))['fps'])")
+          n=$(python3 -c "import json;print(json.load(open('anim_out/scene_check.json'))['frames'])")
+          h=$(head -c 20 anim_out/background.ppm | awk 'NR==1{print $3}')
+          dur=$(python3 -c "print($n/$fps)")
+          got=$(ls anim_out/frames/*.png | wc -l)
+          echo "Frames: $got / $n" | tee -a logs.txt
+          [ "$got" -eq "$n" ] || { echo "::error::frame count mismatch"; exit 1; }
+          caps=$(python3 animation/timeline.py --caption "$CAPTION" --duration "$dur" --height "$h")
           mkdir -p video
           ffmpeg -v error -y -framerate "$fps" -i anim_out/frames/%04d.png -loop 1 -framerate "$fps" -i anim_out/background.ppm \
             -filter_complex "[1:v][0:v]overlay=shortest=1,${caps},format=yuv420p[v]" -map "[v]" \
             -c:v libx264 -preset veryfast -crf 20 -movflags +faststart video/forge-animation.mp4
           ffprobe -v error -show_entries stream=codec_name,width,height,pix_fmt,nb_frames:format=duration -of default=nw=1 video/forge-animation.mp4 | tee -a logs.txt
           ffprobe -v error -show_entries stream=codec_name -of csv=p=0 video/forge-animation.mp4 | grep -qx h264
-          ffmpeg -v error -y -ss "$(python3 -c "print(${{ steps.cfg.outputs.duration }}*0.5)")" -i video/forge-animation.mp4 -frames:v 1 video/preview.png
+          ffmpeg -v error -y -ss "$(python3 -c "print($dur*0.5)")" -i video/forge-animation.mp4 -frames:v 1 video/preview.png
           cp anim_out/scene_check.json logs.txt video/
-          rm -rf anim_out/frames   # frames are no longer needed once the MP4 is verified
+          rm -rf anim_out/frames
 
       - name: Upload video artifact
         id: upload
@@ -175,11 +189,11 @@ jobs:
           {
             echo "## Animation render"
             echo "Artifact: **animation-${{ github.run_number }}** (scroll down to Artifacts to download)"
-            echo '```'; cat logs.txt 2>/dev/null | grep -E "PASS|FAIL|rig:|Render time|Frames|codec|width|height|duration|Model" ; echo '```'
+            echo '```'; grep -hE "PASS|FAIL|rig:|Render time|Frames|codec|width|height|duration|Model" logs.txt 2>/dev/null; echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
       # The Actions API is not readable from agent sessions, so results also go to the ci-results branch
-      # (logs, check JSON and the small preview image only; the MP4 stays an artifact).
+      # (logs, check JSON and the small preview only; the MP4 stays an artifact).
       - name: Write results to ci-results branch
         if: always()
         env:
