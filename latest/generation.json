@@ -1,0 +1,79 @@
+{
+  "generator": "chibi_humanoid",
+  "generator_version": "0.1.0",
+  "blender": "4.2.3 LTS",
+  "name": "Forge Kid",
+  "slug": "forge-kid",
+  "colors": {
+    "skin": "#F2C9A0",
+    "hair": "#3B2417",
+    "shirt": "#E8553D",
+    "shorts": "#2F4A8A",
+    "shoes": "#F4F1EA"
+  },
+  "parts": 39,
+  "triangles": 24300,
+  "vertices": 12228,
+  "materials": [
+    "Brow",
+    "EyeWhite",
+    "Hair",
+    "Mouth",
+    "Pupil",
+    "Shirt",
+    "Shoe",
+    "Shorts",
+    "Skin",
+    "Sole"
+  ],
+  "bbox_min_m": [
+    -0.5596,
+    -0.255,
+    0.0001
+  ],
+  "bbox_max_m": [
+    0.5596,
+    0.2991,
+    1.2896
+  ],
+  "rig": {
+    "bones": 17,
+    "skinning": "rigid per-part"
+  },
+  "tpose_selfcheck": {
+    "arm_angle_deg_L": 0.0,
+    "arm_angle_deg_R": 0.0,
+    "pass": true
+  },
+  "deformation_selftest": {
+    "hand_moved_m": 0.3061,
+    "torso_drift_m": 0.0,
+    "pass": true
+  },
+  "files": {
+    "glb": "forge-kid.glb",
+    "blend": "forge-kid.blend",
+    "previews": [
+      {
+        "view": "front",
+        "file": "forge-kid-front.png",
+        "frame_extent": [
+          0.228,
+          0.772,
+          0.178,
+          0.834
+        ]
+      },
+      {
+        "view": "three-quarter",
+        "file": "forge-kid-three-quarter.png",
+        "frame_extent": [
+          0.308,
+          0.74,
+          0.187,
+          0.832
+        ]
+      }
+    ]
+  }
+}

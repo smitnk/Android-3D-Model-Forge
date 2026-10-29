@@ -1,0 +1,304 @@
+{
+  "overall": "FAIL",
+  "glb": "forge-kid.glb",
+  "checks": [
+    {
+      "check": "glb_exists_nonempty",
+      "pass": true,
+      "detail": "out/forge-kid.glb"
+    },
+    {
+      "check": "glb_structure_valid",
+      "pass": true,
+      "detail": "39 meshes, 12228 verts, 24300 tris"
+    },
+    {
+      "check": "materials_present",
+      "pass": true,
+      "detail": "Brow, EyeWhite, Hair, Mouth, Pupil, Shirt, Shoe, Shorts, Skin, Sole"
+    },
+    {
+      "check": "materials_assigned",
+      "pass": true,
+      "detail": "0 primitives without material"
+    },
+    {
+      "check": "size_reasonable",
+      "pass": true,
+      "detail": "660224 bytes"
+    },
+    {
+      "check": "expected_parts_present",
+      "pass": true,
+      "detail": "27 parts"
+    },
+    {
+      "check": "geometry_finite",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "bbox_nonzero",
+      "pass": true,
+      "detail": "size (1.902, 2.0, 2.29) m"
+    },
+    {
+      "check": "scale_usable",
+      "pass": true,
+      "detail": "height 2.290 m (expected 0.5-3.0)"
+    },
+    {
+      "check": "grounded",
+      "pass": false,
+      "detail": "min z -1.0000"
+    },
+    {
+      "check": "centered",
+      "pass": true,
+      "detail": "center x 0.0000, y 0.0000"
+    },
+    {
+      "check": "upright",
+      "pass": true,
+      "detail": "height 2.290 > depth 2.000"
+    },
+    {
+      "check": "no_degenerate_parts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "tpose_arm_horizontal_L",
+      "pass": true,
+      "detail": "arm angle 0.00 deg from horizontal (max 8.0)"
+    },
+    {
+      "check": "tpose_upperarm_along_x_L",
+      "pass": true,
+      "detail": "x-extent 0.210 vs z-extent 0.107"
+    },
+    {
+      "check": "tpose_elbow_straight_L",
+      "pass": true,
+      "detail": "forearm angle 0.00 deg"
+    },
+    {
+      "check": "leg_straight_vertical_L",
+      "pass": true,
+      "detail": "shin z/x 0.190/0.090, shin-shoe dx 0.0000"
+    },
+    {
+      "check": "foot_points_forward_L",
+      "pass": true,
+      "detail": "shoe depth 0.219 > width 0.119"
+    },
+    {
+      "check": "tpose_arm_horizontal_R",
+      "pass": true,
+      "detail": "arm angle 0.00 deg from horizontal (max 8.0)"
+    },
+    {
+      "check": "tpose_upperarm_along_x_R",
+      "pass": true,
+      "detail": "x-extent 0.210 vs z-extent 0.107"
+    },
+    {
+      "check": "tpose_elbow_straight_R",
+      "pass": true,
+      "detail": "forearm angle 0.00 deg"
+    },
+    {
+      "check": "leg_straight_vertical_R",
+      "pass": true,
+      "detail": "shin z/x 0.190/0.090, shin-shoe dx 0.0000"
+    },
+    {
+      "check": "foot_points_forward_R",
+      "pass": true,
+      "detail": "shoe depth 0.219 > width 0.119"
+    },
+    {
+      "check": "tpose_arm_span",
+      "pass": false,
+      "detail": "span 1.119 m vs height 2.290 m"
+    },
+    {
+      "check": "left_right_symmetry",
+      "pass": true,
+      "detail": "max mirror error 0.00000 m"
+    },
+    {
+      "check": "faces_forward",
+      "pass": true,
+      "detail": "nose y -0.240 in front of head centre y 0.000 (Blender -Y = glTF +Z front)"
+    },
+    {
+      "check": "chibi_proportions",
+      "pass": false,
+      "detail": "head is 22% of height"
+    },
+    {
+      "check": "skin_in_glb",
+      "pass": true,
+      "detail": "1 skins, 39 skinned primitives"
+    },
+    {
+      "check": "armature_present",
+      "pass": true,
+      "detail": "1 armatures"
+    },
+    {
+      "check": "expected_bones",
+      "pass": true,
+      "detail": "17 bones"
+    },
+    {
+      "check": "meshes_bound_to_armature",
+      "pass": false,
+      "detail": "unbound: ['Icosphere']"
+    },
+    {
+      "check": "rest_pose_arm_bones_horizontal_L",
+      "pass": true,
+      "detail": "upper_arm->hand dir (1.0, 0.0, 0.0)"
+    },
+    {
+      "check": "rest_pose_leg_bones_vertical_L",
+      "pass": true,
+      "detail": "thigh->foot dir (0.0, -0.0, -1.0)"
+    },
+    {
+      "check": "rest_pose_arm_bones_horizontal_R",
+      "pass": true,
+      "detail": "upper_arm->hand dir (-1.0, 0.0, 0.0)"
+    },
+    {
+      "check": "rest_pose_leg_bones_vertical_R",
+      "pass": true,
+      "detail": "thigh->foot dir (0.0, -0.0, -1.0)"
+    }
+  ],
+  "summary": {
+    "valid": true,
+    "bytes": 660224,
+    "meshes": 39,
+    "mesh_nodes": [
+      "Ear_L",
+      "Ear_R",
+      "EyeShine_L",
+      "EyeShine_R",
+      "Eye_L",
+      "Eye_R",
+      "Eyebrow_L",
+      "Eyebrow_R",
+      "Forearm_L",
+      "Forearm_R",
+      "Hair",
+      "HairTuft_0",
+      "HairTuft_1",
+      "HairTuft_2",
+      "HairTuft_3",
+      "HairTuft_4",
+      "HairTuft_5",
+      "Hand_L",
+      "Hand_R",
+      "Head",
+      "Mouth",
+      "Neck",
+      "Nose",
+      "Pupil_L",
+      "Pupil_R",
+      "Shin_L",
+      "Shin_R",
+      "Shoe_L",
+      "Shoe_R",
+      "Shorts",
+      "ShortsLeg_L",
+      "ShortsLeg_R",
+      "Sole_L",
+      "Sole_R",
+      "Thumb_L",
+      "Thumb_R",
+      "Torso",
+      "UpperArm_L",
+      "UpperArm_R"
+    ],
+    "vertices": 12228,
+    "triangles": 24300,
+    "materials": [
+      "Brow",
+      "EyeWhite",
+      "Hair",
+      "Mouth",
+      "Pupil",
+      "Shirt",
+      "Shoe",
+      "Shorts",
+      "Skin",
+      "Sole"
+    ],
+    "primitives_without_material": 0,
+    "skins": 1,
+    "joints": [
+      "foot.L",
+      "foot.R",
+      "forearm.L",
+      "forearm.R",
+      "hand.L",
+      "hand.R",
+      "head",
+      "neck",
+      "pelvis",
+      "root",
+      "shin.L",
+      "shin.R",
+      "spine",
+      "thigh.L",
+      "thigh.R",
+      "upper_arm.L",
+      "upper_arm.R"
+    ],
+    "skinned_primitives": 39,
+    "generator": "Khronos glTF Blender I/O v4.2.70"
+  },
+  "dimensions_m": {
+    "height": 2.2896,
+    "size_xyz": [
+      1.9021,
+      2.0,
+      2.2896
+    ],
+    "bbox_min": [
+      -0.9511,
+      -1.0,
+      -1.0
+    ],
+    "bbox_max": [
+      0.9511,
+      1.0,
+      1.2896
+    ]
+  },
+  "rig": {
+    "bones": [
+      "foot.L",
+      "foot.R",
+      "forearm.L",
+      "forearm.R",
+      "hand.L",
+      "hand.R",
+      "head",
+      "neck",
+      "pelvis",
+      "root",
+      "shin.L",
+      "shin.R",
+      "spine",
+      "thigh.L",
+      "thigh.R",
+      "upper_arm.L",
+      "upper_arm.R"
+    ],
+    "skins": 1
+  }
+}
