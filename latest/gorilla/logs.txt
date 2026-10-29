@@ -24,14 +24,312 @@ test_limb_depth_follows_its_thickness (test_hull.TestHull.test_limb_depth_follow
 Ran 8 tests in 0.001s
 
 OK (skipped=3)
-09:52:38 | INFO: Starting glTF 2.0 export
-09:52:38 | INFO: Extracting primitive: Body
-09:52:38 | INFO: Primitives created: 2
-09:52:38 | INFO: Finished glTF 2.0 export in 0.2704746723175049 s
+09:56:53 | INFO: Starting glTF 2.0 export
+09:56:53 | INFO: Extracting primitive: Body
+09:56:53 | INFO: Primitives created: 2
+09:56:53 | INFO: Finished glTF 2.0 export in 0.2605171203613281 s
 Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 Info: Total files 3 | Changed 3 | Failed 0
-Preview 'front' would clip the model: x=-0.075..1.075 y=0.152..0.963
+Fra:1 Mem:33.63M (Peak 35.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
+Fra:1 Mem:33.64M (Peak 35.09M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:41.59M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:38.96M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:2.69M, Peak:2.69M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:2.69M, Peak:2.69M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:5.55M, Peak:5.55M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.03 | Mem:8.96M, Peak:11.82M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.03 | Mem:8.96M, Peak:11.82M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.03 | Mem:8.96M, Peak:11.82M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.03 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.03 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.03 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.03 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Images | Loading tpose-back.png
+Fra:1 Mem:45.25M (Peak 45.25M) | Time:00:00.03 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Images | Loading tpose-front.png
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:12.96M, Peak:12.96M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:12.96M, Peak:12.96M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.04M, Peak:13.04M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:12.96M, Peak:13.05M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:92.07M (Peak 92.07M) | Time:00:00.39 | Remaining:00:16.58 | Mem:59.45M, Peak:59.45M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:111.60M (Peak 140.90M) | Time:00:23.53 | Mem:59.45M, Peak:59.45M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:111.60M (Peak 140.90M) | Time:00:23.53 | Mem:59.45M, Peak:59.45M | Scene, ViewLayer | Finished
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/gorilla-front.png'
+Time: 00:23.59 (Saving: 00:00.05)
+
+Fra:1 Mem:33.63M (Peak 34.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
+Fra:1 Mem:34.71M (Peak 34.71M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:41.59M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:38.96M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:2.69M, Peak:2.69M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:2.69M, Peak:2.69M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:5.55M, Peak:5.55M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.02 | Mem:8.96M, Peak:11.82M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.02 | Mem:8.96M, Peak:11.82M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.02 | Mem:8.96M, Peak:11.82M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.02 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.02 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.02 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.02 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Images | Loading tpose-front.png
+Fra:1 Mem:45.26M (Peak 45.26M) | Time:00:00.02 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Images | Loading tpose-back.png
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:12.96M, Peak:12.96M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:12.96M, Peak:12.96M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:13.04M, Peak:13.04M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:12.96M, Peak:13.05M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.02 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:92.07M (Peak 92.07M) | Time:00:00.38 | Remaining:00:16.69 | Mem:59.45M, Peak:59.45M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:111.60M (Peak 140.90M) | Time:00:22.91 | Mem:59.45M, Peak:59.45M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:111.60M (Peak 140.90M) | Time:00:22.91 | Mem:59.45M, Peak:59.45M | Scene, ViewLayer | Finished
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/gorilla-three-quarter.png'
+Time: 00:22.97 (Saving: 00:00.05)
+
+Fra:1 Mem:33.63M (Peak 34.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
+Fra:1 Mem:33.64M (Peak 34.18M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:41.59M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:37.45M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:37.53M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:38.96M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:2.69M, Peak:2.69M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:2.69M, Peak:2.69M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.01 | Mem:5.55M, Peak:5.55M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.02 | Mem:8.96M, Peak:11.82M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:41.65M (Peak 43.74M) | Time:00:00.03 | Mem:8.96M, Peak:11.82M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.03 | Mem:8.96M, Peak:11.82M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.03 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.03 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.03 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:44.86M (Peak 44.86M) | Time:00:00.03 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Images | Loading tpose-front.png
+Fra:1 Mem:45.26M (Peak 45.26M) | Time:00:00.03 | Mem:12.18M, Peak:12.18M | Scene, ViewLayer | Updating Images | Loading tpose-back.png
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:12.96M, Peak:12.96M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:12.96M, Peak:12.96M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.04M, Peak:13.04M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:12.96M, Peak:13.05M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:45.66M (Peak 45.66M) | Time:00:00.03 | Mem:13.05M, Peak:13.05M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:92.07M (Peak 92.07M) | Time:00:00.33 | Remaining:00:14.31 | Mem:59.45M, Peak:59.45M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:111.60M (Peak 140.90M) | Time:00:20.45 | Mem:59.45M, Peak:59.45M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:111.60M (Peak 140.90M) | Time:00:20.45 | Mem:59.45M, Peak:59.45M | Scene, ViewLayer | Finished
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/gorilla-back.png'
+Time: 00:20.51 (Saving: 00:00.05)
+
 gorilla: 46872 verts, measurements {'shoulder_z': 0.9550000000000001, 'reach': 1.06, 'crotch_z': 0.035, 'leg_x': 0.29500000000000004, 'top_z': 1.495}
 INFO Draco mesh compression is available, use library at /home/runner/blender/4.2/python/lib/python3.11/site-packages/libextern_draco.so
 
 Info: Saved "gorilla.blend"
+{
+  "generator": "gorilla",
+  "generator_version": "0.2.0",
+  "blender": "4.2.3 LTS",
+  "name": "Gorilla",
+  "slug": "gorilla",
+  "colors": {
+    "skin": "default",
+    "hair": "default",
+    "shirt": "#E8553D",
+    "shorts": "#2F4A8A",
+    "shoes": "#F4F1EA"
+  },
+  "parts": 1,
+  "triangles": 93740,
+  "vertices": 46872,
+  "materials": [
+    "DrawingFront"
+  ],
+  "bbox_min_m": [
+    -1.0575,
+    -0.335,
+    0.0
+  ],
+  "bbox_max_m": [
+    1.0575,
+    0.335,
+    1.4956
+  ],
+  "rig": {
+    "bones": 17,
+    "skinning": "blended distance weights"
+  },
+  "tpose_selfcheck": {
+    "arm_angle_deg_L": 1.881,
+    "arm_angle_deg_R": 1.881,
+    "pass": true
+  },
+  "deformation_selftest": {
+    "hand_moved_m": 0.5825,
+    "rest_of_body_drift_m": 0.0,
+    "hand_verts": 720,
+    "pass": true
+  },
+  "files": {
+    "glb": "gorilla.glb",
+    "blend": "gorilla.blend",
+    "previews": [
+      {
+        "view": "front",
+        "file": "gorilla-front.png",
+        "frame_extent": [
+          0.122,
+          0.878,
+          0.167,
+          0.699
+        ]
+      },
+      {
+        "view": "three-quarter",
+        "file": "gorilla-three-quarter.png",
+        "frame_extent": [
+          0.195,
+          0.875,
+          0.085,
+          0.703
+        ]
+      },
+      {
+        "view": "back",
+        "file": "gorilla-back.png",
+        "frame_extent": [
+          0.122,
+          0.878,
+          0.167,
+          0.699
+        ]
+      }
+    ]
+  }
+}
+
+Blender quit
+{
+  "valid": true,
+  "bytes": 3261044,
+  "meshes": 1,
+  "mesh_nodes": [
+    "Body"
+  ],
+  "vertices": 47736,
+  "triangles": 93740,
+  "materials": [
+    "DrawingBack",
+    "DrawingFront"
+  ],
+  "primitives_without_material": 0,
+  "skins": 1,
+  "joints": [
+    "foot.L",
+    "foot.R",
+    "forearm.L",
+    "forearm.R",
+    "hand.L",
+    "hand.R",
+    "head",
+    "neck",
+    "pelvis",
+    "root",
+    "shin.L",
+    "shin.R",
+    "spine",
+    "thigh.L",
+    "thigh.R",
+    "upper_arm.L",
+    "upper_arm.R"
+  ],
+  "skinned_primitives": 2,
+  "generator": "Khronos glTF Blender I/O v4.2.70"
+}
+09:58:01 | INFO: Data are loaded, start creating Blender stuff
+09:58:01 | INFO: Blender create Mesh node Body
+09:58:01 | INFO: glTF import finished in 0.25s
+Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
+[PASS] glb_exists_nonempty out/gorilla.glb
+[PASS] glb_structure_valid 1 meshes, 47736 verts, 93740 tris
+[PASS] materials_present DrawingBack, DrawingFront
+[PASS] materials_assigned 0 primitives without material
+[PASS] size_reasonable 3261044 bytes
+[PASS] expected_parts_present 1 parts
+[PASS] geometry_finite 
+[PASS] bbox_nonzero size (2.115, 0.67, 1.496) m
+[PASS] scale_usable height 1.496 m (expected 0.5-3.0)
+[PASS] grounded min z 0.0000
+[PASS] centered center x 0.0000, y -0.0000
+[PASS] upright height 1.496 > depth 0.670
+[PASS] no_degenerate_parts 
+[PASS] geom_tpose_arm_L forearm/hand 1.96 deg from horizontal vs upper arm (max 8.0)
+[PASS] geom_arm_is_limb_L arm band vertical thickness 0.285 m
+[PASS] geom_leg_vertical_L leg centre drift 0.0094 m between lower and upper leg
+[FAIL] geom_foot_forward_L foot length 0.243 > width 0.543, toe at y -0.092
+[PASS] geom_tpose_arm_R forearm/hand 1.96 deg from horizontal vs upper arm (max 8.0)
+[PASS] geom_arm_is_limb_R arm band vertical thickness 0.285 m
+[PASS] geom_leg_vertical_R leg centre drift 0.0094 m between lower and upper leg
+[FAIL] geom_foot_forward_R foot length 0.243 > width 0.543, toe at y -0.092
+[PASS] geom_left_right_symmetry hand mirror error 0.00000 m
+[PASS] geom_head_size head+neck above shoulders = 37% of height
+[FAIL] geom_faces_forward front-most head point at x -0.114, y -0.335 (Blender -Y = glTF +Z front)
+[PASS] geom_tpose_span span 2.115 m vs height 1.496 m
+[PASS] skin_in_glb 1 skins, 2 skinned primitives
+[PASS] armature_present 1 armatures
+[PASS] expected_bones 17 bones
+[PASS] meshes_bound_to_armature all meshes skinned
+[PASS] rest_pose_arm_bones_horizontal_L upper_arm->hand dir (1.0, 0.0, 0.0)
+[PASS] rest_pose_leg_bones_vertical_L thigh->foot dir (-0.0, -0.0, -1.0)
+[PASS] rest_pose_arm_bones_horizontal_R upper_arm->hand dir (-1.0, 0.0, 0.0)
+[PASS] rest_pose_leg_bones_vertical_R thigh->foot dir (0.0, -0.0, -1.0)
+VALIDATION FAIL: 30/33 checks passed
