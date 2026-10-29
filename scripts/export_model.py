@@ -95,9 +95,14 @@ def render_previews(parts, out_dir, slug):
         "three-quarter": ((1.9, -2.2, 1.15), (0, 0, 0.62)),
         "back": ((0, 2.9, 0.68), (0, 0, 0.64)),
     }
+    # views are tuned for a ~1.3 m figure; scale the camera distance for bigger/wider models
+    pts = [o.matrix_world @ v.co for o in parts for v in o.data.vertices]
+    size = max(max(p.x for p in pts) - min(p.x for p in pts), max(p.z for p in pts))
+    k = max(1.0, size / 1.45)
     results = []
     for view, (loc, target) in views.items():
-        cam.location = loc
+        cam.location = Vector(loc) * k
+        target = Vector(target) * k
         _look_at(cam, target)
         bpy.context.view_layer.update()
         x0, x1, y0, y1 = _framing(scene, cam, parts)
