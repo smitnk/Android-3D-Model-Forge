@@ -104,7 +104,7 @@ jobs:
           IN_TYPE: ${{ matrix.model_type }}
           IN_NAME: ${{ inputs.character_name }}
           IN_SKIN: ${{ inputs.skin_color }}
-          IN_HAIR: ${{ inputs.hair_color || '#3B2417' }}
+          IN_HAIR: ${{ inputs.hair_color }}
           IN_SHIRT: ${{ inputs.shirt_color || '#E8553D' }}
           IN_SHORTS: ${{ inputs.shorts_color || '#2F4A8A' }}
           IN_EXPORT: ${{ inputs.export || 'glb+blend' }}

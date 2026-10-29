@@ -50,13 +50,13 @@ def build(a, material, part):
     fur = Meta("FurMeta", 0.011)
     fur.ellipsoid((0, 0.03, 1.27), 0.13, 0.13, 0.18)          # dome head (sits low and forward)
     fur.capsule((-0.085, -0.10, 1.355), (0.085, -0.10, 1.355), 0.03)  # brow ridge
-    fur.ellipsoid((0, 0.04, 1.10), 0.25, 0.17, 0.09)          # trapezius / shoulder mass
+    fur.ellipsoid((0, 0.04, 1.12), 0.26, 0.17, 0.11)          # trapezius / shoulder mass
     fur.ellipsoid((0, 0, 0.95), 0.29, 0.19, 0.17)             # barrel chest
     fur.ellipsoid((0, 0, 0.73), 0.19, 0.17, 0.15)             # waist / belly core
     fur.ellipsoid((0, 0.02, 0.55), 0.22, 0.17, 0.13)          # hips
     for x in (1, -1):
         fur.ellipsoid((0.10 * x, 0.11, 0.52), 0.11, 0.09, 0.12)        # glutes
-        fur.ellipsoid((0.25 * x, 0, SHOULDER_Z), 0.11, 0.11, 0.10)    # deltoid
+        fur.ellipsoid((0.24 * x, 0.01, SHOULDER_Z + 0.03), 0.13, 0.12, 0.13)  # bulky deltoid
         fur.ellipsoid((0.38 * x, 0, SHOULDER_Z), 0.15, 0.09, 0.085)   # thick upper arm
         fur.ellipsoid((0.56 * x, 0, SHOULDER_Z - 0.005), 0.12, 0.075, 0.07)  # forearm
         fur.ellipsoid((0.15 * x, 0, 0.37), 0.13, 0.12, 0.14)          # thigh
@@ -70,18 +70,18 @@ def build(a, material, part):
     skin.ball((0.012, -0.2, 1.115), 0.024)                    # pursed lips
     for x in (1, -1):
         skin.ellipsoid((0.135 * x, 0.0, 1.28), 0.03, 0.05, 0.06)     # ears
-        skin.ellipsoid((0.10 * x, -0.145, 0.98), 0.11, 0.06, 0.09)   # pec plates
+        skin.ellipsoid((0.10 * x, -0.145, 0.965), 0.115, 0.06, 0.1)  # pec plates (touch the belly)
         # hand: palm entering the forearm, four fingers pointing outward, thumb forward
-        skin.ellipsoid((0.69 * x, -0.005, SHOULDER_Z), 0.065, 0.055, 0.045)
-        for z in (-0.03, -0.01, 0.01, 0.03):
-            skin.capsule((0.73 * x, -0.01, SHOULDER_Z + z), (0.775 * x, -0.02, SHOULDER_Z + z * 1.1), 0.017)
-        skin.capsule((0.68 * x, -0.05, SHOULDER_Z - 0.01), (0.71 * x, -0.085, SHOULDER_Z - 0.03), 0.02)
+        skin.ellipsoid((0.695 * x, -0.005, SHOULDER_Z), 0.075, 0.065, 0.055)
+        for z in (-0.036, -0.012, 0.012, 0.036):
+            skin.capsule((0.74 * x, -0.012, SHOULDER_Z + z), (0.80 * x, -0.025, SHOULDER_Z + z * 1.1), 0.02)
+        skin.capsule((0.68 * x, -0.055, SHOULDER_Z - 0.01), (0.72 * x, -0.1, SHOULDER_Z - 0.035), 0.024)
         # foot: wide sole with a row of toes at the front (toe toward -Y)
-        skin.ellipsoid((0.17 * x, -0.05, 0.055), 0.15, 0.17, 0.06)
-        for i, dx in enumerate((-0.09, -0.03, 0.03, 0.09)):
-            skin.ball(((0.17 + dx * 1.0) * x, -0.20 + 0.012 * abs(i - 1.5), 0.04), 0.036)
-        skin.ball(((0.17 + 0.155) * x, -0.08, 0.045), 0.04)            # big toe on the outer side
-    skin.ellipsoid((0, -0.13, 0.74), 0.17, 0.08, 0.15)        # belly plate (blends with the pecs)
+        skin.ellipsoid((0.19 * x, -0.05, 0.055), 0.12, 0.17, 0.06)     # inner edges stay apart
+        for i, dx in enumerate((-0.075, -0.025, 0.025, 0.075)):
+            skin.ball(((0.19 + dx) * x, -0.20 + 0.012 * abs(i - 1.5), 0.04), 0.034)
+        skin.ball(((0.19 + 0.125) * x, -0.08, 0.045), 0.04)            # big toe on the outer side
+    skin.ellipsoid((0, -0.13, 0.77), 0.17, 0.08, 0.17)        # belly plate (blends with the pecs)
     skin_obj = skin.to_mesh_object("Skin", 0.35)
 
     parts = [fur_obj, skin_obj]
