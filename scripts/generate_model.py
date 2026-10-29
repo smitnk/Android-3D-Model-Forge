@@ -19,9 +19,11 @@ import bpy
 from mathutils import Euler, Matrix, Vector
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import clay_chibi  # noqa: E402
 import export_model  # noqa: E402
 
-GENERATOR_VERSION = "0.1.1"
+GENERATOR_VERSION = "0.2.0"
+DEFAULT_NAMES = {"chibi_humanoid": "Forge Kid", "clay_chibi": "Clay Chibi"}
 
 # --- T-pose construction parameters (the validator re-checks these on the exported GLB) ---
 SHOULDER_Z = 0.645
@@ -50,9 +52,9 @@ for _s, _x in (("L", 1), ("R", -1)):
 def parse_args():
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     p = argparse.ArgumentParser()
-    p.add_argument("--model-type", default="chibi_humanoid", choices=["chibi_humanoid"])
-    p.add_argument("--name", default="Forge Kid")
-    p.add_argument("--skin", default="#F2C9A0")
+    p.add_argument("--model-type", default="chibi_humanoid", choices=list(DEFAULT_NAMES))
+    p.add_argument("--name", default="")
+    p.add_argument("--skin", default="", help="skin/clay colour; empty = type default")
     p.add_argument("--hair", default="#3B2417")
     p.add_argument("--shirt", default="#E8553D")
     p.add_argument("--shorts", default="#2F4A8A")
@@ -155,7 +157,7 @@ def part(name, kind, size, loc, mat, bone, rot=(0, 0, 0), taper=1.0, bevel=0.0,
 
 def build_character(a):
     M = {
-        "Skin": material("Skin", a.skin, 0.55),
+        "Skin": material("Skin", a.skin or "#F2C9A0", 0.55),
         "Hair": material("Hair", a.hair, 0.45),
         "Shirt": material("Shirt", a.shirt, 0.7),
         "Shorts": material("Shorts", a.shorts, 0.7),
@@ -219,23 +221,45 @@ def build_character(a):
     return P
 
 
-def build_rig(parts):
+def _seg_dist(p, a, b):
+    ab = b - a
+    t = max(0.0, min(1.0, (p - a).dot(ab) / ab.length_squared))
+    return (p - (a + ab * t)).length
+
+
+def auto_weights(obj, bone_list):
+    """Blended skin weights: inverse distance^6 to each bone segment, top 3 bones, normalised.
+    Deterministic and robust in headless runs (Blender's heat weighting can fail on dense meshes)."""
+    segs = [(n, Vector(h), Vector(t)) for n, h, t, _ in bone_list if n != "root"]
+    groups = {n: obj.vertex_groups.new(name=n) for n, _, _ in segs}
+    for v in obj.data.vertices:
+        ds = sorted((max(_seg_dist(v.co, h, t), 1e-4), n) for n, h, t in segs)[:3]
+        ws = [(1.0 / d ** 6, n) for d, n in ds]
+        total = sum(w for w, _ in ws)
+        for w, n in ws:
+            if w / total > 0.01:
+                groups[n].add([v.index], w / total, "REPLACE")
+
+
+def build_rig(parts, bone_list):
     arm_data = bpy.data.armatures.new("Armature")
     rig = bpy.data.objects.new("Armature", arm_data)
     bpy.context.scene.collection.objects.link(rig)
     bpy.context.view_layer.objects.active = rig
     bpy.ops.object.mode_set(mode="EDIT")
-    for name, head, tail, parent in BONES:
+    for name, head, tail, parent in bone_list:
         b = arm_data.edit_bones.new(name)
         b.head, b.tail = Vector(head), Vector(tail)
         if parent:
             b.parent = arm_data.edit_bones[parent]
             b.use_connect = (Vector(head) - arm_data.edit_bones[parent].tail).length < 1e-6
     bpy.ops.object.mode_set(mode="OBJECT")
-    # shortcut: rigid one-bone-per-part skinning (weight 1.0); upgrade to blended joint weights for smooth bends.
     for obj in parts:
-        vg = obj.vertex_groups.new(name=obj["bone"])
-        vg.add(range(len(obj.data.vertices)), 1.0, "REPLACE")
+        if obj["bone"]:  # rigid: whole part follows one bone
+            vg = obj.vertex_groups.new(name=obj["bone"])
+            vg.add(range(len(obj.data.vertices)), 1.0, "REPLACE")
+        else:
+            auto_weights(obj, bone_list)
         mod = obj.modifiers.new("Armature", "ARMATURE")
         mod.object = rig
         obj.parent = rig
@@ -251,43 +275,80 @@ def world_bbox(obj):
     return lo, hi
 
 
+def _verts_by_group(parts, group, min_w=0.5):
+    """World positions (evaluated, i.e. posed) of vertices mostly weighted to `group`."""
+    dg = bpy.context.evaluated_depsgraph_get()
+    out = []
+    for o in parts:
+        vg = o.vertex_groups.get(group)
+        if not vg:
+            continue
+        ev = o.evaluated_get(dg)
+        for v in o.data.vertices:
+            if any(g.group == vg.index and g.weight >= min_w for g in v.groups):
+                out.append(ev.matrix_world @ ev.data.vertices[v.index].co)
+    return out
+
+
+def _verts_unaffected_by(parts, groups):
+    """World positions of vertices with no weight at all on any of `groups`."""
+    dg = bpy.context.evaluated_depsgraph_get()
+    out = []
+    for o in parts:
+        idx = {vg.index for vg in o.vertex_groups if vg.name in groups}
+        ev = o.evaluated_get(dg)
+        out += [ev.matrix_world @ ev.data.vertices[v.index].co for v in o.data.vertices
+                if not any(g.group in idx and g.weight > 0 for g in v.groups)]
+    return out
+
+
+def _centroid(pts):
+    return sum(pts, Vector()) / len(pts)
+
+
 def deformation_selftest(rig, parts):
-    """Pose the left arm, confirm the hand follows and the torso does not, then restore rest pose."""
-    by = {o.name: o for o in parts}
-    hand0 = sum(world_bbox(by["Hand_L"]), Vector()) / 2
-    torso0 = world_bbox(by["Torso"])
+    """Pose the left arm, confirm the hand follows and the spine region does not, then restore rest pose."""
+    arm = {"upper_arm.L", "forearm.L", "hand.L"}
+    hand0, spine0 = _verts_by_group(parts, "hand.L"), _verts_unaffected_by(parts, arm)
     pb = rig.pose.bones["upper_arm.L"]
     pb.rotation_mode = "XYZ"
     pb.rotation_euler = (0, 0, math.radians(-45))
     bpy.context.view_layer.update()
-    hand1 = sum(world_bbox(by["Hand_L"]), Vector()) / 2
-    torso1 = world_bbox(by["Torso"])
+    hand1, spine1 = _verts_by_group(parts, "hand.L"), _verts_unaffected_by(parts, arm)
     pb.rotation_euler = (0, 0, 0)
     bpy.context.view_layer.update()
-    moved = (hand1 - hand0).length
-    torso_still = (torso1[0] - torso0[0]).length + (torso1[1] - torso0[1]).length
-    ok = moved > 0.05 and torso_still < 1e-5 and all(math.isfinite(c) for c in hand1)
-    return {"hand_moved_m": round(moved, 4), "torso_drift_m": round(torso_still, 6), "pass": ok}
+    moved = (_centroid(hand1) - _centroid(hand0)).length
+    drift = max((p1 - p0).length for p0, p1 in zip(spine0, spine1))
+    ok = moved > 0.05 and drift < 1e-4 and all(math.isfinite(c) for p in hand1 for c in p)
+    return {"hand_moved_m": round(moved, 4), "rest_of_body_drift_m": round(drift, 6),
+            "hand_verts": len(hand0), "pass": ok}
 
 
 def tpose_selfcheck(parts):
-    by = {o.name: o for o in parts}
+    """Arm band (just outside the torso) vs hand band (outer 15%) must be level: arms horizontal."""
+    pts = [o.matrix_world @ v.co for o in parts for v in o.data.vertices]
     res = {}
-    for s in ("L", "R"):
-        sh = sum(world_bbox(by[f"UpperArm_{s}"]), Vector()) / 2
-        hd = sum(world_bbox(by[f"Hand_{s}"]), Vector()) / 2
-        res[f"arm_angle_deg_{s}"] = round(math.degrees(math.atan2(abs(hd.z - sh.z), abs(hd.x - sh.x))), 3)
-    res["pass"] = all(v <= 5.0 for k, v in res.items())
+    for s, sign in (("L", 1), ("R", -1)):
+        side = [p for p in pts if p.x * sign > 0]
+        reach = max(abs(p.x) for p in side)
+        root = _centroid([p for p in side if 0.2 <= abs(p.x) <= 0.28])
+        hand = _centroid([p for p in side if abs(p.x) >= 0.85 * reach])
+        res[f"arm_angle_deg_{s}"] = round(math.degrees(math.atan2(abs(hand.z - root.z), abs(hand.x - root.x))), 3)
+    res["pass"] = all(v <= 5.0 for v in res.values())
     return res
 
 
 def main():
     a = parse_args()
+    a.name = a.name or DEFAULT_NAMES[a.model_type]
     slug = slugify(a.name)
     os.makedirs(a.out, exist_ok=True)
     reset_scene()
-    parts = build_character(a)
-    rig = None if a.no_rig else build_rig(parts)
+    if a.model_type == "clay_chibi":
+        parts, bone_list = clay_chibi.build(a, material), clay_chibi.bones()
+    else:
+        parts, bone_list = build_character(a), BONES
+    rig = None if a.no_rig else build_rig(parts, bone_list)
     tpose = tpose_selfcheck(parts)
     if not tpose["pass"]:
         raise SystemExit(f"T-pose self-check failed: {tpose}")
@@ -309,14 +370,14 @@ def main():
         lo = Vector(map(min, lo, l))
         hi = Vector(map(max, hi, h))
     info = {
-        "generator": "chibi_humanoid", "generator_version": GENERATOR_VERSION,
+        "generator": a.model_type, "generator_version": GENERATOR_VERSION,
         "blender": bpy.app.version_string, "name": a.name, "slug": slug,
-        "colors": {"skin": a.skin, "hair": a.hair, "shirt": a.shirt, "shorts": a.shorts, "shoes": a.shoes},
+        "colors": {"skin": a.skin or "default", "hair": a.hair, "shirt": a.shirt, "shorts": a.shorts, "shoes": a.shoes},
         "parts": len(parts), "triangles": tris,
         "vertices": sum(len(o.data.vertices) for o in parts),
         "materials": sorted({o.data.materials[0].name for o in parts}),
         "bbox_min_m": [round(c, 4) for c in lo], "bbox_max_m": [round(c, 4) for c in hi],
-        "rig": {"bones": len(BONES), "skinning": "rigid per-part"} if rig else None,
+        "rig": {"bones": len(bone_list), "skinning": "rigid per-part" if all(o["bone"] for o in parts) else "blended distance weights"} if rig else None,
         "tpose_selfcheck": tpose, "deformation_selftest": deform, "files": files,
     }
     with open(os.path.join(a.out, "generation.json"), "w") as f:

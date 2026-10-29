@@ -19,7 +19,10 @@ import glb_inspect  # noqa: E402
 
 SIDED = ["Ear", "Eye", "Pupil", "Eyebrow", "UpperArm", "Forearm", "Hand", "ShortsLeg", "Shin", "Shoe"]
 CENTRAL = ["Head", "Hair", "Nose", "Mouth", "Neck", "Torso", "Shorts"]
-EXPECTED_PARTS = CENTRAL + [f"{p}_{s}" for p in SIDED for s in ("L", "R")]
+EXPECTED_PARTS = {
+    "chibi_humanoid": CENTRAL + [f"{p}_{s}" for p in SIDED for s in ("L", "R")],
+    "clay_chibi": ["Head", "Body"],
+}
 EXPECTED_BONES = ["root", "pelvis", "spine", "neck", "head"] + [
     f"{b}.{s}" for b in ("upper_arm", "forearm", "hand", "thigh", "shin", "foot") for s in ("L", "R")]
 MAX_ARM_ANGLE_DEG = 8.0   # T-pose: arms within 8 degrees of horizontal (an A-pose is ~30-45)
@@ -31,6 +34,7 @@ def parse_args():
     p.add_argument("--glb", required=True)
     p.add_argument("--report", required=True)
     p.add_argument("--expect-rig", action="store_true")
+    p.add_argument("--model-type", default="chibi_humanoid", choices=list(EXPECTED_PARTS))
     return p.parse_args(argv)
 
 
@@ -79,8 +83,9 @@ def main():
     c.add("materials_assigned", summary["primitives_without_material"] == 0,
           f"{summary['primitives_without_material']} primitives without material")
     c.add("size_reasonable", summary["bytes"] < 25 * 1024 * 1024, f"{summary['bytes']} bytes")
-    missing = [p for p in EXPECTED_PARTS if p not in summary["mesh_nodes"]]
-    c.add("expected_parts_present", not missing, f"missing: {missing}" if missing else f"{len(EXPECTED_PARTS)} parts")
+    expected = EXPECTED_PARTS[a.model_type]
+    missing = [p for p in expected if p not in summary["mesh_nodes"]]
+    c.add("expected_parts_present", not missing, f"missing: {missing}" if missing else f"{len(expected)} parts")
 
     # 2. Re-import into a clean Blender scene and measure real geometry.
     bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -105,8 +110,16 @@ def main():
     degenerate = [n for n, b in B.items() if min(b[3]) <= 1e-5]
     c.add("no_degenerate_parts", not degenerate, f"{degenerate}" if degenerate else "")
 
-    # 3. T-pose.
-    if not missing:
+    # 3a. T-pose from raw geometry (works for one-piece and multi-part meshes).
+    dg = bpy.context.evaluated_depsgraph_get()
+    pts = []
+    for o in meshes.values():
+        ev = o.evaluated_get(dg)
+        pts += [ev.matrix_world @ v.co for v in ev.data.vertices]
+    geometry_tpose(c, pts, height)
+
+    # 3b. Part-level T-pose checks (multi-part generators only).
+    if a.model_type == "chibi_humanoid" and not missing:
         for s, sign in (("L", 1), ("R", -1)):
             sh, hd = B[f"UpperArm_{s}"][2], B[f"Hand_{s}"][2]
             ang = math.degrees(math.atan2(abs(hd.z - sh.z), abs(hd.x - sh.x)))
@@ -158,6 +171,55 @@ def main():
                           f"thigh->foot dir {tuple(round(v, 3) for v in d)}")
             rig_info = {"bones": sorted(names), "skins": summary["skins"]}
     return finish(a, c, summary, rig_info, height=height, size=size, lo=lo, hi=hi)
+
+
+def _mean(pts):
+    return sum(pts, Vector()) / len(pts) if pts else None
+
+
+def geometry_tpose(c, pts, height):
+    arm_angles = {}
+    for s, sign in (("L", 1), ("R", -1)):
+        side = [p for p in pts if p.x * sign > 0]
+        reach = max(abs(p.x) for p in side)
+        bands = [_mean([p for p in side if lo_ <= abs(p.x) <= hi_]) for lo_, hi_ in
+                 ((0.2, 0.28), (0.30, 0.40), (0.85 * reach, reach))]  # upper arm, forearm, hand
+        if None in bands:
+            c.add(f"geom_tpose_arm_{s}", False, "no geometry in arm bands")
+            continue
+        ang = max(math.degrees(math.atan2(abs(b.z - bands[0].z), abs(b.x - bands[0].x))) for b in bands[1:])
+        arm_angles[s] = (ang, bands)
+        c.add(f"geom_tpose_arm_{s}", ang <= MAX_ARM_ANGLE_DEG,
+              f"forearm/hand {ang:.2f} deg from horizontal vs upper arm (max {MAX_ARM_ANGLE_DEG})")
+        thin = [p for p in side if 0.2 <= abs(p.x) <= 0.4]
+        zs = max(p.z for p in thin) - min(p.z for p in thin)
+        c.add(f"geom_arm_is_limb_{s}", zs < 0.15 * height, f"arm band vertical thickness {zs:.3f} m")
+        low = [p for p in side if 0.12 <= p.z <= 0.18]
+        mid = [p for p in side if 0.25 <= p.z <= 0.30]
+        if low and mid:
+            dx = abs(_mean(low).x - _mean(mid).x)
+            c.add(f"geom_leg_vertical_{s}", dx < 0.03, f"leg centre drift {dx:.4f} m between z 0.15 and 0.28")
+        else:
+            c.add(f"geom_leg_vertical_{s}", False, "no leg geometry found")
+        foot = [p for p in side if p.z <= 0.03]
+        fx = max(p.x for p in foot) - min(p.x for p in foot)
+        fy = max(p.y for p in foot) - min(p.y for p in foot)
+        c.add(f"geom_foot_forward_{s}", fy > fx and min(p.y for p in foot) < -0.05,
+              f"foot length {fy:.3f} > width {fx:.3f}, toe at y {min(p.y for p in foot):.3f}")
+    if len(arm_angles) == 2:
+        l, r = arm_angles["L"][1][2], arm_angles["R"][1][2]
+        err = (l - Vector((-r.x, r.y, r.z))).length
+        c.add("geom_left_right_symmetry", err < 0.01 * height, f"hand mirror error {err:.5f} m")
+        shoulder_z = (arm_angles["L"][1][0].z + arm_angles["R"][1][0].z) / 2
+        top = max(p.z for p in pts)
+        c.add("geom_chibi_head", top - shoulder_z > 0.3 * height,
+              f"head+neck above shoulders = {100 * (top - shoulder_z) / height:.0f}% of height")
+        upper = [p for p in pts if p.z > shoulder_z]
+        front = min(upper, key=lambda p: p.y)
+        c.add("geom_faces_forward", abs(front.x) < 0.03 and front.y < -0.1,
+              f"front-most head point at x {front.x:.3f}, y {front.y:.3f} (Blender -Y = glTF +Z front)")
+    span = max(p.x for p in pts) - min(p.x for p in pts)
+    c.add("geom_tpose_span", span >= 0.8 * height, f"span {span:.3f} m vs height {height:.3f} m")
 
 
 def finish(a, c, summary, rig, height=None, size=None, lo=None, hi=None):

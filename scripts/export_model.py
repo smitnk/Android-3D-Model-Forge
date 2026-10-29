@@ -93,6 +93,7 @@ def render_previews(parts, out_dir, slug):
     views = {
         "front": ((0, -2.9, 0.68), (0, 0, 0.64)),
         "three-quarter": ((1.9, -2.2, 1.15), (0, 0, 0.62)),
+        "back": ((0, 2.9, 0.68), (0, 0, 0.64)),
     }
     results = []
     for view, (loc, target) in views.items():

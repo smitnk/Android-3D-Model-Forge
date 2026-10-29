@@ -6,16 +6,16 @@ on:
       model_type:
         description: "Model type"
         type: choice
-        options: [chibi_humanoid]
+        options: [chibi_humanoid, clay_chibi]
         default: chibi_humanoid
       character_name:
-        description: "Character name (used for file names)"
+        description: "Character name for file names (empty = Forge Kid / Clay Chibi)"
         type: string
-        default: "Forge Kid"
+        default: ""
       skin_color:
-        description: "Skin colour (#RRGGBB)"
+        description: "Skin / clay colour (#RRGGBB, empty = type default)"
         type: string
-        default: "#F2C9A0"
+        default: ""
       hair_color:
         description: "Hair colour (#RRGGBB)"
         type: string
@@ -58,6 +58,11 @@ jobs:
   generate:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 1   # publish steps commit to the same branch; run one model at a time
+      matrix:
+        model_type: ${{ fromJSON(github.event_name == 'push' && '["chibi_humanoid","clay_chibi"]' || format('["{0}"]', inputs.model_type)) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -96,9 +101,9 @@ jobs:
 
       - name: Generate model
         env:
-          IN_TYPE: ${{ inputs.model_type || 'chibi_humanoid' }}
-          IN_NAME: ${{ inputs.character_name || 'Forge Kid' }}
-          IN_SKIN: ${{ inputs.skin_color || '#F2C9A0' }}
+          IN_TYPE: ${{ matrix.model_type }}
+          IN_NAME: ${{ inputs.character_name }}
+          IN_SKIN: ${{ inputs.skin_color }}
           IN_HAIR: ${{ inputs.hair_color || '#3B2417' }}
           IN_SHIRT: ${{ inputs.shirt_color || '#E8553D' }}
           IN_SHORTS: ${{ inputs.shorts_color || '#2F4A8A' }}
@@ -118,7 +123,7 @@ jobs:
           glb=$(ls out/*.glb)
           python3 scripts/glb_inspect.py "$glb" | tee -a logs.txt
           ~/blender/blender -b --factory-startup --python-exit-code 1 \
-            --python scripts/validate_model.py -- --glb "$glb" --report out/validation.json --expect-rig 2>&1 | tee -a logs.txt
+            --python scripts/validate_model.py -- --glb "$glb" --report out/validation.json --expect-rig --model-type "${{ matrix.model_type }}" 2>&1 | tee -a logs.txt
           python3 -c "import json,sys; sys.exit(json.load(open('out/validation.json'))['overall']!='PASS')"
 
       - name: Write report
@@ -129,7 +134,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: model-${{ github.run_number }}
+          name: model-${{ matrix.model_type }}-${{ github.run_number }}
           path: |
             out/*.glb
             out/*.blend
@@ -151,7 +156,7 @@ jobs:
           cp out/*.png out/REPORT.md docs/preview/
           git add docs/preview
           if ! git diff --cached --quiet; then
-            git commit -m "Update model preview from run ${{ github.run_number }} [skip ci]"
+            git commit -m "Update ${{ matrix.model_type }} preview from run ${{ github.run_number }} [skip ci]"
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
@@ -170,11 +175,11 @@ jobs:
           set +e
           rm -rf /tmp/ci && mkdir -p /tmp/ci
           cp logs.txt out/*.json out/*.png out/REPORT.md /tmp/ci/ 2>/dev/null
-          echo "run=${{ github.run_number }} status=$STATUS sha=${{ github.sha }}" > /tmp/ci/STATUS.txt
+          echo "run=${{ github.run_number }} type=${{ matrix.model_type }} status=$STATUS sha=${{ github.sha }}" > /tmp/ci/STATUS.txt
           git fetch origin ci-results 2>/dev/null
           git worktree add -B ci-results /tmp/wt origin/ci-results 2>/dev/null || {
             git worktree add --detach /tmp/wt && cd /tmp/wt && git checkout --orphan ci-results && git rm -rqf . ; cd -; }
-          rm -rf /tmp/wt/latest && mkdir -p /tmp/wt/latest && cp /tmp/ci/* /tmp/wt/latest/
+          d=/tmp/wt/latest/${{ matrix.model_type }}; rm -rf "$d" && mkdir -p "$d" && cp /tmp/ci/* "$d"/
           cd /tmp/wt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
