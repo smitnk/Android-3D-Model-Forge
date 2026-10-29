@@ -10,7 +10,7 @@
     {
       "check": "glb_structure_valid",
       "pass": true,
-      "detail": "11 meshes, 20532 verts, 41000 tris"
+      "detail": "11 meshes, 20318 verts, 40568 tris"
     },
     {
       "check": "materials_present",
@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "1163544 bytes"
+      "detail": "1151532 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -40,7 +40,7 @@
     {
       "check": "bbox_nonzero",
       "pass": true,
-      "detail": "size (1.584, 0.455, 1.48) m"
+      "detail": "size (1.64, 0.451, 1.48) m"
     },
     {
       "check": "scale_usable",
@@ -55,12 +55,12 @@
     {
       "check": "centered",
       "pass": true,
-      "detail": "center x -0.0000, y -0.0108"
+      "detail": "center x -0.0000, y -0.0112"
     },
     {
       "check": "upright",
       "pass": true,
-      "detail": "height 1.480 > depth 0.455"
+      "detail": "height 1.480 > depth 0.451"
     },
     {
       "check": "no_degenerate_parts",
@@ -70,47 +70,47 @@
     {
       "check": "geom_tpose_arm_L",
       "pass": true,
-      "detail": "forearm/hand 1.65 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 1.85 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_L",
       "pass": true,
-      "detail": "arm band vertical thickness 0.157 m"
+      "detail": "arm band vertical thickness 0.153 m"
     },
     {
       "check": "geom_leg_vertical_L",
       "pass": true,
-      "detail": "leg centre drift 0.0177 m between lower and upper leg"
+      "detail": "leg centre drift 0.0228 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_L",
       "pass": true,
-      "detail": "foot length 0.323 > width 0.322, toe at y -0.229"
+      "detail": "foot length 0.322 > width 0.265, toe at y -0.228"
     },
     {
       "check": "geom_tpose_arm_R",
       "pass": true,
-      "detail": "forearm/hand 2.44 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 0.72 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_R",
       "pass": true,
-      "detail": "arm band vertical thickness 0.157 m"
+      "detail": "arm band vertical thickness 0.154 m"
     },
     {
       "check": "geom_leg_vertical_R",
       "pass": true,
-      "detail": "leg centre drift 0.0187 m between lower and upper leg"
+      "detail": "leg centre drift 0.0243 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_R",
       "pass": true,
-      "detail": "foot length 0.323 > width 0.322, toe at y -0.229"
+      "detail": "foot length 0.323 > width 0.265, toe at y -0.228"
     },
     {
       "check": "geom_left_right_symmetry",
       "pass": true,
-      "detail": "hand mirror error 0.00084 m"
+      "detail": "hand mirror error 0.00081 m"
     },
     {
       "check": "geom_head_size",
@@ -125,7 +125,7 @@
     {
       "check": "geom_tpose_span",
       "pass": true,
-      "detail": "span 1.584 m vs height 1.480 m"
+      "detail": "span 1.640 m vs height 1.480 m"
     },
     {
       "check": "skin_in_glb",
@@ -170,7 +170,7 @@
   ],
   "summary": {
     "valid": true,
-    "bytes": 1163544,
+    "bytes": 1151532,
     "meshes": 11,
     "mesh_nodes": [
       "Eye_L",
@@ -185,8 +185,8 @@
       "Pupil_R",
       "Skin"
     ],
-    "vertices": 20532,
-    "triangles": 41000,
+    "vertices": 20318,
+    "triangles": 40568,
     "materials": [
       "EyeWhite",
       "Fur",
@@ -221,18 +221,18 @@
   "dimensions_m": {
     "height": 1.4803,
     "size_xyz": [
-      1.5842,
-      0.4554,
+      1.6399,
+      0.4506,
       1.4803
     ],
     "bbox_min": [
-      -0.7921,
-      -0.2385,
+      -0.8199,
+      -0.2365,
       -0.0
     ],
     "bbox_max": [
-      0.7921,
-      0.2169,
+      0.8199,
+      0.2141,
       1.4803
     ]
   },

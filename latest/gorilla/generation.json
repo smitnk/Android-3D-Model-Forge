@@ -6,14 +6,14 @@
   "slug": "gorilla",
   "colors": {
     "skin": "default",
-    "hair": "#3B2417",
+    "hair": "default",
     "shirt": "#E8553D",
     "shorts": "#2F4A8A",
     "shoes": "#F4F1EA"
   },
   "parts": 11,
-  "triangles": 41000,
-  "vertices": 20532,
+  "triangles": 40568,
+  "vertices": 20318,
   "materials": [
     "EyeWhite",
     "Fur",
@@ -22,13 +22,13 @@
     "Skin"
   ],
   "bbox_min_m": [
-    -0.7921,
-    -0.2385,
+    -0.8199,
+    -0.2365,
     -0.0
   ],
   "bbox_max_m": [
-    0.7921,
-    0.2169,
+    0.8199,
+    0.2141,
     1.4803
   ],
   "rig": {
@@ -36,14 +36,14 @@
     "skinning": "blended distance weights"
   },
   "tpose_selfcheck": {
-    "arm_angle_deg_L": 1.155,
-    "arm_angle_deg_R": 1.269,
+    "arm_angle_deg_L": 0.236,
+    "arm_angle_deg_R": 1.105,
     "pass": true
   },
   "deformation_selftest": {
-    "hand_moved_m": 0.3798,
+    "hand_moved_m": 0.3897,
     "rest_of_body_drift_m": 0.0,
-    "hand_verts": 621,
+    "hand_verts": 816,
     "pass": true
   },
   "files": {
@@ -54,9 +54,9 @@
         "view": "front",
         "file": "gorilla-front.png",
         "frame_extent": [
-          0.085,
-          0.915,
-          0.165,
+          0.071,
+          0.929,
+          0.166,
           0.918
         ]
       },
@@ -64,9 +64,9 @@
         "view": "three-quarter",
         "file": "gorilla-three-quarter.png",
         "frame_extent": [
-          0.167,
-          0.892,
-          0.071,
+          0.16,
+          0.908,
+          0.066,
           0.946
         ]
       },
@@ -74,10 +74,10 @@
         "view": "back",
         "file": "gorilla-back.png",
         "frame_extent": [
-          0.103,
-          0.897,
+          0.089,
+          0.911,
           0.181,
-          0.922
+          0.921
         ]
       }
     ]
