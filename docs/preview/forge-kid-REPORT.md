@@ -13,7 +13,7 @@
 | Vertices / triangles (GLB) | 12378 / 24588 |
 | Materials | Brow, EyeWhite, Hair, Mouth, Pupil, Shirt, Shoe, Shorts, Skin, Sole |
 | Rig | 17 bones, rigid per-part skinning |
-| GLB size | 649 KB |
+| GLB size | 652 KB |
 
 ## Checks
 
@@ -21,7 +21,7 @@
 - ✅ `glb_structure_valid` 42 meshes, 12378 verts, 24588 tris
 - ✅ `materials_present` Brow, EyeWhite, Hair, Mouth, Pupil, Shirt, Shoe, Shorts, Skin, Sole
 - ✅ `materials_assigned` 0 primitives without material
-- ✅ `size_reasonable` 664456 bytes
+- ✅ `size_reasonable` 667472 bytes
 - ✅ `expected_parts_present` 27 parts
 - ✅ `geometry_finite` 
 - ✅ `bbox_nonzero` size (1.119, 0.554, 1.345) m
