@@ -34,20 +34,27 @@ def load_rgba(name):
     return img, px
 
 
+def body_centre(mask):
+    """Centre column of the hips/thighs (rows 30-45% up the figure): arms are drawn unequal, the body is not."""
+    rows = np.where(mask.any(1))[0]
+    top, bot = rows.min(), rows.max()
+    band = range(int(bot - 0.45 * (bot - top)), int(bot - 0.30 * (bot - top)))
+    return float(np.mean([(np.where(mask[r])[0].min() + np.where(mask[r])[0].max()) / 2 for r in band]))
+
+
 def symmetric(mask):
-    """T-pose policy: mirror the drawn silhouette about its bounding-box centre (drawings are never exact)."""
-    cols = np.where(mask.any(0))[0]
-    out = np.zeros_like(mask)
-    sub = mask[:, cols.min():cols.max() + 1]
-    out[:, cols.min():cols.max() + 1] = sub | sub[:, ::-1]
-    return out
+    """T-pose policy: mirror the drawn silhouette about the body centre; returns a mask centred in its width."""
+    c = int(round(body_centre(mask)))
+    half = max(c, mask.shape[1] - 1 - c)
+    pad = np.zeros((mask.shape[0], 2 * half + 1), bool)
+    pad[:, half - c:half - c + mask.shape[1]] = mask
+    return pad | pad[:, ::-1]
 
 
 def projector(mask):
     """Front-panel pixel coords for a world point: returns (cx, bottom_row, metres_per_px, w, h)."""
     rows = np.where(mask.any(1))[0]
-    cols = np.where(mask.any(0))[0]
-    return (cols.min() + cols.max()) / 2.0, rows.max(), HEIGHT / (rows.max() - rows.min() + 1), mask.shape[1], mask.shape[0]
+    return body_centre(mask), rows.max(), HEIGHT / (rows.max() - rows.min() + 1), mask.shape[1], mask.shape[0]
 
 
 def measure(occ, origin):

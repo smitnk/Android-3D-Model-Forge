@@ -26,6 +26,8 @@ EXPECTED_PARTS = {
 }
 # max arm thickness / height; gorilla arms measure ~0.15 H in the reference plus fur tufts
 LIMB_RATIO = {"chibi_humanoid": 0.15, "clay_chibi": 0.15, "gorilla": 0.22}
+# feet longer than wide (humanoid shoes); gorilla feet in the reference are wider than long
+LONG_FEET = {"chibi_humanoid": True, "clay_chibi": True, "gorilla": False}
 HEAD_RATIO = {"chibi_humanoid": 0.3, "clay_chibi": 0.3, "gorilla": 0.2}  # min head+neck above shoulders / height
 EXPECTED_BONES = ["root", "pelvis", "spine", "neck", "head"] + [
     f"{b}.{s}" for b in ("upper_arm", "forearm", "hand", "thigh", "shin", "foot") for s in ("L", "R")]
@@ -121,7 +123,7 @@ def main():
     for o in meshes.values():
         ev = o.evaluated_get(dg)
         pts += [ev.matrix_world @ v.co for v in ev.data.vertices]
-    geometry_tpose(c, pts, height, HEAD_RATIO[a.model_type], LIMB_RATIO[a.model_type])
+    geometry_tpose(c, pts, height, HEAD_RATIO[a.model_type], LIMB_RATIO[a.model_type], LONG_FEET[a.model_type])
 
     # 3b. Part-level T-pose checks (multi-part generators only).
     if a.model_type == "chibi_humanoid" and not missing:
@@ -182,7 +184,7 @@ def _mean(pts):
     return sum(pts, Vector()) / len(pts) if pts else None
 
 
-def geometry_tpose(c, pts, height, head_ratio, limb_ratio):
+def geometry_tpose(c, pts, height, head_ratio, limb_ratio, long_feet=True):
     arm_angles = {}
     for s, sign in (("L", 1), ("R", -1)):
         side = [p for p in pts if p.x * sign > 0]
@@ -209,8 +211,9 @@ def geometry_tpose(c, pts, height, head_ratio, limb_ratio):
         foot = [p for p in side if p.z <= 0.03]
         fx = max(p.x for p in foot) - min(p.x for p in foot)
         fy = max(p.y for p in foot) - min(p.y for p in foot)
-        c.add(f"geom_foot_forward_{s}", fy > fx and min(p.y for p in foot) < -0.05,
-              f"foot length {fy:.3f} > width {fx:.3f}, toe at y {min(p.y for p in foot):.3f}")
+        c.add(f"geom_foot_forward_{s}", (fy > fx or not long_feet) and min(p.y for p in foot) < -0.05,
+              f"foot length {fy:.3f} vs width {fx:.3f}{'' if long_feet else ' (wide feet allowed)'}, "
+              f"toe at y {min(p.y for p in foot):.3f}")
     if len(arm_angles) == 2:
         l, r = arm_angles["L"][1][2], arm_angles["R"][1][2]
         err = (l - Vector((-r.x, r.y, r.z))).length
