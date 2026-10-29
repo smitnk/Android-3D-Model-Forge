@@ -21,65 +21,20 @@ test_disc_masks_carve_a_ball (test_hull.TestHull.test_disc_masks_carve_a_ball) .
 test_limb_depth_follows_its_thickness (test_hull.TestHull.test_limb_depth_follows_its_thickness) ... skipped 'numpy not installed'
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.000s
+Ran 8 tests in 0.001s
 
 OK (skipped=3)
-14:18:02 | INFO: Starting glTF 2.0 export
-14:18:02 | INFO: Extracting primitive: Body
-14:18:02 | INFO: Primitives created: 1
-14:18:02 | INFO: Extracting primitive: Head
-14:18:02 | INFO: Primitives created: 2
-14:18:02 | INFO: Finished glTF 2.0 export in 0.1561598777770996 s
+14:22:52 | INFO: Starting glTF 2.0 export
+14:22:52 | INFO: Extracting primitive: Body
+14:22:52 | INFO: Primitives created: 1
+14:22:52 | INFO: Extracting primitive: Head
+14:22:52 | INFO: Primitives created: 2
+14:22:52 | INFO: Finished glTF 2.0 export in 0.21677303314208984 s
 Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 Info: Total files 1 | Changed 1 | Failed 0
 Fra:1 Mem:25.73M (Peak 26.16M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
-Fra:1 Mem:25.73M (Peak 26.16M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
-Fra:1 Mem:30.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
-Fra:1 Mem:27.48M (Peak 30.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading FaceTexture
-Fra:1 Mem:27.21M (Peak 30.62M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Waiting for render to start
-Fra:1 Mem:27.21M (Peak 30.62M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
-Fra:1 Mem:27.21M (Peak 30.62M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Updating Scene
-Fra:1 Mem:27.21M (Peak 30.62M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Updating Shaders
-Fra:1 Mem:27.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Procedurals
-Fra:1 Mem:27.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Background
-Fra:1 Mem:27.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Camera
-Fra:1 Mem:27.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Meshes Flags
-Fra:1 Mem:27.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Objects
-Fra:1 Mem:27.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
-Fra:1 Mem:27.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
-Fra:1 Mem:27.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems
-Fra:1 Mem:27.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
-Fra:1 Mem:27.29M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Meshes
-Fra:1 Mem:28.31M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Computing attributes
-Fra:1 Mem:29.01M (Peak 30.62M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
-Fra:1 Mem:29.01M (Peak 30.62M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building
-Fra:1 Mem:29.01M (Peak 30.62M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building BVH
-Fra:1 Mem:29.01M (Peak 30.62M) | Time:00:00.00 | Mem:2.83M, Peak:2.83M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
-Fra:1 Mem:29.01M (Peak 30.62M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
-Fra:1 Mem:29.01M (Peak 30.62M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Computing normals
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Objects Flags
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Primitive Offsets
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Images
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Camera Volume
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Lookup Tables
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Lights
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Lights | Computing tree
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Integrator
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Film
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.39M | Scene, ViewLayer | Updating Lookup Tables
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Baking
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Device | Writing constant memory
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.21 | Remaining:00:09.26 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:11.80 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:11.80 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
-Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/round-buddy-front.png'
-Time: 00:11.84 (Saving: 00:00.03)
-
-Fra:1 Mem:25.73M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
-Fra:1 Mem:25.90M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:25.73M (Peak 26.16M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
+Fra:1 Mem:26.49M (Peak 26.49M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
 Fra:1 Mem:30.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
 Fra:1 Mem:27.48M (Peak 30.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading FaceTexture
 Fra:1 Mem:27.21M (Peak 30.29M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Waiting for render to start
@@ -96,33 +51,33 @@ Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, 
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Meshes
-Fra:1 Mem:28.31M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Computing attributes
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building BVH
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:2.83M, Peak:2.83M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Computing normals
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Objects Flags
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Primitive Offsets
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Images
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Camera Volume
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Lookup Tables
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Lights
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Lights | Computing tree
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Integrator
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Film
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.39M | Scene, ViewLayer | Updating Lookup Tables
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Baking
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Device | Writing constant memory
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
-Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.23 | Remaining:00:10.63 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:12.04 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:12.04 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
-Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/round-buddy-three-quarter.png'
-Time: 00:12.07 (Saving: 00:00.03)
+Fra:1 Mem:28.31M (Peak 30.29M) | Time:00:00.01 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:2.83M, Peak:2.83M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.02 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.02 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.31M, Peak:7.39M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.36 | Remaining:00:15.88 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:22.44 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:22.44 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/round-buddy-front.png'
+Time: 00:22.50 (Saving: 00:00.05)
 
 Fra:1 Mem:25.73M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
 Fra:1 Mem:25.73M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
@@ -164,11 +119,58 @@ Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, 
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Device | Writing constant memory
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.17 | Remaining:00:07.49 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:10.20 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:10.20 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
+Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.36 | Remaining:00:16.22 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:23.18 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:23.18 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/round-buddy-three-quarter.png'
+Time: 00:23.24 (Saving: 00:00.05)
+
+Fra:1 Mem:25.73M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
+Fra:1 Mem:25.73M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
+Fra:1 Mem:26.49M (Peak 26.49M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:30.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:27.48M (Peak 30.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading FaceTexture
+Fra:1 Mem:27.21M (Peak 30.29M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:27.21M (Peak 30.29M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:27.21M (Peak 30.29M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:27.21M (Peak 30.29M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:28.31M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:2.83M, Peak:2.83M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.31M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.39M, Peak:7.39M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.31M, Peak:7.39M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.30 | Remaining:00:13.43 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:20.33 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:20.33 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/round-buddy-back.png'
-Time: 00:10.24 (Saving: 00:00.03)
+Time: 00:20.39 (Saving: 00:00.05)
 
 INFO Draco mesh compression is available, use library at /home/runner/blender/4.2/python/lib/python3.11/site-packages/libextern_draco.so
 
@@ -294,10 +296,10 @@ Blender quit
   "skinned_primitives": 3,
   "generator": "Khronos glTF Blender I/O v4.2.70"
 }
-14:18:37 | INFO: Data are loaded, start creating Blender stuff
-14:18:37 | INFO: Blender create Mesh node Body
-14:18:37 | INFO: Blender create Mesh node Head
-14:18:37 | INFO: glTF import finished in 0.09s
+14:23:59 | INFO: Data are loaded, start creating Blender stuff
+14:23:59 | INFO: Blender create Mesh node Body
+14:23:59 | INFO: Blender create Mesh node Head
+14:23:59 | INFO: glTF import finished in 0.16s
 [PASS] glb_exists_nonempty out/round-buddy.glb
 [PASS] glb_structure_valid 2 meshes, 33308 verts, 66252 tris
 [PASS] materials_present Face, Skin
@@ -337,9 +339,9 @@ Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 Blender quit
 From https://github.com/smitnk/Android-3D-Model-Forge
  * branch            main       -> FETCH_HEAD
- + 476d974...83519d0 main       -> origin/main  (forced update)
+ + c1bf9f4...0717182 main       -> origin/main  (forced update)
 Switched to a new branch 'publish'
-[publish 2bdec2c] Update round_buddy preview from run 24 [skip ci]
+[publish 585158b] Update round_buddy preview from run 27 [skip ci]
  3 files changed, 0 insertions(+), 0 deletions(-)
 To https://github.com/smitnk/Android-3D-Model-Forge
-   83519d0..2bdec2c  HEAD -> main
+   0717182..585158b  HEAD -> main
