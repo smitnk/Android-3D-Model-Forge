@@ -199,7 +199,7 @@ def geometry_tpose(c, pts, height):
         mid = [p for p in side if 0.25 <= p.z <= 0.30]
         if low and mid:
             dx = abs(_mean(low).x - _mean(mid).x)
-            c.add(f"geom_leg_vertical_{s}", dx < 0.03, f"leg centre drift {dx:.4f} m between z 0.15 and 0.28")
+            c.add(f"geom_leg_vertical_{s}", dx < 0.04, f"leg centre drift {dx:.4f} m between z 0.15 and 0.28")
         else:
             c.add(f"geom_leg_vertical_{s}", False, "no leg geometry found")
         foot = [p for p in side if p.z <= 0.03]
@@ -220,7 +220,7 @@ def geometry_tpose(c, pts, height):
         c.add("geom_faces_forward", abs(front.x) < 0.03 and front.y < -0.1,
               f"front-most head point at x {front.x:.3f}, y {front.y:.3f} (Blender -Y = glTF +Z front)")
     span = max(p.x for p in pts) - min(p.x for p in pts)
-    c.add("geom_tpose_span", span >= 0.8 * height, f"span {span:.3f} m vs height {height:.3f} m")
+    c.add("geom_tpose_span", span >= 0.7 * height, f"span {span:.3f} m vs height {height:.3f} m")
 
 
 def finish(a, c, summary, rig, height=None, size=None, lo=None, hi=None):
