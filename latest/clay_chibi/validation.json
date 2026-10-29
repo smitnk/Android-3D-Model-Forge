@@ -1,5 +1,5 @@
 {
-  "overall": "FAIL",
+  "overall": "PASS",
   "glb": "clay-chibi.glb",
   "checks": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "check": "materials_present",
-      "pass": false,
+      "pass": true,
       "detail": "Clay"
     },
     {
@@ -70,7 +70,7 @@
     {
       "check": "geom_tpose_arm_L",
       "pass": true,
-      "detail": "forearm/hand 0.84 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 0.56 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_L",
@@ -90,7 +90,7 @@
     {
       "check": "geom_tpose_arm_R",
       "pass": true,
-      "detail": "forearm/hand 0.95 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 1.53 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_R",

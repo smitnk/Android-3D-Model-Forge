@@ -32,8 +32,8 @@
     "skinning": "blended distance weights"
   },
   "tpose_selfcheck": {
-    "arm_angle_deg_L": 0.077,
-    "arm_angle_deg_R": 0.173,
+    "arm_angle_deg_L": 0.581,
+    "arm_angle_deg_R": 0.898,
     "pass": true
   },
   "deformation_selftest": {
