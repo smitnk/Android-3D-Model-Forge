@@ -14,7 +14,7 @@ Inventory (reference: front + back turnaround sheet)
 - hair tuft on top of the head                                                            -> HairTuft_*
 - jagged fur tufts on the silhouette of shoulders, arms, thighs, calves (all views)            -> Tufts_*
 Measured from the 360 turnaround (side view): body depth ~0.40 H with the belly pushed forward,
-head depth ~0.24 H including a muzzle that sticks out past the face. Fur #4C4054, skin #8C8192.
+head depth ~0.24 H including a muzzle that sticks out past the face. Fur #4C4054, skin #8C8192 (rendered darker to match: #3E3447 / #7E7286).
 Measured (H = 1.5 m): shoulder line 0.70 H, hand reach 0.52 H from centre, chest half-width 0.20 H,
 waist half-width 0.10 H, hips 0.14 H, leg centres +-0.11 H, feet 0.23 H wide, head top 0.97 H.
 """
@@ -60,10 +60,13 @@ def tuft_ring(bm, a, b, radius, rings, per_ring, length, start=0.0, skip=None):
             if skip and skip(th, u, v):
                 continue
             radial = u * math.cos(th) + v * math.sin(th)
-            d = (radial + axis * 0.55).normalized()
-            m = (Matrix.Translation(c + radial * radius * 0.8 + d * length * 0.5)
-                 @ d.to_track_quat("Z", "Y").to_matrix().to_4x4()
-                 @ Matrix.Diagonal((0.032, 0.032 * 0.75, length, 1)))
+            # a flat lock: lies close to the surface, leans toward b and hangs down (gravity in a T-pose)
+            d = (radial * 0.45 + axis * 0.6 + Vector((0, 0, -0.45))).normalized()
+            tangent = d.cross(radial).normalized()
+            normal = tangent.cross(d)
+            basis = Matrix((tangent, normal, d)).transposed().to_4x4()
+            m = (Matrix.Translation(c + radial * radius * 0.86 + d * length * 0.45)
+                 @ basis @ Matrix.Diagonal((0.075, 0.022, length, 1)))
             bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
                                   radius1=0.5, radius2=0.0, depth=1.0, matrix=m)
 
@@ -84,8 +87,8 @@ def tuft_object(name, bone, mat, fn):
 
 
 def build(a, material, part):
-    fur_m = material("Fur", a.hair or "#4C4054", 0.85)
-    skin_m = material("Skin", a.skin or "#8C8192", 0.6)
+    fur_m = material("Fur", a.hair or "#3E3447", 0.85)
+    skin_m = material("Skin", a.skin or "#7E7286", 0.6)
     eye_m = material("EyeWhite", "#FFFFFF", 0.3)
     pupil_m = material("Pupil", "#121018", 0.15)
     dark_m = material("Nostril", "#2A2433", 0.6)
@@ -139,17 +142,17 @@ def build(a, material, part):
     for s, x in (("L", 1), ("R", -1)):
         z = SHOULDER_Z
         parts.append(tuft_object(f"Tufts_Shoulder_{s}", f"upper_arm.{s}", fur_m, lambda bm, x=x, z=z: tuft_ring(
-            bm, (0.16 * x, 0.01, z + 0.03), (0.30 * x, 0.01, z + 0.03), 0.12, 2, 9, 0.06,
+            bm, (0.16 * x, 0.01, z + 0.03), (0.30 * x, 0.01, z + 0.03), 0.12, 2, 12, 0.07,
             skip=lambda th, u, v: math.sin(th) * v.z + math.cos(th) * u.z < -0.3)))  # not underneath
         parts.append(tuft_object(f"Tufts_UpperArm_{s}", f"upper_arm.{s}", fur_m, lambda bm, x=x, z=z: tuft_ring(
-            bm, (0.30 * x, 0, z), (0.48 * x, 0, z), 0.085, 3, 10, 0.055)))
+            bm, (0.30 * x, 0, z), (0.48 * x, 0, z), 0.085, 4, 13, 0.07)))
         parts.append(tuft_object(f"Tufts_Forearm_{s}", f"forearm.{s}", fur_m, lambda bm, x=x, z=z: tuft_ring(
-            bm, (0.48 * x, 0, z - 0.005), (0.64 * x, 0, z - 0.005), 0.07, 3, 10, 0.05)))
+            bm, (0.48 * x, 0, z - 0.005), (0.64 * x, 0, z - 0.005), 0.07, 4, 12, 0.065)))
         front = lambda th, u, v: (math.cos(th) * u.y + math.sin(th) * v.y) < -0.7  # keep legs' front clean
         parts.append(tuft_object(f"Tufts_Thigh_{s}", f"thigh.{s}", fur_m, lambda bm, x=x: tuft_ring(
-            bm, (0.15 * x, 0, 0.47), (0.155 * x, 0, 0.29), 0.13, 2, 12, 0.05, skip=front)))
+            bm, (0.15 * x, 0, 0.47), (0.155 * x, 0, 0.29), 0.13, 3, 14, 0.065, skip=front)))
         parts.append(tuft_object(f"Tufts_Calf_{s}", f"shin.{s}", fur_m, lambda bm, x=x: tuft_ring(
-            bm, (0.16 * x, 0, 0.29), (0.17 * x, 0, 0.13), 0.13, 2, 12, 0.05, skip=front)))
+            bm, (0.16 * x, 0, 0.29), (0.17 * x, 0, 0.13), 0.13, 3, 14, 0.065, skip=front)))
     for i, (dx, tilt) in enumerate(((0, 0), (0.035, 25), (-0.035, -25))):
         parts.append(part(f"HairTuft_{i}", "cone", (0.05, 0.05, 0.09), (dx, 0.03, 1.455), fur_m, "head",
                           rot=(0, tilt, 0), subsurf=1, segments=12))
