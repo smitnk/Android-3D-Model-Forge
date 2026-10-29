@@ -13,7 +13,7 @@
 | Vertices / triangles (GLB) | 12378 / 24588 |
 | Materials | Brow, EyeWhite, Hair, Mouth, Pupil, Shirt, Shoe, Shorts, Skin, Sole |
 | Rig | 17 bones, rigid per-part skinning |
-| GLB size | 650 KB |
+| GLB size | 652 KB |
 
 ## Checks
 
@@ -21,7 +21,7 @@
 - ✅ `glb_structure_valid` 42 meshes, 12378 verts, 24588 tris
 - ✅ `materials_present` Brow, EyeWhite, Hair, Mouth, Pupil, Shirt, Shoe, Shorts, Skin, Sole
 - ✅ `materials_assigned` 0 primitives without material
-- ✅ `size_reasonable` 665584 bytes
+- ✅ `size_reasonable` 667472 bytes
 - ✅ `expected_parts_present` 27 parts
 - ✅ `geometry_finite` 
 - ✅ `bbox_nonzero` size (1.119, 0.554, 1.345) m
@@ -30,16 +30,16 @@
 - ✅ `centered` center x 0.0000, y 0.0220
 - ✅ `upright` height 1.345 > depth 0.554
 - ✅ `no_degenerate_parts` 
-- ✅ `geom_tpose_arm_L` forearm/hand 0.69 deg from horizontal vs upper arm (max 8.0)
+- ✅ `geom_tpose_arm_L` forearm/hand 0.26 deg from horizontal vs upper arm (max 8.0)
 - ✅ `geom_arm_is_limb_L` arm band vertical thickness 0.082 m
-- ✅ `geom_leg_vertical_L` leg centre drift 0.0022 m between lower and upper leg
+- ✅ `geom_leg_vertical_L` leg centre drift 0.0029 m between lower and upper leg
 - ✅ `geom_foot_forward_L` foot length 0.215 > width 0.118, toe at y -0.137
-- ✅ `geom_tpose_arm_R` forearm/hand 0.69 deg from horizontal vs upper arm (max 8.0)
+- ✅ `geom_tpose_arm_R` forearm/hand 0.26 deg from horizontal vs upper arm (max 8.0)
 - ✅ `geom_arm_is_limb_R` arm band vertical thickness 0.082 m
-- ✅ `geom_leg_vertical_R` leg centre drift 0.0034 m between lower and upper leg
+- ✅ `geom_leg_vertical_R` leg centre drift 0.0039 m between lower and upper leg
 - ✅ `geom_foot_forward_R` foot length 0.215 > width 0.118, toe at y -0.137
 - ✅ `geom_left_right_symmetry` hand mirror error 0.00000 m
-- ✅ `geom_chibi_head` head+neck above shoulders = 52% of height
+- ✅ `geom_head_size` head+neck above shoulders = 52% of height
 - ✅ `geom_faces_forward` front-most head point at x -0.000, y -0.255 (Blender -Y = glTF +Z front)
 - ✅ `geom_tpose_span` span 1.119 m vs height 1.345 m
 - ✅ `tpose_arm_horizontal_L` arm angle 0.00 deg from horizontal (max 8.0)
