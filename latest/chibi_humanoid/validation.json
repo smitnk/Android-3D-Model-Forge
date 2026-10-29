@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "669336 bytes"
+      "detail": "666328 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -85,7 +85,7 @@
     {
       "check": "geom_foot_forward_L",
       "pass": true,
-      "detail": "foot length 0.215 > width 0.118, toe at y -0.137"
+      "detail": "foot length 0.215 vs width 0.118, toe at y -0.137"
     },
     {
       "check": "geom_tpose_arm_R",
@@ -105,7 +105,7 @@
     {
       "check": "geom_foot_forward_R",
       "pass": true,
-      "detail": "foot length 0.215 > width 0.118, toe at y -0.137"
+      "detail": "foot length 0.215 vs width 0.118, toe at y -0.137"
     },
     {
       "check": "geom_left_right_symmetry",
@@ -240,7 +240,7 @@
   ],
   "summary": {
     "valid": true,
-    "bytes": 669336,
+    "bytes": 666328,
     "meshes": 42,
     "mesh_nodes": [
       "Ear_L",
