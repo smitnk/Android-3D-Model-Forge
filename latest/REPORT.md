@@ -4,24 +4,24 @@
 
 | Property | Value |
 |---|---|
-| Generator | `chibi_humanoid` v0.1.0 |
+| Generator | `chibi_humanoid` v0.1.1 |
 | Blender | 4.2.3 LTS |
 | Pose | T-pose (verified) |
 | Height | 1.2895 m |
 | Size (x, y, z) | [1.1191, 0.5541, 1.2895] m |
-| Mesh parts | 39 |
-| Vertices / triangles (GLB) | 12228 / 24300 |
+| Mesh parts | 42 |
+| Vertices / triangles (GLB) | 12378 / 24588 |
 | Materials | Brow, EyeWhite, Hair, Mouth, Pupil, Shirt, Shoe, Shorts, Skin, Sole |
 | Rig | 17 bones, rigid per-part skinning |
-| GLB size | 645 KB |
+| GLB size | 651 KB |
 
 ## Checks
 
 - ✅ `glb_exists_nonempty` out/forge-kid.glb
-- ✅ `glb_structure_valid` 39 meshes, 12228 verts, 24300 tris
+- ✅ `glb_structure_valid` 42 meshes, 12378 verts, 24588 tris
 - ✅ `materials_present` Brow, EyeWhite, Hair, Mouth, Pupil, Shirt, Shoe, Shorts, Skin, Sole
 - ✅ `materials_assigned` 0 primitives without material
-- ✅ `size_reasonable` 660224 bytes
+- ✅ `size_reasonable` 666324 bytes
 - ✅ `expected_parts_present` 27 parts
 - ✅ `geometry_finite` 
 - ✅ `bbox_nonzero` size (1.119, 0.554, 1.29) m
@@ -44,7 +44,7 @@
 - ✅ `left_right_symmetry` max mirror error 0.00000 m
 - ✅ `faces_forward` nose y -0.240 in front of head centre y 0.000 (Blender -Y = glTF +Z front)
 - ✅ `chibi_proportions` head is 38% of height
-- ✅ `skin_in_glb` 1 skins, 39 skinned primitives
+- ✅ `skin_in_glb` 1 skins, 42 skinned primitives
 - ✅ `armature_present` 1 armatures
 - ✅ `expected_bones` 17 bones
 - ✅ `meshes_bound_to_armature` all meshes skinned

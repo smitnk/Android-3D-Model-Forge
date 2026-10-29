@@ -10,7 +10,7 @@
     {
       "check": "glb_structure_valid",
       "pass": true,
-      "detail": "39 meshes, 12228 verts, 24300 tris"
+      "detail": "42 meshes, 12378 verts, 24588 tris"
     },
     {
       "check": "materials_present",
@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "660224 bytes"
+      "detail": "666324 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -140,7 +140,7 @@
     {
       "check": "skin_in_glb",
       "pass": true,
-      "detail": "1 skins, 39 skinned primitives"
+      "detail": "1 skins, 42 skinned primitives"
     },
     {
       "check": "armature_present",
@@ -180,8 +180,8 @@
   ],
   "summary": {
     "valid": true,
-    "bytes": 660224,
-    "meshes": 39,
+    "bytes": 666324,
+    "meshes": 42,
     "mesh_nodes": [
       "Ear_L",
       "Ear_R",
@@ -200,6 +200,9 @@
       "HairTuft_3",
       "HairTuft_4",
       "HairTuft_5",
+      "HairTuft_6",
+      "HairTuft_7",
+      "HairTuft_8",
       "Hand_L",
       "Hand_R",
       "Head",
@@ -223,8 +226,8 @@
       "UpperArm_L",
       "UpperArm_R"
     ],
-    "vertices": 12228,
-    "triangles": 24300,
+    "vertices": 12378,
+    "triangles": 24588,
     "materials": [
       "Brow",
       "EyeWhite",
@@ -258,7 +261,7 @@
       "upper_arm.L",
       "upper_arm.R"
     ],
-    "skinned_primitives": 39,
+    "skinned_primitives": 42,
     "generator": "Khronos glTF Blender I/O v4.2.70"
   },
   "dimensions_m": {

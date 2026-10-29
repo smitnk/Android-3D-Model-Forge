@@ -1,6 +1,6 @@
 {
   "generator": "chibi_humanoid",
-  "generator_version": "0.1.0",
+  "generator_version": "0.1.1",
   "blender": "4.2.3 LTS",
   "name": "Forge Kid",
   "slug": "forge-kid",
@@ -11,9 +11,9 @@
     "shorts": "#2F4A8A",
     "shoes": "#F4F1EA"
   },
-  "parts": 39,
-  "triangles": 24300,
-  "vertices": 12228,
+  "parts": 42,
+  "triangles": 24588,
+  "vertices": 12378,
   "materials": [
     "Brow",
     "EyeWhite",
@@ -70,7 +70,7 @@
         "frame_extent": [
           0.308,
           0.74,
-          0.187,
+          0.188,
           0.832
         ]
       }
