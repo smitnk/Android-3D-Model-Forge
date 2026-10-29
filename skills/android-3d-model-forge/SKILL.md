@@ -10,8 +10,9 @@ compatibility: Requires a GitHub repository with Actions enabled (ubuntu-24.04 r
 Procedural 3D asset generation with Blender's Python API (`bpy`), executed in the cloud by
 GitHub Actions. No local Blender, PC, API key, MCP server or paid service is needed.
 
-**What works today:** two deterministic, rigged generators — `chibi_humanoid` (dressed, multi-part,
-rigid skinning) and `clay_chibi` (one-piece metaball sculpt base mesh, blended skinning) — with colour options, GLB + BLEND export, Cycles CPU preview renders, and automated
+**What works today:** three deterministic, rigged generators — `chibi_humanoid` (dressed, multi-part,
+rigid skinning), `clay_chibi` (one-piece metaball sculpt base mesh, blended skinning) and `gorilla`
+(metaball fur + skin layers, eyes/nostrils/tufts as parts, blended skinning) — with colour options, GLB + BLEND export, Cycles CPU preview renders, and automated
 validation (container, geometry, materials, scale, grounding, symmetry, T-pose, skeleton).
 
 **What does not exist yet:** image-to-3D or AI reconstruction, creatures, props, clothing
@@ -23,6 +24,8 @@ variants, smooth (blended) joint weights. Never claim these work until implement
 |---|---|
 | `scripts/generate_model.py` | Builds the character in Blender, rigs it, runs self-checks, exports |
 | `scripts/clay_chibi.py` | `clay_chibi` generator: metaball body/head, carved eye sockets, bone layout |
+| `scripts/gorilla.py` | `gorilla` generator, built with the blender-kiln reference-fidelity method |
+| `skills/blender-kiln/` | Vendored MIT skill (elithril/blender-kiln); read `references/reference-fidelity.md` for image references |
 | `scripts/export_model.py` | GLB/BLEND export and preview rendering helpers |
 | `scripts/validate_model.py` | Re-imports the GLB in a clean scene and runs all checks; exit 1 on failure |
 | `scripts/glb_inspect.py` | Pure-Python GLB parser (no Blender) |
@@ -123,7 +126,10 @@ all meshes bound, rest-pose arm bones horizontal and leg bones vertical. Output:
 
 ## Building a model from a reference image
 
-1. Measure the reference as fractions of total height H: head top/chin, shoulder (arm) line, crotch, boot height,
+0. Follow `skills/blender-kiln/references/reference-fidelity.md`: write a detail inventory (detail → part) in the
+   generator's docstring before modeling (see `scripts/gorilla.py`).
+1. Measure the reference as fractions of total height H (from the image's pixels — mask the background and read
+   the widths per height row, do not eyeball): head top/chin, shoulder (arm) line, crotch, boot height,
    head width, arm reach. Convert with H ≈ 1.3 m.
 2. Organic one-piece characters: copy the `clay_chibi.py` pattern — metaball `ellipsoid`/`capsule`/`ball`/`box`
    elements given as **surface** radii, separate metaball families for parts that must not blend (head vs body),

@@ -15,6 +15,13 @@ No PC, no local Blender, no API keys, no paid services.
   <img src="docs/preview/clay-chibi-three-quarter.png" width="31%" alt="Clay Chibi, three-quarter view">
   <img src="docs/preview/clay-chibi-back.png" width="31%" alt="Clay Chibi, back view">
 </p>
+<p align="center">
+  <img src="docs/preview/gorilla-front.png" width="31%" alt="Gorilla, front view, T-pose">
+  <img src="docs/preview/gorilla-three-quarter.png" width="31%" alt="Gorilla, three-quarter view">
+  <img src="docs/preview/gorilla-back.png" width="31%" alt="Gorilla, back view">
+</p>
+<p align="center"><i>"Gorilla" (<code>gorilla</code>) — built from a reference turnaround with the blender-kiln reference-fidelity method.</i></p>
+
 <p align="center"><i>"Clay Chibi" (<code>clay_chibi</code>) — a one-piece, sculpt-style base mesh with carved eye sockets, fingers and block boots.</i></p>
 
 ## Download the example models
@@ -22,6 +29,7 @@ No PC, no local Blender, no API keys, no paid services.
 | Model | GLB (rigged, for viewers/engines) | BLEND (editable) | Report |
 |---|---|---|---|
 | Forge Kid | [forge-kid.glb](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.glb) | [forge-kid.blend](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.blend) | [report](docs/preview/forge-kid-REPORT.md) |
+| Gorilla | [gorilla.glb](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.glb) | [gorilla.blend](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.blend) | [report](docs/preview/gorilla-REPORT.md) |
 | Clay Chibi | [clay-chibi.glb](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.glb) | [clay-chibi.blend](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.blend) | [report](docs/preview/clay-chibi-REPORT.md) |
 
 These files live on the [`model-latest` Release](https://github.com/smitnk/Android-3D-Model-Forge/releases/tag/model-latest)
@@ -29,7 +37,9 @@ and are replaced each time a new model is published.
 
 ## Features
 
-- **Two generators**, picked with the `model_type` option:
+- **Three generators**, picked with the `model_type` option:
+  - `gorilla` — stylised cartoon gorilla: fur body, light skin muzzle/chest/belly/hands/feet with fingers and toes,
+    big eyes, hair tuft. Proportions measured from a reference image.
   - `clay_chibi` — one-piece sculpt-style base mesh built from metaballs: big round head with carved angry eye sockets
     and a pointed nose, slim body, fingers, flared legs and block boots, blended skin weights.
   - `chibi_humanoid` — dressed cartoon character — oversized head, face (eyes, pupils, brows, nose, mouth, ears),
@@ -48,7 +58,7 @@ and are replaced each time a new model is published.
 1. Open this repository in your phone's browser (Chrome works; tap **⋮ → Desktop site** if a button is hidden).
 2. Tap the **Actions** tab.
 3. Tap **Generate 3D Model** (on mobile you may need to tap **All workflows** first).
-4. Tap **Run workflow**. Pick a **model type** (`chibi_humanoid` or `clay_chibi`). Change the name or colours if you like (colours are `#RRGGBB`, e.g. `#2E9E5B`).
+4. Tap **Run workflow**. Pick a **model type** (`chibi_humanoid`, `clay_chibi` or `gorilla`). Change the name or colours if you like (colours are `#RRGGBB`, e.g. `#2E9E5B`).
    Tick **publish** if you want it to replace the example above. Tap the green **Run workflow** button.
 5. Wait 3–6 minutes. Refresh; when the run shows a green ✓, tap it.
 6. The **Summary** page shows the model report. Scroll down to **Artifacts** and tap `model-<number>`.
@@ -102,6 +112,13 @@ frontmatter + `references/`). Copy the folder into your agent's skills directory
 `.claude/skills/`), or simply tell any coding agent to read it. It needs no MCP server or API key.
 See [the skill README](skills/android-3d-model-forge/README.md).
 
+## Vendored skill: blender-kiln
+
+[`skills/blender-kiln`](skills/blender-kiln/VENDORED.md) is a copy of the MIT-licensed
+[elithril/blender-kiln](https://github.com/elithril/blender-kiln) 3D-asset pipeline skill. It normally drives Blender
+through a Blender MCP add-on on a PC; here we use its **reference-fidelity** method (inventory → measure the
+silhouette → attach every part → review against the reference) inside the cloud workflow. See `VENDORED.md`.
+
 ## Add a new model type
 
 1. In `scripts/generate_model.py`, add the type to `--model-type` choices and write a `build_<type>()` that returns
@@ -126,7 +143,7 @@ Details: [modeling guidelines](skills/android-3d-model-forge/references/modeling
 
 ## Known limitations and plans
 
-- Two generators so far (`chibi_humanoid`, `clay_chibi`). Creatures, props and clothing variants are planned.
+- Three generators so far (`chibi_humanoid`, `clay_chibi`, `gorilla`). Fur is a smooth stylised surface, not hair strands. Creatures, props and clothing variants are planned.
 - `chibi_humanoid` skinning is **rigid per part** (each part follows one bone); `clay_chibi` uses blended
   distance-based weights, which bend more smoothly but are not hand-painted production weights.
 - No image-to-3D / AI reconstruction yet. It will be an optional integration and won't be claimed until tested.
