@@ -22,10 +22,12 @@ CENTRAL = ["Head", "Hair", "Nose", "Mouth", "Neck", "Torso", "Shorts"]
 EXPECTED_PARTS = {
     "chibi_humanoid": CENTRAL + [f"{p}_{s}" for p in SIDED for s in ("L", "R")],
     "clay_chibi": ["Head", "Body"],
+    "gorilla": ["Fur", "Skin", "Eye_L", "Eye_R", "Pupil_L", "Pupil_R", "Nostril_L", "Nostril_R"],
 }
+HEAD_RATIO = {"chibi_humanoid": 0.3, "clay_chibi": 0.3, "gorilla": 0.2}  # min head+neck above shoulders / height
 EXPECTED_BONES = ["root", "pelvis", "spine", "neck", "head"] + [
     f"{b}.{s}" for b in ("upper_arm", "forearm", "hand", "thigh", "shin", "foot") for s in ("L", "R")]
-MIN_MATERIALS = {"chibi_humanoid": 5, "clay_chibi": 1}
+MIN_MATERIALS = {"chibi_humanoid": 5, "clay_chibi": 1, "gorilla": 4}
 MAX_ARM_ANGLE_DEG = 8.0   # T-pose: arms within 8 degrees of horizontal (an A-pose is ~30-45)
 
 
@@ -117,7 +119,7 @@ def main():
     for o in meshes.values():
         ev = o.evaluated_get(dg)
         pts += [ev.matrix_world @ v.co for v in ev.data.vertices]
-    geometry_tpose(c, pts, height)
+    geometry_tpose(c, pts, height, HEAD_RATIO[a.model_type])
 
     # 3b. Part-level T-pose checks (multi-part generators only).
     if a.model_type == "chibi_humanoid" and not missing:
@@ -178,13 +180,13 @@ def _mean(pts):
     return sum(pts, Vector()) / len(pts) if pts else None
 
 
-def geometry_tpose(c, pts, height):
+def geometry_tpose(c, pts, height, head_ratio):
     arm_angles = {}
     for s, sign in (("L", 1), ("R", -1)):
         side = [p for p in pts if p.x * sign > 0]
         reach = max(abs(p.x) for p in side)
         bands = [_mean([p for p in side if lo_ <= abs(p.x) <= hi_]) for lo_, hi_ in
-                 ((0.31, 0.36), (0.38, 0.43), (0.85 * reach, reach))]  # arm bands outside head/hair width
+                 ((0.55 * reach, 0.65 * reach), (0.70 * reach, 0.80 * reach), (0.88 * reach, reach))]  # bands relative to reach
         if None in bands:
             c.add(f"geom_tpose_arm_{s}", False, "no geometry in arm bands")
             continue
@@ -192,14 +194,14 @@ def geometry_tpose(c, pts, height):
         arm_angles[s] = (ang, bands)
         c.add(f"geom_tpose_arm_{s}", ang <= MAX_ARM_ANGLE_DEG,
               f"forearm/hand {ang:.2f} deg from horizontal vs upper arm (max {MAX_ARM_ANGLE_DEG})")
-        thin = [p for p in side if 0.31 <= abs(p.x) <= 0.43]
+        thin = [p for p in side if 0.55 * reach <= abs(p.x) <= 0.80 * reach]
         zs = max(p.z for p in thin) - min(p.z for p in thin)
         c.add(f"geom_arm_is_limb_{s}", zs < 0.15 * height, f"arm band vertical thickness {zs:.3f} m")
-        leg = sorted((p for p in side if 0.10 <= p.z <= 0.35), key=lambda p: p.z)
+        leg = sorted((p for p in side if 0.07 * height <= p.z <= 0.25 * height), key=lambda p: p.z)
         low, mid = leg[:len(leg) // 2], leg[len(leg) // 2:]  # split at median height (works for sparse meshes)
         if low and mid:
             dx = abs(_mean(low).x - _mean(mid).x)
-            c.add(f"geom_leg_vertical_{s}", dx < 0.04, f"leg centre drift {dx:.4f} m between lower and upper leg")
+            c.add(f"geom_leg_vertical_{s}", dx < 0.03 * height, f"leg centre drift {dx:.4f} m between lower and upper leg")
         else:
             c.add(f"geom_leg_vertical_{s}", False, "no leg geometry found")
         foot = [p for p in side if p.z <= 0.03]
@@ -213,7 +215,7 @@ def geometry_tpose(c, pts, height):
         c.add("geom_left_right_symmetry", err < 0.01 * height, f"hand mirror error {err:.5f} m")
         shoulder_z = (arm_angles["L"][1][0].z + arm_angles["R"][1][0].z) / 2
         top = max(p.z for p in pts)
-        c.add("geom_chibi_head", top - shoulder_z > 0.3 * height,
+        c.add("geom_head_size", top - shoulder_z > head_ratio * height,
               f"head+neck above shoulders = {100 * (top - shoulder_z) / height:.0f}% of height")
         upper = [p for p in pts if p.z > shoulder_z]
         front = min(upper, key=lambda p: p.y)

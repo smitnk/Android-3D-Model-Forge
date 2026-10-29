@@ -20,10 +20,11 @@ from mathutils import Euler, Matrix, Vector
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import clay_chibi  # noqa: E402
+import gorilla  # noqa: E402
 import export_model  # noqa: E402
 
 GENERATOR_VERSION = "0.2.0"
-DEFAULT_NAMES = {"chibi_humanoid": "Forge Kid", "clay_chibi": "Clay Chibi"}
+DEFAULT_NAMES = {"chibi_humanoid": "Forge Kid", "clay_chibi": "Clay Chibi", "gorilla": "Gorilla"}
 
 # --- T-pose construction parameters (the validator re-checks these on the exported GLB) ---
 SHOULDER_Z = 0.645
@@ -55,7 +56,7 @@ def parse_args():
     p.add_argument("--model-type", default="chibi_humanoid", choices=list(DEFAULT_NAMES))
     p.add_argument("--name", default="")
     p.add_argument("--skin", default="", help="skin/clay colour; empty = type default")
-    p.add_argument("--hair", default="#3B2417")
+    p.add_argument("--hair", default="", help="hair/fur colour; empty = type default")
     p.add_argument("--shirt", default="#E8553D")
     p.add_argument("--shorts", default="#2F4A8A")
     p.add_argument("--shoes", default="#F4F1EA")
@@ -158,14 +159,14 @@ def part(name, kind, size, loc, mat, bone, rot=(0, 0, 0), taper=1.0, bevel=0.0,
 def build_character(a):
     M = {
         "Skin": material("Skin", a.skin or "#F2C9A0", 0.55),
-        "Hair": material("Hair", a.hair, 0.45),
+        "Hair": material("Hair", a.hair or "#3B2417", 0.45),
         "Shirt": material("Shirt", a.shirt, 0.7),
         "Shorts": material("Shorts", a.shorts, 0.7),
         "Shoe": material("Shoe", a.shoes, 0.5),
         "Sole": material("Sole", "#3A3A3A", 0.8),
         "EyeWhite": material("EyeWhite", "#FFFFFF", 0.3),
         "Pupil": material("Pupil", "#1B1B2A", 0.15),
-        "Brow": material("Brow", a.hair, 0.6),
+        "Brow": material("Brow", a.hair or "#3B2417", 0.6),
         "Mouth": material("Mouth", "#8E2B2B", 0.5),
     }
     P = []
@@ -331,7 +332,7 @@ def tpose_selfcheck(parts):
     for s, sign in (("L", 1), ("R", -1)):
         side = [p for p in pts if p.x * sign > 0]
         reach = max(abs(p.x) for p in side)
-        root = _centroid([p for p in side if 0.31 <= abs(p.x) <= 0.38])  # outside head/hair width
+        root = _centroid([p for p in side if 0.55 * reach <= abs(p.x) <= 0.65 * reach])  # outside head/torso width
         hand = _centroid([p for p in side if abs(p.x) >= 0.85 * reach])
         res[f"arm_angle_deg_{s}"] = round(math.degrees(math.atan2(abs(hand.z - root.z), abs(hand.x - root.x))), 3)
     res["pass"] = all(v <= 5.0 for v in res.values())
@@ -346,6 +347,8 @@ def main():
     reset_scene()
     if a.model_type == "clay_chibi":
         parts, bone_list = clay_chibi.build(a, material), clay_chibi.bones()
+    elif a.model_type == "gorilla":
+        parts, bone_list = gorilla.build(a, material, part), gorilla.bones()
     else:
         parts, bone_list = build_character(a), BONES
     rig = None if a.no_rig else build_rig(parts, bone_list)
@@ -372,7 +375,7 @@ def main():
     info = {
         "generator": a.model_type, "generator_version": GENERATOR_VERSION,
         "blender": bpy.app.version_string, "name": a.name, "slug": slug,
-        "colors": {"skin": a.skin or "default", "hair": a.hair, "shirt": a.shirt, "shorts": a.shorts, "shoes": a.shoes},
+        "colors": {"skin": a.skin or "default", "hair": a.hair or "default", "shirt": a.shirt, "shorts": a.shorts, "shoes": a.shoes},
         "parts": len(parts), "triangles": tris,
         "vertices": sum(len(o.data.vertices) for o in parts),
         "materials": sorted({o.data.materials[0].name for o in parts}),

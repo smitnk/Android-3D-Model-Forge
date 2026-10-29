@@ -6,7 +6,7 @@ on:
       model_type:
         description: "Model type"
         type: choice
-        options: [chibi_humanoid, clay_chibi]
+        options: [chibi_humanoid, clay_chibi, gorilla]
         default: chibi_humanoid
       character_name:
         description: "Character name for file names (empty = Forge Kid / Clay Chibi)"
@@ -17,9 +17,9 @@ on:
         type: string
         default: ""
       hair_color:
-        description: "Hair colour (#RRGGBB)"
+        description: "Hair / fur colour (#RRGGBB, empty = type default)"
         type: string
-        default: "#3B2417"
+        default: ""
       shirt_color:
         description: "Shirt colour (#RRGGBB)"
         type: string
@@ -62,7 +62,7 @@ jobs:
       fail-fast: false
       max-parallel: 1   # publish steps commit to the same branch; run one model at a time
       matrix:
-        model_type: ${{ fromJSON(github.event_name == 'push' && '["chibi_humanoid","clay_chibi"]' || format('["{0}"]', inputs.model_type)) }}
+        model_type: ${{ fromJSON(github.event_name == 'push' && '["chibi_humanoid","clay_chibi","gorilla"]' || format('["{0}"]', inputs.model_type)) }}
     steps:
       - uses: actions/checkout@v4
 
