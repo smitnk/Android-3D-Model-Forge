@@ -22,14 +22,14 @@ CENTRAL = ["Head", "Hair", "Nose", "Mouth", "Neck", "Torso", "Shorts"]
 EXPECTED_PARTS = {
     "chibi_humanoid": CENTRAL + [f"{p}_{s}" for p in SIDED for s in ("L", "R")],
     "clay_chibi": ["Head", "Body"],
-    "gorilla": ["Fur", "Skin", "Eye_L", "Eye_R", "Pupil_L", "Pupil_R", "Nostril_L", "Nostril_R"],
+    "gorilla": ["Body"],
 }
 # max arm thickness / height; gorilla arms measure ~0.15 H in the reference plus fur tufts
 LIMB_RATIO = {"chibi_humanoid": 0.15, "clay_chibi": 0.15, "gorilla": 0.22}
 HEAD_RATIO = {"chibi_humanoid": 0.3, "clay_chibi": 0.3, "gorilla": 0.2}  # min head+neck above shoulders / height
 EXPECTED_BONES = ["root", "pelvis", "spine", "neck", "head"] + [
     f"{b}.{s}" for b in ("upper_arm", "forearm", "hand", "thigh", "shin", "foot") for s in ("L", "R")]
-MIN_MATERIALS = {"chibi_humanoid": 5, "clay_chibi": 1, "gorilla": 4}
+MIN_MATERIALS = {"chibi_humanoid": 5, "clay_chibi": 1, "gorilla": 2}
 MAX_ARM_ANGLE_DEG = 8.0   # T-pose: arms within 8 degrees of horizontal (an A-pose is ~30-45)
 
 

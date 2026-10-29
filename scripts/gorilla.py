@@ -1,170 +1,153 @@
-"""'gorilla' generator: stylised cartoon gorilla in T-pose (Blender, headless).
+"""'gorilla' generator: carved from the owner's turnaround sheet and textured with the drawing itself.
 
-Built with the blender-kiln reference-fidelity method (skills/blender-kiln/references/reference-fidelity.md):
-detail inventory first, proportions MEASURED from the reference silhouette (fractions of height H),
-every part entering the part it joins.
-
-Inventory (reference: front + back turnaround sheet)
-- fur body: dome head with brow ridge, huge shoulders/traps, barrel chest, belly, glutes  -> Fur
-- arms: very long (span 1.08 H), thick upper arm, muscular forearm, horizontal (T-pose)   -> Fur
-- legs: short and thick (crotch at 0.32 H), slightly apart                                -> Fur
-- light skin: big muzzle, eye mask, ears, pec plates + belly, hands with fingers, feet with toes -> Skin
-- eyes: big white ovals, small black pupils looking forward                               -> Eye_*, Pupil_*
-- nose: two nostrils on a soft bump; small pursed lips                                     -> Skin, Nostril_*
-- hair tuft on top of the head                                                            -> HairTuft_*
-- jagged fur tufts on the silhouette of shoulders, arms, thighs, calves (all views)            -> Tufts_*
-Measured from the 360 turnaround (side view): body depth ~0.40 H with the belly pushed forward,
-head depth ~0.24 H including a muzzle that sticks out past the face. Fur #4C4054, skin #8C8192 (rendered darker to match: #3E3447 / #7E7286).
-Measured (H = 1.5 m): shoulder line 0.70 H, hand reach 0.52 H from centre, chest half-width 0.20 H,
-waist half-width 0.10 H, hips 0.14 H, leg centres +-0.11 H, feet 0.23 H wide, head top 0.97 H.
+Method (img2threejs, skills/img2threejs): reconstruct the object from the reference rather than by eye.
+  1. Shape  - visual hull (scripts/hull.py): T-pose front silhouette x side-view depth profile, with
+              rounded cross-sections per row and per column so limbs are round, at 1 cm voxels.
+  2. Surface - voxel remesh + smoothing in Blender -> clean, evenly spaced quads (like the sheet's wireframe).
+  3. Look   - the T-pose front and back panels are projected onto the faces that face them
+              (front panel on -Y faces, mirrored back panel on +Y faces), so fur, face, chest and toes
+              are the drawing's own pixels.
+  4. Rig    - bones placed from measurements of the carved volume (shoulder line, reach, crotch, legs).
+Inventory (blender-kiln reference-fidelity): dome head + tuft, ears, muzzle, eyes, nostrils, pursed mouth,
+pec/belly plates, furry shoulders/arms/legs with jagged edges, hands with fingers, wide feet with toes.
+Concavities no silhouette shows (eye sockets, mouth) are carried by the texture, not the geometry.
+Reference images: assets/reference/gorilla/ (owner-supplied).
 """
-import math
+import os
 
-import bmesh
 import bpy
-from mathutils import Matrix, Vector
+import numpy as np
+from mathutils import Vector
 
-from clay_chibi import Meta
+import hull
 
-SHOULDER_Z = 1.05
+HEIGHT = 1.5
+VOXEL = 0.01
+REF = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "reference", "gorilla")
+M = {}  # measurements of the carved volume, filled by build(), used by bones()
+
+
+def load_rgba(name):
+    img = bpy.data.images.load(os.path.join(REF, name), check_existing=True)
+    w, h = img.size
+    px = np.array(img.pixels[:], dtype=np.float32).reshape(h, w, 4)[::-1]  # row 0 = top
+    return img, px
+
+
+def symmetric(mask):
+    """T-pose policy: mirror the drawn silhouette about its bounding-box centre (drawings are never exact)."""
+    cols = np.where(mask.any(0))[0]
+    out = np.zeros_like(mask)
+    sub = mask[:, cols.min():cols.max() + 1]
+    out[:, cols.min():cols.max() + 1] = sub | sub[:, ::-1]
+    return out
+
+
+def projector(mask):
+    """Front-panel pixel coords for a world point: returns (cx, bottom_row, metres_per_px, w, h)."""
+    rows = np.where(mask.any(1))[0]
+    cols = np.where(mask.any(0))[0]
+    return (cols.min() + cols.max()) / 2.0, rows.max(), HEIGHT / (rows.max() - rows.min() + 1), mask.shape[1], mask.shape[0]
+
+
+def measure(occ, origin):
+    nx, ny, nz = occ.shape
+    xs = origin[0] + (np.arange(nx) + 0.5) * VOXEL
+    zs = origin[2] + (np.arange(nz) + 0.5) * VOXEL
+    width = np.array([np.ptp(xs[occ[:, :, k].any(1)]) if occ[:, :, k].any() else 0 for k in range(nz)])
+    M["shoulder_z"] = float(zs[np.argmax(width)])
+    M["reach"] = float(np.abs(xs[occ.any((1, 2))]).max())
+    centre = np.argmin(np.abs(xs))
+    filled = np.where(occ[centre].any(0))[0]
+    M["crotch_z"] = float(zs[filled.min()])
+    k = int(filled.min() * 0.5)
+    right = occ[:, :, k].any(1) & (xs > 0)
+    M["leg_x"] = float(xs[right].mean())
+    M["top_z"] = float(zs[np.where(occ.any((0, 1)))[0].max()])
 
 
 def bones():
+    sz, r, cz, lx, top = M["shoulder_z"], M["reach"], M["crotch_z"], M["leg_x"], M["top_z"]
+    neck = sz + 0.08
     b = [("root", (0, 0, 0), (0, 0, 0.12), None),
-         ("pelvis", (0, 0, 0.45), (0, 0, 0.62), "root"),
-         ("spine", (0, 0, 0.62), (0, 0, SHOULDER_Z), "pelvis"),
-         ("neck", (0, 0, SHOULDER_Z), (0, 0, 1.15), "spine"),
-         ("head", (0, 0, 1.15), (0, 0, 1.48), "neck")]
+         ("pelvis", (0, 0, cz), (0, 0, cz + 0.15), "root"),
+         ("spine", (0, 0, cz + 0.15), (0, 0, sz), "pelvis"),
+         ("neck", (0, 0, sz), (0, 0, neck), "spine"),
+         ("head", (0, 0, neck), (0, 0, top), "neck")]
     for s, x in (("L", 1), ("R", -1)):
-        b += [(f"upper_arm.{s}", (0.22 * x, 0, SHOULDER_Z), (0.48 * x, 0, SHOULDER_Z), "spine"),
-              (f"forearm.{s}", (0.48 * x, 0, SHOULDER_Z), (0.66 * x, 0, SHOULDER_Z), f"upper_arm.{s}"),
-              (f"hand.{s}", (0.66 * x, 0, SHOULDER_Z), (0.79 * x, 0, SHOULDER_Z), f"forearm.{s}"),
-              (f"thigh.{s}", (0.15 * x, 0, 0.50), (0.16 * x, 0, 0.28), "pelvis"),
-              (f"shin.{s}", (0.16 * x, 0, 0.28), (0.17 * x, 0, 0.08), f"thigh.{s}"),
-              (f"foot.{s}", (0.17 * x, 0, 0.08), (0.17 * x, -0.20, 0.03), f"shin.{s}")]
+        b += [(f"upper_arm.{s}", (0.2 * x, 0, sz), (0.55 * r * x, 0, sz), "spine"),
+              (f"forearm.{s}", (0.55 * r * x, 0, sz), (0.84 * r * x, 0, sz), f"upper_arm.{s}"),
+              (f"hand.{s}", (0.84 * r * x, 0, sz), (r * x, 0, sz), f"forearm.{s}"),
+              (f"thigh.{s}", (lx * x, 0, cz + 0.05), (lx * x, 0, cz * 0.5), "pelvis"),
+              (f"shin.{s}", (lx * x, 0, cz * 0.5), (lx * x, 0, 0.08), f"thigh.{s}"),
+              (f"foot.{s}", (lx * x, 0, 0.08), (lx * x, -0.18, 0.03), f"shin.{s}")]
     return b
 
 
-def tuft_ring(bm, a, b, radius, rings, per_ring, length, start=0.0, skip=None):
-    """Add fur-tuft cones around the segment a->b: base sinks into the fur, tips point outward and
-    lean toward b (fur hangs toward the extremity). `skip(theta)` leaves gaps, e.g. where skin shows."""
-    a, b = Vector(a), Vector(b)
-    axis = (b - a).normalized()
-    u = axis.orthogonal().normalized()
-    v = axis.cross(u)
-    for i in range(rings):
-        t = (i + 0.5) / rings
-        c = a + (b - a) * t
-        for j in range(per_ring):
-            th = 2 * math.pi * (j + 0.5 * (i % 2)) / per_ring + start  # staggered rings
-            if skip and skip(th, u, v):
-                continue
-            radial = u * math.cos(th) + v * math.sin(th)
-            # a flat lock: lies close to the surface, leans toward b and hangs down (gravity in a T-pose)
-            d = (radial * 0.45 + axis * 0.6 + Vector((0, 0, -0.45))).normalized()
-            tangent = d.cross(radial).normalized()
-            normal = tangent.cross(d)
-            basis = Matrix((tangent, normal, d)).transposed().to_4x4()
-            m = (Matrix.Translation(c + radial * radius * 0.86 + d * length * 0.45)
-                 @ basis @ Matrix.Diagonal((0.075, 0.022, length, 1)))
-            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
-                                  radius1=0.5, radius2=0.0, depth=1.0, matrix=m)
-
-
-def tuft_object(name, bone, mat, fn):
-    bm = bmesh.new()
-    fn(bm)
-    me = bpy.data.meshes.new(name)
-    bm.to_mesh(me)
-    bm.free()
-    obj = bpy.data.objects.new(name, me)
-    bpy.context.scene.collection.objects.link(obj)
-    for poly in me.polygons:
-        poly.use_smooth = True
-    me.materials.append(mat)
-    obj["bone"] = bone
-    return obj
+def textured_material(name, img):
+    m = bpy.data.materials.new(name)
+    m.use_nodes = True
+    nt = m.node_tree
+    tex = nt.nodes.new("ShaderNodeTexImage")
+    tex.image = img
+    bsdf = nt.nodes["Principled BSDF"]
+    nt.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
+    bsdf.inputs["Roughness"].default_value = 0.85
+    return m
 
 
 def build(a, material, part):
-    fur_m = material("Fur", a.hair or "#3E3447", 0.85)
-    skin_m = material("Skin", a.skin or "#7E7286", 0.6)
-    eye_m = material("EyeWhite", "#FFFFFF", 0.3)
-    pupil_m = material("Pupil", "#121018", 0.15)
-    dark_m = material("Nostril", "#2A2433", 0.6)
+    front_img, front_px = load_rgba("tpose-front.png")
+    back_img, back_px = load_rgba("tpose-back.png")
+    _, side_px = load_rgba("side-right.png")
+    front = symmetric(front_px[..., 3] > 0.5)
+    side = side_px[..., 3] > 0.5
 
-    fur = Meta("FurMeta", 0.011)
-    fur.ellipsoid((0, 0.04, 1.28), 0.135, 0.15, 0.185)        # dome head, high at the back
-    fur.capsule((-0.085, -0.10, 1.355), (0.085, -0.10, 1.355), 0.03)  # brow ridge
-    fur.ellipsoid((0, 0.06, 1.12), 0.26, 0.2, 0.12)           # trapezius / hunched shoulder mass
-    fur.ellipsoid((0, 0.0, 0.95), 0.29, 0.25, 0.18)           # barrel chest (side view: deep)
-    fur.ellipsoid((0, -0.02, 0.74), 0.2, 0.25, 0.16)          # belly core, pushed forward
-    fur.ellipsoid((0, 0.03, 0.55), 0.22, 0.2, 0.13)           # hips
-    for x in (1, -1):
-        fur.ellipsoid((0.10 * x, 0.15, 0.52), 0.115, 0.1, 0.13)        # glutes
-        fur.ellipsoid((0.24 * x, 0.01, SHOULDER_Z + 0.03), 0.13, 0.12, 0.13)  # bulky deltoid
-        fur.ellipsoid((0.38 * x, 0, SHOULDER_Z), 0.15, 0.09, 0.085)   # thick upper arm
-        fur.ellipsoid((0.56 * x, 0, SHOULDER_Z - 0.005), 0.12, 0.075, 0.07)  # forearm
-        fur.ellipsoid((0.15 * x, 0, 0.37), 0.13, 0.12, 0.14)          # thigh
-        fur.ellipsoid((0.165 * x, 0, 0.20), 0.135, 0.125, 0.12)       # calf (enters the foot)
-    fur_obj = fur.to_mesh_object("Fur", 0.3)
+    occ, origin, _ = hull.carve(front, side, HEIGHT, VOXEL)
+    measure(occ, origin)
+    verts, quads = hull.boundary_quads(occ, origin, VOXEL)
 
-    skin = Meta("SkinMeta", 0.0075)
-    skin.ellipsoid((0, -0.13, 1.17), 0.15, 0.13, 0.11)        # big muzzle, protruding (side view)
-    skin.ellipsoid((0, -0.10, 1.30), 0.10, 0.06, 0.07)        # eye mask
-    skin.ball((0, -0.235, 1.225), 0.035)                      # nose bump
-    skin.ball((0.012, -0.255, 1.115), 0.024)                  # pursed lips
-    for x in (1, -1):
-        skin.ellipsoid((0.135 * x, 0.0, 1.28), 0.03, 0.05, 0.06)     # ears
-        skin.ellipsoid((0.10 * x, -0.2, 0.965), 0.115, 0.07, 0.1)    # pec plates (touch the belly)
-        # hand: palm entering the forearm, four fingers pointing outward, thumb forward
-        skin.ellipsoid((0.695 * x, -0.005, SHOULDER_Z), 0.075, 0.065, 0.055)
-        for z in (-0.036, -0.012, 0.012, 0.036):
-            skin.capsule((0.74 * x, -0.012, SHOULDER_Z + z), (0.80 * x, -0.025, SHOULDER_Z + z * 1.1), 0.02)
-        skin.capsule((0.68 * x, -0.055, SHOULDER_Z - 0.01), (0.72 * x, -0.1, SHOULDER_Z - 0.035), 0.024)
-        # foot: wide sole with a row of toes at the front (toe toward -Y)
-        skin.ellipsoid((0.19 * x, -0.05, 0.055), 0.12, 0.17, 0.06)     # inner edges stay apart
-        for i, dx in enumerate((-0.075, -0.025, 0.025, 0.075)):
-            skin.ball(((0.19 + dx) * x, -0.20 + 0.012 * abs(i - 1.5), 0.04), 0.034)
-        skin.ball(((0.19 + 0.125) * x, -0.08, 0.045), 0.04)            # big toe on the outer side
-    skin.ellipsoid((0, -0.2, 0.76), 0.17, 0.1, 0.17)          # round belly plate (blends with the pecs)
-    skin_obj = skin.to_mesh_object("Skin", 0.35)
+    me = bpy.data.meshes.new("Body")
+    me.from_pydata(verts.tolist(), [], quads.tolist())
+    obj = bpy.data.objects.new("Body", me)
+    bpy.context.scene.collection.objects.link(obj)
+    rem = obj.modifiers.new("remesh", "REMESH")  # voxel stairs -> even quads
+    rem.mode, rem.voxel_size = "VOXEL", 0.012
+    sm = obj.modifiers.new("smooth", "SMOOTH")
+    sm.factor, sm.iterations = 0.8, 6
+    dg = bpy.context.evaluated_depsgraph_get()
+    baked = bpy.data.meshes.new_from_object(obj.evaluated_get(dg))
+    obj.modifiers.clear()
+    old, obj.data = obj.data, baked
+    bpy.data.meshes.remove(old)
+    baked.name = "Body"
+    me = obj.data
 
-    parts = [fur_obj, skin_obj]
-    for s, x in (("L", 1), ("R", -1)):
-        parts.append(part(f"Eye_{s}", "sphere", (0.075, 0.035, 0.095), (0.045 * x, -0.157, 1.31), eye_m, "head",
-                          segments=24))
-        parts.append(part(f"Pupil_{s}", "sphere", (0.02, 0.012, 0.022), (0.04 * x, -0.174, 1.305), pupil_m, "head",
-                          segments=12))
-        parts.append(part(f"Nostril_{s}", "sphere", (0.022, 0.014, 0.016), (0.02 * x, -0.264, 1.222), dark_m, "head",
-                          segments=12))
-    # Fur tufts: one rigid mesh per bone (the jagged outline of the reference)
-    for s, x in (("L", 1), ("R", -1)):
-        z = SHOULDER_Z
-        parts.append(tuft_object(f"Tufts_Shoulder_{s}", f"upper_arm.{s}", fur_m, lambda bm, x=x, z=z: tuft_ring(
-            bm, (0.16 * x, 0.01, z + 0.03), (0.30 * x, 0.01, z + 0.03), 0.12, 2, 12, 0.07,
-            skip=lambda th, u, v: math.sin(th) * v.z + math.cos(th) * u.z < -0.3)))  # not underneath
-        parts.append(tuft_object(f"Tufts_UpperArm_{s}", f"upper_arm.{s}", fur_m, lambda bm, x=x, z=z: tuft_ring(
-            bm, (0.30 * x, 0, z), (0.48 * x, 0, z), 0.085, 4, 13, 0.07)))
-        parts.append(tuft_object(f"Tufts_Forearm_{s}", f"forearm.{s}", fur_m, lambda bm, x=x, z=z: tuft_ring(
-            bm, (0.48 * x, 0, z - 0.005), (0.64 * x, 0, z - 0.005), 0.07, 4, 12, 0.065)))
-        front = lambda th, u, v: (math.cos(th) * u.y + math.sin(th) * v.y) < -0.7  # keep legs' front clean
-        parts.append(tuft_object(f"Tufts_Thigh_{s}", f"thigh.{s}", fur_m, lambda bm, x=x: tuft_ring(
-            bm, (0.15 * x, 0, 0.47), (0.155 * x, 0, 0.29), 0.13, 3, 14, 0.065, skip=front)))
-        parts.append(tuft_object(f"Tufts_Calf_{s}", f"shin.{s}", fur_m, lambda bm, x=x: tuft_ring(
-            bm, (0.16 * x, 0, 0.29), (0.17 * x, 0, 0.13), 0.13, 3, 14, 0.065, skip=front)))
-    for i, (dx, tilt) in enumerate(((0, 0), (0.035, 25), (-0.035, -25))):
-        parts.append(part(f"HairTuft_{i}", "cone", (0.05, 0.05, 0.09), (dx, 0.03, 1.455), fur_m, "head",
-                          rot=(0, tilt, 0), subsurf=1, segments=12))
+    # ground + centre depth
+    co = np.array([v.co[:] for v in me.vertices])
+    shift = Vector((0, -(co[:, 1].min() + co[:, 1].max()) / 2, -co[:, 2].min()))
+    for v in me.vertices:
+        v.co += shift
 
-    lo = min(v.co.z for o in parts for v in o.data.vertices)  # ground exactly at z = 0
-    for o in parts:
-        for v in o.data.vertices:
-            v.co.z -= lo
-    for o in (fur_obj, skin_obj):
-        for poly in o.data.polygons:
-            poly.use_smooth = True
-        o["bone"] = ""  # blended distance weights
-    fur_obj.data.materials.append(fur_m)
-    skin_obj.data.materials.append(skin_m)
-    return parts
+    # project the drawing: front panel on -Y faces, mirrored back panel on +Y faces
+    mat_f = textured_material("DrawingFront", front_img)
+    mat_b = textured_material("DrawingBack", back_img)
+    me.materials.append(mat_f)
+    me.materials.append(mat_b)
+    pf = projector(front_px[..., 3] > 0.5)
+    pb = projector(back_px[..., 3] > 0.5)
+    uv = me.uv_layers.new(name="UVMap")
+    for poly in me.polygons:
+        is_back = poly.normal.y > 0
+        poly.material_index = 1 if is_back else 0
+        poly.use_smooth = True
+        cx, bottom, s, w, h = pb if is_back else pf
+        for li in poly.loop_indices:
+            p = me.vertices[me.loops[li].vertex_index].co
+            col = cx - p.x / s if is_back else cx + p.x / s
+            row = bottom - p.z / s
+            uv.data[li].uv = (col / w, 1.0 - row / h)
+
+    obj["bone"] = ""  # blended distance weights
+    print(f"gorilla: {len(me.vertices)} verts, measurements {M}")
+    return [obj]
