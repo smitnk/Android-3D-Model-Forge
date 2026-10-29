@@ -1,5 +1,5 @@
 {
-  "overall": "FAIL",
+  "overall": "PASS",
   "glb": "forge-kid.glb",
   "checks": [
     {
@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "665608 bytes"
+      "detail": "669336 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -79,8 +79,8 @@
     },
     {
       "check": "geom_leg_vertical_L",
-      "pass": false,
-      "detail": "no leg geometry found"
+      "pass": true,
+      "detail": "leg centre drift 0.0022 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_L",
@@ -99,8 +99,8 @@
     },
     {
       "check": "geom_leg_vertical_R",
-      "pass": false,
-      "detail": "no leg geometry found"
+      "pass": true,
+      "detail": "leg centre drift 0.0034 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_R",
@@ -240,7 +240,7 @@
   ],
   "summary": {
     "valid": true,
-    "bytes": 665608,
+    "bytes": 669336,
     "meshes": 42,
     "mesh_nodes": [
       "Ear_L",
