@@ -28,17 +28,17 @@ test_limb_depth_follows_its_thickness (test_hull.TestHull.test_limb_depth_follow
 Ran 12 tests in 0.001s
 
 OK (skipped=3)
-15:48:52 | INFO: Starting glTF 2.0 export
-15:48:52 | INFO: Extracting primitive: Body
-15:48:52 | INFO: Primitives created: 1
-15:48:52 | INFO: Extracting primitive: Head
-15:48:52 | INFO: Primitives created: 2
-15:48:52 | INFO: Finished glTF 2.0 export in 0.15248370170593262 s
+16:01:09 | INFO: Starting glTF 2.0 export
+16:01:09 | INFO: Extracting primitive: Body
+16:01:09 | INFO: Primitives created: 1
+16:01:09 | INFO: Extracting primitive: Head
+16:01:09 | INFO: Primitives created: 2
+16:01:09 | INFO: Finished glTF 2.0 export in 0.20390748977661133 s
 Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 Info: Total files 1 | Changed 1 | Failed 0
 Fra:1 Mem:25.73M (Peak 26.16M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
-Fra:1 Mem:25.90M (Peak 26.16M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
-Fra:1 Mem:26.24M (Peak 26.24M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
+Fra:1 Mem:25.73M (Peak 26.16M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
+Fra:1 Mem:26.49M (Peak 26.49M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
 Fra:1 Mem:30.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
 Fra:1 Mem:27.48M (Peak 30.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading FaceTexture
 Fra:1 Mem:27.21M (Peak 30.29M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Waiting for render to start
@@ -55,10 +55,10 @@ Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, 
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Meshes
-Fra:1 Mem:28.31M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Computing attributes
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:28.31M (Peak 30.29M) | Time:00:00.01 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building BVH
 Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:2.83M, Peak:2.83M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
 Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.02 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
 Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.02 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Computing normals
@@ -77,15 +77,15 @@ Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.40M, Peak:7.40M | Scene, 
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Device | Writing constant memory
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.02 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.24 | Remaining:00:10.35 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:11.79 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:11.79 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
+Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.36 | Remaining:00:16.29 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:23.02 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:23.02 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/round-buddy-front.png'
-Time: 00:11.82 (Saving: 00:00.03)
+Time: 00:23.08 (Saving: 00:00.05)
 
 Fra:1 Mem:25.73M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
 Fra:1 Mem:25.73M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
-Fra:1 Mem:25.90M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:27.10M (Peak 27.10M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
 Fra:1 Mem:30.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
 Fra:1 Mem:27.48M (Peak 30.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading FaceTexture
 Fra:1 Mem:27.21M (Peak 30.29M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Waiting for render to start
@@ -102,11 +102,11 @@ Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, 
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Meshes
-Fra:1 Mem:28.31M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Computing attributes
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building BVH
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:2.83M, Peak:2.83M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:28.31M (Peak 30.29M) | Time:00:00.01 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:2.83M, Peak:2.83M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
 Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
 Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Computing normals
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
@@ -124,14 +124,14 @@ Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, 
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Device | Writing constant memory
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.21 | Remaining:00:09.46 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:11.91 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:11.91 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
+Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.39 | Remaining:00:17.62 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:23.79 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:23.79 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/round-buddy-three-quarter.png'
-Time: 00:11.95 (Saving: 00:00.03)
+Time: 00:23.84 (Saving: 00:00.05)
 
-Fra:1 Mem:25.73M (Peak 25.96M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
-Fra:1 Mem:25.90M (Peak 25.96M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:25.73M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
+Fra:1 Mem:25.73M (Peak 26.04M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
 Fra:1 Mem:30.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
 Fra:1 Mem:27.48M (Peak 30.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading FaceTexture
 Fra:1 Mem:27.21M (Peak 30.29M) | Time:00:00.00 | Mem:0.10M, Peak:0.10M | Scene, ViewLayer | Waiting for render to start
@@ -149,10 +149,10 @@ Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, 
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
 Fra:1 Mem:27.29M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Meshes
 Fra:1 Mem:28.31M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Computing attributes
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building BVH
-Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.00 | Mem:2.83M, Peak:2.83M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.11M, Peak:0.11M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:0.81M, Peak:0.81M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:2.83M, Peak:2.83M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
 Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
 Fra:1 Mem:29.01M (Peak 30.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Computing normals
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:5.04M, Peak:7.06M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
@@ -170,11 +170,11 @@ Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, 
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Updating Device | Writing constant memory
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
 Fra:1 Mem:31.29M (Peak 31.29M) | Time:00:00.01 | Mem:7.40M, Peak:7.40M | Scene, ViewLayer | Sample 0/48
-Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.17 | Remaining:00:07.80 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:10.47 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
-Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:10.47 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
+Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.33 | Remaining:00:14.71 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:20.79 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:97.23M (Peak 126.53M) | Time:00:20.79 | Mem:53.79M, Peak:53.79M | Scene, ViewLayer | Finished
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/round-buddy-back.png'
-Time: 00:10.51 (Saving: 00:00.03)
+Time: 00:20.84 (Saving: 00:00.05)
 
 INFO Draco mesh compression is available, use library at /home/runner/blender/4.2/python/lib/python3.11/site-packages/libextern_draco.so
 
@@ -300,10 +300,10 @@ Blender quit
   "skinned_primitives": 3,
   "generator": "Khronos glTF Blender I/O v4.2.70"
 }
-15:49:27 | INFO: Data are loaded, start creating Blender stuff
-15:49:27 | INFO: Blender create Mesh node Body
-15:49:27 | INFO: Blender create Mesh node Head
-15:49:27 | INFO: glTF import finished in 0.10s
+16:02:17 | INFO: Data are loaded, start creating Blender stuff
+16:02:17 | INFO: Blender create Mesh node Body
+16:02:17 | INFO: Blender create Mesh node Head
+16:02:17 | INFO: glTF import finished in 0.16s
 [PASS] glb_exists_nonempty out/round-buddy.glb
 [PASS] glb_structure_valid 2 meshes, 33308 verts, 66252 tris
 [PASS] materials_present Face, Skin
@@ -343,9 +343,8 @@ Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 Blender quit
 From https://github.com/smitnk/Android-3D-Model-Forge
  * branch            main       -> FETCH_HEAD
- + ca50981...792d535 main       -> origin/main  (forced update)
 Switched to a new branch 'publish'
-[publish 322161f] Update round_buddy preview from run 28 [skip ci]
+[publish c81dbb2] Update round_buddy preview from run 29 [skip ci]
  3 files changed, 0 insertions(+), 0 deletions(-)
 To https://github.com/smitnk/Android-3D-Model-Forge
-   792d535..322161f  HEAD -> main
+   9b29b25..c81dbb2  HEAD -> main
