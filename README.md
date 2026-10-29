@@ -8,22 +8,31 @@ No PC, no local Blender, no API keys, no paid services.
   <img src="docs/preview/forge-kid-front.png" width="45%" alt="Forge Kid, front view, T-pose — rendered by Blender in CI">
   <img src="docs/preview/forge-kid-three-quarter.png" width="45%" alt="Forge Kid, three-quarter view — rendered by Blender in CI">
 </p>
-<p align="center"><i>"Forge Kid" — generated, rigged, validated and rendered by Blender 4.2 LTS inside GitHub Actions.</i></p>
+<p align="center"><i>"Forge Kid" (<code>chibi_humanoid</code>) — generated, rigged, validated and rendered by Blender 4.2 LTS inside GitHub Actions.</i></p>
 
-## Download the example model
+<p align="center">
+  <img src="docs/preview/clay-chibi-front.png" width="31%" alt="Clay Chibi, front view, T-pose">
+  <img src="docs/preview/clay-chibi-three-quarter.png" width="31%" alt="Clay Chibi, three-quarter view">
+  <img src="docs/preview/clay-chibi-back.png" width="31%" alt="Clay Chibi, back view">
+</p>
+<p align="center"><i>"Clay Chibi" (<code>clay_chibi</code>) — a one-piece, sculpt-style base mesh with carved eye sockets, fingers and block boots.</i></p>
 
-| File | What it is |
-|---|---|
-| [forge-kid.glb](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.glb) | Rigged 3D model (glTF binary) for Android 3D viewers, game engines, web |
-| [forge-kid.blend](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.blend) | Editable Blender 4.2 project |
-| [Model report](docs/preview/REPORT.md) | Geometry, materials, dimensions, rig and every validation check |
+## Download the example models
+
+| Model | GLB (rigged, for viewers/engines) | BLEND (editable) | Report |
+|---|---|---|---|
+| Forge Kid | [forge-kid.glb](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.glb) | [forge-kid.blend](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.blend) | [report](docs/preview/forge-kid-REPORT.md) |
+| Clay Chibi | [clay-chibi.glb](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.glb) | [clay-chibi.blend](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.blend) | [report](docs/preview/clay-chibi-REPORT.md) |
 
 These files live on the [`model-latest` Release](https://github.com/smitnk/Android-3D-Model-Forge/releases/tag/model-latest)
 and are replaced each time a new model is published.
 
 ## Features
 
-- **Procedural chibi humanoid** generator (`chibi_humanoid`) — oversized head, face (eyes, pupils, brows, nose, mouth, ears),
+- **Two generators**, picked with the `model_type` option:
+  - `clay_chibi` — one-piece sculpt-style base mesh built from metaballs: big round head with carved angry eye sockets
+    and a pointed nose, slim body, fingers, flared legs and block boots, blended skin weights.
+  - `chibi_humanoid` — dressed cartoon character — oversized head, face (eyes, pupils, brows, nose, mouth, ears),
   spiky hair, shirt, shorts, arms, hands with thumbs, legs, shoes. ~42 parts, ~25k triangles, 10 materials.
 - **Always a T-pose** — enforced by the generator and re-checked on the exported file.
 - **Rigged** — 17-bone humanoid skeleton with skinning that survives GLB export (rigid per-part weights; see limitations).
@@ -39,7 +48,7 @@ and are replaced each time a new model is published.
 1. Open this repository in your phone's browser (Chrome works; tap **⋮ → Desktop site** if a button is hidden).
 2. Tap the **Actions** tab.
 3. Tap **Generate 3D Model** (on mobile you may need to tap **All workflows** first).
-4. Tap **Run workflow**. Change the name or colours if you like (colours are `#RRGGBB`, e.g. `#2E9E5B`).
+4. Tap **Run workflow**. Pick a **model type** (`chibi_humanoid` or `clay_chibi`). Change the name or colours if you like (colours are `#RRGGBB`, e.g. `#2E9E5B`).
    Tick **publish** if you want it to replace the example above. Tap the green **Run workflow** button.
 5. Wait 3–6 minutes. Refresh; when the run shows a green ✓, tap it.
 6. The **Summary** page shows the model report. Scroll down to **Artifacts** and tap `model-<number>`.
@@ -117,9 +126,9 @@ Details: [modeling guidelines](skills/android-3d-model-forge/references/modeling
 
 ## Known limitations and plans
 
-- One generator so far (`chibi_humanoid`). Creatures, props and clothing variants are planned.
-- **Skinning is rigid per part** (each part follows one bone). Posing works, but joints don't bend smoothly yet;
-  blended joint weights are the next rig milestone.
+- Two generators so far (`chibi_humanoid`, `clay_chibi`). Creatures, props and clothing variants are planned.
+- `chibi_humanoid` skinning is **rigid per part** (each part follows one bone); `clay_chibi` uses blended
+  distance-based weights, which bend more smoothly but are not hand-painted production weights.
 - No image-to-3D / AI reconstruction yet. It will be an optional integration and won't be claimed until tested.
 - No animations are exported yet.
 

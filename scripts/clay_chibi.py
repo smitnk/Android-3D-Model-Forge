@@ -111,8 +111,9 @@ def carve_eye_sockets(obj, depth=0.026):
     region = {v for v, _ in moves}
     for _ in range(2):
         region |= {e.other_vert(v) for v in list(region) for e in v.link_edges}
-    bmesh.ops.smooth_vert(bm, verts=list(region), factor=0.5, repeat=4,
-                          use_axis_x=True, use_axis_y=True, use_axis_z=True)
+    for _ in range(4):  # smooth_vert has no repeat argument in 4.2
+        bmesh.ops.smooth_vert(bm, verts=list(region), factor=0.5,
+                              use_axis_x=True, use_axis_y=True, use_axis_z=True)
     bm.to_mesh(obj.data)
     bm.free()
     return len(moves)

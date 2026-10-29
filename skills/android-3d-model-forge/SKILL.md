@@ -10,8 +10,8 @@ compatibility: Requires a GitHub repository with Actions enabled (ubuntu-24.04 r
 Procedural 3D asset generation with Blender's Python API (`bpy`), executed in the cloud by
 GitHub Actions. No local Blender, PC, API key, MCP server or paid service is needed.
 
-**What works today:** a deterministic, rigged chibi humanoid generator (`chibi_humanoid`)
-with colour options, GLB + BLEND export, Cycles CPU preview renders, and automated
+**What works today:** two deterministic, rigged generators — `chibi_humanoid` (dressed, multi-part,
+rigid skinning) and `clay_chibi` (one-piece metaball sculpt base mesh, blended skinning) — with colour options, GLB + BLEND export, Cycles CPU preview renders, and automated
 validation (container, geometry, materials, scale, grounding, symmetry, T-pose, skeleton).
 
 **What does not exist yet:** image-to-3D or AI reconstruction, creatures, props, clothing
@@ -22,6 +22,7 @@ variants, smooth (blended) joint weights. Never claim these work until implement
 | Path | Role |
 |---|---|
 | `scripts/generate_model.py` | Builds the character in Blender, rigs it, runs self-checks, exports |
+| `scripts/clay_chibi.py` | `clay_chibi` generator: metaball body/head, carved eye sockets, bone layout |
 | `scripts/export_model.py` | GLB/BLEND export and preview rendering helpers |
 | `scripts/validate_model.py` | Re-imports the GLB in a clean scene and runs all checks; exit 1 on failure |
 | `scripts/glb_inspect.py` | Pure-Python GLB parser (no Blender) |
@@ -83,7 +84,8 @@ continuing the arm line, straight vertical legs, feet pointing forward, left/rig
 grounded at z = 0 and centred on the origin. An A-pose (arms angled down 30–45°) is a failure.
 
 Enforced twice: `tpose_selfcheck()` in the generator (from construction geometry) and the validator
-on the re-imported GLB (part bounding boxes **and** armature rest-pose bone directions).
+on the re-imported GLB: geometry bands along each arm (works for any mesh layout), part bounding boxes for
+multi-part models, **and** armature rest-pose bone directions.
 
 ## Rigging
 
@@ -119,9 +121,20 @@ all meshes bound, rest-pose arm bones horizontal and leg bones vertical. Output:
    bpy API changed (pin stays 4.2.3 unless you test a new version); a geometry change broke a T-pose
    or symmetry check (fix the geometry, never loosen the threshold to make it pass).
 
+## Building a model from a reference image
+
+1. Measure the reference as fractions of total height H: head top/chin, shoulder (arm) line, crotch, boot height,
+   head width, arm reach. Convert with H ≈ 1.3 m.
+2. Organic one-piece characters: copy the `clay_chibi.py` pattern — metaball `ellipsoid`/`capsule`/`ball`/`box`
+   elements given as **surface** radii, separate metaball families for parts that must not blend (head vs body),
+   detail carving on the dense mesh **before** decimation.
+3. Multi-part dressed characters: use `part()` in `generate_model.py`.
+4. Push, then compare the CI previews (front, three-quarter, back) against the reference and iterate.
+
 ## Adding a new generator
 
-1. Add a choice to `--model-type` in `generate_model.py` and the `model_type` workflow input.
+1. Add the type to `DEFAULT_NAMES` in `generate_model.py`, `EXPECTED_PARTS`/`MIN_MATERIALS` in `validate_model.py`,
+   the `model_type` workflow input options, and the push matrix list in `generate-model.yml`.
 2. Write a `build_<type>(args)` returning a list of parts built with `part()`; reuse `material()`.
 3. If humanoid: reuse `BONES`/`build_rig()` naming and keep the T-pose. If not humanoid, add
    type-specific expected parts and skip the T-pose checks in the validator for that type explicitly.
