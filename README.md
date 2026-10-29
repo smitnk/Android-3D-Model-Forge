@@ -143,7 +143,7 @@ Details: [modeling guidelines](skills/android-3d-model-forge/references/modeling
 
 ## Known limitations and plans
 
-- Three generators so far (`chibi_humanoid`, `clay_chibi`, `gorilla`). Fur is a smooth stylised surface, not hair strands. Creatures, props and clothing variants are planned.
+- Three generators so far (`chibi_humanoid`, `clay_chibi`, `gorilla`). Gorilla fur is a stylised body plus flat fur locks on the shoulders, arms and legs (no hair strands); no expressions or action poses yet. Creatures, props and clothing variants are planned.
 - `chibi_humanoid` skinning is **rigid per part** (each part follows one bone); `clay_chibi` uses blended
   distance-based weights, which bend more smoothly but are not hand-painted production weights.
 - No image-to-3D / AI reconstruction yet. It will be an optional integration and won't be claimed until tested.
