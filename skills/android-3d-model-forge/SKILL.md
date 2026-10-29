@@ -60,7 +60,7 @@ Always pass `--python-exit-code 1`; without it Blender exits 0 even when the scr
    transformed by size → rotation → location and **baked in world space** (object transform stays identity).
 3. Refine shape with modifiers passed to `part()` (`bevel`, `subsurf`, `solidify`, `cut` to delete vertices);
    modifiers are baked into the mesh immediately so what is exported is exactly what is validated.
-4. All faces are smooth-shaded. Keep total triangles below ~100k for mobile viewers (current model ≈ 30–40k).
+4. All faces are smooth-shaded. Keep total triangles below ~100k for mobile viewers (current model ≈ 25k).
 5. Name parts consistently: central parts plain (`Head`, `Torso`), sided parts with `_L` / `_R` suffix.
    Character's **left is +X**; the character faces **-Y** in Blender (exported as +Z front, Y-up).
 

@@ -24,7 +24,7 @@ and are replaced each time a new model is published.
 ## Features
 
 - **Procedural chibi humanoid** generator (`chibi_humanoid`) — oversized head, face (eyes, pupils, brows, nose, mouth, ears),
-  spiky hair, shirt, shorts, arms, hands with thumbs, legs, shoes. ~39 parts, ~25k triangles, 10 materials.
+  spiky hair, shirt, shorts, arms, hands with thumbs, legs, shoes. ~42 parts, ~25k triangles, 10 materials.
 - **Always a T-pose** — enforced by the generator and re-checked on the exported file.
 - **Rigged** — 17-bone humanoid skeleton with skinning that survives GLB export (rigid per-part weights; see limitations).
 - **Customisable colours** for skin, hair, shirt and shorts from the Run-workflow form.
