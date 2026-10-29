@@ -1,0 +1,248 @@
+{
+  "overall": "PASS",
+  "glb": "clay-chibi.glb",
+  "checks": [
+    {
+      "check": "glb_exists_nonempty",
+      "pass": true,
+      "detail": "out/clay-chibi.glb"
+    },
+    {
+      "check": "glb_structure_valid",
+      "pass": true,
+      "detail": "2 meshes, 18223 verts, 36442 tris"
+    },
+    {
+      "check": "materials_present",
+      "pass": true,
+      "detail": "Clay"
+    },
+    {
+      "check": "materials_assigned",
+      "pass": true,
+      "detail": "0 primitives without material"
+    },
+    {
+      "check": "size_reasonable",
+      "pass": true,
+      "detail": "1026692 bytes"
+    },
+    {
+      "check": "expected_parts_present",
+      "pass": true,
+      "detail": "2 parts"
+    },
+    {
+      "check": "geometry_finite",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "bbox_nonzero",
+      "pass": true,
+      "detail": "size (0.984, 0.496, 1.295) m"
+    },
+    {
+      "check": "scale_usable",
+      "pass": true,
+      "detail": "height 1.295 m (expected 0.5-3.0)"
+    },
+    {
+      "check": "grounded",
+      "pass": true,
+      "detail": "min z -0.0000"
+    },
+    {
+      "check": "centered",
+      "pass": true,
+      "detail": "center x 0.0000, y -0.0130"
+    },
+    {
+      "check": "upright",
+      "pass": true,
+      "detail": "height 1.295 > depth 0.496"
+    },
+    {
+      "check": "no_degenerate_parts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "geom_tpose_arm_L",
+      "pass": true,
+      "detail": "forearm/hand 0.50 deg from horizontal vs upper arm (max 8.0)"
+    },
+    {
+      "check": "geom_arm_is_limb_L",
+      "pass": true,
+      "detail": "arm band vertical thickness 0.050 m"
+    },
+    {
+      "check": "geom_leg_vertical_L",
+      "pass": true,
+      "detail": "leg centre drift 0.0187 m between lower and upper leg"
+    },
+    {
+      "check": "geom_foot_forward_L",
+      "pass": true,
+      "detail": "foot length 0.230 > width 0.154, toe at y -0.150"
+    },
+    {
+      "check": "geom_tpose_arm_R",
+      "pass": true,
+      "detail": "forearm/hand 0.56 deg from horizontal vs upper arm (max 8.0)"
+    },
+    {
+      "check": "geom_arm_is_limb_R",
+      "pass": true,
+      "detail": "arm band vertical thickness 0.051 m"
+    },
+    {
+      "check": "geom_leg_vertical_R",
+      "pass": true,
+      "detail": "leg centre drift 0.0181 m between lower and upper leg"
+    },
+    {
+      "check": "geom_foot_forward_R",
+      "pass": true,
+      "detail": "foot length 0.230 > width 0.154, toe at y -0.150"
+    },
+    {
+      "check": "geom_left_right_symmetry",
+      "pass": true,
+      "detail": "hand mirror error 0.00082 m"
+    },
+    {
+      "check": "geom_chibi_head",
+      "pass": true,
+      "detail": "head+neck above shoulders = 46% of height"
+    },
+    {
+      "check": "geom_faces_forward",
+      "pass": true,
+      "detail": "front-most head point at x 0.003, y -0.261 (Blender -Y = glTF +Z front)"
+    },
+    {
+      "check": "geom_tpose_span",
+      "pass": true,
+      "detail": "span 0.984 m vs height 1.295 m"
+    },
+    {
+      "check": "skin_in_glb",
+      "pass": true,
+      "detail": "1 skins, 2 skinned primitives"
+    },
+    {
+      "check": "armature_present",
+      "pass": true,
+      "detail": "1 armatures"
+    },
+    {
+      "check": "expected_bones",
+      "pass": true,
+      "detail": "17 bones"
+    },
+    {
+      "check": "meshes_bound_to_armature",
+      "pass": true,
+      "detail": "all meshes skinned"
+    },
+    {
+      "check": "rest_pose_arm_bones_horizontal_L",
+      "pass": true,
+      "detail": "upper_arm->hand dir (1.0, 0.0, 0.0)"
+    },
+    {
+      "check": "rest_pose_leg_bones_vertical_L",
+      "pass": true,
+      "detail": "thigh->foot dir (0.116, -0.0, -0.993)"
+    },
+    {
+      "check": "rest_pose_arm_bones_horizontal_R",
+      "pass": true,
+      "detail": "upper_arm->hand dir (-1.0, 0.0, 0.0)"
+    },
+    {
+      "check": "rest_pose_leg_bones_vertical_R",
+      "pass": true,
+      "detail": "thigh->foot dir (-0.116, -0.0, -0.993)"
+    }
+  ],
+  "summary": {
+    "valid": true,
+    "bytes": 1026692,
+    "meshes": 2,
+    "mesh_nodes": [
+      "Body",
+      "Head"
+    ],
+    "vertices": 18223,
+    "triangles": 36442,
+    "materials": [
+      "Clay"
+    ],
+    "primitives_without_material": 0,
+    "skins": 1,
+    "joints": [
+      "foot.L",
+      "foot.R",
+      "forearm.L",
+      "forearm.R",
+      "hand.L",
+      "hand.R",
+      "head",
+      "neck",
+      "pelvis",
+      "root",
+      "shin.L",
+      "shin.R",
+      "spine",
+      "thigh.L",
+      "thigh.R",
+      "upper_arm.L",
+      "upper_arm.R"
+    ],
+    "skinned_primitives": 2,
+    "generator": "Khronos glTF Blender I/O v4.2.70"
+  },
+  "dimensions_m": {
+    "height": 1.295,
+    "size_xyz": [
+      0.9839,
+      0.4961,
+      1.295
+    ],
+    "bbox_min": [
+      -0.4919,
+      -0.2611,
+      -0.0
+    ],
+    "bbox_max": [
+      0.4919,
+      0.235,
+      1.295
+    ]
+  },
+  "rig": {
+    "bones": [
+      "foot.L",
+      "foot.R",
+      "forearm.L",
+      "forearm.R",
+      "hand.L",
+      "hand.R",
+      "head",
+      "neck",
+      "pelvis",
+      "root",
+      "shin.L",
+      "shin.R",
+      "spine",
+      "thigh.L",
+      "thigh.R",
+      "upper_arm.L",
+      "upper_arm.R"
+    ],
+    "skins": 1
+  }
+}
