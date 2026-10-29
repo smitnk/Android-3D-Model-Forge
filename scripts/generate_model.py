@@ -22,10 +22,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import clay_chibi  # noqa: E402
 import gorilla  # noqa: E402
 import round_buddy  # noqa: E402
+import snow_buddy  # noqa: E402
 import export_model  # noqa: E402
 
 GENERATOR_VERSION = "0.2.0"
-DEFAULT_NAMES = {"chibi_humanoid": "Forge Kid", "clay_chibi": "Clay Chibi", "gorilla": "Gorilla", "round_buddy": "Round Buddy"}
+DEFAULT_NAMES = {"chibi_humanoid": "Forge Kid", "clay_chibi": "Clay Chibi", "gorilla": "Gorilla", "round_buddy": "Round Buddy", "snow_buddy": "Snow Buddy"}
 
 # --- T-pose construction parameters (the validator re-checks these on the exported GLB) ---
 SHOULDER_Z = 0.645
@@ -352,6 +353,8 @@ def main():
         parts, bone_list = round_buddy.build(a, material, part), round_buddy.bones()
     elif a.model_type == "gorilla":
         parts, bone_list = gorilla.build(a, material, part), gorilla.bones()
+    elif a.model_type == "snow_buddy":
+        parts, bone_list = snow_buddy.build(a, material), snow_buddy.bones()
     else:
         parts, bone_list = build_character(a), BONES
     rig = None if a.no_rig else build_rig(parts, bone_list)
