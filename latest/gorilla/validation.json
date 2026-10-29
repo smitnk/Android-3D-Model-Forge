@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "3172796 bytes"
+      "detail": "3143816 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -170,7 +170,7 @@
   ],
   "summary": {
     "valid": true,
-    "bytes": 3172796,
+    "bytes": 3143816,
     "meshes": 1,
     "mesh_nodes": [
       "Body"
