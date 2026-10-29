@@ -1,0 +1,181 @@
+name: Generate 3D Model
+
+on:
+  workflow_dispatch:
+    inputs:
+      model_type:
+        description: "Model type"
+        type: choice
+        options: [chibi_humanoid]
+        default: chibi_humanoid
+      character_name:
+        description: "Character name (used for file names)"
+        type: string
+        default: "Forge Kid"
+      skin_color:
+        description: "Skin colour (#RRGGBB)"
+        type: string
+        default: "#F2C9A0"
+      hair_color:
+        description: "Hair colour (#RRGGBB)"
+        type: string
+        default: "#3B2417"
+      shirt_color:
+        description: "Shirt colour (#RRGGBB)"
+        type: string
+        default: "#E8553D"
+      shorts_color:
+        description: "Shorts colour (#RRGGBB)"
+        type: string
+        default: "#2F4A8A"
+      export:
+        description: "What to export"
+        type: choice
+        options: ["glb+blend", "glb"]
+        default: "glb+blend"
+      publish:
+        description: "Publish to the 'model-latest' Release and update the README preview"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - ".github/workflows/generate-model.yml"
+
+permissions:
+  contents: write   # needed only for publishing previews/release
+
+concurrency:
+  group: generate-model
+  cancel-in-progress: false
+
+env:
+  BLENDER_VERSION: "4.2.3"     # pinned Blender 4.2 LTS
+  BLENDER_SERIES: "4.2"
+
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore cached Blender
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/blender
+          key: blender-${{ env.BLENDER_VERSION }}-linux-x64
+
+      - name: Download pinned Blender
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          base="https://download.blender.org/release/Blender${BLENDER_SERIES}"
+          file="blender-${BLENDER_VERSION}-linux-x64.tar.xz"
+          curl -fsSL --retry 3 -o "/tmp/$file" "$base/$file"
+          if curl -fsSL --retry 3 -o /tmp/blender.sha256 "$base/blender-${BLENDER_VERSION}.sha256"; then
+            (cd /tmp && grep " $file\$" blender.sha256 | sha256sum -c -)
+          else
+            echo "::warning::Checksum file not available; skipping checksum verification"
+          fi
+          mkdir -p ~/blender
+          tar -xf "/tmp/$file" -C ~/blender --strip-components=1
+
+      - name: Install runtime libraries
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libxkbcommon0 libsm6 libice6 libegl1 > /dev/null
+
+      - name: Verify Blender runs
+        run: ~/blender/blender --version | tee -a logs.txt
+
+      - name: Unit tests (pure Python)
+        run: python3 -m unittest discover tests -v 2>&1 | tee -a logs.txt
+
+      - name: Generate model
+        env:
+          IN_TYPE: ${{ inputs.model_type || 'chibi_humanoid' }}
+          IN_NAME: ${{ inputs.character_name || 'Forge Kid' }}
+          IN_SKIN: ${{ inputs.skin_color || '#F2C9A0' }}
+          IN_HAIR: ${{ inputs.hair_color || '#3B2417' }}
+          IN_SHIRT: ${{ inputs.shirt_color || '#E8553D' }}
+          IN_SHORTS: ${{ inputs.shorts_color || '#2F4A8A' }}
+          IN_EXPORT: ${{ inputs.export || 'glb+blend' }}
+        run: |
+          set -o pipefail
+          extra=(--render)
+          [ "$IN_EXPORT" = "glb+blend" ] && extra+=(--blend)
+          ~/blender/blender -b --factory-startup --python-exit-code 1 \
+            --python scripts/generate_model.py -- \
+            --model-type "$IN_TYPE" --name "$IN_NAME" --skin "$IN_SKIN" --hair "$IN_HAIR" \
+            --shirt "$IN_SHIRT" --shorts "$IN_SHORTS" --out out "${extra[@]}" 2>&1 | tee -a logs.txt
+
+      - name: Validate model
+        run: |
+          set -o pipefail
+          glb=$(ls out/*.glb)
+          python3 scripts/glb_inspect.py "$glb" | tee -a logs.txt
+          ~/blender/blender -b --factory-startup --python-exit-code 1 \
+            --python scripts/validate_model.py -- --glb "$glb" --report out/validation.json --expect-rig 2>&1 | tee -a logs.txt
+          python3 -c "import json,sys; sys.exit(json.load(open('out/validation.json'))['overall']!='PASS')"
+
+      - name: Write report
+        run: |
+          python3 scripts/make_report.py out/generation.json out/validation.json > out/REPORT.md
+          cat out/REPORT.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-${{ github.run_number }}
+          path: |
+            out/*.glb
+            out/*.blend
+            out/*.png
+            out/*.json
+            out/REPORT.md
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Publish preview to repo and Release
+        if: github.event_name == 'push' || inputs.publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p docs/preview
+          cp out/*.png out/REPORT.md docs/preview/
+          git add docs/preview
+          if ! git diff --cached --quiet; then
+            git commit -m "Update model preview from run ${{ github.run_number }} [skip ci]"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+          gh release view model-latest >/dev/null 2>&1 || \
+            gh release create model-latest --target "${GITHUB_REF_NAME}" --title "Latest generated model" \
+              --notes "Automatically published by the Generate 3D Model workflow. See REPORT.md for validation results."
+          gh release upload model-latest out/*.glb out/*.png out/REPORT.md --clobber
+          ls out/*.blend >/dev/null 2>&1 && gh release upload model-latest out/*.blend --clobber || true
+
+      # Snapshot logs + reports to a branch so tools without Actions-log access can read the result.
+      - name: Save CI results snapshot
+        if: always()
+        env:
+          STATUS: ${{ job.status }}
+        run: |
+          set +e
+          rm -rf /tmp/ci && mkdir -p /tmp/ci
+          cp logs.txt out/*.json out/REPORT.md /tmp/ci/ 2>/dev/null
+          echo "run=${{ github.run_number }} status=$STATUS sha=${{ github.sha }}" > /tmp/ci/STATUS.txt
+          git fetch origin ci-results 2>/dev/null
+          git worktree add -B ci-results /tmp/wt origin/ci-results 2>/dev/null || {
+            git worktree add --detach /tmp/wt && cd /tmp/wt && git checkout --orphan ci-results && git rm -rqf . ; cd -; }
+          rm -rf /tmp/wt/latest && mkdir -p /tmp/wt/latest && cp /tmp/ci/* /tmp/wt/latest/
+          cd /tmp/wt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "CI results run ${{ github.run_number }}: $STATUS" && git push -q origin ci-results
