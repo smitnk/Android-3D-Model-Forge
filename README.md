@@ -20,7 +20,7 @@ No PC, no local Blender, no API keys, no paid services.
   <img src="docs/preview/gorilla-three-quarter.png" width="31%" alt="Gorilla, three-quarter view">
   <img src="docs/preview/gorilla-back.png" width="31%" alt="Gorilla, back view">
 </p>
-<p align="center"><i>"Gorilla" (<code>gorilla</code>) — built from a reference turnaround with the blender-kiln reference-fidelity method.</i></p>
+<p align="center"><i>"Gorilla" (<code>gorilla</code>) — carved from the owner's turnaround sheet (img2threejs visual-hull method) and textured with the drawing itself.</i></p>
 
 <p align="center"><i>"Clay Chibi" (<code>clay_chibi</code>) — a one-piece, sculpt-style base mesh with carved eye sockets, fingers and block boots.</i></p>
 
@@ -38,8 +38,8 @@ and are replaced each time a new model is published.
 ## Features
 
 - **Three generators**, picked with the `model_type` option:
-  - `gorilla` — stylised cartoon gorilla: fur body, light skin muzzle/chest/belly/hands/feet with fingers and toes,
-    big eyes, hair tuft. Proportions measured from a reference image.
+  - `gorilla` — carved from a turnaround sheet: T-pose front silhouette x side-view depth (`scripts/hull.py`),
+    voxel-remeshed to even quads, with the T-pose front/back drawings projected on as the texture.
   - `clay_chibi` — one-piece sculpt-style base mesh built from metaballs: big round head with carved angry eye sockets
     and a pointed nose, slim body, fingers, flared legs and block boots, blended skin weights.
   - `chibi_humanoid` — dressed cartoon character — oversized head, face (eyes, pupils, brows, nose, mouth, ears),
@@ -119,6 +119,13 @@ See [the skill README](skills/android-3d-model-forge/README.md).
 through a Blender MCP add-on on a PC; here we use its **reference-fidelity** method (inventory → measure the
 silhouette → attach every part → review against the reference) inside the cloud workflow. See `VENDORED.md`.
 
+## Vendored skill: img2threejs
+
+[`skills/img2threejs`](skills/img2threejs/VENDORED.md) is a copy of the Apache-2.0
+[img2threejs](https://github.com/img2threejs/img2threejs) skill. Its visual-hull and projected-texture ideas
+power the `gorilla` generator (`scripts/hull.py`, `scripts/gorilla.py`); its browser-based Three.js pipeline is not
+run in CI.
+
 ## Add a new model type
 
 1. In `scripts/generate_model.py`, add the type to `--model-type` choices and write a `build_<type>()` that returns
@@ -143,7 +150,7 @@ Details: [modeling guidelines](skills/android-3d-model-forge/references/modeling
 
 ## Known limitations and plans
 
-- Three generators so far (`chibi_humanoid`, `clay_chibi`, `gorilla`). Gorilla fur is a stylised body plus flat fur locks on the shoulders, arms and legs (no hair strands); no expressions or action poses yet. Creatures, props and clothing variants are planned.
+- Three generators so far (`chibi_humanoid`, `clay_chibi`, `gorilla`). The gorilla is shaped from two views (front + side), so concavities no silhouette shows are carried only by the texture; side-facing surfaces show some texture stretching; no expressions or action poses yet. Creatures, props and clothing variants are planned.
 - `chibi_humanoid` skinning is **rigid per part** (each part follows one bone); `clay_chibi` uses blended
   distance-based weights, which bend more smoothly but are not hand-painted production weights.
 - No image-to-3D / AI reconstruction yet. It will be an optional integration and won't be claimed until tested.

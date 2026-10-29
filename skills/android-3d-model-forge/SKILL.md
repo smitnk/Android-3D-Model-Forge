@@ -12,7 +12,7 @@ GitHub Actions. No local Blender, PC, API key, MCP server or paid service is nee
 
 **What works today:** three deterministic, rigged generators — `chibi_humanoid` (dressed, multi-part,
 rigid skinning), `clay_chibi` (one-piece metaball sculpt base mesh, blended skinning) and `gorilla`
-(metaball fur + skin layers, eyes/nostrils/tufts as parts, blended skinning) — with colour options, GLB + BLEND export, Cycles CPU preview renders, and automated
+(visual hull carved from a turnaround sheet + projected drawing texture, blended skinning) — with colour options, GLB + BLEND export, Cycles CPU preview renders, and automated
 validation (container, geometry, materials, scale, grounding, symmetry, T-pose, skeleton).
 
 **What does not exist yet:** image-to-3D or AI reconstruction, creatures, props, clothing
@@ -24,7 +24,9 @@ variants, smooth (blended) joint weights. Never claim these work until implement
 |---|---|
 | `scripts/generate_model.py` | Builds the character in Blender, rigs it, runs self-checks, exports |
 | `scripts/clay_chibi.py` | `clay_chibi` generator: metaball body/head, carved eye sockets, bone layout |
-| `scripts/gorilla.py` | `gorilla` generator, built with the blender-kiln reference-fidelity method |
+| `scripts/gorilla.py` | `gorilla` generator: carves `assets/reference/gorilla/` silhouettes, projects the drawing |
+| `scripts/hull.py` | Numpy visual hull (front silhouette x side depth, rounded limb sections) + boundary mesh |
+| `skills/img2threejs/` | Vendored Apache-2.0 skill; source of the visual-hull / projected-texture method |
 | `skills/blender-kiln/` | Vendored MIT skill (elithril/blender-kiln); read `references/reference-fidelity.md` for image references |
 | `scripts/export_model.py` | GLB/BLEND export and preview rendering helpers |
 | `scripts/validate_model.py` | Re-imports the GLB in a clean scene and runs all checks; exit 1 on failure |
@@ -136,6 +138,12 @@ all meshes bound, rest-pose arm bones horizontal and leg bones vertical. Output:
    detail carving on the dense mesh **before** decimation.
 3. Multi-part dressed characters: use `part()` in `generate_model.py`.
 4. Push, then compare the CI previews (front, three-quarter, back) against the reference and iterate.
+
+### When the reference is a turnaround / model sheet (best fidelity)
+Use the `gorilla` pattern: crop the T-pose front, T-pose back and 90° side panels into
+`assets/reference/<name>/` with alpha = figure mask (centre the T-pose panels on the body axis and mirror-fill
+them), carve with `hull.carve()`, remesh, and project the panels as textures. This reproduces the drawing far more
+closely than hand-placed primitives.
 
 ## Adding a new generator
 
