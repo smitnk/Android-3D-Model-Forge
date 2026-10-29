@@ -32,11 +32,11 @@
 - ✅ `no_degenerate_parts` 
 - ✅ `geom_tpose_arm_L` forearm/hand 0.66 deg from horizontal vs upper arm (max 8.0)
 - ✅ `geom_arm_is_limb_L` arm band vertical thickness 0.043 m
-- ✅ `geom_leg_vertical_L` leg centre drift 0.0179 m between z 0.15 and 0.28
+- ✅ `geom_leg_vertical_L` leg centre drift 0.0205 m between lower and upper leg
 - ✅ `geom_foot_forward_L` foot length 0.230 > width 0.150, toe at y -0.155
 - ✅ `geom_tpose_arm_R` forearm/hand 1.29 deg from horizontal vs upper arm (max 8.0)
 - ✅ `geom_arm_is_limb_R` arm band vertical thickness 0.042 m
-- ✅ `geom_leg_vertical_R` leg centre drift 0.0194 m between z 0.15 and 0.28
+- ✅ `geom_leg_vertical_R` leg centre drift 0.0210 m between lower and upper leg
 - ✅ `geom_foot_forward_R` foot length 0.230 > width 0.150, toe at y -0.155
 - ✅ `geom_left_right_symmetry` hand mirror error 0.00096 m
 - ✅ `geom_chibi_head` head+neck above shoulders = 49% of height

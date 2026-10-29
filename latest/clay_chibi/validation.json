@@ -80,7 +80,7 @@
     {
       "check": "geom_leg_vertical_L",
       "pass": true,
-      "detail": "leg centre drift 0.0179 m between z 0.15 and 0.28"
+      "detail": "leg centre drift 0.0205 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_L",
@@ -100,7 +100,7 @@
     {
       "check": "geom_leg_vertical_R",
       "pass": true,
-      "detail": "leg centre drift 0.0194 m between z 0.15 and 0.28"
+      "detail": "leg centre drift 0.0210 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_R",
