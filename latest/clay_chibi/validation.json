@@ -85,7 +85,7 @@
     {
       "check": "geom_foot_forward_L",
       "pass": true,
-      "detail": "foot length 0.230 > width 0.154, toe at y -0.150"
+      "detail": "foot length 0.230 vs width 0.154, toe at y -0.150"
     },
     {
       "check": "geom_tpose_arm_R",
@@ -105,7 +105,7 @@
     {
       "check": "geom_foot_forward_R",
       "pass": true,
-      "detail": "foot length 0.230 > width 0.154, toe at y -0.150"
+      "detail": "foot length 0.230 vs width 0.154, toe at y -0.150"
     },
     {
       "check": "geom_left_right_symmetry",
