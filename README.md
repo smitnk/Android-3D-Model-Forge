@@ -24,6 +24,26 @@ No PC, no local Blender, no API keys, no paid services.
 
 <p align="center"><i>"Clay Chibi" (<code>clay_chibi</code>) — a one-piece, sculpt-style base mesh with carved eye sockets, fingers and block boots.</i></p>
 
+## Model gallery — download and check
+
+| | Model | Download (ZIP: GLB + BLEND + previews + report) | Single files |
+|---|---|---|---|
+| <img src="docs/preview/gorilla-front.png" width="160" alt="Gorilla preview"> | **Gorilla** — carved from a turnaround sheet, drawing projected as texture, 17-bone rig | [gorilla.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.blend) · [report](docs/preview/gorilla-REPORT.md) |
+| <img src="docs/preview/forge-kid-front.png" width="160" alt="Forge Kid preview"> | **Forge Kid** — the first character: dressed chibi, 17-bone rig | [forge-kid.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.blend) · [report](docs/preview/forge-kid-REPORT.md) |
+| <img src="docs/preview/clay-chibi-front.png" width="160" alt="Clay Chibi preview"> | **Clay Chibi** — one-piece sculpt base mesh | [clay-chibi.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.blend) · [report](docs/preview/clay-chibi-REPORT.md) |
+
+**Check a model on Android:** download the ZIP, open it in your Files app, and open the `.glb` with any glTF / 3D
+viewer app (or drag it into a web glTF viewer). The ZIP also has front, three-quarter and back renders and the
+validation report.
+
+### Gorilla views
+
+<p align="center">
+  <img src="docs/preview/gorilla-front.png" width="31%" alt="Gorilla front">
+  <img src="docs/preview/gorilla-three-quarter.png" width="31%" alt="Gorilla three-quarter">
+  <img src="docs/preview/gorilla-back.png" width="31%" alt="Gorilla back">
+</p>
+
 ## Download the example models
 
 | Model | GLB (rigged, for viewers/engines) | BLEND (editable) | Report |
