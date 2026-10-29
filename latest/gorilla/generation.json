@@ -12,18 +12,18 @@
     "shoes": "#F4F1EA"
   },
   "parts": 1,
-  "triangles": 93740,
-  "vertices": 46872,
+  "triangles": 90784,
+  "vertices": 45398,
   "materials": [
     "DrawingFront"
   ],
   "bbox_min_m": [
-    -1.0575,
+    -1.1751,
     -0.335,
     0.0
   ],
   "bbox_max_m": [
-    1.0575,
+    1.1751,
     0.335,
     1.4956
   ],
@@ -32,14 +32,14 @@
     "skinning": "blended distance weights"
   },
   "tpose_selfcheck": {
-    "arm_angle_deg_L": 1.881,
-    "arm_angle_deg_R": 1.881,
+    "arm_angle_deg_L": 0.635,
+    "arm_angle_deg_R": 0.635,
     "pass": true
   },
   "deformation_selftest": {
-    "hand_moved_m": 0.5825,
+    "hand_moved_m": 0.66,
     "rest_of_body_drift_m": 0.0,
-    "hand_verts": 720,
+    "hand_verts": 704,
     "pass": true
   },
   "files": {
@@ -50,30 +50,30 @@
         "view": "front",
         "file": "gorilla-front.png",
         "frame_extent": [
-          0.122,
-          0.878,
-          0.167,
-          0.699
+          0.126,
+          0.874,
+          0.17,
+          0.645
         ]
       },
       {
         "view": "three-quarter",
         "file": "gorilla-three-quarter.png",
         "frame_extent": [
-          0.195,
-          0.875,
-          0.085,
-          0.703
+          0.204,
+          0.867,
+          0.089,
+          0.662
         ]
       },
       {
         "view": "back",
         "file": "gorilla-back.png",
         "frame_extent": [
-          0.122,
-          0.878,
-          0.167,
-          0.699
+          0.126,
+          0.874,
+          0.17,
+          0.645
         ]
       }
     ]
