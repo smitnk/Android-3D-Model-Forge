@@ -1,0 +1,85 @@
+{
+  "generator": "gorilla",
+  "generator_version": "0.2.0",
+  "blender": "4.2.3 LTS",
+  "name": "Gorilla",
+  "slug": "gorilla",
+  "colors": {
+    "skin": "default",
+    "hair": "#3B2417",
+    "shirt": "#E8553D",
+    "shorts": "#2F4A8A",
+    "shoes": "#F4F1EA"
+  },
+  "parts": 11,
+  "triangles": 41000,
+  "vertices": 20532,
+  "materials": [
+    "EyeWhite",
+    "Fur",
+    "Nostril",
+    "Pupil",
+    "Skin"
+  ],
+  "bbox_min_m": [
+    -0.7921,
+    -0.2385,
+    -0.0
+  ],
+  "bbox_max_m": [
+    0.7921,
+    0.2169,
+    1.4803
+  ],
+  "rig": {
+    "bones": 17,
+    "skinning": "blended distance weights"
+  },
+  "tpose_selfcheck": {
+    "arm_angle_deg_L": 1.155,
+    "arm_angle_deg_R": 1.269,
+    "pass": true
+  },
+  "deformation_selftest": {
+    "hand_moved_m": 0.3798,
+    "rest_of_body_drift_m": 0.0,
+    "hand_verts": 621,
+    "pass": true
+  },
+  "files": {
+    "glb": "gorilla.glb",
+    "blend": "gorilla.blend",
+    "previews": [
+      {
+        "view": "front",
+        "file": "gorilla-front.png",
+        "frame_extent": [
+          0.085,
+          0.915,
+          0.165,
+          0.918
+        ]
+      },
+      {
+        "view": "three-quarter",
+        "file": "gorilla-three-quarter.png",
+        "frame_extent": [
+          0.167,
+          0.892,
+          0.071,
+          0.946
+        ]
+      },
+      {
+        "view": "back",
+        "file": "gorilla-back.png",
+        "frame_extent": [
+          0.103,
+          0.897,
+          0.181,
+          0.922
+        ]
+      }
+    ]
+  }
+}
