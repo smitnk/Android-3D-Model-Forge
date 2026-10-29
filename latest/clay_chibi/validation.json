@@ -10,7 +10,7 @@
     {
       "check": "glb_structure_valid",
       "pass": true,
-      "detail": "2 meshes, 12386 verts, 24764 tris"
+      "detail": "2 meshes, 14855 verts, 29702 tris"
     },
     {
       "check": "materials_present",
@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "699784 bytes"
+      "detail": "838056 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -40,12 +40,12 @@
     {
       "check": "bbox_nonzero",
       "pass": true,
-      "detail": "size (1.181, 0.393, 1.275) m"
+      "detail": "size (0.959, 0.496, 1.295) m"
     },
     {
       "check": "scale_usable",
       "pass": true,
-      "detail": "height 1.275 m (expected 0.5-3.0)"
+      "detail": "height 1.295 m (expected 0.5-3.0)"
     },
     {
       "check": "grounded",
@@ -55,12 +55,12 @@
     {
       "check": "centered",
       "pass": true,
-      "detail": "center x 0.0000, y -0.0165"
+      "detail": "center x 0.0000, y -0.0128"
     },
     {
       "check": "upright",
       "pass": true,
-      "detail": "height 1.275 > depth 0.393"
+      "detail": "height 1.295 > depth 0.496"
     },
     {
       "check": "no_degenerate_parts",
@@ -70,62 +70,62 @@
     {
       "check": "geom_tpose_arm_L",
       "pass": true,
-      "detail": "forearm/hand 0.56 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 0.66 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_L",
       "pass": true,
-      "detail": "arm band vertical thickness 0.066 m"
+      "detail": "arm band vertical thickness 0.043 m"
     },
     {
       "check": "geom_leg_vertical_L",
       "pass": true,
-      "detail": "leg centre drift 0.0039 m between z 0.15 and 0.28"
+      "detail": "leg centre drift 0.0179 m between z 0.15 and 0.28"
     },
     {
       "check": "geom_foot_forward_L",
       "pass": true,
-      "detail": "foot length 0.180 > width 0.110, toe at y -0.125"
+      "detail": "foot length 0.230 > width 0.150, toe at y -0.155"
     },
     {
       "check": "geom_tpose_arm_R",
       "pass": true,
-      "detail": "forearm/hand 1.53 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 1.29 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_R",
       "pass": true,
-      "detail": "arm band vertical thickness 0.066 m"
+      "detail": "arm band vertical thickness 0.042 m"
     },
     {
       "check": "geom_leg_vertical_R",
       "pass": true,
-      "detail": "leg centre drift 0.0046 m between z 0.15 and 0.28"
+      "detail": "leg centre drift 0.0194 m between z 0.15 and 0.28"
     },
     {
       "check": "geom_foot_forward_R",
       "pass": true,
-      "detail": "foot length 0.180 > width 0.110, toe at y -0.125"
+      "detail": "foot length 0.230 > width 0.150, toe at y -0.155"
     },
     {
       "check": "geom_left_right_symmetry",
       "pass": true,
-      "detail": "hand mirror error 0.00048 m"
+      "detail": "hand mirror error 0.00096 m"
     },
     {
       "check": "geom_chibi_head",
       "pass": true,
-      "detail": "head+neck above shoulders = 39% of height"
+      "detail": "head+neck above shoulders = 49% of height"
     },
     {
       "check": "geom_faces_forward",
       "pass": true,
-      "detail": "front-most head point at x 0.004, y -0.213 (Blender -Y = glTF +Z front)"
+      "detail": "front-most head point at x 0.004, y -0.261 (Blender -Y = glTF +Z front)"
     },
     {
       "check": "geom_tpose_span",
       "pass": true,
-      "detail": "span 1.181 m vs height 1.275 m"
+      "detail": "span 0.959 m vs height 1.295 m"
     },
     {
       "check": "skin_in_glb",
@@ -150,34 +150,34 @@
     {
       "check": "rest_pose_arm_bones_horizontal_L",
       "pass": true,
-      "detail": "upper_arm->hand dir (1.0, -0.0, 0.0)"
+      "detail": "upper_arm->hand dir (1.0, 0.0, 0.0)"
     },
     {
       "check": "rest_pose_leg_bones_vertical_L",
       "pass": true,
-      "detail": "thigh->foot dir (0.062, -0.0, -0.998)"
+      "detail": "thigh->foot dir (0.116, -0.0, -0.993)"
     },
     {
       "check": "rest_pose_arm_bones_horizontal_R",
       "pass": true,
-      "detail": "upper_arm->hand dir (-1.0, -0.0, 0.0)"
+      "detail": "upper_arm->hand dir (-1.0, 0.0, 0.0)"
     },
     {
       "check": "rest_pose_leg_bones_vertical_R",
       "pass": true,
-      "detail": "thigh->foot dir (-0.062, -0.0, -0.998)"
+      "detail": "thigh->foot dir (-0.116, -0.0, -0.993)"
     }
   ],
   "summary": {
     "valid": true,
-    "bytes": 699784,
+    "bytes": 838056,
     "meshes": 2,
     "mesh_nodes": [
       "Body",
       "Head"
     ],
-    "vertices": 12386,
-    "triangles": 24764,
+    "vertices": 14855,
+    "triangles": 29702,
     "materials": [
       "Clay"
     ],
@@ -206,21 +206,21 @@
     "generator": "Khronos glTF Blender I/O v4.2.70"
   },
   "dimensions_m": {
-    "height": 1.2749,
+    "height": 1.295,
     "size_xyz": [
-      1.1807,
-      0.3929,
-      1.2749
+      0.9588,
+      0.4955,
+      1.295
     ],
     "bbox_min": [
-      -0.5903,
-      -0.213,
+      -0.4794,
+      -0.2605,
       -0.0
     ],
     "bbox_max": [
-      0.5903,
-      0.18,
-      1.2749
+      0.4794,
+      0.235,
+      1.295
     ]
   },
   "rig": {

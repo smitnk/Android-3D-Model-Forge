@@ -1,1 +1,1 @@
-run=6 type=clay_chibi status=success sha=b25242ce58438a6689ecbe0f30091eb91128b83a
+run=7 type=clay_chibi status=failure sha=7915841142aa91ae51188b86df70723843b0b7f7
