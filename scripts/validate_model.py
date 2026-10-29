@@ -24,6 +24,8 @@ EXPECTED_PARTS = {
     "clay_chibi": ["Head", "Body"],
     "gorilla": ["Fur", "Skin", "Eye_L", "Eye_R", "Pupil_L", "Pupil_R", "Nostril_L", "Nostril_R"],
 }
+# max arm thickness / height; gorilla arms measure ~0.15 H in the reference plus fur tufts
+LIMB_RATIO = {"chibi_humanoid": 0.15, "clay_chibi": 0.15, "gorilla": 0.22}
 HEAD_RATIO = {"chibi_humanoid": 0.3, "clay_chibi": 0.3, "gorilla": 0.2}  # min head+neck above shoulders / height
 EXPECTED_BONES = ["root", "pelvis", "spine", "neck", "head"] + [
     f"{b}.{s}" for b in ("upper_arm", "forearm", "hand", "thigh", "shin", "foot") for s in ("L", "R")]
@@ -119,7 +121,7 @@ def main():
     for o in meshes.values():
         ev = o.evaluated_get(dg)
         pts += [ev.matrix_world @ v.co for v in ev.data.vertices]
-    geometry_tpose(c, pts, height, HEAD_RATIO[a.model_type])
+    geometry_tpose(c, pts, height, HEAD_RATIO[a.model_type], LIMB_RATIO[a.model_type])
 
     # 3b. Part-level T-pose checks (multi-part generators only).
     if a.model_type == "chibi_humanoid" and not missing:
@@ -180,7 +182,7 @@ def _mean(pts):
     return sum(pts, Vector()) / len(pts) if pts else None
 
 
-def geometry_tpose(c, pts, height, head_ratio):
+def geometry_tpose(c, pts, height, head_ratio, limb_ratio):
     arm_angles = {}
     for s, sign in (("L", 1), ("R", -1)):
         side = [p for p in pts if p.x * sign > 0]
@@ -196,7 +198,7 @@ def geometry_tpose(c, pts, height, head_ratio):
               f"forearm/hand {ang:.2f} deg from horizontal vs upper arm (max {MAX_ARM_ANGLE_DEG})")
         thin = [p for p in side if 0.55 * reach <= abs(p.x) <= 0.80 * reach]
         zs = max(p.z for p in thin) - min(p.z for p in thin)
-        c.add(f"geom_arm_is_limb_{s}", zs < 0.15 * height, f"arm band vertical thickness {zs:.3f} m")
+        c.add(f"geom_arm_is_limb_{s}", zs < limb_ratio * height, f"arm band vertical thickness {zs:.3f} m")
         leg = sorted((p for p in side if 0.07 * height <= p.z <= 0.25 * height), key=lambda p: p.z)
         low, mid = leg[:len(leg) // 2], leg[len(leg) // 2:]  # split at median height (works for sparse meshes)
         if low and mid:

@@ -12,12 +12,17 @@ Inventory (reference: front + back turnaround sheet)
 - eyes: big white ovals, small black pupils looking forward                               -> Eye_*, Pupil_*
 - nose: two nostrils on a soft bump; small pursed lips                                     -> Skin, Nostril_*
 - hair tuft on top of the head                                                            -> HairTuft_*
+- jagged fur tufts on the silhouette of shoulders, arms, thighs, calves (all views)            -> Tufts_*
+Measured from the 360 turnaround (side view): body depth ~0.40 H with the belly pushed forward,
+head depth ~0.24 H including a muzzle that sticks out past the face. Fur #4C4054, skin #8C8192.
 Measured (H = 1.5 m): shoulder line 0.70 H, hand reach 0.52 H from centre, chest half-width 0.20 H,
 waist half-width 0.10 H, hips 0.14 H, leg centres +-0.11 H, feet 0.23 H wide, head top 0.97 H.
 """
 import math
 
-from mathutils import Vector
+import bmesh
+import bpy
+from mathutils import Matrix, Vector
 
 from clay_chibi import Meta
 
@@ -40,22 +45,60 @@ def bones():
     return b
 
 
+def tuft_ring(bm, a, b, radius, rings, per_ring, length, start=0.0, skip=None):
+    """Add fur-tuft cones around the segment a->b: base sinks into the fur, tips point outward and
+    lean toward b (fur hangs toward the extremity). `skip(theta)` leaves gaps, e.g. where skin shows."""
+    a, b = Vector(a), Vector(b)
+    axis = (b - a).normalized()
+    u = axis.orthogonal().normalized()
+    v = axis.cross(u)
+    for i in range(rings):
+        t = (i + 0.5) / rings
+        c = a + (b - a) * t
+        for j in range(per_ring):
+            th = 2 * math.pi * (j + 0.5 * (i % 2)) / per_ring + start  # staggered rings
+            if skip and skip(th, u, v):
+                continue
+            radial = u * math.cos(th) + v * math.sin(th)
+            d = (radial + axis * 0.55).normalized()
+            m = (Matrix.Translation(c + radial * radius * 0.8 + d * length * 0.5)
+                 @ d.to_track_quat("Z", "Y").to_matrix().to_4x4()
+                 @ Matrix.Diagonal((0.032, 0.032 * 0.75, length, 1)))
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=8,
+                                  radius1=0.5, radius2=0.0, depth=1.0, matrix=m)
+
+
+def tuft_object(name, bone, mat, fn):
+    bm = bmesh.new()
+    fn(bm)
+    me = bpy.data.meshes.new(name)
+    bm.to_mesh(me)
+    bm.free()
+    obj = bpy.data.objects.new(name, me)
+    bpy.context.scene.collection.objects.link(obj)
+    for poly in me.polygons:
+        poly.use_smooth = True
+    me.materials.append(mat)
+    obj["bone"] = bone
+    return obj
+
+
 def build(a, material, part):
-    fur_m = material("Fur", a.hair or "#4B4260", 0.85)
-    skin_m = material("Skin", a.skin or "#8A7E9C", 0.6)
+    fur_m = material("Fur", a.hair or "#4C4054", 0.85)
+    skin_m = material("Skin", a.skin or "#8C8192", 0.6)
     eye_m = material("EyeWhite", "#FFFFFF", 0.3)
     pupil_m = material("Pupil", "#121018", 0.15)
     dark_m = material("Nostril", "#2A2433", 0.6)
 
     fur = Meta("FurMeta", 0.011)
-    fur.ellipsoid((0, 0.03, 1.27), 0.13, 0.13, 0.18)          # dome head (sits low and forward)
+    fur.ellipsoid((0, 0.04, 1.28), 0.135, 0.15, 0.185)        # dome head, high at the back
     fur.capsule((-0.085, -0.10, 1.355), (0.085, -0.10, 1.355), 0.03)  # brow ridge
-    fur.ellipsoid((0, 0.04, 1.12), 0.26, 0.17, 0.11)          # trapezius / shoulder mass
-    fur.ellipsoid((0, 0, 0.95), 0.29, 0.19, 0.17)             # barrel chest
-    fur.ellipsoid((0, 0, 0.73), 0.19, 0.17, 0.15)             # waist / belly core
-    fur.ellipsoid((0, 0.02, 0.55), 0.22, 0.17, 0.13)          # hips
+    fur.ellipsoid((0, 0.06, 1.12), 0.26, 0.2, 0.12)           # trapezius / hunched shoulder mass
+    fur.ellipsoid((0, 0.0, 0.95), 0.29, 0.25, 0.18)           # barrel chest (side view: deep)
+    fur.ellipsoid((0, -0.02, 0.74), 0.2, 0.25, 0.16)          # belly core, pushed forward
+    fur.ellipsoid((0, 0.03, 0.55), 0.22, 0.2, 0.13)           # hips
     for x in (1, -1):
-        fur.ellipsoid((0.10 * x, 0.11, 0.52), 0.11, 0.09, 0.12)        # glutes
+        fur.ellipsoid((0.10 * x, 0.15, 0.52), 0.115, 0.1, 0.13)        # glutes
         fur.ellipsoid((0.24 * x, 0.01, SHOULDER_Z + 0.03), 0.13, 0.12, 0.13)  # bulky deltoid
         fur.ellipsoid((0.38 * x, 0, SHOULDER_Z), 0.15, 0.09, 0.085)   # thick upper arm
         fur.ellipsoid((0.56 * x, 0, SHOULDER_Z - 0.005), 0.12, 0.075, 0.07)  # forearm
@@ -64,13 +107,13 @@ def build(a, material, part):
     fur_obj = fur.to_mesh_object("Fur", 0.3)
 
     skin = Meta("SkinMeta", 0.0075)
-    skin.ellipsoid((0, -0.10, 1.17), 0.145, 0.11, 0.105)      # big muzzle
-    skin.ellipsoid((0, -0.085, 1.30), 0.10, 0.06, 0.07)       # eye mask
-    skin.ball((0, -0.185, 1.225), 0.035)                      # nose bump
-    skin.ball((0.012, -0.2, 1.115), 0.024)                    # pursed lips
+    skin.ellipsoid((0, -0.13, 1.17), 0.15, 0.13, 0.11)        # big muzzle, protruding (side view)
+    skin.ellipsoid((0, -0.10, 1.30), 0.10, 0.06, 0.07)        # eye mask
+    skin.ball((0, -0.235, 1.225), 0.035)                      # nose bump
+    skin.ball((0.012, -0.255, 1.115), 0.024)                  # pursed lips
     for x in (1, -1):
         skin.ellipsoid((0.135 * x, 0.0, 1.28), 0.03, 0.05, 0.06)     # ears
-        skin.ellipsoid((0.10 * x, -0.145, 0.965), 0.115, 0.06, 0.1)  # pec plates (touch the belly)
+        skin.ellipsoid((0.10 * x, -0.2, 0.965), 0.115, 0.07, 0.1)    # pec plates (touch the belly)
         # hand: palm entering the forearm, four fingers pointing outward, thumb forward
         skin.ellipsoid((0.695 * x, -0.005, SHOULDER_Z), 0.075, 0.065, 0.055)
         for z in (-0.036, -0.012, 0.012, 0.036):
@@ -81,17 +124,32 @@ def build(a, material, part):
         for i, dx in enumerate((-0.075, -0.025, 0.025, 0.075)):
             skin.ball(((0.19 + dx) * x, -0.20 + 0.012 * abs(i - 1.5), 0.04), 0.034)
         skin.ball(((0.19 + 0.125) * x, -0.08, 0.045), 0.04)            # big toe on the outer side
-    skin.ellipsoid((0, -0.13, 0.77), 0.17, 0.08, 0.17)        # belly plate (blends with the pecs)
+    skin.ellipsoid((0, -0.2, 0.76), 0.17, 0.1, 0.17)          # round belly plate (blends with the pecs)
     skin_obj = skin.to_mesh_object("Skin", 0.35)
 
     parts = [fur_obj, skin_obj]
     for s, x in (("L", 1), ("R", -1)):
-        parts.append(part(f"Eye_{s}", "sphere", (0.075, 0.035, 0.095), (0.045 * x, -0.142, 1.31), eye_m, "head",
+        parts.append(part(f"Eye_{s}", "sphere", (0.075, 0.035, 0.095), (0.045 * x, -0.157, 1.31), eye_m, "head",
                           segments=24))
-        parts.append(part(f"Pupil_{s}", "sphere", (0.02, 0.012, 0.022), (0.04 * x, -0.159, 1.305), pupil_m, "head",
+        parts.append(part(f"Pupil_{s}", "sphere", (0.02, 0.012, 0.022), (0.04 * x, -0.174, 1.305), pupil_m, "head",
                           segments=12))
-        parts.append(part(f"Nostril_{s}", "sphere", (0.022, 0.014, 0.016), (0.02 * x, -0.214, 1.222), dark_m, "head",
+        parts.append(part(f"Nostril_{s}", "sphere", (0.022, 0.014, 0.016), (0.02 * x, -0.264, 1.222), dark_m, "head",
                           segments=12))
+    # Fur tufts: one rigid mesh per bone (the jagged outline of the reference)
+    for s, x in (("L", 1), ("R", -1)):
+        z = SHOULDER_Z
+        parts.append(tuft_object(f"Tufts_Shoulder_{s}", f"upper_arm.{s}", fur_m, lambda bm, x=x, z=z: tuft_ring(
+            bm, (0.16 * x, 0.01, z + 0.03), (0.30 * x, 0.01, z + 0.03), 0.12, 2, 9, 0.06,
+            skip=lambda th, u, v: math.sin(th) * v.z + math.cos(th) * u.z < -0.3)))  # not underneath
+        parts.append(tuft_object(f"Tufts_UpperArm_{s}", f"upper_arm.{s}", fur_m, lambda bm, x=x, z=z: tuft_ring(
+            bm, (0.30 * x, 0, z), (0.48 * x, 0, z), 0.085, 3, 10, 0.055)))
+        parts.append(tuft_object(f"Tufts_Forearm_{s}", f"forearm.{s}", fur_m, lambda bm, x=x, z=z: tuft_ring(
+            bm, (0.48 * x, 0, z - 0.005), (0.64 * x, 0, z - 0.005), 0.07, 3, 10, 0.05)))
+        front = lambda th, u, v: (math.cos(th) * u.y + math.sin(th) * v.y) < -0.7  # keep legs' front clean
+        parts.append(tuft_object(f"Tufts_Thigh_{s}", f"thigh.{s}", fur_m, lambda bm, x=x: tuft_ring(
+            bm, (0.15 * x, 0, 0.47), (0.155 * x, 0, 0.29), 0.13, 2, 12, 0.05, skip=front)))
+        parts.append(tuft_object(f"Tufts_Calf_{s}", f"shin.{s}", fur_m, lambda bm, x=x: tuft_ring(
+            bm, (0.16 * x, 0, 0.29), (0.17 * x, 0, 0.13), 0.13, 2, 12, 0.05, skip=front)))
     for i, (dx, tilt) in enumerate(((0, 0), (0.035, 25), (-0.035, -25))):
         parts.append(part(f"HairTuft_{i}", "cone", (0.05, 0.05, 0.09), (dx, 0.03, 1.455), fur_m, "head",
                           rot=(0, tilt, 0), subsurf=1, segments=12))
