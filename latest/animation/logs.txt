@@ -1,4 +1,4 @@
-Model: in/model.glb  2s 24fps 360x640 samples=8
+Model: in/model.glb  8s 24fps 720x1280 samples=24
 ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
 Blender 4.2.3 LTS
 test_captions_deterministic_and_ordered (tests.test_timeline.TimelineTest.test_captions_deterministic_and_ordered) ... ok
@@ -9,210 +9,457 @@ test_shots_cover_all_frames_without_gaps (tests.test_timeline.TimelineTest.test_
 Ran 3 tests in 0.000s
 
 OK
-18:23:34 | INFO: Data are loaded, start creating Blender stuff
-18:23:34 | INFO: Blender create Mesh node Ear_L
-18:23:34 | INFO: Blender create Mesh node Ear_R
-18:23:34 | INFO: Blender create Mesh node Eye_L
-18:23:34 | INFO: Blender create Mesh node Eye_R
-18:23:34 | INFO: Blender create Mesh node Eyebrow_L
-18:23:34 | INFO: Blender create Mesh node Eyebrow_R
-18:23:34 | INFO: Blender create Mesh node EyeShine_L
-18:23:34 | INFO: Blender create Mesh node EyeShine_R
-18:23:34 | INFO: Blender create Mesh node Forearm_L
-18:23:34 | INFO: Blender create Mesh node Forearm_R
-18:23:34 | INFO: Blender create Mesh node Hair
-18:23:34 | INFO: Blender create Mesh node HairTuft_0
-18:23:34 | INFO: Blender create Mesh node HairTuft_1
-18:23:34 | INFO: Blender create Mesh node HairTuft_2
-18:23:34 | INFO: Blender create Mesh node HairTuft_3
-18:23:34 | INFO: Blender create Mesh node HairTuft_4
-18:23:34 | INFO: Blender create Mesh node HairTuft_5
-18:23:34 | INFO: Blender create Mesh node HairTuft_6
-18:23:34 | INFO: Blender create Mesh node HairTuft_7
-18:23:34 | INFO: Blender create Mesh node HairTuft_8
-18:23:34 | INFO: Blender create Mesh node Hand_L
-18:23:34 | INFO: Blender create Mesh node Hand_R
-18:23:34 | INFO: Blender create Mesh node Head
-18:23:34 | INFO: Blender create Mesh node Mouth
-18:23:34 | INFO: Blender create Mesh node Neck
-18:23:34 | INFO: Blender create Mesh node Nose
-18:23:34 | INFO: Blender create Mesh node Pupil_L
-18:23:34 | INFO: Blender create Mesh node Pupil_R
-18:23:34 | INFO: Blender create Mesh node Shin_L
-18:23:34 | INFO: Blender create Mesh node Shin_R
-18:23:34 | INFO: Blender create Mesh node Shoe_L
-18:23:34 | INFO: Blender create Mesh node Shoe_R
-18:23:34 | INFO: Blender create Mesh node Shorts
-18:23:34 | INFO: Blender create Mesh node ShortsLeg_L
-18:23:34 | INFO: Blender create Mesh node ShortsLeg_R
-18:23:34 | INFO: Blender create Mesh node Sole_L
-18:23:34 | INFO: Blender create Mesh node Sole_R
-18:23:34 | INFO: Blender create Mesh node Thumb_L
-18:23:34 | INFO: Blender create Mesh node Thumb_R
-18:23:34 | INFO: Blender create Mesh node Torso
-18:23:34 | INFO: Blender create Mesh node UpperArm_L
-18:23:34 | INFO: Blender create Mesh node UpperArm_R
-18:23:34 | INFO: glTF import finished in 0.05s
+18:34:59 | INFO: Data are loaded, start creating Blender stuff
+18:34:59 | INFO: Blender create Mesh node Ear_L
+18:34:59 | INFO: Blender create Mesh node Ear_R
+18:34:59 | INFO: Blender create Mesh node Eye_L
+18:34:59 | INFO: Blender create Mesh node Eye_R
+18:34:59 | INFO: Blender create Mesh node Eyebrow_L
+18:34:59 | INFO: Blender create Mesh node Eyebrow_R
+18:34:59 | INFO: Blender create Mesh node EyeShine_L
+18:34:59 | INFO: Blender create Mesh node EyeShine_R
+18:34:59 | INFO: Blender create Mesh node Forearm_L
+18:34:59 | INFO: Blender create Mesh node Forearm_R
+18:34:59 | INFO: Blender create Mesh node Hair
+18:34:59 | INFO: Blender create Mesh node HairTuft_0
+18:34:59 | INFO: Blender create Mesh node HairTuft_1
+18:34:59 | INFO: Blender create Mesh node HairTuft_2
+18:34:59 | INFO: Blender create Mesh node HairTuft_3
+18:34:59 | INFO: Blender create Mesh node HairTuft_4
+18:34:59 | INFO: Blender create Mesh node HairTuft_5
+18:34:59 | INFO: Blender create Mesh node HairTuft_6
+18:34:59 | INFO: Blender create Mesh node HairTuft_7
+18:34:59 | INFO: Blender create Mesh node HairTuft_8
+18:34:59 | INFO: Blender create Mesh node Hand_L
+18:34:59 | INFO: Blender create Mesh node Hand_R
+18:34:59 | INFO: Blender create Mesh node Head
+18:34:59 | INFO: Blender create Mesh node Mouth
+18:34:59 | INFO: Blender create Mesh node Neck
+18:34:59 | INFO: Blender create Mesh node Nose
+18:34:59 | INFO: Blender create Mesh node Pupil_L
+18:34:59 | INFO: Blender create Mesh node Pupil_R
+18:34:59 | INFO: Blender create Mesh node Shin_L
+18:34:59 | INFO: Blender create Mesh node Shin_R
+18:34:59 | INFO: Blender create Mesh node Shoe_L
+18:34:59 | INFO: Blender create Mesh node Shoe_R
+18:34:59 | INFO: Blender create Mesh node Shorts
+18:34:59 | INFO: Blender create Mesh node ShortsLeg_L
+18:34:59 | INFO: Blender create Mesh node ShortsLeg_R
+18:34:59 | INFO: Blender create Mesh node Sole_L
+18:34:59 | INFO: Blender create Mesh node Sole_R
+18:34:59 | INFO: Blender create Mesh node Thumb_L
+18:34:59 | INFO: Blender create Mesh node Thumb_R
+18:34:59 | INFO: Blender create Mesh node Torso
+18:34:59 | INFO: Blender create Mesh node UpperArm_L
+18:34:59 | INFO: Blender create Mesh node UpperArm_R
+18:34:59 | INFO: glTF import finished in 0.09s
 Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0001.png'
-Time: 00:02.40 (Saving: 00:00.06)
+Time: 00:31.87 (Saving: 00:00.18)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0002.png'
-Time: 00:02.34 (Saving: 00:00.02)
+Time: 00:30.20 (Saving: 00:00.11)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0003.png'
-Time: 00:02.31 (Saving: 00:00.02)
+Time: 00:30.43 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0004.png'
-Time: 00:02.34 (Saving: 00:00.02)
+Time: 00:30.26 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0005.png'
-Time: 00:02.63 (Saving: 00:00.02)
+Time: 00:30.29 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0006.png'
-Time: 00:02.48 (Saving: 00:00.02)
+Time: 00:30.30 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0007.png'
-Time: 00:02.33 (Saving: 00:00.02)
+Time: 00:30.28 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0008.png'
-Time: 00:02.34 (Saving: 00:00.02)
+Time: 00:30.34 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0009.png'
-Time: 00:02.32 (Saving: 00:00.02)
+Time: 00:30.38 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0010.png'
-Time: 00:02.35 (Saving: 00:00.02)
+Time: 00:30.31 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0011.png'
-Time: 00:02.33 (Saving: 00:00.02)
+Time: 00:30.30 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0012.png'
-Time: 00:02.33 (Saving: 00:00.02)
+Time: 00:30.37 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0013.png'
-Time: 00:02.32 (Saving: 00:00.02)
+Time: 00:30.45 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0014.png'
-Time: 00:02.38 (Saving: 00:00.02)
+Time: 00:30.45 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0015.png'
-Time: 00:02.37 (Saving: 00:00.02)
+Time: 00:30.50 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0016.png'
-Time: 00:02.35 (Saving: 00:00.02)
+Time: 00:30.48 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0017.png'
-Time: 00:02.84 (Saving: 00:00.02)
+Time: 00:30.54 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0018.png'
-Time: 00:02.88 (Saving: 00:00.02)
+Time: 00:30.57 (Saving: 00:00.11)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0019.png'
-Time: 00:02.88 (Saving: 00:00.02)
+Time: 00:30.55 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0020.png'
-Time: 00:02.87 (Saving: 00:00.02)
+Time: 00:30.52 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0021.png'
-Time: 00:02.95 (Saving: 00:00.02)
+Time: 00:30.51 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0022.png'
-Time: 00:02.90 (Saving: 00:00.02)
+Time: 00:30.52 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0023.png'
-Time: 00:02.92 (Saving: 00:00.02)
+Time: 00:30.58 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0024.png'
-Time: 00:02.91 (Saving: 00:00.02)
+Time: 00:30.63 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0025.png'
-Time: 00:02.89 (Saving: 00:00.02)
+Time: 00:30.70 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0026.png'
-Time: 00:02.86 (Saving: 00:00.02)
+Time: 00:30.68 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0027.png'
-Time: 00:02.87 (Saving: 00:00.02)
+Time: 00:30.81 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0028.png'
-Time: 00:02.88 (Saving: 00:00.02)
+Time: 00:30.79 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0029.png'
-Time: 00:02.82 (Saving: 00:00.02)
+Time: 00:30.77 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0030.png'
-Time: 00:02.81 (Saving: 00:00.02)
+Time: 00:30.73 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0031.png'
-Time: 00:02.84 (Saving: 00:00.02)
+Time: 00:30.74 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0032.png'
-Time: 00:02.80 (Saving: 00:00.02)
+Time: 00:30.81 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0033.png'
-Time: 00:02.44 (Saving: 00:00.02)
+Time: 00:30.91 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0034.png'
-Time: 00:02.49 (Saving: 00:00.02)
+Time: 00:30.92 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0035.png'
-Time: 00:02.49 (Saving: 00:00.02)
+Time: 00:30.97 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0036.png'
-Time: 00:02.55 (Saving: 00:00.02)
+Time: 00:30.90 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0037.png'
-Time: 00:02.52 (Saving: 00:00.02)
+Time: 00:31.07 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0038.png'
-Time: 00:02.59 (Saving: 00:00.02)
+Time: 00:30.98 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0039.png'
-Time: 00:02.66 (Saving: 00:00.02)
+Time: 00:31.08 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0040.png'
-Time: 00:02.72 (Saving: 00:00.02)
+Time: 00:31.04 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0041.png'
-Time: 00:02.69 (Saving: 00:00.02)
+Time: 00:31.03 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0042.png'
-Time: 00:02.71 (Saving: 00:00.02)
+Time: 00:31.01 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0043.png'
-Time: 00:02.69 (Saving: 00:00.02)
+Time: 00:31.23 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0044.png'
-Time: 00:02.64 (Saving: 00:00.02)
+Time: 00:31.27 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0045.png'
-Time: 00:02.67 (Saving: 00:00.02)
+Time: 00:31.26 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0046.png'
-Time: 00:02.71 (Saving: 00:00.02)
+Time: 00:31.33 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0047.png'
-Time: 00:02.74 (Saving: 00:00.02)
+Time: 00:31.27 (Saving: 00:00.10)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0048.png'
-Time: 00:02.69 (Saving: 00:00.02)
+Time: 00:31.40 (Saving: 00:00.10)
 
-[PASS] model_imported
-[PASS] camera
-[PASS] lights
-[PASS] floor_shadow_catcher
-[PASS] frame_count
-[PASS] camera_changes_between_shots
-[PASS] captions
-rig: 17 bones (skeletal animation)
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0049.png'
+Time: 00:31.35 (Saving: 00:00.10)
 
-Blender quit
-Render time: 126s
-Frames: 48 / 48
-codec_name=h264
-width=360
-height=640
-pix_fmt=yuv420p
-nb_frames=48
-duration=2.000000
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0050.png'
+Time: 00:31.40 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0051.png'
+Time: 00:31.42 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0052.png'
+Time: 00:31.59 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0053.png'
+Time: 00:31.67 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0054.png'
+Time: 00:31.66 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0055.png'
+Time: 00:31.75 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0056.png'
+Time: 00:31.82 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0057.png'
+Time: 00:31.65 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0058.png'
+Time: 00:31.79 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0059.png'
+Time: 00:31.74 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0060.png'
+Time: 00:31.75 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0061.png'
+Time: 00:31.71 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0062.png'
+Time: 00:31.77 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0063.png'
+Time: 00:31.68 (Saving: 00:00.10)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0064.png'
+Time: 00:31.70 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0065.png'
+Time: 00:42.50 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0066.png'
+Time: 00:42.48 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0067.png'
+Time: 00:42.45 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0068.png'
+Time: 00:42.48 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0069.png'
+Time: 00:42.43 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0070.png'
+Time: 00:42.56 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0071.png'
+Time: 00:42.58 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0072.png'
+Time: 00:42.65 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0073.png'
+Time: 00:42.70 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0074.png'
+Time: 00:42.66 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0075.png'
+Time: 00:42.74 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0076.png'
+Time: 00:42.79 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0077.png'
+Time: 00:42.82 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0078.png'
+Time: 00:42.92 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0079.png'
+Time: 00:42.90 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0080.png'
+Time: 00:42.95 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0081.png'
+Time: 00:43.08 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0082.png'
+Time: 00:43.13 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0083.png'
+Time: 00:43.15 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0084.png'
+Time: 00:43.13 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0085.png'
+Time: 00:43.21 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0086.png'
+Time: 00:43.35 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0087.png'
+Time: 00:43.23 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0088.png'
+Time: 00:43.30 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0089.png'
+Time: 00:43.37 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0090.png'
+Time: 00:43.44 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0091.png'
+Time: 00:43.56 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0092.png'
+Time: 00:43.63 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0093.png'
+Time: 00:43.65 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0094.png'
+Time: 00:43.59 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0095.png'
+Time: 00:43.69 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0096.png'
+Time: 00:43.73 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0097.png'
+Time: 00:43.75 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0098.png'
+Time: 00:43.77 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0099.png'
+Time: 00:43.83 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0100.png'
+Time: 00:43.76 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0101.png'
+Time: 00:43.83 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0102.png'
+Time: 00:43.68 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0103.png'
+Time: 00:43.65 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0104.png'
+Time: 00:43.91 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0105.png'
+Time: 00:43.58 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0106.png'
+Time: 00:43.40 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0107.png'
+Time: 00:43.38 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0108.png'
+Time: 00:43.37 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0109.png'
+Time: 00:43.12 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0110.png'
+Time: 00:43.12 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0111.png'
+Time: 00:43.10 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0112.png'
+Time: 00:42.92 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0113.png'
+Time: 00:42.83 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0114.png'
+Time: 00:42.92 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0115.png'
+Time: 00:42.80 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0116.png'
+Time: 00:42.69 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0117.png'
+Time: 00:42.66 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0118.png'
+Time: 00:42.62 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0119.png'
+Time: 00:42.61 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0120.png'
+Time: 00:42.55 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0121.png'
+Time: 00:42.56 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0122.png'
+Time: 00:42.50 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0123.png'
+Time: 00:42.44 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0124.png'
+Time: 00:42.56 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0125.png'
+Time: 00:42.34 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0126.png'
+Time: 00:42.39 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0127.png'
+Time: 00:42.42 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0128.png'
+Time: 00:42.43 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0129.png'
+Time: 00:34.75 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0130.png'
+Time: 00:34.76 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0131.png'
+Time: 00:34.78 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0132.png'
+Time: 00:34.77 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0133.png'
+Time: 00:34.92 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0134.png'
+Time: 00:34.91 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0135.png'
+Time: 00:34.91 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0136.png'
+Time: 00:34.94 (Saving: 00:00.11)
+
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/anim_out/frames/0137.png
