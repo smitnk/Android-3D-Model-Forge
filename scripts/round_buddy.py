@@ -60,8 +60,8 @@ def face_texture():
     core = m.copy()
     for _ in range(4):  # erode: the outer 4 px are the drawn outline
         core = core & np.roll(core, 1, 0) & np.roll(core, -1, 0) & np.roll(core, 1, 1) & np.roll(core, -1, 1)
-    fill = np.median(px[core][:, :3], axis=0)
-    rgb = px[..., :3].copy()
+    rgb = px[..., :3] * 0.9  # renders read lighter than the drawing; tint face and skin alike
+    fill = np.median(rgb[core], axis=0)
     rgb[~core] = fill
     out = bpy.data.images.new("FaceTexture", w, hh, alpha=False)
     out.pixels[:] = np.dstack([rgb, np.ones((hh, w))]).ravel()
@@ -87,15 +87,14 @@ def build(a, material, part):
     body = Meta("BodyMeta", 0.008)
     body.capsule((0, 0, h(0.56)), (0, 0, h(0.68)), h(0.07))           # neck (enters the head)
     body.ellipsoid((0, 0.005, h(0.50)), h(0.11), h(0.10), h(0.11))    # chest / shoulders
-    body.ellipsoid((0, 0.01, h(0.37)), h(0.145), h(0.11), h(0.10))    # soft pear hips
+    body.ellipsoid((0, 0.01, h(0.38)), h(0.145), h(0.11), h(0.09))    # soft pear hips (ends above crotch)
     for x in (1, -1):
         # arm, horizontal (T-pose), slightly thicker toward the shoulder
-        body.capsule((h(0.08) * x, 0, SHOULDER_Z), (h(0.30) * x, 0, SHOULDER_Z), h(0.038))
-        body.capsule((h(0.28) * x, 0, SHOULDER_Z), (h(0.45) * x, 0, SHOULDER_Z), h(0.034))
+        body.capsule((h(0.08) * x, 0, SHOULDER_Z), (h(0.45) * x, 0, SHOULDER_Z), h(0.036))
         body.ellipsoid((h(0.50) * x, 0, SHOULDER_Z), h(0.06), h(0.042), h(0.048))    # mitten
         body.ellipsoid((h(0.46) * x, -h(0.045), SHOULDER_Z), h(0.025), h(0.025), h(0.02))  # thumb, forward
-        body.capsule((h(0.075) * x, 0, h(0.33)), (h(0.078) * x, 0, h(0.09)), h(0.062))  # leg
-        body.ellipsoid((h(0.09) * x, -h(0.03), h(0.04)), h(0.085), h(0.14), h(0.045))  # foot, toe forward
+        body.capsule((h(0.082) * x, 0, h(0.31)), (h(0.085) * x, 0, h(0.09)), h(0.054))  # leg (gap kept)
+        body.ellipsoid((h(0.10) * x, -h(0.03), h(0.04)), h(0.078), h(0.14), h(0.045))  # foot, toe forward
     body_obj = body.to_mesh_object("Body", 0.4)
 
     parts = [head_obj, body_obj]

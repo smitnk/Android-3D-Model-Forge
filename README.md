@@ -5,63 +5,80 @@ builds the model with Python, checks it automatically, and hands you a `.glb` (p
 No PC, no local Blender, no API keys, no paid services.
 
 <p align="center">
-  <img src="docs/preview/forge-kid-front.png" width="45%" alt="Forge Kid, front view, T-pose — rendered by Blender in CI">
-  <img src="docs/preview/forge-kid-three-quarter.png" width="45%" alt="Forge Kid, three-quarter view — rendered by Blender in CI">
-</p>
-<p align="center"><i>"Forge Kid" (<code>chibi_humanoid</code>) — generated, rigged, validated and rendered by Blender 4.2 LTS inside GitHub Actions.</i></p>
-
-<p align="center">
-  <img src="docs/preview/clay-chibi-front.png" width="31%" alt="Clay Chibi, front view, T-pose">
-  <img src="docs/preview/clay-chibi-three-quarter.png" width="31%" alt="Clay Chibi, three-quarter view">
-  <img src="docs/preview/clay-chibi-back.png" width="31%" alt="Clay Chibi, back view">
-</p>
-<p align="center">
+  <img src="docs/preview/round-buddy-front.png" width="31%" alt="Round Buddy, front view, T-pose">
   <img src="docs/preview/gorilla-front.png" width="31%" alt="Gorilla, front view, T-pose">
-  <img src="docs/preview/gorilla-three-quarter.png" width="31%" alt="Gorilla, three-quarter view">
-  <img src="docs/preview/gorilla-back.png" width="31%" alt="Gorilla, back view">
+  <img src="docs/preview/forge-kid-front.png" width="31%" alt="Forge Kid, front view, T-pose">
 </p>
-<p align="center"><i>"Gorilla" (<code>gorilla</code>) — carved from the owner's turnaround sheet (img2threejs visual-hull method) and textured with the drawing itself.</i></p>
-
-<p align="center"><i>"Clay Chibi" (<code>clay_chibi</code>) — a one-piece, sculpt-style base mesh with carved eye sockets, fingers and block boots.</i></p>
+<p align="center"><i>Round Buddy, Gorilla and Forge Kid — generated, rigged, validated and rendered by Blender 4.2 LTS inside GitHub Actions.</i></p>
 
 ## Model gallery — download and check
 
 | | Model | Download (ZIP: GLB + BLEND + previews + report) | Single files |
 |---|---|---|---|
-| <img src="docs/preview/gorilla-front.png" width="160" alt="Gorilla preview"> | **Gorilla** — carved from a turnaround sheet, drawing projected as texture, 17-bone rig | [gorilla.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.blend) · [report](docs/preview/gorilla-REPORT.md) |
+| <img src="docs/preview/round-buddy-front.png" width="160" alt="Round Buddy preview"> | **Round Buddy** — built from a 24-view turnaround sheet: measured proportions, T-pose arms, face projected from the drawing | [round-buddy.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/round-buddy.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/round-buddy.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/round-buddy.blend) · [report](docs/preview/round-buddy-REPORT.md) |
+| <img src="docs/preview/gorilla-front.png" width="160" alt="Gorilla preview"> | **Gorilla** — carved from a turnaround sheet (visual hull), drawing projected as texture, 17-bone rig | [gorilla.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.blend) · [report](docs/preview/gorilla-REPORT.md) |
 | <img src="docs/preview/forge-kid-front.png" width="160" alt="Forge Kid preview"> | **Forge Kid** — the first character: dressed chibi, 17-bone rig | [forge-kid.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.blend) · [report](docs/preview/forge-kid-REPORT.md) |
-| <img src="docs/preview/clay-chibi-front.png" width="160" alt="Clay Chibi preview"> | **Clay Chibi** — one-piece sculpt base mesh | [clay-chibi.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.blend) · [report](docs/preview/clay-chibi-REPORT.md) |
 
 **Check a model on Android:** download the ZIP, open it in your Files app, and open the `.glb` with any glTF / 3D
-viewer app (or drag it into a web glTF viewer). The ZIP also has front, three-quarter and back renders and the
-validation report.
+viewer app (or a web glTF viewer). The ZIP also has front, three-quarter and back renders and the validation report.
+All files live on the [`model-latest` Release](https://github.com/smitnk/Android-3D-Model-Forge/releases/tag/model-latest) and are
+replaced each time a model is published.
 
-### Gorilla views
+<details><summary>More views</summary>
 
 <p align="center">
-  <img src="docs/preview/gorilla-front.png" width="31%" alt="Gorilla front">
+  <img src="docs/preview/round-buddy-three-quarter.png" width="31%" alt="Round Buddy three-quarter">
+  <img src="docs/preview/round-buddy-back.png" width="31%" alt="Round Buddy back">
+</p>
+<p align="center">
   <img src="docs/preview/gorilla-three-quarter.png" width="31%" alt="Gorilla three-quarter">
   <img src="docs/preview/gorilla-back.png" width="31%" alt="Gorilla back">
 </p>
+<p align="center">
+  <img src="docs/preview/forge-kid-three-quarter.png" width="31%" alt="Forge Kid three-quarter">
+  <img src="docs/preview/forge-kid-back.png" width="31%" alt="Forge Kid back">
+</p>
+</details>
 
-## Download the example models
+## Make your own character with Claude (or any AI coding agent)
 
-| Model | GLB (rigged, for viewers/engines) | BLEND (editable) | Report |
-|---|---|---|---|
-| Forge Kid | [forge-kid.glb](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.glb) | [forge-kid.blend](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/forge-kid.blend) | [report](docs/preview/forge-kid-REPORT.md) |
-| Gorilla | [gorilla.glb](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.glb) | [gorilla.blend](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.blend) | [report](docs/preview/gorilla-REPORT.md) |
-| Clay Chibi | [clay-chibi.glb](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.glb) | [clay-chibi.blend](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/clay-chibi.blend) | [report](docs/preview/clay-chibi-REPORT.md) |
+You need only a GitHub account and a phone or browser. The AI writes the generator; GitHub runs Blender.
 
-These files live on the [`model-latest` Release](https://github.com/smitnk/Android-3D-Model-Forge/releases/tag/model-latest)
-and are replaced each time a new model is published.
+1. **Get your own copy.** Open this repository on GitHub and tap **Fork** (or, on a PC, `git clone
+   https://github.com/smitnk/Android-3D-Model-Forge`). In your copy, open **Actions** and tap **Enable workflows**.
+2. **Prepare a reference.** The best input is a turnaround / model sheet of your *own* (or AI-generated, original)
+   character: a front view and a 90° side view, ideally also a T-pose and a back view. One front image also works;
+   the AI will tell you what it had to assume.
+3. **Open your AI agent on your copy.**
+   - **Claude** (claude.ai or the Claude app with code access, or Claude Code): connect GitHub, attach your copy of
+     the repository and the reference image.
+   - **Any other agent** (Codex, Cursor, Gemini CLI, Copilot agent, OpenCode, …): open your copy as the workspace and
+     attach the image. Nothing here is Claude-specific.
+4. **Give it this prompt** (edit the name):
+
+   > Read `skills/android-3d-model-forge/SKILL.md`, `skills/img2threejs/SKILL.md` and
+   > `skills/blender-kiln/references/reference-fidelity.md`. Build a new generator `scripts/<name>.py` for the
+   > character in the attached image: crop the views into `assets/reference/<name>/` with alpha masks, measure the
+   > proportions from the pixels, build the model in a T-pose, register the type in `generate_model.py`,
+   > `validate_model.py` and the workflow, push to `main`, read the CI result on the `ci-results` branch,
+   > fix any failure, compare the previews with the reference, and add the model to the README gallery.
+
+5. **Wait for the cloud build** (~5 minutes). Every push to `main` that touches `scripts/` or
+   `assets/reference/` runs Blender, checks the model (T-pose, scale, symmetry, rig, file structure) and publishes it.
+6. **Download** your model from the gallery / Release (ZIP with GLB + BLEND), or from the run's **Artifacts**.
+7. **Iterate:** tell the agent what looks wrong ("head too small", "feet too flat"); it edits the generator and
+   pushes again.
+
+Patterns the agent can copy: `scripts/round_buddy.py` (measured shapes + projected face), `scripts/gorilla.py`
+(silhouette carving + projected drawing, for sheets with T-pose and side views), `generate_model.py` → `build_character`
+(multi-part dressed character). Only use characters you have the rights to.
 
 ## Features
 
-- **Three generators**, picked with the `model_type` option:
+- **Generators**, picked with the `model_type` option:
   - `gorilla` — carved from a turnaround sheet: T-pose front silhouette x side-view depth (`scripts/hull.py`),
     voxel-remeshed to even quads, with the T-pose front/back drawings projected on as the texture.
-  - `clay_chibi` — one-piece sculpt-style base mesh built from metaballs: big round head with carved angry eye sockets
-    and a pointed nose, slim body, fingers, flared legs and block boots, blended skin weights.
+  - `round_buddy` — soft cartoon figure measured from a turnaround sheet, face projected from the drawing.
   - `chibi_humanoid` — dressed cartoon character — oversized head, face (eyes, pupils, brows, nose, mouth, ears),
   spiky hair, shirt, shorts, arms, hands with thumbs, legs, shoes. ~42 parts, ~25k triangles, 10 materials.
 - **Always a T-pose** — enforced by the generator and re-checked on the exported file.
@@ -78,7 +95,7 @@ and are replaced each time a new model is published.
 1. Open this repository in your phone's browser (Chrome works; tap **⋮ → Desktop site** if a button is hidden).
 2. Tap the **Actions** tab.
 3. Tap **Generate 3D Model** (on mobile you may need to tap **All workflows** first).
-4. Tap **Run workflow**. Pick a **model type** (`chibi_humanoid`, `clay_chibi` or `gorilla`). Change the name or colours if you like (colours are `#RRGGBB`, e.g. `#2E9E5B`).
+4. Tap **Run workflow**. Pick a **model type** (`chibi_humanoid`, `gorilla` or `round_buddy`). Change the name or colours if you like (colours are `#RRGGBB`, e.g. `#2E9E5B`).
    Tick **publish** if you want it to replace the example above. Tap the green **Run workflow** button.
 5. Wait 3–6 minutes. Refresh; when the run shows a green ✓, tap it.
 6. The **Summary** page shows the model report. Scroll down to **Artifacts** and tap `model-<number>`.
@@ -170,8 +187,8 @@ Details: [modeling guidelines](skills/android-3d-model-forge/references/modeling
 
 ## Known limitations and plans
 
-- Three generators so far (`chibi_humanoid`, `clay_chibi`, `gorilla`). The gorilla is shaped from two views (front + side), so concavities no silhouette shows are carried only by the texture; side-facing surfaces show some texture stretching; no expressions or action poses yet. Creatures, props and clothing variants are planned.
-- `chibi_humanoid` skinning is **rigid per part** (each part follows one bone); `clay_chibi` uses blended
+- Main generators: `chibi_humanoid`, `gorilla`, `round_buddy` (`clay_chibi` remains as an unpublished example). The gorilla is shaped from two views (front + side), so concavities no silhouette shows are carried only by the texture; side-facing surfaces show some texture stretching; no expressions or action poses yet. Creatures, props and clothing variants are planned.
+- `chibi_humanoid` skinning is **rigid per part** (each part follows one bone); `gorilla` and `round_buddy` use blended
   distance-based weights, which bend more smoothly but are not hand-painted production weights.
 - No image-to-3D / AI reconstruction yet. It will be an optional integration and won't be claimed until tested.
 - No animations are exported yet.
