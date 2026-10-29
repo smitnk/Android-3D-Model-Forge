@@ -1,0 +1,81 @@
+{
+  "generator": "clay_chibi",
+  "generator_version": "0.2.0",
+  "blender": "4.2.3 LTS",
+  "name": "Clay Chibi",
+  "slug": "clay-chibi",
+  "colors": {
+    "skin": "default",
+    "hair": "#3B2417",
+    "shirt": "#E8553D",
+    "shorts": "#2F4A8A",
+    "shoes": "#F4F1EA"
+  },
+  "parts": 2,
+  "triangles": 24764,
+  "vertices": 12386,
+  "materials": [
+    "Clay"
+  ],
+  "bbox_min_m": [
+    -0.5903,
+    -0.213,
+    -0.0
+  ],
+  "bbox_max_m": [
+    0.5903,
+    0.18,
+    1.2749
+  ],
+  "rig": {
+    "bones": 17,
+    "skinning": "blended distance weights"
+  },
+  "tpose_selfcheck": {
+    "arm_angle_deg_L": 0.077,
+    "arm_angle_deg_R": 0.173,
+    "pass": true
+  },
+  "deformation_selftest": {
+    "hand_moved_m": 0.3446,
+    "rest_of_body_drift_m": 0.0,
+    "hand_verts": 406,
+    "pass": true
+  },
+  "files": {
+    "glb": "clay-chibi.glb",
+    "blend": "clay-chibi.blend",
+    "previews": [
+      {
+        "view": "front",
+        "file": "clay-chibi-front.png",
+        "frame_extent": [
+          0.204,
+          0.796,
+          0.18,
+          0.828
+        ]
+      },
+      {
+        "view": "three-quarter",
+        "file": "clay-chibi-three-quarter.png",
+        "frame_extent": [
+          0.27,
+          0.768,
+          0.127,
+          0.822
+        ]
+      },
+      {
+        "view": "back",
+        "file": "clay-chibi-back.png",
+        "frame_extent": [
+          0.209,
+          0.791,
+          0.185,
+          0.824
+        ]
+      }
+    ]
+  }
+}

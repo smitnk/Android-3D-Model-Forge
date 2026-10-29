@@ -1,0 +1,331 @@
+Blender 4.2.3 LTS
+	build date: 2024-10-14
+	build time: 23:31:34
+	build commit date: 2024-10-14
+	build commit time: 15:20
+	build hash: 0e22e4fcea03
+	build branch: blender-v4.2-release
+	build platform: Linux
+	build type: Release
+	build c flags:  -Wall -Werror=implicit-function-declaration -Wstrict-prototypes -Werror=return-type -Werror=vla -Wmissing-prototypes -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wlogical-op -Wundef -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Wformat-signedness -Wrestrict -Wno-stringop-overread -Wno-stringop-overflow -Wnonnull -Wabsolute-value -Wuninitialized -Wredundant-decls -Wshadow -Wimplicit-fallthrough=5 -Wno-error=unused-but-set-variable  -march=x86-64-v2 -std=gnu11 -pipe -fPIC -funsigned-char -fno-strict-aliasing -ffp-contract=off  
+	build c++ flags:  -Wuninitialized -Wredundant-decls -Wall -Wno-invalid-offsetof -Wno-sign-compare -Wlogical-op -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Werror=return-type -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wundef -Wcomma-subscript -Wformat-signedness -Wrestrict -Wno-suggest-override -Wuninitialized -Wno-stringop-overread -Wno-stringop-overflow -Wimplicit-fallthrough=5 -Wundef -Wmissing-declarations  -march=x86-64-v2 -pipe -fPIC -funsigned-char -fno-strict-aliasing -ffp-contract=off  
+	build link flags:  -Wl,--version-script='/home/blender/git/blender-v420/blender.git/source/creator/symbols_unix.map'
+	build system: CMake
+test_missing_material_counted (test_glb_inspect.TestGLBInspect.test_missing_material_counted) ... ok
+test_rejects_bad_magic (test_glb_inspect.TestGLBInspect.test_rejects_bad_magic) ... ok
+test_rejects_length_mismatch (test_glb_inspect.TestGLBInspect.test_rejects_length_mismatch) ... ok
+test_report_renders (test_glb_inspect.TestGLBInspect.test_report_renders) ... ok
+test_valid_triangle (test_glb_inspect.TestGLBInspect.test_valid_triangle) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK
+08:39:34 | INFO: Starting glTF 2.0 export
+08:39:34 | INFO: Extracting primitive: Body
+08:39:34 | INFO: Primitives created: 1
+08:39:34 | INFO: Extracting primitive: Head
+08:39:34 | INFO: Primitives created: 1
+08:39:34 | INFO: Finished glTF 2.0 export in 0.05036163330078125 s
+Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
+Info: Total files 0 | Changed 0 | Failed 0
+Fra:1 Mem:16.68M (Peak 16.68M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
+Fra:1 Mem:16.68M (Peak 16.68M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
+Fra:1 Mem:16.97M (Peak 16.97M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:18.36M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:16.86M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:16.87M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:16.87M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:16.87M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:17.33M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.14M, Peak:0.14M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.14M, Peak:0.14M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.90M, Peak:0.90M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.01 | Mem:1.73M, Peak:2.48M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.01 | Mem:1.73M, Peak:2.48M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:1.73M, Peak:2.48M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.58M, Peak:2.66M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.01 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:64.73M (Peak 64.73M) | Time:00:00.24 | Remaining:00:10.70 | Mem:49.05M, Peak:49.05M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:84.26M (Peak 113.56M) | Time:00:16.31 | Mem:49.05M, Peak:49.05M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:84.26M (Peak 113.56M) | Time:00:16.31 | Mem:49.05M, Peak:49.05M | Scene, ViewLayer | Finished
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/clay-chibi-front.png'
+Time: 00:16.36 (Saving: 00:00.04)
+
+Fra:1 Mem:16.68M (Peak 16.68M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
+Fra:1 Mem:16.68M (Peak 16.68M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:18.36M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:16.86M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:16.87M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:16.87M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:16.87M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:17.33M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.14M, Peak:0.14M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.14M, Peak:0.14M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.90M, Peak:0.90M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:1.73M, Peak:2.48M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:1.73M, Peak:2.48M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:1.73M, Peak:2.48M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.66M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:64.73M (Peak 64.73M) | Time:00:00.25 | Remaining:00:11.83 | Mem:49.05M, Peak:49.05M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:84.26M (Peak 113.56M) | Time:00:17.35 | Mem:49.05M, Peak:49.05M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:84.26M (Peak 113.56M) | Time:00:17.35 | Mem:49.05M, Peak:49.05M | Scene, ViewLayer | Finished
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/clay-chibi-three-quarter.png'
+Time: 00:17.39 (Saving: 00:00.04)
+
+Fra:1 Mem:16.68M (Peak 16.68M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Head
+Fra:1 Mem:16.68M (Peak 16.68M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Body
+Fra:1 Mem:16.82M (Peak 16.82M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Floor
+Fra:1 Mem:18.36M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:16.86M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:16.87M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:16.87M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:16.87M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:16.95M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:17.33M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.14M, Peak:0.14M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.14M, Peak:0.14M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:0.90M, Peak:0.90M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:1.73M, Peak:2.48M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:17.47M (Peak 18.36M) | Time:00:00.00 | Mem:1.73M, Peak:2.48M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:1.73M, Peak:2.48M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.58M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.58M, Peak:2.66M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:18.32M (Peak 18.36M) | Time:00:00.00 | Mem:2.66M, Peak:2.66M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:64.73M (Peak 64.73M) | Time:00:00.20 | Remaining:00:09.15 | Mem:49.05M, Peak:49.05M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:84.26M (Peak 113.56M) | Time:00:14.93 | Mem:49.05M, Peak:49.05M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:84.26M (Peak 113.56M) | Time:00:14.93 | Mem:49.05M, Peak:49.05M | Scene, ViewLayer | Finished
+Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/clay-chibi-back.png'
+Time: 00:14.97 (Saving: 00:00.04)
+
+clay_chibi: carved 110 eye-socket vertices
+INFO Draco mesh compression is available, use library at /home/runner/blender/4.2/python/lib/python3.11/site-packages/libextern_draco.so
+
+Info: Saved "clay-chibi.blend"
+{
+  "generator": "clay_chibi",
+  "generator_version": "0.2.0",
+  "blender": "4.2.3 LTS",
+  "name": "Clay Chibi",
+  "slug": "clay-chibi",
+  "colors": {
+    "skin": "default",
+    "hair": "#3B2417",
+    "shirt": "#E8553D",
+    "shorts": "#2F4A8A",
+    "shoes": "#F4F1EA"
+  },
+  "parts": 2,
+  "triangles": 24764,
+  "vertices": 12386,
+  "materials": [
+    "Clay"
+  ],
+  "bbox_min_m": [
+    -0.5903,
+    -0.213,
+    -0.0
+  ],
+  "bbox_max_m": [
+    0.5903,
+    0.18,
+    1.2749
+  ],
+  "rig": {
+    "bones": 17,
+    "skinning": "blended distance weights"
+  },
+  "tpose_selfcheck": {
+    "arm_angle_deg_L": 0.077,
+    "arm_angle_deg_R": 0.173,
+    "pass": true
+  },
+  "deformation_selftest": {
+    "hand_moved_m": 0.3446,
+    "rest_of_body_drift_m": 0.0,
+    "hand_verts": 406,
+    "pass": true
+  },
+  "files": {
+    "glb": "clay-chibi.glb",
+    "blend": "clay-chibi.blend",
+    "previews": [
+      {
+        "view": "front",
+        "file": "clay-chibi-front.png",
+        "frame_extent": [
+          0.204,
+          0.796,
+          0.18,
+          0.828
+        ]
+      },
+      {
+        "view": "three-quarter",
+        "file": "clay-chibi-three-quarter.png",
+        "frame_extent": [
+          0.27,
+          0.768,
+          0.127,
+          0.822
+        ]
+      },
+      {
+        "view": "back",
+        "file": "clay-chibi-back.png",
+        "frame_extent": [
+          0.209,
+          0.791,
+          0.185,
+          0.824
+        ]
+      }
+    ]
+  }
+}
+
+Blender quit
+{
+  "valid": true,
+  "bytes": 699784,
+  "meshes": 2,
+  "mesh_nodes": [
+    "Body",
+    "Head"
+  ],
+  "vertices": 12386,
+  "triangles": 24764,
+  "materials": [
+    "Clay"
+  ],
+  "primitives_without_material": 0,
+  "skins": 1,
+  "joints": [
+    "foot.L",
+    "foot.R",
+    "forearm.L",
+    "forearm.R",
+    "hand.L",
+    "hand.R",
+    "head",
+    "neck",
+    "pelvis",
+    "root",
+    "shin.L",
+    "shin.R",
+    "spine",
+    "thigh.L",
+    "thigh.R",
+    "upper_arm.L",
+    "upper_arm.R"
+  ],
+  "skinned_primitives": 2,
+  "generator": "Khronos glTF Blender I/O v4.2.70"
+}
+08:40:23 | INFO: Data are loaded, start creating Blender stuff
+08:40:23 | INFO: Blender create Mesh node Body
+08:40:23 | INFO: Blender create Mesh node Head
+08:40:23 | INFO: glTF import finished in 0.04s
+Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
+[PASS] glb_exists_nonempty out/clay-chibi.glb
+[PASS] glb_structure_valid 2 meshes, 12386 verts, 24764 tris
+[FAIL] materials_present Clay
+[PASS] materials_assigned 0 primitives without material
+[PASS] size_reasonable 699784 bytes
+[PASS] expected_parts_present 2 parts
+[PASS] geometry_finite 
+[PASS] bbox_nonzero size (1.181, 0.393, 1.275) m
+[PASS] scale_usable height 1.275 m (expected 0.5-3.0)
+[PASS] grounded min z -0.0000
+[PASS] centered center x 0.0000, y -0.0165
+[PASS] upright height 1.275 > depth 0.393
+[PASS] no_degenerate_parts 
+[PASS] geom_tpose_arm_L forearm/hand 0.84 deg from horizontal vs upper arm (max 8.0)
+[PASS] geom_arm_is_limb_L arm band vertical thickness 0.066 m
+[PASS] geom_leg_vertical_L leg centre drift 0.0039 m between z 0.15 and 0.28
+[PASS] geom_foot_forward_L foot length 0.180 > width 0.110, toe at y -0.125
+[PASS] geom_tpose_arm_R forearm/hand 0.95 deg from horizontal vs upper arm (max 8.0)
+[PASS] geom_arm_is_limb_R arm band vertical thickness 0.066 m
+[PASS] geom_leg_vertical_R leg centre drift 0.0046 m between z 0.15 and 0.28
+[PASS] geom_foot_forward_R foot length 0.180 > width 0.110, toe at y -0.125
+[PASS] geom_left_right_symmetry hand mirror error 0.00048 m
+[PASS] geom_chibi_head head+neck above shoulders = 39% of height
+[PASS] geom_faces_forward front-most head point at x 0.004, y -0.213 (Blender -Y = glTF +Z front)
+[PASS] geom_tpose_span span 1.181 m vs height 1.275 m
+[PASS] skin_in_glb 1 skins, 2 skinned primitives
+[PASS] armature_present 1 armatures
+[PASS] expected_bones 17 bones
+[PASS] meshes_bound_to_armature all meshes skinned
+[PASS] rest_pose_arm_bones_horizontal_L upper_arm->hand dir (1.0, -0.0, 0.0)
+[PASS] rest_pose_leg_bones_vertical_L thigh->foot dir (0.062, -0.0, -0.998)
+[PASS] rest_pose_arm_bones_horizontal_R upper_arm->hand dir (-1.0, -0.0, 0.0)
+[PASS] rest_pose_leg_bones_vertical_R thigh->foot dir (-0.062, -0.0, -0.998)
+VALIDATION FAIL: 32/33 checks passed
