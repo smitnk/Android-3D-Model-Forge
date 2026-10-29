@@ -1,0 +1,84 @@
+{
+  "generator": "snow_buddy",
+  "generator_version": "0.2.0",
+  "blender": "4.2.3 LTS",
+  "name": "Snow Buddy",
+  "slug": "snow-buddy",
+  "colors": {
+    "skin": "default",
+    "hair": "default",
+    "shirt": "#E8553D",
+    "shorts": "#2F4A8A",
+    "shoes": "#F4F1EA"
+  },
+  "parts": 8,
+  "triangles": 160152,
+  "vertices": 80090,
+  "materials": [
+    "CoolRim",
+    "FaceBlack",
+    "SnowWhite",
+    "TongueRed"
+  ],
+  "bbox_min_m": [
+    -0.5399,
+    -0.24,
+    0.0
+  ],
+  "bbox_max_m": [
+    0.5399,
+    0.223,
+    1.1699
+  ],
+  "rig": {
+    "bones": 17,
+    "skinning": "blended distance weights"
+  },
+  "tpose_selfcheck": {
+    "arm_angle_deg_L": 0.088,
+    "arm_angle_deg_R": 0.088,
+    "pass": true
+  },
+  "deformation_selftest": {
+    "hand_moved_m": 0.3061,
+    "rest_of_body_drift_m": 0.0,
+    "hand_verts": 1297,
+    "pass": true
+  },
+  "files": {
+    "glb": "snow-buddy.glb",
+    "blend": "snow-buddy.blend",
+    "previews": [
+      {
+        "view": "front",
+        "file": "snow-buddy-front.png",
+        "frame_extent": [
+          0.223,
+          0.777,
+          0.172,
+          0.773
+        ]
+      },
+      {
+        "view": "three-quarter",
+        "file": "snow-buddy-three-quarter.png",
+        "frame_extent": [
+          0.264,
+          0.753,
+          0.123,
+          0.764
+        ]
+      },
+      {
+        "view": "back",
+        "file": "snow-buddy-back.png",
+        "frame_extent": [
+          0.23,
+          0.77,
+          0.18,
+          0.774
+        ]
+      }
+    ]
+  }
+}
