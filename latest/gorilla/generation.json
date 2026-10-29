@@ -12,8 +12,8 @@
     "shoes": "#F4F1EA"
   },
   "parts": 21,
-  "triangles": 46414,
-  "vertices": 23661,
+  "triangles": 48374,
+  "vertices": 24921,
   "materials": [
     "EyeWhite",
     "Fur",
@@ -36,8 +36,8 @@
     "skinning": "blended distance weights"
   },
   "tpose_selfcheck": {
-    "arm_angle_deg_L": 0.338,
-    "arm_angle_deg_R": 0.772,
+    "arm_angle_deg_L": 0.511,
+    "arm_angle_deg_R": 0.613,
     "pass": true
   },
   "deformation_selftest": {

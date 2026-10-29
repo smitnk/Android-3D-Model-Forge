@@ -10,7 +10,7 @@
     {
       "check": "glb_structure_valid",
       "pass": true,
-      "detail": "21 meshes, 23661 verts, 46414 tris"
+      "detail": "21 meshes, 24921 verts, 48374 tris"
     },
     {
       "check": "materials_present",
@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "1328684 bytes"
+      "detail": "1392724 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -70,17 +70,17 @@
     {
       "check": "geom_tpose_arm_L",
       "pass": true,
-      "detail": "forearm/hand 0.78 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 0.25 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_L",
       "pass": true,
-      "detail": "arm band vertical thickness 0.230 m"
+      "detail": "arm band vertical thickness 0.211 m"
     },
     {
       "check": "geom_leg_vertical_L",
       "pass": true,
-      "detail": "leg centre drift 0.0196 m between lower and upper leg"
+      "detail": "leg centre drift 0.0218 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_L",
@@ -90,17 +90,17 @@
     {
       "check": "geom_tpose_arm_R",
       "pass": true,
-      "detail": "forearm/hand 0.39 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 0.24 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_R",
       "pass": true,
-      "detail": "arm band vertical thickness 0.230 m"
+      "detail": "arm band vertical thickness 0.213 m"
     },
     {
       "check": "geom_leg_vertical_R",
       "pass": true,
-      "detail": "leg centre drift 0.0192 m between lower and upper leg"
+      "detail": "leg centre drift 0.0219 m between lower and upper leg"
     },
     {
       "check": "geom_foot_forward_R",
@@ -170,7 +170,7 @@
   ],
   "summary": {
     "valid": true,
-    "bytes": 1328684,
+    "bytes": 1392724,
     "meshes": 21,
     "mesh_nodes": [
       "Eye_L",
@@ -195,8 +195,8 @@
       "Tufts_UpperArm_L",
       "Tufts_UpperArm_R"
     ],
-    "vertices": 23661,
-    "triangles": 46414,
+    "vertices": 24921,
+    "triangles": 48374,
     "materials": [
       "EyeWhite",
       "Fur",
