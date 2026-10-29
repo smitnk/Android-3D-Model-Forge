@@ -195,11 +195,11 @@ def geometry_tpose(c, pts, height):
         thin = [p for p in side if 0.31 <= abs(p.x) <= 0.43]
         zs = max(p.z for p in thin) - min(p.z for p in thin)
         c.add(f"geom_arm_is_limb_{s}", zs < 0.15 * height, f"arm band vertical thickness {zs:.3f} m")
-        low = [p for p in side if 0.12 <= p.z <= 0.18]
-        mid = [p for p in side if 0.25 <= p.z <= 0.30]
+        leg = sorted((p for p in side if 0.10 <= p.z <= 0.35), key=lambda p: p.z)
+        low, mid = leg[:len(leg) // 2], leg[len(leg) // 2:]  # split at median height (works for sparse meshes)
         if low and mid:
             dx = abs(_mean(low).x - _mean(mid).x)
-            c.add(f"geom_leg_vertical_{s}", dx < 0.04, f"leg centre drift {dx:.4f} m between z 0.15 and 0.28")
+            c.add(f"geom_leg_vertical_{s}", dx < 0.04, f"leg centre drift {dx:.4f} m between lower and upper leg")
         else:
             c.add(f"geom_leg_vertical_{s}", False, "no leg geometry found")
         foot = [p for p in side if p.z <= 0.03]

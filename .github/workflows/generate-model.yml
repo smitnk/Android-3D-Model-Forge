@@ -150,20 +150,25 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          exec > >(tee -a logs.txt) 2>&1
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          slug=$(python3 -c "import json; print(json.load(open('out/generation.json'))['slug'])")
+          cp out/REPORT.md "out/$slug-REPORT.md"
+          # base the commit on the newest main (another matrix job may have pushed meanwhile)
+          git fetch --depth=1 origin "${GITHUB_REF_NAME}"
+          git checkout -B publish FETCH_HEAD
           mkdir -p docs/preview
-          cp out/*.png out/REPORT.md docs/preview/
+          cp out/*.png "out/$slug-REPORT.md" docs/preview/
           git add docs/preview
           if ! git diff --cached --quiet; then
             git commit -m "Update ${{ matrix.model_type }} preview from run ${{ github.run_number }} [skip ci]"
-            git pull --rebase origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
           gh release view model-latest >/dev/null 2>&1 || \
             gh release create model-latest --target "${GITHUB_REF_NAME}" --title "Latest generated model" \
               --notes "Automatically published by the Generate 3D Model workflow. See REPORT.md for validation results."
-          gh release upload model-latest out/*.glb out/*.png out/REPORT.md --clobber
+          gh release upload model-latest out/*.glb out/*.png "out/$slug-REPORT.md" --clobber
           ls out/*.blend >/dev/null 2>&1 && gh release upload model-latest out/*.blend --clobber || true
 
       # Snapshot logs + reports to a branch so tools without Actions-log access can read the result.
