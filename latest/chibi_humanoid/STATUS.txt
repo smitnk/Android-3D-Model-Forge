@@ -1,1 +1,1 @@
-run=24 type=chibi_humanoid status=success sha=476d9742d84038018d60e91bb2412500dc52240d
+run=27 type=chibi_humanoid status=success sha=c1bf9f4a367de26315a93ab78b5bd3e0ee793d80
