@@ -85,7 +85,10 @@ def main():
     # 2. Re-import into a clean Blender scene and measure real geometry.
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.import_scene.gltf(filepath=os.path.abspath(a.glb))
-    meshes = {base_name(o.name): o for o in bpy.context.scene.objects if o.type == "MESH"}
+    # Only measure meshes that are nodes in the GLB (the importer adds a hidden bone-shape 'Icosphere').
+    glb_nodes = set(summary["mesh_nodes"])
+    meshes = {base_name(o.name): o for o in bpy.context.scene.objects
+              if o.type == "MESH" and base_name(o.name) in glb_nodes}
     B = {n: bbox(o) for n, o in meshes.items()}
     lo = Vector(tuple(min(b[0][i] for b in B.values()) for i in range(3)))
     hi = Vector(tuple(max(b[1][i] for b in B.values()) for i in range(3)))

@@ -169,7 +169,7 @@ jobs:
         run: |
           set +e
           rm -rf /tmp/ci && mkdir -p /tmp/ci
-          cp logs.txt out/*.json out/REPORT.md /tmp/ci/ 2>/dev/null
+          cp logs.txt out/*.json out/*.png out/REPORT.md /tmp/ci/ 2>/dev/null
           echo "run=${{ github.run_number }} status=$STATUS sha=${{ github.sha }}" > /tmp/ci/STATUS.txt
           git fetch origin ci-results 2>/dev/null
           git worktree add -B ci-results /tmp/wt origin/ci-results 2>/dev/null || {
