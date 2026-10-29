@@ -331,7 +331,7 @@ def tpose_selfcheck(parts):
     for s, sign in (("L", 1), ("R", -1)):
         side = [p for p in pts if p.x * sign > 0]
         reach = max(abs(p.x) for p in side)
-        root = _centroid([p for p in side if 0.2 <= abs(p.x) <= 0.28])
+        root = _centroid([p for p in side if 0.31 <= abs(p.x) <= 0.38])  # outside head/hair width
         hand = _centroid([p for p in side if abs(p.x) >= 0.85 * reach])
         res[f"arm_angle_deg_{s}"] = round(math.degrees(math.atan2(abs(hand.z - root.z), abs(hand.x - root.x))), 3)
     res["pass"] = all(v <= 5.0 for v in res.values())

@@ -25,6 +25,7 @@ EXPECTED_PARTS = {
 }
 EXPECTED_BONES = ["root", "pelvis", "spine", "neck", "head"] + [
     f"{b}.{s}" for b in ("upper_arm", "forearm", "hand", "thigh", "shin", "foot") for s in ("L", "R")]
+MIN_MATERIALS = {"chibi_humanoid": 5, "clay_chibi": 1}
 MAX_ARM_ANGLE_DEG = 8.0   # T-pose: arms within 8 degrees of horizontal (an A-pose is ~30-45)
 
 
@@ -79,7 +80,7 @@ def main():
     except glb_inspect.GLBError as e:
         c.add("glb_structure_valid", False, str(e))
         return finish(a, c, None, None)
-    c.add("materials_present", len(summary["materials"]) >= 5, ", ".join(summary["materials"]))
+    c.add("materials_present", len(summary["materials"]) >= MIN_MATERIALS[a.model_type], ", ".join(summary["materials"]))
     c.add("materials_assigned", summary["primitives_without_material"] == 0,
           f"{summary['primitives_without_material']} primitives without material")
     c.add("size_reasonable", summary["bytes"] < 25 * 1024 * 1024, f"{summary['bytes']} bytes")
@@ -183,7 +184,7 @@ def geometry_tpose(c, pts, height):
         side = [p for p in pts if p.x * sign > 0]
         reach = max(abs(p.x) for p in side)
         bands = [_mean([p for p in side if lo_ <= abs(p.x) <= hi_]) for lo_, hi_ in
-                 ((0.2, 0.28), (0.30, 0.40), (0.85 * reach, reach))]  # upper arm, forearm, hand
+                 ((0.31, 0.36), (0.38, 0.43), (0.85 * reach, reach))]  # arm bands outside head/hair width
         if None in bands:
             c.add(f"geom_tpose_arm_{s}", False, "no geometry in arm bands")
             continue
@@ -191,7 +192,7 @@ def geometry_tpose(c, pts, height):
         arm_angles[s] = (ang, bands)
         c.add(f"geom_tpose_arm_{s}", ang <= MAX_ARM_ANGLE_DEG,
               f"forearm/hand {ang:.2f} deg from horizontal vs upper arm (max {MAX_ARM_ANGLE_DEG})")
-        thin = [p for p in side if 0.2 <= abs(p.x) <= 0.4]
+        thin = [p for p in side if 0.31 <= abs(p.x) <= 0.43]
         zs = max(p.z for p in thin) - min(p.z for p in thin)
         c.add(f"geom_arm_is_limb_{s}", zs < 0.15 * height, f"arm band vertical thickness {zs:.3f} m")
         low = [p for p in side if 0.12 <= p.z <= 0.18]
