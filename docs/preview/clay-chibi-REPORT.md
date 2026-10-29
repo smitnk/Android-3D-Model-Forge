@@ -40,7 +40,7 @@
 - ✅ `geom_foot_forward_R` foot length 0.230 vs width 0.154, toe at y -0.150
 - ✅ `geom_left_right_symmetry` hand mirror error 0.00026 m
 - ✅ `geom_head_size` head+neck above shoulders = 46% of height
-- ✅ `geom_faces_forward` front-most head point at x 0.003, y -0.261 (Blender -Y = glTF +Z front)
+- ✅ `geom_faces_forward` front-most head patch centred at x 0.000, y -0.256 (Blender -Y = glTF +Z front)
 - ✅ `geom_tpose_span` span 0.984 m vs height 1.295 m
 - ✅ `skin_in_glb` 1 skins, 2 skinned primitives
 - ✅ `armature_present` 1 armatures
