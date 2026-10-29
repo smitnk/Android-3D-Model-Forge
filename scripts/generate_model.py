@@ -175,7 +175,7 @@ def build_character(a):
         P.append(part(f"Pupil_{s}", "sphere", (0.05, 0.02, 0.062), (0.083 * x, -0.236, 0.985), M["Pupil"], "head", segments=16))
         P.append(part(f"EyeShine_{s}", "sphere", (0.016, 0.008, 0.016), (0.072 * x, -0.2465, 1.0), M["EyeWhite"], "head", segments=10))
         P.append(part(f"Eyebrow_{s}", "cube", (0.075, 0.018, 0.017), (0.088 * x, -0.214, 1.068), M["Brow"], "head",
-                      rot=(0, 10 * x, 0), bevel=0.006, subsurf=1))
+                      rot=(0, -2 * x, 0), bevel=0.006, subsurf=1))
     P.append(part("Nose", "sphere", (0.04, 0.03, 0.035), (0, -0.240, 0.945), M["Skin"], "head", segments=16))
     P.append(part("Mouth", "sphere", (0.10, 0.022, 0.035), (0, -0.222, 0.892), M["Mouth"], "head", segments=16))
     # Hair: a shell over the skull, cut higher at the front to expose the forehead, plus tufts.
@@ -187,9 +187,9 @@ def build_character(a):
              (0.5, 0.15, 0.85), (-0.5, 0.15, 0.85), (0, 0.65, 0.75), (0.3, 0.55, 0.78), (-0.3, 0.55, 0.78)]
     for i, d in enumerate(tufts):
         d = Vector(d).normalized()
-        loc = hc + Vector((d.x * hr.x, d.y * hr.y, d.z * hr.z)) * 0.8
+        loc = hc + Vector((d.x * hr.x, d.y * hr.y, d.z * hr.z)) * 1.02
         rot = [math.degrees(v) for v in d.to_track_quat("Z", "Y").to_euler()]
-        P.append(part(f"HairTuft_{i}", "cone", (0.15, 0.15, 0.22), loc, M["Hair"], "head",
+        P.append(part(f"HairTuft_{i}", "cone", (0.17, 0.17, 0.28), loc, M["Hair"], "head",
                       rot=rot, subsurf=1, segments=12))
     # Body
     P.append(part("Neck", "cyl", (0.1, 0.1, 0.09), (0, 0, 0.71), M["Skin"], "neck", segments=16))
