@@ -16,8 +16,9 @@ OWN = {
     "gorilla": ("scripts/gorilla.py", "assets/reference/gorilla/"),
     "round_buddy": ("scripts/round_buddy.py", "assets/reference/round-buddy/"),
     "snow_buddy": ("scripts/snow_buddy.py",),
+    "lizard_warrior": ("scripts/lizard_warrior.py", "assets/reference/lizard-warrior/"),
 }
-PUBLISHED = ["chibi_humanoid", "gorilla", "round_buddy", "snow_buddy"]  # clay_chibi is an unpublished example
+PUBLISHED = ["chibi_humanoid", "gorilla", "round_buddy", "snow_buddy", "lizard_warrior"]  # clay_chibi is an unpublished example
 
 
 def models_to_build(paths, message):
