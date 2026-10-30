@@ -1,0 +1,82 @@
+{
+  "generator": "lizard_warrior",
+  "generator_version": "0.2.0",
+  "blender": "4.2.3 LTS",
+  "name": "Lizard Warrior",
+  "slug": "lizard-warrior",
+  "colors": {
+    "skin": "default",
+    "hair": "default",
+    "shirt": "#E8553D",
+    "shorts": "#2F4A8A",
+    "shoes": "#F4F1EA"
+  },
+  "parts": 4,
+  "triangles": 63704,
+  "vertices": 31878,
+  "materials": [
+    "Bone",
+    "DrawingFront"
+  ],
+  "bbox_min_m": [
+    -0.9146,
+    -0.4129,
+    -0.0
+  ],
+  "bbox_max_m": [
+    0.9146,
+    0.2331,
+    1.8854
+  ],
+  "rig": {
+    "bones": 17,
+    "skinning": "blended distance weights"
+  },
+  "tpose_selfcheck": {
+    "arm_angle_deg_L": 0.782,
+    "arm_angle_deg_R": 0.782,
+    "pass": true
+  },
+  "deformation_selftest": {
+    "hand_moved_m": 0.4527,
+    "rest_of_body_drift_m": 0.0,
+    "hand_verts": 589,
+    "pass": true
+  },
+  "files": {
+    "glb": "lizard-warrior.glb",
+    "blend": "lizard-warrior.blend",
+    "previews": [
+      {
+        "view": "front",
+        "file": "lizard-warrior-front.png",
+        "frame_extent": [
+          0.133,
+          0.867,
+          0.173,
+          0.914
+        ]
+      },
+      {
+        "view": "three-quarter",
+        "file": "lizard-warrior-three-quarter.png",
+        "frame_extent": [
+          0.173,
+          0.823,
+          0.159,
+          0.925
+        ]
+      },
+      {
+        "view": "back",
+        "file": "lizard-warrior-back.png",
+        "frame_extent": [
+          0.156,
+          0.844,
+          0.173,
+          0.914
+        ]
+      }
+    ]
+  }
+}
