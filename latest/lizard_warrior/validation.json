@@ -1,5 +1,5 @@
 {
-  "overall": "FAIL",
+  "overall": "PASS",
   "glb": "lizard-warrior.glb",
   "checks": [
     {
@@ -10,7 +10,7 @@
     {
       "check": "glb_structure_valid",
       "pass": true,
-      "detail": "4 meshes, 32946 verts, 63704 tris"
+      "detail": "4 meshes, 33090 verts, 63976 tris"
     },
     {
       "check": "materials_present",
@@ -25,7 +25,7 @@
     {
       "check": "size_reasonable",
       "pass": true,
-      "detail": "2281976 bytes"
+      "detail": "2291060 bytes"
     },
     {
       "check": "expected_parts_present",
@@ -40,7 +40,7 @@
     {
       "check": "bbox_nonzero",
       "pass": true,
-      "detail": "size (1.829, 0.646, 1.885) m"
+      "detail": "size (1.829, 0.575, 1.885) m"
     },
     {
       "check": "scale_usable",
@@ -54,13 +54,13 @@
     },
     {
       "check": "centered",
-      "pass": false,
-      "detail": "center x 0.0000, y -0.0899"
+      "pass": true,
+      "detail": "center x 0.0000, y -0.0546"
     },
     {
       "check": "upright",
       "pass": true,
-      "detail": "height 1.885 > depth 0.646"
+      "detail": "height 1.885 > depth 0.575"
     },
     {
       "check": "no_degenerate_parts",
@@ -70,7 +70,7 @@
     {
       "check": "geom_tpose_arm_L",
       "pass": true,
-      "detail": "forearm/hand 0.84 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 0.97 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_L",
@@ -90,7 +90,7 @@
     {
       "check": "geom_tpose_arm_R",
       "pass": true,
-      "detail": "forearm/hand 0.90 deg from horizontal vs upper arm (max 8.0)"
+      "detail": "forearm/hand 1.03 deg from horizontal vs upper arm (max 8.0)"
     },
     {
       "check": "geom_arm_is_limb_R",
@@ -170,7 +170,7 @@
   ],
   "summary": {
     "valid": true,
-    "bytes": 2281976,
+    "bytes": 2291060,
     "meshes": 4,
     "mesh_nodes": [
       "Arms",
@@ -178,8 +178,8 @@
       "Dagger_L",
       "Dagger_R"
     ],
-    "vertices": 32946,
-    "triangles": 63704,
+    "vertices": 33090,
+    "triangles": 63976,
     "materials": [
       "Bone",
       "DrawingBack",
@@ -213,12 +213,12 @@
     "height": 1.8854,
     "size_xyz": [
       1.8293,
-      0.6459,
+      0.5754,
       1.8854
     ],
     "bbox_min": [
       -0.9146,
-      -0.4129,
+      -0.3423,
       0.0
     ],
     "bbox_max": [

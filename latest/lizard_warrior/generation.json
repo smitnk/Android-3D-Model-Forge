@@ -12,15 +12,15 @@
     "shoes": "#F4F1EA"
   },
   "parts": 4,
-  "triangles": 63704,
-  "vertices": 31878,
+  "triangles": 63976,
+  "vertices": 32022,
   "materials": [
     "Bone",
     "DrawingFront"
   ],
   "bbox_min_m": [
     -0.9146,
-    -0.4129,
+    -0.3423,
     -0.0
   ],
   "bbox_max_m": [
@@ -33,14 +33,14 @@
     "skinning": "blended distance weights"
   },
   "tpose_selfcheck": {
-    "arm_angle_deg_L": 0.782,
-    "arm_angle_deg_R": 0.782,
+    "arm_angle_deg_L": 0.91,
+    "arm_angle_deg_R": 0.91,
     "pass": true
   },
   "deformation_selftest": {
-    "hand_moved_m": 0.4527,
+    "hand_moved_m": 0.4512,
     "rest_of_body_drift_m": 0.0,
-    "hand_verts": 589,
+    "hand_verts": 661,
     "pass": true
   },
   "files": {
@@ -51,8 +51,8 @@
         "view": "front",
         "file": "lizard-warrior-front.png",
         "frame_extent": [
-          0.133,
-          0.867,
+          0.141,
+          0.859,
           0.173,
           0.914
         ]
@@ -61,7 +61,7 @@
         "view": "three-quarter",
         "file": "lizard-warrior-three-quarter.png",
         "frame_extent": [
-          0.173,
+          0.193,
           0.823,
           0.159,
           0.925
