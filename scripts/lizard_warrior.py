@@ -194,7 +194,13 @@ def build(a, material, part):
         bm = bmesh.new()
         # curved blade: a chain of tapering cones from the fist, pointing forward (-Y) and slightly down
         base = Vector((FIST_X * x, -0.05, SHOULDER_Z - 0.01))
-        segs, length = 5, 0.36
+        segs, length = 5, 0.29
+        # grip + pommel through the fist, out the back of the hand
+        m = Matrix.Translation(base + Vector((0, 0.07, 0))) @ Vector((0, -1, 0)).to_track_quat("Z", "Y").to_matrix().to_4x4()
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10, radius1=0.018, radius2=0.018,
+                              depth=0.16, matrix=m)
+        bmesh.ops.create_uvsphere(bm, u_segments=10, v_segments=6, radius=0.026,
+                                  matrix=Matrix.Translation(base + Vector((0, 0.15, 0))))
         for i in range(segs):
             t0, t1 = i / segs, (i + 1) / segs
             p0 = base + Vector((0.03 * x * math.sin(t0 * 2.5), -length * t0, -0.06 * t0 ** 2))
