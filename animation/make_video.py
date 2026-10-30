@@ -35,6 +35,7 @@ def parse_args():
     p.add_argument("--height", type=int, default=1280)
     p.add_argument("--samples", type=int, default=24)
     p.add_argument("--caption", default=timeline.DEFAULT_CAPTION)
+    p.add_argument("--model2", default="", help="second .glb (rival scene)")
     p.add_argument("--frames", default="", help="render only FIRST-LAST (1-based, inclusive)")
     p.add_argument("--check-only", action="store_true", help="build and check the scene, do not render")
     return p.parse_args(argv)
@@ -152,18 +153,8 @@ def pose(f, n, actor, rig):
         rig.rot("upper_arm.R", Y, -arms_down + 130 * lift)
 
 
-def build_scene(a):
-    meshes = load_model(a.model)
-    arm = next((o for o in bpy.data.objects if o.type == "ARMATURE"), None)
-    for o in bpy.data.objects:  # drop any animation that came with the file
-        if o.animation_data:
-            o.animation_data_clear()
-    actor = make_actor(meshes)
-    sc = bpy.context.scene
-    n = round(a.fps * a.duration)
-    sc.render.fps, sc.frame_start, sc.frame_end = a.fps, 1, n
-    sc.render.resolution_x, sc.render.resolution_y = a.width, a.height
-
+def add_stage(sc):
+    """Shadow-catcher floor, soft world light, key + rim area lights and a portrait camera."""
     floor_mesh = bpy.data.meshes.new("Floor")
     floor_mesh.from_pydata([(-30, -30, 0), (30, -30, 0), (30, 30, 0), (-30, 30, 0)], [], [(0, 1, 2, 3)])
     floor = bpy.data.objects.new("Floor", floor_mesh)
@@ -187,6 +178,23 @@ def build_scene(a):
     cam.data.lens, cam.data.sensor_fit = 40, "VERTICAL"
     sc.collection.objects.link(cam)
     sc.camera = cam
+    return floor
+
+
+def build_scene(a):
+    meshes = load_model(a.model)
+    arm = next((o for o in bpy.data.objects if o.type == "ARMATURE"), None)
+    for o in bpy.data.objects:  # drop any animation that came with the file
+        if o.animation_data:
+            o.animation_data_clear()
+    actor = make_actor(meshes)
+    sc = bpy.context.scene
+    n = round(a.fps * a.duration)
+    sc.render.fps, sc.frame_start, sc.frame_end = a.fps, 1, n
+    sc.render.resolution_x, sc.render.resolution_y = a.width, a.height
+
+    floor = add_stage(sc)
+    cam = sc.camera
 
     rig = Rig(arm) if arm and len(arm.pose.bones) >= 10 else None
     shots = timeline.shot_frames(a.fps, a.duration)
@@ -240,7 +248,11 @@ def background(path, w, h):
 def main():
     a = parse_args()
     os.makedirs(os.path.join(a.out, "frames"), exist_ok=True)
-    checks, info = build_scene(a)
+    finish(a, *build_scene(a))
+
+
+def finish(a, checks, info):
+    """Write scene_check.json, fail on any False check, write the backdrop and render the frames."""
     with open(os.path.join(a.out, "scene_check.json"), "w") as fh:
         json.dump(info, fh, indent=1)
     for k, v in checks.items():

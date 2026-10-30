@@ -3,6 +3,11 @@ name: Render Animation Video
 on:
   workflow_dispatch:
     inputs:
+      scene:
+        description: "showcase = one model walks/waves/jumps with captions; rival = Round Buddy trips, Gorilla pounds his chest (no text)"
+        type: choice
+        options: [showcase, rival]
+        default: showcase
       model:
         description: "Published model (used when model_path and model_url are empty)"
         type: choice
@@ -112,11 +117,16 @@ jobs:
           per=$(( (n + 3) / 4 )); lo=$(( ${{ matrix.chunk }} * per + 1 )); hi=$(( lo + per - 1 )); (( hi > n )) && hi=$n
           echo "Chunk ${{ matrix.chunk }}: frames $lo-$hi of $n" | tee -a logs.txt
           start=$(date +%s)
-          ~/blender/blender -b --factory-startup --python-exit-code 1 --python animation/make_video.py -- \
+          script=animation/make_video.py; EXTRA=""
+          if [ "${{ inputs.scene }}" = rival ]; then
+            curl -fsSL --retry 3 -o in/gorilla.glb "https://github.com/${{ github.repository }}/releases/download/model-latest/gorilla.glb"
+            script=animation/rival_scene.py; EXTRA="--model2 in/gorilla.glb"
+          fi
+          ~/blender/blender -b --factory-startup --python-exit-code 1 --python "$script" -- \
             --model "${{ steps.cfg.outputs.src }}" --out anim_out --fps ${{ steps.cfg.outputs.fps }} \
             --duration ${{ steps.cfg.outputs.duration }} --width ${{ steps.cfg.outputs.w }} \
             --height ${{ steps.cfg.outputs.h }} --samples ${{ steps.cfg.outputs.samples }} \
-            --caption "$CAPTION" --frames "$lo-$hi" 2>&1 | grep -v "^Fra:" | tee -a logs.txt
+            --caption "$CAPTION" --frames "$lo-$hi" $EXTRA 2>&1 | grep -v "^Fra:" | tee -a logs.txt
           echo "Render time chunk ${{ matrix.chunk }}: $(( $(date +%s) - start ))s" | tee -a logs.txt
           got=$(ls anim_out/frames/*.png | wc -l)
           [ "$got" -eq $(( hi - lo + 1 )) ] || { echo "::error::chunk rendered $got frames"; exit 1; }
@@ -163,6 +173,7 @@ jobs:
           got=$(ls anim_out/frames/*.png | wc -l)
           echo "Frames: $got / $n" | tee -a logs.txt
           [ "$got" -eq "$n" ] || { echo "::error::frame count mismatch"; exit 1; }
+          [ "${{ inputs.scene }}" = rival ] && CAPTION=""   # the rival scene has no text
           caps=$(python3 animation/timeline.py --caption "$CAPTION" --duration "$dur" --height "$h")
           mkdir -p video
           ffmpeg -v error -y -framerate "$fps" -i anim_out/frames/%04d.png -loop 1 -framerate "$fps" -i anim_out/background.ppm \
