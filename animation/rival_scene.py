@@ -12,18 +12,18 @@ import os
 import sys
 
 import bpy
-from mathutils import Euler, Vector
+from mathutils import Euler, Quaternion, Vector
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import make_video as mv  # noqa: E402
 
 X, Y, Z = (1, 0, 0), (0, 1, 0), (0, 0, 1)
 
-# (first_s, last_s, cam_from, cam_to, look_from, look_to). Buddy falls near x=0, Gorilla stops at x=0.85.
+# (first_s, last_s, cam_from, cam_to, look_from, look_to). Buddy falls near x=0, Gorilla stops at x=1.75.
 SHOTS = [
     (0.0, 3.2, (0.0, -3.4, 0.55), (0.2, -2.9, 0.5), (-0.2, 0, 0.35), (0.2, 0, 0.25)),   # wide: walk, trip, fall
-    (3.2, 5.4, (-1.5, -1.3, 0.3), (-1.2, -1.0, 0.35), (0.6, 0, 0.6), (0.8, 0, 0.7)),    # low over Buddy: Gorilla arrives
-    (5.4, 9e9, (0.05, -1.5, 0.2), (0.25, -1.2, 0.25), (0.8, 0, 0.85), (0.8, 0, 0.95)),  # low hero shot: chest pounding
+    (3.2, 5.4, (-0.6, -1.4, 0.3), (-0.3, -1.1, 0.35), (1.5, 0, 0.6), (1.7, 0, 0.7)),    # low over Buddy: Gorilla arrives
+    (5.4, 9e9, (0.1, -1.6, 0.3), (0.3, -1.4, 0.35), (1.6, 0, 0.8), (1.7, 0, 0.85)),     # low hero shot: chest pounding
 ]
 
 
@@ -52,6 +52,18 @@ def import_actor(path, name, height):
     return actor, mv.Rig(arm), meshes
 
 
+def rots(rig, name, *turns):
+    """Like Rig.rot but composes several armature-space turns (applied first to last)."""
+    pb = rig.arm.pose.bones.get(name)
+    if pb is None:
+        return
+    q = Quaternion()
+    for axis, deg in turns:
+        q = Quaternion(rig.to_arm @ Vector(axis), math.radians(deg)) @ q
+    rest = pb.bone.matrix_local.to_quaternion()
+    pb.rotation_quaternion = rest.inverted() @ q @ rest
+
+
 def walk(rig, t, amp=28, speed=9.0):
     s = math.sin(t * speed)
     rig.rot("thigh.L", X, amp * s)
@@ -68,7 +80,7 @@ def buddy_pose(T, actor, rig):
     fall = mv.ease((T - trip) / (land - trip))
     actor.location = (x + 0.35 * fall, 0, 0.12 * fall)
     # facing +X (Z 90), pitched forward about its own X axis as it falls
-    actor.rotation_euler = Euler((math.radians(-88 * fall), 0, math.radians(90)), "XYZ")
+    actor.rotation_euler = Euler((math.radians(88 * fall), 0, math.radians(90)), "XYZ")
     if T < trip + 0.15:
         walk(rig, T, amp=30 * (1 - fall), speed=10)
         rig.rot("upper_arm.L", Y, 70 * (1 - fall))
@@ -85,7 +97,7 @@ def gorilla_pose(T, actor, rig):
     """Enter from the right at 3.0 s, stop facing Buddy at 4.6 s, lean back and pound the chest."""
     rig.reset()
     arrive = mv.ease((T - 3.0) / 1.6)
-    actor.location = (2.4 - 1.55 * arrive, 0, 0)
+    actor.location = (3.1 - 1.35 * arrive, 0, 0)
     actor.rotation_euler = Euler((0, 0, math.radians(-90)), "XYZ")  # faces -X, towards Buddy
     if T < 4.6:
         walk(rig, T, amp=22 * (1 - mv.ease((T - 4.3) / 0.3)), speed=7)
@@ -98,10 +110,11 @@ def gorilla_pose(T, actor, rig):
     rig.rot("spine", X, -12 * k)  # chest out
     rig.rot("head", X, 10 * k + 4 * (beat + beat2))  # chin down at the rival on each hit
     # upper arms swing to the front, forearms fold so the fists meet the chest, alternating
-    rig.rot("upper_arm.L", Z, -(55 + 20 * beat) * k)
-    rig.rot("upper_arm.R", Z, (55 + 20 * beat2) * k)
-    rig.rot("forearm.L", Z, -(70 - 35 * beat) * k)
-    rig.rot("forearm.R", Z, (70 - 35 * beat2) * k)
+    # upper arms drop and swing forward, forearms fold in so the fists strike the chest, alternating
+    rots(rig, "upper_arm.L", (Y, 45 * k), (Z, -(50 + 15 * beat) * k))
+    rots(rig, "upper_arm.R", (Y, -45 * k), (Z, (50 + 15 * beat2) * k))
+    rig.rot("forearm.L", Z, -(105 - 45 * beat) * k)
+    rig.rot("forearm.R", Z, (105 - 45 * beat2) * k)
 
 
 def main():
@@ -144,7 +157,7 @@ def main():
         "camera_changes_between_shots": (at(round(1.5 * a.fps), cam) - at(round(4 * a.fps), cam)).length > 0.3,
         "buddy_on_floor_after_fall": at(round(3 * a.fps), buddy).z < 0.2
             and abs(buddy.rotation_euler.x) > math.radians(80),
-        "gorilla_in_front_of_buddy": 0.4 < at(n, gor).x - at(n, buddy).x < 1.2,
+        "gorilla_in_front_of_buddy": 0.8 < at(n, gor).x - at(n, buddy).x < 1.8,
     }
     info = {"checks": checks, "frames": n, "fps": a.fps, "scene": "rival",
             "rig": f"{len(brig.arm.pose.bones)} + {len(grig.arm.pose.bones)} bones (skeletal animation)",
