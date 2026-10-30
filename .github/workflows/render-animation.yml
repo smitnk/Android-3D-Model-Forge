@@ -182,6 +182,7 @@ jobs:
           ffprobe -v error -show_entries stream=codec_name,width,height,pix_fmt,nb_frames:format=duration -of default=nw=1 video/forge-animation.mp4 | tee -a logs.txt
           ffprobe -v error -show_entries stream=codec_name -of csv=p=0 video/forge-animation.mp4 | grep -qx h264
           ffmpeg -v error -y -ss "$(python3 -c "print($dur*0.5)")" -i video/forge-animation.mp4 -frames:v 1 video/preview.png
+          ffmpeg -v error -y -i video/forge-animation.mp4 -vf "fps=2,scale=180:-2,tile=8x2" -frames:v 1 video/contact-sheet.png
           cp anim_out/scene_check.json logs.txt video/
           rm -rf anim_out/frames
 
@@ -213,7 +214,7 @@ jobs:
         run: |
           mkdir -p /tmp/ci
           cp logs.txt /tmp/ci/ 2>/dev/null || true
-          cp video/scene_check.json video/preview.png /tmp/ci/ 2>/dev/null || true
+          cp video/scene_check.json video/preview.png video/contact-sheet.png /tmp/ci/ 2>/dev/null || true
           echo "run ${{ github.run_number }} $STATUS sha=${{ github.sha }} artifact=animation-${{ github.run_number }} id=$ART_ID" > /tmp/ci/STATUS.txt
           git fetch origin ci-results 2>/dev/null
           git worktree add -B ci-results /tmp/wt origin/ci-results 2>/dev/null || {
