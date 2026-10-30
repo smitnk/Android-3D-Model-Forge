@@ -1,0 +1,17 @@
+{
+ "checks": {
+  "both_models_imported": true,
+  "camera": true,
+  "lights": true,
+  "floor_shadow_catcher": true,
+  "frame_count": true,
+  "camera_changes_between_shots": true,
+  "buddy_on_floor_after_fall": true,
+  "gorilla_in_front_of_buddy": true
+ },
+ "frames": 192,
+ "fps": 24,
+ "scene": "rival",
+ "rig": "17 + 17 bones (skeletal animation)",
+ "blender": "4.2.3 LTS"
+}
