@@ -5,6 +5,7 @@ builds the model with Python, checks it automatically, and hands you a `.glb` (p
 No PC, no local Blender, no API keys, no paid services.
 
 <p align="center">
+  <img src="docs/preview/lizard-warrior-front.png" width="31%" alt="Lizard Warrior, front view, T-pose">
   <img src="docs/preview/round-buddy-front.png" width="31%" alt="Round Buddy, front view, T-pose">
   <img src="docs/preview/gorilla-front.png" width="31%" alt="Gorilla, front view, T-pose">
   <img src="docs/preview/forge-kid-front.png" width="31%" alt="Forge Kid, front view, T-pose">
@@ -15,6 +16,7 @@ No PC, no local Blender, no API keys, no paid services.
 
 | | Model | Download (ZIP: GLB + BLEND + previews + report) | Single files |
 |---|---|---|---|
+| <img src="docs/preview/lizard-warrior-front.png" width="160" alt="Lizard Warrior preview"> | **Lizard Warrior** — carved from a 12-view turnaround (wireframe row for shape, textured row for colour), T-pose arms, bone daggers | [lizard-warrior.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/lizard-warrior.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/lizard-warrior.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/lizard-warrior.blend) · [report](docs/preview/lizard-warrior-REPORT.md) |
 | <img src="docs/preview/round-buddy-front.png" width="160" alt="Round Buddy preview"> | **Round Buddy** — built from a 24-view turnaround sheet: measured proportions, T-pose arms, face projected from the drawing | [round-buddy.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/round-buddy.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/round-buddy.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/round-buddy.blend) · [report](docs/preview/round-buddy-REPORT.md) |
 | <img src="docs/preview/snow-buddy-front.png" width="160" alt="Snow Buddy preview"> | **Snow Buddy** — white round cartoon character with dot eyes, open smile and red tongue, generated from procedural geometry | [snow-buddy.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/snow-buddy.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/snow-buddy.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/snow-buddy.blend) · [report](docs/preview/snow-buddy-REPORT.md) |
 | <img src="docs/preview/gorilla-front.png" width="160" alt="Gorilla preview"> | **Gorilla** — carved from a turnaround sheet (visual hull), drawing projected as texture, 17-bone rig | [gorilla.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/gorilla.blend) · [report](docs/preview/gorilla-REPORT.md) |
@@ -27,6 +29,10 @@ replaced each time a model is published.
 
 <details><summary>More views</summary>
 
+<p align="center">
+  <img src="docs/preview/lizard-warrior-three-quarter.png" width="31%" alt="Lizard Warrior three-quarter">
+  <img src="docs/preview/lizard-warrior-back.png" width="31%" alt="Lizard Warrior back">
+</p>
 <p align="center">
   <img src="docs/preview/round-buddy-three-quarter.png" width="31%" alt="Round Buddy three-quarter">
   <img src="docs/preview/round-buddy-back.png" width="31%" alt="Round Buddy back">
