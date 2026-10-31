@@ -1,7 +1,8 @@
 """Render front / three-quarter / back previews of any GLB (e.g. an AI-generated mesh) with the repo's preview setup.
 
 Usage: blender -b --factory-startup --python-exit-code 1 --python scripts/preview_glb.py -- \
-           --glb mesh.glb --out out --slug name [--height 1.8] [--rotate-x 90] [--rotate-z 0]
+           --glb mesh.glb --out out --slug name [--height 1.8] [--rotate-x 90] [--rotate-z 0] [--save-glb fixed.glb]
+TripoSR meshes are Z-up with the camera on +X: use --rotate-x -90 --rotate-z -90.
 Vertex colours (COLOR_0) are wired into the material so meshes without textures render in colour.
 Prints the mesh's size before normalising, so orientation problems are visible in the log.
 """
@@ -26,6 +27,7 @@ def main():
     p.add_argument("--height", type=float, default=1.8)
     p.add_argument("--rotate-x", type=float, default=0.0)
     p.add_argument("--rotate-z", type=float, default=0.0)
+    p.add_argument("--save-glb", default="", help="also write the re-oriented, scaled mesh here")
     a = p.parse_args(sys.argv[sys.argv.index("--") + 1:])
     os.makedirs(a.out, exist_ok=True)
 
@@ -60,6 +62,8 @@ def main():
         for poly in me.polygons:
             poly.use_smooth = True
 
+    if a.save_glb:  # the upright, metre-scaled copy, for viewers and as a modelling template
+        bpy.ops.export_scene.gltf(filepath=os.path.abspath(a.save_glb), export_format="GLB", export_yup=True)
     files = export_model.render_previews(parts, a.out, a.slug)
     info = {"raw_size_xyz": raw, "vertices": len(pts),
             "triangles": sum(len(f.vertices) - 2 for o in parts for f in o.data.polygons),

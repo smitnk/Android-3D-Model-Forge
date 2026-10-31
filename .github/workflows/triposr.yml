@@ -101,7 +101,8 @@ jobs:
           set -o pipefail
           sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libxkbcommon0 libsm6 libice6 libegl1 > /dev/null
           ~/blender/blender -b --factory-startup --python-exit-code 1 --python scripts/preview_glb.py -- \
-            --glb "out/$SLUG-triposr.glb" --out out --slug "$SLUG-triposr" 2>&1 | grep -v "^Fra:" | tee -a logs.txt
+            --glb "/tmp/tsr-out/0/mesh.glb" --out out --slug "$SLUG-triposr" \
+            --rotate-x -90 --rotate-z -90 --save-glb "out/$SLUG-triposr.glb" 2>&1 | grep -v "^Fra:" | tee -a logs.txt
 
       - name: Upload artifact
         if: always()
