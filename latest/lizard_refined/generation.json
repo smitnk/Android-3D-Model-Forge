@@ -1,0 +1,84 @@
+{
+  "generator": "lizard_refined",
+  "generator_version": "0.2.0",
+  "blender": "4.2.3 LTS",
+  "name": "Lizard Warrior Refined",
+  "slug": "lizard-warrior-refined",
+  "colors": {
+    "skin": "default",
+    "hair": "default",
+    "shirt": "#E8553D",
+    "shorts": "#2F4A8A",
+    "shoes": "#F4F1EA"
+  },
+  "parts": 5,
+  "triangles": 151972,
+  "vertices": 75956,
+  "materials": [
+    "Armour000",
+    "Bone",
+    "Cloth000",
+    "Skin000"
+  ],
+  "bbox_min_m": [
+    -0.9509,
+    -0.3423,
+    0.0
+  ],
+  "bbox_max_m": [
+    0.9509,
+    0.3803,
+    1.8743
+  ],
+  "rig": {
+    "bones": 17,
+    "skinning": "blended distance weights"
+  },
+  "tpose_selfcheck": {
+    "arm_angle_deg_L": 3.306,
+    "arm_angle_deg_R": 3.355,
+    "pass": true
+  },
+  "deformation_selftest": {
+    "hand_moved_m": 0.4871,
+    "rest_of_body_drift_m": 0.0,
+    "hand_verts": 395,
+    "pass": true
+  },
+  "files": {
+    "glb": "lizard-warrior-refined.glb",
+    "blend": "lizard-warrior-refined.blend",
+    "previews": [
+      {
+        "view": "front",
+        "file": "lizard-warrior-refined-front.png",
+        "frame_extent": [
+          0.121,
+          0.879,
+          0.18,
+          0.895
+        ]
+      },
+      {
+        "view": "three-quarter",
+        "file": "lizard-warrior-refined-three-quarter.png",
+        "frame_extent": [
+          0.183,
+          0.9,
+          0.106,
+          0.928
+        ]
+      },
+      {
+        "view": "back",
+        "file": "lizard-warrior-refined-back.png",
+        "frame_extent": [
+          0.113,
+          0.887,
+          0.159,
+          0.919
+        ]
+      }
+    ]
+  }
+}
