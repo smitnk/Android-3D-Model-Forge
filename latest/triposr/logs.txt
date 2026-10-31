@@ -1,6 +1,6 @@
 Collecting git+https://github.com/tatsy/torchmcubes.git
-  Cloning https://github.com/tatsy/torchmcubes.git to /tmp/pip-req-build-rd1zhqv9
-  Running command git clone --filter=blob:none --quiet https://github.com/tatsy/torchmcubes.git /tmp/pip-req-build-rd1zhqv9
+  Cloning https://github.com/tatsy/torchmcubes.git to /tmp/pip-req-build-o1xowxbn
+  Running command git clone --filter=blob:none --quiet https://github.com/tatsy/torchmcubes.git /tmp/pip-req-build-o1xowxbn
   Resolved https://github.com/tatsy/torchmcubes.git to commit a9ac95aa329957ba646e7bb057f825f5dfa77f38
   Preparing metadata (pyproject.toml): started
   Preparing metadata (pyproject.toml): finished with status 'done'
@@ -16,60 +16,77 @@ Requirement already satisfied: mpmath<1.4,>=1.1.0 in /opt/hostedtoolcache/Python
 Building wheels for collected packages: torchmcubes
   Building wheel for torchmcubes (pyproject.toml): started
   Building wheel for torchmcubes (pyproject.toml): finished with status 'done'
-  Created wheel for torchmcubes: filename=torchmcubes-0.1.0-cp310-cp310-linux_x86_64.whl size=80248 sha256=57cc9b9b68c6ac7fdf4143a4ffc9b4e00d8b65973f41f99738e728ff426d1d0b
-  Stored in directory: /tmp/pip-ephem-wheel-cache-di7xo_j2/wheels/07/5f/20/0199858e9f96d327760cf61044996e8ed132513df3544fd601
+  Created wheel for torchmcubes: filename=torchmcubes-0.1.0-cp310-cp310-linux_x86_64.whl size=80247 sha256=3d522ab07c3a50bf9189ffdb17d04a56458e52b647b155afac0b65744bb2995e
+  Stored in directory: /tmp/pip-ephem-wheel-cache-_8onzh8v/wheels/07/5f/20/0199858e9f96d327760cf61044996e8ed132513df3544fd601
 Successfully built torchmcubes
 Installing collected packages: torchmcubes
 Successfully installed torchmcubes-0.1.0
 torch 2.3.1+cpu
-2026-10-31 05:36:45,937 - INFO - Initializing model ...
-Downloading config.yaml:   0%|          | 0.00/987 [00:00<?, ?B/s]Downloading config.yaml: 100%|██████████| 987/987 [00:00<00:00, 5.76MB/s]
-Downloading model.ckpt:   0%|          | 0.00/1.68G [00:00<?, ?B/s]Downloading model.ckpt:   2%|▏         | 31.5M/1.68G [00:00<00:05, 278MB/s]Downloading model.ckpt:   6%|▌         | 94.4M/1.68G [00:00<00:03, 439MB/s]Downloading model.ckpt:   9%|▉         | 147M/1.68G [00:00<00:03, 472MB/s] Downloading model.ckpt:  13%|█▎        | 210M/1.68G [00:00<00:04, 334MB/s]Downloading model.ckpt:  15%|█▌        | 252M/1.68G [00:01<00:09, 143MB/s]Downloading model.ckpt:  17%|█▋        | 283M/1.68G [00:01<00:10, 134MB/s]Downloading model.ckpt:  21%|██        | 346M/1.68G [00:01<00:06, 195MB/s]Downloading model.ckpt:  24%|██▍       | 409M/1.68G [00:01<00:05, 226MB/s]Downloading model.ckpt:  27%|██▋       | 451M/1.68G [00:02<00:10, 119MB/s]Downloading model.ckpt:  29%|██▉       | 482M/1.68G [00:03<00:11, 108MB/s]Downloading model.ckpt:  33%|███▎      | 545M/1.68G [00:03<00:07, 157MB/s]Downloading model.ckpt:  35%|███▌      | 587M/1.68G [00:03<00:05, 183MB/s]Downloading model.ckpt:  38%|███▊      | 629M/1.68G [00:03<00:04, 216MB/s]Downloading model.ckpt:  40%|████      | 671M/1.68G [00:03<00:04, 247MB/s]Downloading model.ckpt:  44%|████▍     | 734M/1.68G [00:03<00:02, 318MB/s]Downloading model.ckpt:  47%|████▋     | 786M/1.68G [00:04<00:04, 186MB/s]Downloading model.ckpt:  49%|████▉     | 828M/1.68G [00:04<00:05, 150MB/s]Downloading model.ckpt:  51%|█████▏    | 860M/1.68G [00:04<00:04, 165MB/s]Downloading model.ckpt:  54%|█████▍    | 902M/1.68G [00:04<00:04, 184MB/s]Downloading model.ckpt:  56%|█████▌    | 933M/1.68G [00:05<00:05, 141MB/s]Downloading model.ckpt:  58%|█████▊    | 965M/1.68G [00:05<00:04, 160MB/s]Downloading model.ckpt:  61%|██████▏   | 1.03G/1.68G [00:05<00:02, 229MB/s]Downloading model.ckpt:  64%|██████▍   | 1.07G/1.68G [00:05<00:02, 237MB/s]Downloading model.ckpt:  67%|██████▋   | 1.12G/1.68G [00:05<00:01, 289MB/s]Downloading model.ckpt:  70%|███████   | 1.17G/1.68G [00:05<00:01, 317MB/s]Downloading model.ckpt:  73%|███████▎  | 1.22G/1.68G [00:06<00:01, 336MB/s]Downloading model.ckpt:  75%|███████▌  | 1.26G/1.68G [00:06<00:01, 354MB/s]Downloading model.ckpt:  78%|███████▊  | 1.30G/1.68G [00:06<00:01, 370MB/s]Downloading model.ckpt:  80%|████████  | 1.34G/1.68G [00:06<00:01, 270MB/s]Downloading model.ckpt:  83%|████████▎ | 1.38G/1.68G [00:06<00:00, 298MB/s]Downloading model.ckpt:  85%|████████▌ | 1.43G/1.68G [00:06<00:00, 278MB/s]Downloading model.ckpt:  88%|████████▊ | 1.47G/1.68G [00:07<00:00, 236MB/s]Downloading model.ckpt:  90%|█████████ | 1.51G/1.68G [00:07<00:00, 267MB/s]Downloading model.ckpt:  94%|█████████▍| 1.58G/1.68G [00:07<00:00, 358MB/s]Downloading model.ckpt:  98%|█████████▊| 1.65G/1.68G [00:07<00:00, 402MB/s]Downloading model.ckpt: 100%|██████████| 1.68G/1.68G [00:07<00:00, 225MB/s]
+2026-10-31 05:39:18,395 - INFO - Initializing model ...
+Downloading config.yaml:   0%|          | 0.00/987 [00:00<?, ?B/s]Downloading config.yaml: 100%|██████████| 987/987 [00:00<00:00, 9.95MB/s]
+Downloading model.ckpt:   0%|          | 0.00/1.68G [00:00<?, ?B/s]Downloading model.ckpt:   1%|          | 10.5M/1.68G [00:00<00:50, 33.2MB/s]Downloading model.ckpt:   4%|▍         | 62.9M/1.68G [00:00<00:08, 180MB/s] Downloading model.ckpt:   8%|▊         | 126M/1.68G [00:00<00:05, 300MB/s] Downloading model.ckpt:  11%|█▏        | 189M/1.68G [00:00<00:03, 378MB/s]Downloading model.ckpt:  14%|█▍        | 241M/1.68G [00:00<00:03, 389MB/s]Downloading model.ckpt:  18%|█▊        | 294M/1.68G [00:00<00:03, 402MB/s]Downloading model.ckpt:  21%|██        | 346M/1.68G [00:01<00:03, 434MB/s]Downloading model.ckpt:  24%|██▍       | 398M/1.68G [00:01<00:02, 457MB/s]Downloading model.ckpt:  27%|██▋       | 451M/1.68G [00:01<00:04, 278MB/s]Downloading model.ckpt:  29%|██▉       | 493M/1.68G [00:01<00:04, 287MB/s]Downloading model.ckpt:  33%|███▎      | 556M/1.68G [00:01<00:03, 351MB/s]Downloading model.ckpt:  37%|███▋      | 619M/1.68G [00:01<00:02, 397MB/s]Downloading model.ckpt:  40%|████      | 671M/1.68G [00:01<00:02, 404MB/s]Downloading model.ckpt:  44%|████▍     | 734M/1.68G [00:02<00:02, 450MB/s]Downloading model.ckpt:  48%|████▊     | 797M/1.68G [00:02<00:01, 485MB/s]Downloading model.ckpt:  51%|█████     | 849M/1.68G [00:02<00:02, 375MB/s]Downloading model.ckpt:  54%|█████▍    | 902M/1.68G [00:02<00:02, 361MB/s]Downloading model.ckpt:  58%|█████▊    | 965M/1.68G [00:02<00:01, 412MB/s]Downloading model.ckpt:  61%|██████▏   | 1.03G/1.68G [00:02<00:01, 446MB/s]Downloading model.ckpt:  64%|██████▍   | 1.08G/1.68G [00:02<00:01, 387MB/s]Downloading model.ckpt:  68%|██████▊   | 1.13G/1.68G [00:03<00:02, 253MB/s]Downloading model.ckpt:  70%|███████   | 1.17G/1.68G [00:03<00:01, 254MB/s]Downloading model.ckpt:  73%|███████▎  | 1.23G/1.68G [00:03<00:01, 278MB/s]Downloading model.ckpt:  76%|███████▌  | 1.27G/1.68G [00:03<00:01, 213MB/s]Downloading model.ckpt:  79%|███████▉  | 1.32G/1.68G [00:04<00:01, 258MB/s]Downloading model.ckpt:  83%|████████▎ | 1.38G/1.68G [00:04<00:00, 322MB/s]Downloading model.ckpt:  85%|████████▌ | 1.43G/1.68G [00:04<00:00, 266MB/s]Downloading model.ckpt:  88%|████████▊ | 1.47G/1.68G [00:04<00:01, 166MB/s]Downloading model.ckpt:  89%|████████▉ | 1.50G/1.68G [00:05<00:00, 181MB/s]Downloading model.ckpt:  93%|█████████▎| 1.56G/1.68G [00:05<00:00, 247MB/s]Downloading model.ckpt:  97%|█████████▋| 1.63G/1.68G [00:05<00:00, 309MB/s]Downloading model.ckpt: 100%|██████████| 1.68G/1.68G [00:05<00:00, 314MB/s]Downloading model.ckpt: 100%|██████████| 1.68G/1.68G [00:05<00:00, 308MB/s]
 /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/transformers/utils/generic.py:441: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
   _torch_pytree._register_pytree_node(
 The cache for model files in Transformers v4.22.0 has been updated. Migrating your old cache. This is a one-time only operation. You can interrupt this and resume the migration later on by calling `transformers.utils.move_cache()`.
 0it [00:00, ?it/s]0it [00:00, ?it/s]
 /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/transformers/utils/generic.py:309: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
   _torch_pytree._register_pytree_node(
-Downloading config.json:   0%|          | 0.00/454 [00:00<?, ?B/s]Downloading config.json: 100%|██████████| 454/454 [00:00<00:00, 2.40MB/s]
-2026-10-31 05:36:58,483 - INFO - Initializing model finished in 12546.72ms.
-2026-10-31 05:36:58,483 - INFO - Processing images ...
-2026-10-31 05:36:58,492 - INFO - Processing images finished in 8.66ms.
-2026-10-31 05:36:58,492 - INFO - Running image 1/1 ...
-2026-10-31 05:36:58,492 - INFO - Running model ...
-2026-10-31 05:37:18,673 - INFO - Running model finished in 20180.35ms.
-2026-10-31 05:37:18,673 - INFO - Extracting mesh ...
-2026-10-31 05:37:51,081 - INFO - Extracting mesh finished in 32408.44ms.
-2026-10-31 05:37:51,081 - INFO - Exporting mesh ...
-Traceback (most recent call last):
-  File "/tmp/TripoSR/run.py", line 190, in <module>
-    meshes[0].export(out_mesh_path)
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/trimesh/base.py", line 2862, in export
-    return export_mesh(mesh=self, file_obj=file_obj, file_type=file_type, **kwargs)
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/trimesh/exchange/export.py", line 55, in export_mesh
-    file_obj = open(file_path, "wb")
-FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tsr-out/0/mesh.glb'
-Command exited with non-zero status 1
+Downloading config.json:   0%|          | 0.00/454 [00:00<?, ?B/s]Downloading config.json: 100%|██████████| 454/454 [00:00<00:00, 565kB/s]
+2026-10-31 05:39:27,411 - INFO - Initializing model finished in 9016.41ms.
+2026-10-31 05:39:27,411 - INFO - Processing images ...
+2026-10-31 05:39:27,417 - INFO - Processing images finished in 5.95ms.
+2026-10-31 05:39:27,417 - INFO - Running image 1/1 ...
+2026-10-31 05:39:27,417 - INFO - Running model ...
+2026-10-31 05:39:43,092 - INFO - Running model finished in 15674.65ms.
+2026-10-31 05:39:43,092 - INFO - Extracting mesh ...
+2026-10-31 05:40:18,677 - INFO - Extracting mesh finished in 35585.20ms.
+2026-10-31 05:40:18,677 - INFO - Exporting mesh ...
+2026-10-31 05:40:18,682 - INFO - Exporting mesh finished in 4.82ms.
 	Command being timed: "python run.py /tmp/input.png --device cpu --no-remove-bg --model-save-format glb --mc-resolution 256 --output-dir /tmp/tsr-out"
-	User time (seconds): 110.85
-	System time (seconds): 4.43
-	Percent of CPU this job got: 171%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:07.21
+	User time (seconds): 105.86
+	System time (seconds): 3.51
+	Percent of CPU this job got: 176%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:01.90
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 3634368
+	Maximum resident set size (kbytes): 3635188
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 34
-	Minor (reclaiming a frame) page faults: 1056970
-	Voluntary context switches: 17102
-	Involuntary context switches: 1909
+	Minor (reclaiming a frame) page faults: 1056971
+	Voluntary context switches: 65180
+	Involuntary context switches: 1525
 	Swaps: 0
 	File system inputs: 4240
-	File system outputs: 3276464
+	File system outputs: 3279272
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
-	Exit status: 1
+	Exit status: 0
+total 1412
+drwxr-xr-x 2 runner runner    4096 Oct 31 05:40 .
+drwxr-xr-x 3 runner runner    4096 Oct 31 05:39 ..
+-rw-r--r-- 1 runner runner 1436576 Oct 31 05:40 mesh.glb
+{
+  "valid": true,
+  "bytes": 1436576,
+  "meshes": 1,
+  "mesh_nodes": [
+    "geometry_0"
+  ],
+  "vertices": 35920,
+  "triangles": 71736,
+  "materials": [],
+  "primitives_without_material": 1,
+  "skins": 0,
+  "joints": [],
+  "skinned_primitives": 0,
+  "generator": "https://github.com/mikedh/trimesh"
+}
+05:40:33 | INFO: Data are loaded, start creating Blender stuff
+05:40:33 | INFO: Blender create Mesh node geometry_0
+05:40:33 | INFO: glTF import finished in 0.03s
+Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
+Preview 'front' would clip the model: x=-0.100..1.100 y=-0.133..1.269
