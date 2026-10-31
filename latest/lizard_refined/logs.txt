@@ -1,0 +1,43 @@
+Blender 4.2.3 LTS
+	build date: 2024-10-14
+	build time: 23:31:34
+	build commit date: 2024-10-14
+	build commit time: 15:20
+	build hash: 0e22e4fcea03
+	build branch: blender-v4.2-release
+	build platform: Linux
+	build type: Release
+	build c flags:  -Wall -Werror=implicit-function-declaration -Wstrict-prototypes -Werror=return-type -Werror=vla -Wmissing-prototypes -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wlogical-op -Wundef -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Wformat-signedness -Wrestrict -Wno-stringop-overread -Wno-stringop-overflow -Wnonnull -Wabsolute-value -Wuninitialized -Wredundant-decls -Wshadow -Wimplicit-fallthrough=5 -Wno-error=unused-but-set-variable  -march=x86-64-v2 -std=gnu11 -pipe -fPIC -funsigned-char -fno-strict-aliasing -ffp-contract=off  
+	build c++ flags:  -Wuninitialized -Wredundant-decls -Wall -Wno-invalid-offsetof -Wno-sign-compare -Wlogical-op -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Werror=return-type -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wundef -Wcomma-subscript -Wformat-signedness -Wrestrict -Wno-suggest-override -Wuninitialized -Wno-stringop-overread -Wno-stringop-overflow -Wimplicit-fallthrough=5 -Wundef -Wmissing-declarations  -march=x86-64-v2 -pipe -fPIC -funsigned-char -fno-strict-aliasing -ffp-contract=off  
+	build link flags:  -Wl,--version-script='/home/blender/git/blender-v420/blender.git/source/creator/symbols_unix.map'
+	build system: CMake
+test_own_script_builds_only_that_model (test_changed_models.TestChangedModels.test_own_script_builds_only_that_model) ... ok
+test_reference_images_count_as_own_files (test_changed_models.TestChangedModels.test_reference_images_count_as_own_files) ... ok
+test_shared_code_alone_builds_nothing (test_changed_models.TestChangedModels.test_shared_code_alone_builds_nothing) ... ok
+test_tags (test_changed_models.TestChangedModels.test_tags) ... ok
+test_missing_material_counted (test_glb_inspect.TestGLBInspect.test_missing_material_counted) ... ok
+test_rejects_bad_magic (test_glb_inspect.TestGLBInspect.test_rejects_bad_magic) ... ok
+test_rejects_length_mismatch (test_glb_inspect.TestGLBInspect.test_rejects_length_mismatch) ... ok
+test_report_renders (test_glb_inspect.TestGLBInspect.test_report_renders) ... ok
+test_valid_triangle (test_glb_inspect.TestGLBInspect.test_valid_triangle) ... ok
+test_boundary_is_closed (test_hull.TestHull.test_boundary_is_closed) ... skipped 'numpy not installed'
+test_disc_masks_carve_a_ball (test_hull.TestHull.test_disc_masks_carve_a_ball) ... skipped 'numpy not installed'
+test_limb_depth_follows_its_thickness (test_hull.TestHull.test_limb_depth_follows_its_thickness) ... skipped 'numpy not installed'
+test_captions_deterministic_and_ordered (test_timeline.TimelineTest.test_captions_deterministic_and_ordered) ... ok
+test_filter_strips_unsafe_chars (test_timeline.TimelineTest.test_filter_strips_unsafe_chars) ... ok
+test_shots_cover_all_frames_without_gaps (test_timeline.TimelineTest.test_shots_cover_all_frames_without_gaps) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.001s
+
+OK (skipped=3)
+06:11:13 | INFO: Data are loaded, start creating Blender stuff
+06:11:13 | INFO: Blender create Mesh node geometry_0
+06:11:13 | INFO: glTF import finished in 0.07s
+Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
+T-pose self-check failed: {'arm_angle_deg_L': 48.633, 'arm_angle_deg_R': 48.716, 'pass': False}
+lizard_refined: template fit IoU 0.755 with width x0.90, depth x0.95
+lizard_refined: view IoU 0:0.37 30:0.36 60:0.33 90:0.41 120:0.41 150:0.34 180:0.37 210:0.36 240:0.44 270:0.42 300:0.36 330:0.36
+lizard_refined: trim kept 73.5% of 211829 voxels
+lizard_refined: face labels {'skin': 13194, 'armour': 6858, 'cloth': 11263, 'dagger': 11}
+lizard_refined: body 31331 verts, armour 15670, loincloth 22874
