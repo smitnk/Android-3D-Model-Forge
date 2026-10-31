@@ -11,8 +11,9 @@ Pipeline (img2threejs: reconstruct from the reference, verify against it):
   5. Parts     - faces are labelled by body region + sheet colour: Armour (dark desaturated plates on the
                  torso), Loincloth (belt..knees), dagger blobs (bone colour; removed), skin. Armour and
                  Loincloth become separate shell objects with thickness and their own metal / cloth shading.
-  6. T-pose    - the sheet's hanging arms are rotated about the shoulder to horizontal (blended at the
-                 armpit), clean procedural daggers go in the fists, the usual 17-bone rig follows.
+  6. T-pose    - the hanging arms are cut out of the VOLUME and rotated as solid blocks about the shoulder
+                 (no stretched surface); texturing maps each posed point back to its drawn position;
+                 clean procedural daggers go in the fists; the usual 17-bone rig follows.
 Hanging-pose arm landmarks measured on the 0-degree view (|x|, z in metres, H = 1.9): shoulder (0.26, 1.44),
 wrist (0.40, 0.88), fist centre (0.41, 0.82), dagger tip (0.38, 0.42). Legs at x +-0.175, crotch z 0.39.
 """
@@ -202,6 +203,51 @@ def torso_axis(mask):
     return float(np.median(cols))
 
 
+# ---------------------------------------------------------------- posing (voxel level) + inverse mapping
+THETA = -math.atan2(WR[1] - SH[1], WR[0] - SH[0])      # rotation that maps shoulder->wrist onto +x
+
+
+def rotate_arm(pts, angle):
+    """Rotate points about the shoulder in each side's (|x|, z) plane."""
+    c, s = math.cos(angle), math.sin(angle)
+    u, t = np.abs(pts[:, 0]) - SH[0], pts[:, 2] - SH[1]
+    out = pts.copy()
+    out[:, 0] = np.copysign(SH[0] + u * c - t * s, pts[:, 0])
+    out[:, 2] = SH[1] + u * s + t * c
+    return out
+
+
+def morph(occ, n):
+    for _ in range(abs(n)):
+        nb = [np.roll(occ, d, a) for a in range(3) for d in (1, -1)]
+        occ = np.logical_or.reduce([occ] + nb) if n > 0 else np.logical_and.reduce([occ] + nb)
+    return occ
+
+
+def pose_voxels(occ, lo):
+    """Cut the hanging arms out of the volume and rotate them, as solid blocks, into the T-pose."""
+    pts = lo + (np.argwhere(occ) + 0.5) * VOX
+    arm = arm_weight(np.abs(pts[:, 0]), pts[:, 2]) > 0.5
+    posed = np.concatenate([pts[~arm], rotate_arm(pts[arm], THETA)])
+    half = np.abs(posed[:, 0]).max() + 3 * VOX
+    lo2 = np.array([-half, posed[:, 1].min() - 3 * VOX, -VOX])
+    n = np.ceil((np.array([half, posed[:, 1].max() + 3 * VOX, posed[:, 2].max() + 3 * VOX]) - lo2) / VOX).astype(int)
+    out = np.zeros(n, bool)
+    out[tuple(np.floor((posed - lo2) / VOX).astype(int).T)] = True
+    print(f"lizard_refined: posed {arm.sum()} arm voxels into the T-pose")
+    return morph(morph(out, 1), -1), lo2                 # closing fills rotation gaps
+
+
+def arm_share_posed(pts):
+    """In the posed model: 1 on the raised arm, 0 on the body (shoulder pads reach |x| ~0.36)."""
+    return np.clip((np.abs(pts[:, 0]) - 0.34) / 0.06, 0, 1) * (np.abs(pts[:, 2] - SH[1]) < 0.3)
+
+
+def to_hanging(pts):
+    w = arm_share_posed(pts)[:, None]
+    return pts + w * (rotate_arm(pts, -THETA) - pts)
+
+
 # ---------------------------------------------------------------- texture + labels
 def torso_half_width(front):
     """Half-width (m) of the body WITHOUT the hanging arms, per front-view row."""
@@ -214,23 +260,23 @@ def torso_half_width(front):
     return lambda z: hw[int(np.clip(round(front["bottom_row"] - z / front["s"]), 0, front["h"] - 1))]
 
 
-def project_and_label(obj, views, hw):
+def project_and_label(obj, views, hw, hang_bvh):
+    """Texture and label every face from where it was in the DRAWING (hanging arms), via to_hanging()."""
     me = obj.data
-    bm = bmesh.new()
-    bm.from_mesh(me)
-    bvh = BVHTree.FromBMesh(bm)
-    bm.free()
     uv = me.uv_layers.new(name="UVMap")
-    co = np.array([v.co[:] for v in me.vertices])
+    co = to_hanging(np.array([v.co[:] for v in me.vertices]))
     labels = []
     for poly in me.polygons:
-        n, c = np.array(poly.normal[:]), np.array(poly.center[:])
+        pc, pn = np.array(poly.center[:]), np.array(poly.normal[:])
+        c = to_hanging(pc[None])[0]
+        n = to_hanging((pc + 0.01 * pn)[None])[0] - c
+        n /= max(np.linalg.norm(n), 1e-9)
         order = sorted(range(len(views)), key=lambda k: -float(n @ views[k]["cam"]))
         pick = order[0]
         for k in order[:4]:                             # best-facing view that actually sees this face
             if float(n @ views[k]["cam"]) < 0.1:
                 break
-            hit = bvh.ray_cast(Vector(c + n * 0.004), Vector(views[k]["cam"]), 3.0)
+            hit = hang_bvh.ray_cast(Vector(c + n * 0.02), Vector(views[k]["cam"]), 3.0)
             if hit[0] is None:
                 pick = k
                 break
@@ -309,23 +355,6 @@ def shell(src, labels, which, name, offset, thickness, mats):
 
 
 # ---------------------------------------------------------------- pose
-def raise_arms(objs):
-    """Rotate the hanging arms about the shoulder to horizontal, weighted by arm_weight (blends at the armpit)."""
-    d = WR - SH
-    theta = -math.atan2(d[1], d[0])                    # angle that maps shoulder->wrist onto +x
-    c, s = math.cos(theta), math.sin(theta)
-    for o in objs:
-        for vtx in o.data.vertices:
-            x, y, z = vtx.co
-            w = float(arm_weight(abs(x), z))
-            if w == 0:
-                continue
-            u, t = abs(x) - SH[0], z - SH[1]
-            u2, t2 = u * c - t * s, u * s + t * c
-            nx, nz = math.copysign(SH[0] + u2, x), SH[1] + t2
-            vtx.co = (x + w * (nx - x), y, z + w * (nz - z))
-
-
 def build(a, material, part):
     views = load_views()
     v, faces = load_template()
@@ -351,6 +380,9 @@ def build(a, material, part):
     # 3. voxelise, trim with every view, mirror, remesh
     occ, lo = voxelise(v, faces)
     occ = trim_and_symmetrise(occ, lo, views)
+    hv, hq = hull.boundary_quads(occ, lo, VOX)            # hanging volume: occlusion tests for texturing
+    hang_bvh = BVHTree.FromPolygons([Vector(p) for p in hv], hq.tolist())
+    occ, lo = pose_voxels(occ, lo)
     verts, quads = hull.boundary_quads(occ, lo, VOX)
     me = bpy.data.meshes.new("Body")
     me.from_pydata(verts.tolist(), [], quads.tolist())
@@ -361,12 +393,9 @@ def build(a, material, part):
     for vtx in body.data.vertices:
         vtx.co.z -= zmin
 
-    on_arm = sum(float(arm_weight(abs(q.co.x), q.co.z)) > 0.5 for q in body.data.vertices)
-    print(f"lizard_refined: {on_arm} body vertices on the hanging arms before posing")
-
     # 4. textures + 5. labels
     hw = torso_half_width(front)
-    labels = project_and_label(body, views, hw)
+    labels = project_and_label(body, views, hw, hang_bvh)
     for m in material_set(views, "Skin", 0.0, 0.8):
         body.data.materials.append(m)
     counts = {k: labels.count(k) for k in ("skin", "armour", "cloth")}
@@ -376,8 +405,7 @@ def build(a, material, part):
     for p in body.data.polygons:
         p.use_smooth = True
 
-    # 6. T-pose, clean daggers
-    raise_arms([body, armour, cloth])
+    # 6. clean daggers in the T-pose fists (the arms were posed at voxel level)
     fist_x = SH[0] + float(np.linalg.norm(FIST - SH))
     xs = np.array([abs(vv.co.x) for vv in body.data.vertices if abs(vv.co.z - SH[1]) < 0.15])
     print("lizard_refined: body |x| near shoulder height, counts per 0.1 m: "
