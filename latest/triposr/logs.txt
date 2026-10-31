@@ -1,51 +1,75 @@
 Collecting git+https://github.com/tatsy/torchmcubes.git
-  Cloning https://github.com/tatsy/torchmcubes.git to /tmp/pip-req-build-_qcrd11j
-  Running command git clone --filter=blob:none --quiet https://github.com/tatsy/torchmcubes.git /tmp/pip-req-build-_qcrd11j
+  Cloning https://github.com/tatsy/torchmcubes.git to /tmp/pip-req-build-rd1zhqv9
+  Running command git clone --filter=blob:none --quiet https://github.com/tatsy/torchmcubes.git /tmp/pip-req-build-rd1zhqv9
   Resolved https://github.com/tatsy/torchmcubes.git to commit a9ac95aa329957ba646e7bb057f825f5dfa77f38
   Preparing metadata (pyproject.toml): started
   Preparing metadata (pyproject.toml): finished with status 'done'
-ERROR: Exception:
+Requirement already satisfied: torch==2.3.* in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from torchmcubes==0.1.0) (2.3.1+cpu)
+Requirement already satisfied: filelock in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from torch==2.3.*->torchmcubes==0.1.0) (4.1.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from torch==2.3.*->torchmcubes==0.1.0) (4.16.0)
+Requirement already satisfied: sympy in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from torch==2.3.*->torchmcubes==0.1.0) (1.14.0)
+Requirement already satisfied: networkx in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from torch==2.3.*->torchmcubes==0.1.0) (3.4.2)
+Requirement already satisfied: jinja2 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from torch==2.3.*->torchmcubes==0.1.0) (3.1.6)
+Requirement already satisfied: fsspec in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from torch==2.3.*->torchmcubes==0.1.0) (2026.9.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from jinja2->torch==2.3.*->torchmcubes==0.1.0) (3.0.3)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from sympy->torch==2.3.*->torchmcubes==0.1.0) (1.3.0)
+Building wheels for collected packages: torchmcubes
+  Building wheel for torchmcubes (pyproject.toml): started
+  Building wheel for torchmcubes (pyproject.toml): finished with status 'done'
+  Created wheel for torchmcubes: filename=torchmcubes-0.1.0-cp310-cp310-linux_x86_64.whl size=80248 sha256=57cc9b9b68c6ac7fdf4143a4ffc9b4e00d8b65973f41f99738e728ff426d1d0b
+  Stored in directory: /tmp/pip-ephem-wheel-cache-di7xo_j2/wheels/07/5f/20/0199858e9f96d327760cf61044996e8ed132513df3544fd601
+Successfully built torchmcubes
+Installing collected packages: torchmcubes
+Successfully installed torchmcubes-0.1.0
+torch 2.3.1+cpu
+2026-10-31 05:36:45,937 - INFO - Initializing model ...
+Downloading config.yaml:   0%|          | 0.00/987 [00:00<?, ?B/s]Downloading config.yaml: 100%|██████████| 987/987 [00:00<00:00, 5.76MB/s]
+Downloading model.ckpt:   0%|          | 0.00/1.68G [00:00<?, ?B/s]Downloading model.ckpt:   2%|▏         | 31.5M/1.68G [00:00<00:05, 278MB/s]Downloading model.ckpt:   6%|▌         | 94.4M/1.68G [00:00<00:03, 439MB/s]Downloading model.ckpt:   9%|▉         | 147M/1.68G [00:00<00:03, 472MB/s] Downloading model.ckpt:  13%|█▎        | 210M/1.68G [00:00<00:04, 334MB/s]Downloading model.ckpt:  15%|█▌        | 252M/1.68G [00:01<00:09, 143MB/s]Downloading model.ckpt:  17%|█▋        | 283M/1.68G [00:01<00:10, 134MB/s]Downloading model.ckpt:  21%|██        | 346M/1.68G [00:01<00:06, 195MB/s]Downloading model.ckpt:  24%|██▍       | 409M/1.68G [00:01<00:05, 226MB/s]Downloading model.ckpt:  27%|██▋       | 451M/1.68G [00:02<00:10, 119MB/s]Downloading model.ckpt:  29%|██▉       | 482M/1.68G [00:03<00:11, 108MB/s]Downloading model.ckpt:  33%|███▎      | 545M/1.68G [00:03<00:07, 157MB/s]Downloading model.ckpt:  35%|███▌      | 587M/1.68G [00:03<00:05, 183MB/s]Downloading model.ckpt:  38%|███▊      | 629M/1.68G [00:03<00:04, 216MB/s]Downloading model.ckpt:  40%|████      | 671M/1.68G [00:03<00:04, 247MB/s]Downloading model.ckpt:  44%|████▍     | 734M/1.68G [00:03<00:02, 318MB/s]Downloading model.ckpt:  47%|████▋     | 786M/1.68G [00:04<00:04, 186MB/s]Downloading model.ckpt:  49%|████▉     | 828M/1.68G [00:04<00:05, 150MB/s]Downloading model.ckpt:  51%|█████▏    | 860M/1.68G [00:04<00:04, 165MB/s]Downloading model.ckpt:  54%|█████▍    | 902M/1.68G [00:04<00:04, 184MB/s]Downloading model.ckpt:  56%|█████▌    | 933M/1.68G [00:05<00:05, 141MB/s]Downloading model.ckpt:  58%|█████▊    | 965M/1.68G [00:05<00:04, 160MB/s]Downloading model.ckpt:  61%|██████▏   | 1.03G/1.68G [00:05<00:02, 229MB/s]Downloading model.ckpt:  64%|██████▍   | 1.07G/1.68G [00:05<00:02, 237MB/s]Downloading model.ckpt:  67%|██████▋   | 1.12G/1.68G [00:05<00:01, 289MB/s]Downloading model.ckpt:  70%|███████   | 1.17G/1.68G [00:05<00:01, 317MB/s]Downloading model.ckpt:  73%|███████▎  | 1.22G/1.68G [00:06<00:01, 336MB/s]Downloading model.ckpt:  75%|███████▌  | 1.26G/1.68G [00:06<00:01, 354MB/s]Downloading model.ckpt:  78%|███████▊  | 1.30G/1.68G [00:06<00:01, 370MB/s]Downloading model.ckpt:  80%|████████  | 1.34G/1.68G [00:06<00:01, 270MB/s]Downloading model.ckpt:  83%|████████▎ | 1.38G/1.68G [00:06<00:00, 298MB/s]Downloading model.ckpt:  85%|████████▌ | 1.43G/1.68G [00:06<00:00, 278MB/s]Downloading model.ckpt:  88%|████████▊ | 1.47G/1.68G [00:07<00:00, 236MB/s]Downloading model.ckpt:  90%|█████████ | 1.51G/1.68G [00:07<00:00, 267MB/s]Downloading model.ckpt:  94%|█████████▍| 1.58G/1.68G [00:07<00:00, 358MB/s]Downloading model.ckpt:  98%|█████████▊| 1.65G/1.68G [00:07<00:00, 402MB/s]Downloading model.ckpt: 100%|██████████| 1.68G/1.68G [00:07<00:00, 225MB/s]
+/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/transformers/utils/generic.py:441: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  _torch_pytree._register_pytree_node(
+The cache for model files in Transformers v4.22.0 has been updated. Migrating your old cache. This is a one-time only operation. You can interrupt this and resume the migration later on by calling `transformers.utils.move_cache()`.
+0it [00:00, ?it/s]0it [00:00, ?it/s]
+/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/transformers/utils/generic.py:309: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  _torch_pytree._register_pytree_node(
+Downloading config.json:   0%|          | 0.00/454 [00:00<?, ?B/s]Downloading config.json: 100%|██████████| 454/454 [00:00<00:00, 2.40MB/s]
+2026-10-31 05:36:58,483 - INFO - Initializing model finished in 12546.72ms.
+2026-10-31 05:36:58,483 - INFO - Processing images ...
+2026-10-31 05:36:58,492 - INFO - Processing images finished in 8.66ms.
+2026-10-31 05:36:58,492 - INFO - Running image 1/1 ...
+2026-10-31 05:36:58,492 - INFO - Running model ...
+2026-10-31 05:37:18,673 - INFO - Running model finished in 20180.35ms.
+2026-10-31 05:37:18,673 - INFO - Extracting mesh ...
+2026-10-31 05:37:51,081 - INFO - Extracting mesh finished in 32408.44ms.
+2026-10-31 05:37:51,081 - INFO - Exporting mesh ...
 Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/cli/base_command.py", line 109, in _run_wrapper
-    status = _inner_run()
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/cli/base_command.py", line 102, in _inner_run
-    return self.run(options, args)
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/cli/req_command.py", line 106, in wrapper
-    return func(self, options, args)
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/commands/install.py", line 478, in run
-    requirement_set = resolver.resolve(
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/resolution/resolvelib/resolver.py", line 82, in resolve
-    collected = self.factory.collect_root_requirements(root_reqs)
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 563, in collect_root_requirements
-    reqs = list(
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 519, in _make_requirements_from_install_req
-    cand = self._make_base_candidate_from_link(
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 227, in _make_base_candidate_from_link
-    self._link_candidate_cache[link] = LinkCandidate(
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 325, in __init__
-    super().__init__(
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 167, in __init__
-    self.dist = self._prepare()
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 245, in _prepare
-    dist = self._prepare_distribution()
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 336, in _prepare_distribution
-    return preparer.prepare_linked_requirement(self._ireq, parallel_builds=True)
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/operations/prepare.py", line 664, in prepare_linked_requirement
-    return self._prepare_linked_requirement(req, parallel_builds)
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/operations/prepare.py", line 783, in _prepare_linked_requirement
-    dist = _get_prepared_distribution(
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/operations/prepare.py", line 82, in _get_prepared_distribution
-    abstract_dist.prepare_distribution_metadata(
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/distributions/sdist.py", line 81, in prepare_distribution_metadata
-    self.req.prepare_metadata(allow_editables)
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/req/req_install.py", line 535, in prepare_metadata
-    self.metadata_directory = generate_metadata(
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/operations/build/metadata.py", line 34, in generate_metadata
-    distinfo_dir = backend.prepare_metadata_for_build_wheel(metadata_dir)
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_internal/utils/misc.py", line 755, in prepare_metadata_for_build_wheel
-    return super().prepare_metadata_for_build_wheel(
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 224, in prepare_metadata_for_build_wheel
-    return self._call_hook(
-  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 402, in _call_hook
-    raise BackendUnavailable(
-pip._vendor.pyproject_hooks._impl.BackendUnavailable: Cannot import 'scikit_build_core.build'
+  File "/tmp/TripoSR/run.py", line 190, in <module>
+    meshes[0].export(out_mesh_path)
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/trimesh/base.py", line 2862, in export
+    return export_mesh(mesh=self, file_obj=file_obj, file_type=file_type, **kwargs)
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/trimesh/exchange/export.py", line 55, in export_mesh
+    file_obj = open(file_path, "wb")
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tsr-out/0/mesh.glb'
+Command exited with non-zero status 1
+	Command being timed: "python run.py /tmp/input.png --device cpu --no-remove-bg --model-save-format glb --mc-resolution 256 --output-dir /tmp/tsr-out"
+	User time (seconds): 110.85
+	System time (seconds): 4.43
+	Percent of CPU this job got: 171%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:07.21
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3634368
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 34
+	Minor (reclaiming a frame) page faults: 1056970
+	Voluntary context switches: 17102
+	Involuntary context switches: 1909
+	Swaps: 0
+	File system inputs: 4240
+	File system outputs: 3276464
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
