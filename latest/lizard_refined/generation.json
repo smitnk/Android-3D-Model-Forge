@@ -12,8 +12,8 @@
     "shoes": "#F4F1EA"
   },
   "parts": 5,
-  "triangles": 151972,
-  "vertices": 75956,
+  "triangles": 154860,
+  "vertices": 77414,
   "materials": [
     "Armour000",
     "Bone",
@@ -21,28 +21,28 @@
     "Skin000"
   ],
   "bbox_min_m": [
-    -0.9509,
+    -0.9468,
     -0.3423,
     0.0
   ],
   "bbox_max_m": [
-    0.9509,
-    0.3803,
-    1.8743
+    0.9467,
+    0.385,
+    1.875
   ],
   "rig": {
     "bones": 17,
     "skinning": "blended distance weights"
   },
   "tpose_selfcheck": {
-    "arm_angle_deg_L": 3.306,
-    "arm_angle_deg_R": 3.355,
+    "arm_angle_deg_L": 3.61,
+    "arm_angle_deg_R": 3.597,
     "pass": true
   },
   "deformation_selftest": {
-    "hand_moved_m": 0.4871,
+    "hand_moved_m": 0.4874,
     "rest_of_body_drift_m": 0.0,
-    "hand_verts": 395,
+    "hand_verts": 429,
     "pass": true
   },
   "files": {
@@ -53,30 +53,30 @@
         "view": "front",
         "file": "lizard-warrior-refined-front.png",
         "frame_extent": [
-          0.121,
-          0.879,
-          0.18,
-          0.895
+          0.119,
+          0.881,
+          0.181,
+          0.898
         ]
       },
       {
         "view": "three-quarter",
         "file": "lizard-warrior-refined-three-quarter.png",
         "frame_extent": [
-          0.183,
-          0.9,
-          0.106,
-          0.928
+          0.182,
+          0.901,
+          0.107,
+          0.932
         ]
       },
       {
         "view": "back",
         "file": "lizard-warrior-refined-back.png",
         "frame_extent": [
-          0.113,
-          0.887,
-          0.159,
-          0.919
+          0.112,
+          0.888,
+          0.158,
+          0.923
         ]
       }
     ]
