@@ -82,6 +82,14 @@ Patterns the agent can copy: `scripts/round_buddy.py` (measured shapes + project
 (silhouette carving + projected drawing, for sheets with T-pose and side views), `generate_model.py` → `build_character`
 (multi-part dressed character). Only use characters you have the rights to.
 
+## Experimental: AI template with TripoSR (free, CPU)
+
+**Actions → AI Template (TripoSR, CPU) → Run workflow** turns one prepared image (gray background, figure centred,
+e.g. `assets/ai-input/lizard-warrior.png`) into a rough textured 3D mesh in about a minute on GitHub's free runner
+(peak ~3.7 GB RAM, no GPU). The mesh is one fused surface in the pose of the image: useful as a 3D reference for
+building a proper model, not a finished, rigged character. Result: the run's artifact and
+[`ci-results/latest/triposr`](https://github.com/smitnk/Android-3D-Model-Forge/tree/ci-results/latest/triposr).
+
 ## Features
 
 - **Generators**, picked with the `model_type` option:
