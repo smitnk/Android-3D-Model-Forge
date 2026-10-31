@@ -1,6 +1,6 @@
 Collecting git+https://github.com/tatsy/torchmcubes.git
-  Cloning https://github.com/tatsy/torchmcubes.git to /tmp/pip-req-build-r6qgstoc
-  Running command git clone --filter=blob:none --quiet https://github.com/tatsy/torchmcubes.git /tmp/pip-req-build-r6qgstoc
+  Cloning https://github.com/tatsy/torchmcubes.git to /tmp/pip-req-build-rqkse9h1
+  Running command git clone --filter=blob:none --quiet https://github.com/tatsy/torchmcubes.git /tmp/pip-req-build-rqkse9h1
   Resolved https://github.com/tatsy/torchmcubes.git to commit a9ac95aa329957ba646e7bb057f825f5dfa77f38
   Preparing metadata (pyproject.toml): started
   Preparing metadata (pyproject.toml): finished with status 'done'
@@ -16,47 +16,47 @@ Requirement already satisfied: mpmath<1.4,>=1.1.0 in /opt/hostedtoolcache/Python
 Building wheels for collected packages: torchmcubes
   Building wheel for torchmcubes (pyproject.toml): started
   Building wheel for torchmcubes (pyproject.toml): finished with status 'done'
-  Created wheel for torchmcubes: filename=torchmcubes-0.1.0-cp310-cp310-linux_x86_64.whl size=80246 sha256=86aa034852dcaf563ca613904e80f3051a5bdbe5cd93b9aa65214a295f766c33
-  Stored in directory: /tmp/pip-ephem-wheel-cache-v0o0xavl/wheels/07/5f/20/0199858e9f96d327760cf61044996e8ed132513df3544fd601
+  Created wheel for torchmcubes: filename=torchmcubes-0.1.0-cp310-cp310-linux_x86_64.whl size=80247 sha256=c3ff60f39b2e8347fc229cb324e58a5685e1a7fdf97e801f97b3bb7248771ab2
+  Stored in directory: /tmp/pip-ephem-wheel-cache-vyfp_lka/wheels/07/5f/20/0199858e9f96d327760cf61044996e8ed132513df3544fd601
 Successfully built torchmcubes
 Installing collected packages: torchmcubes
 Successfully installed torchmcubes-0.1.0
 torch 2.3.1+cpu
-2026-10-31 05:42:27,116 - INFO - Initializing model ...
-Downloading config.yaml:   0%|          | 0.00/987 [00:00<?, ?B/s]Downloading config.yaml: 100%|██████████| 987/987 [00:00<00:00, 7.51MB/s]
-Downloading model.ckpt:   0%|          | 0.00/1.68G [00:00<?, ?B/s]Downloading model.ckpt:   3%|▎         | 41.9M/1.68G [00:00<00:03, 415MB/s]Downloading model.ckpt:   6%|▌         | 94.4M/1.68G [00:00<00:03, 475MB/s]Downloading model.ckpt:   9%|▉         | 157M/1.68G [00:00<00:02, 528MB/s] Downloading model.ckpt:  13%|█▎        | 220M/1.68G [00:00<00:02, 509MB/s]Downloading model.ckpt:  16%|█▋        | 273M/1.68G [00:00<00:03, 429MB/s]Downloading model.ckpt:  20%|██        | 336M/1.68G [00:00<00:02, 464MB/s]Downloading model.ckpt:  24%|██▍       | 398M/1.68G [00:00<00:02, 501MB/s]Downloading model.ckpt:  27%|██▋       | 451M/1.68G [00:01<00:03, 353MB/s]Downloading model.ckpt:  29%|██▉       | 493M/1.68G [00:01<00:03, 343MB/s]Downloading model.ckpt:  33%|███▎      | 556M/1.68G [00:01<00:02, 400MB/s]Downloading model.ckpt:  37%|███▋      | 619M/1.68G [00:01<00:02, 447MB/s]Downloading model.ckpt:  40%|████      | 671M/1.68G [00:01<00:02, 416MB/s]Downloading model.ckpt:  44%|████▍     | 734M/1.68G [00:01<00:02, 457MB/s]Downloading model.ckpt:  48%|████▊     | 797M/1.68G [00:01<00:01, 444MB/s]Downloading model.ckpt:  51%|█████     | 849M/1.68G [00:02<00:02, 391MB/s]Downloading model.ckpt:  54%|█████▍    | 902M/1.68G [00:02<00:01, 408MB/s]Downloading model.ckpt:  58%|█████▊    | 965M/1.68G [00:02<00:01, 453MB/s]Downloading model.ckpt:  61%|██████▏   | 1.03G/1.68G [00:02<00:01, 464MB/s]Downloading model.ckpt:  64%|██████▍   | 1.08G/1.68G [00:02<00:01, 439MB/s]Downloading model.ckpt:  68%|██████▊   | 1.14G/1.68G [00:02<00:01, 473MB/s]Downloading model.ckpt:  72%|███████▏  | 1.21G/1.68G [00:02<00:00, 499MB/s]Downloading model.ckpt:  76%|███████▌  | 1.27G/1.68G [00:02<00:00, 518MB/s]Downloading model.ckpt:  79%|███████▉  | 1.33G/1.68G [00:02<00:00, 530MB/s]Downloading model.ckpt:  83%|████████▎ | 1.39G/1.68G [00:03<00:00, 543MB/s]Downloading model.ckpt:  87%|████████▋ | 1.46G/1.68G [00:03<00:00, 373MB/s]Downloading model.ckpt:  90%|█████████ | 1.51G/1.68G [00:03<00:00, 389MB/s]Downloading model.ckpt:  93%|█████████▎| 1.56G/1.68G [00:03<00:00, 407MB/s]Downloading model.ckpt:  96%|█████████▋| 1.61G/1.68G [00:03<00:00, 417MB/s]Downloading model.ckpt:  99%|█████████▉| 1.67G/1.68G [00:03<00:00, 366MB/s]Downloading model.ckpt: 100%|██████████| 1.68G/1.68G [00:03<00:00, 428MB/s]
+2026-10-31 05:46:32,485 - INFO - Initializing model ...
+Downloading config.yaml:   0%|          | 0.00/987 [00:00<?, ?B/s]Downloading config.yaml: 100%|██████████| 987/987 [00:00<00:00, 7.26MB/s]
+Downloading model.ckpt:   0%|          | 0.00/1.68G [00:00<?, ?B/s]Downloading model.ckpt:   1%|          | 10.5M/1.68G [00:00<00:24, 67.5MB/s]Downloading model.ckpt:   4%|▍         | 62.9M/1.68G [00:00<00:05, 283MB/s] Downloading model.ckpt:   7%|▋         | 115M/1.68G [00:00<00:04, 377MB/s] Downloading model.ckpt:  11%|█         | 178M/1.68G [00:00<00:03, 439MB/s]Downloading model.ckpt:  14%|█▍        | 231M/1.68G [00:00<00:03, 455MB/s]Downloading model.ckpt:  17%|█▋        | 283M/1.68G [00:00<00:03, 421MB/s]Downloading model.ckpt:  21%|██        | 346M/1.68G [00:00<00:02, 456MB/s]Downloading model.ckpt:  24%|██▍       | 409M/1.68G [00:00<00:02, 482MB/s]Downloading model.ckpt:  28%|██▊       | 461M/1.68G [00:01<00:02, 467MB/s]Downloading model.ckpt:  31%|███       | 514M/1.68G [00:01<00:02, 472MB/s]Downloading model.ckpt:  34%|███▍      | 577M/1.68G [00:01<00:02, 492MB/s]Downloading model.ckpt:  38%|███▊      | 640M/1.68G [00:01<00:02, 507MB/s]Downloading model.ckpt:  41%|████▏     | 692M/1.68G [00:01<00:02, 457MB/s]Downloading model.ckpt:  44%|████▍     | 744M/1.68G [00:01<00:02, 459MB/s]Downloading model.ckpt:  48%|████▊     | 797M/1.68G [00:01<00:02, 440MB/s]Downloading model.ckpt:  51%|█████     | 849M/1.68G [00:02<00:02, 340MB/s]Downloading model.ckpt:  53%|█████▎    | 891M/1.68G [00:02<00:02, 348MB/s]Downloading model.ckpt:  56%|█████▋    | 944M/1.68G [00:02<00:01, 380MB/s]Downloading model.ckpt:  60%|██████    | 1.01G/1.68G [00:02<00:01, 423MB/s]Downloading model.ckpt:  63%|██████▎   | 1.06G/1.68G [00:02<00:01, 411MB/s]Downloading model.ckpt:  66%|██████▋   | 1.11G/1.68G [00:02<00:01, 421MB/s]Downloading model.ckpt:  70%|███████   | 1.17G/1.68G [00:02<00:01, 451MB/s]Downloading model.ckpt:  74%|███████▍  | 1.24G/1.68G [00:02<00:00, 473MB/s]Downloading model.ckpt:  78%|███████▊  | 1.30G/1.68G [00:03<00:00, 490MB/s]Downloading model.ckpt:  81%|████████  | 1.35G/1.68G [00:03<00:00, 499MB/s]Downloading model.ckpt:  84%|████████▍ | 1.42G/1.68G [00:03<00:00, 506MB/s]Downloading model.ckpt:  88%|████████▊ | 1.47G/1.68G [00:03<00:00, 466MB/s]Downloading model.ckpt:  91%|█████████ | 1.52G/1.68G [00:03<00:00, 451MB/s]Downloading model.ckpt:  94%|█████████▍| 1.57G/1.68G [00:03<00:00, 469MB/s]Downloading model.ckpt:  97%|█████████▋| 1.63G/1.68G [00:03<00:00, 473MB/s]Downloading model.ckpt: 100%|██████████| 1.68G/1.68G [00:03<00:00, 374MB/s]Downloading model.ckpt: 100%|██████████| 1.68G/1.68G [00:03<00:00, 429MB/s]
 /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/transformers/utils/generic.py:441: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
   _torch_pytree._register_pytree_node(
 The cache for model files in Transformers v4.22.0 has been updated. Migrating your old cache. This is a one-time only operation. You can interrupt this and resume the migration later on by calling `transformers.utils.move_cache()`.
 0it [00:00, ?it/s]0it [00:00, ?it/s]
 /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/transformers/utils/generic.py:309: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
   _torch_pytree._register_pytree_node(
-Downloading config.json:   0%|          | 0.00/454 [00:00<?, ?B/s]Downloading config.json: 100%|██████████| 454/454 [00:00<00:00, 3.96MB/s]
-2026-10-31 05:42:34,999 - INFO - Initializing model finished in 7882.56ms.
-2026-10-31 05:42:34,999 - INFO - Processing images ...
-2026-10-31 05:42:35,006 - INFO - Processing images finished in 6.80ms.
-2026-10-31 05:42:35,006 - INFO - Running image 1/1 ...
-2026-10-31 05:42:35,006 - INFO - Running model ...
-2026-10-31 05:42:53,140 - INFO - Running model finished in 18134.34ms.
-2026-10-31 05:42:53,140 - INFO - Extracting mesh ...
-2026-10-31 05:43:17,890 - INFO - Extracting mesh finished in 24749.50ms.
-2026-10-31 05:43:17,890 - INFO - Exporting mesh ...
-2026-10-31 05:43:17,896 - INFO - Exporting mesh finished in 6.22ms.
+Downloading config.json:   0%|          | 0.00/454 [00:00<?, ?B/s]Downloading config.json: 100%|██████████| 454/454 [00:00<00:00, 3.07MB/s]
+2026-10-31 05:46:41,345 - INFO - Initializing model finished in 8860.30ms.
+2026-10-31 05:46:41,345 - INFO - Processing images ...
+2026-10-31 05:46:41,353 - INFO - Processing images finished in 8.25ms.
+2026-10-31 05:46:41,353 - INFO - Running image 1/1 ...
+2026-10-31 05:46:41,353 - INFO - Running model ...
+2026-10-31 05:47:00,963 - INFO - Running model finished in 19609.57ms.
+2026-10-31 05:47:00,963 - INFO - Extracting mesh ...
+2026-10-31 05:47:33,348 - INFO - Extracting mesh finished in 32384.59ms.
+2026-10-31 05:47:33,348 - INFO - Exporting mesh ...
+2026-10-31 05:47:33,355 - INFO - Exporting mesh finished in 7.57ms.
 	Command being timed: "python run.py /tmp/input.png --device cpu --no-remove-bg --model-save-format glb --mc-resolution 256 --output-dir /tmp/tsr-out"
-	User time (seconds): 89.56
-	System time (seconds): 3.79
-	Percent of CPU this job got: 177%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:52.61
+	User time (seconds): 109.51
+	System time (seconds): 4.26
+	Percent of CPU this job got: 180%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:02.92
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 3684124
+	Maximum resident set size (kbytes): 3681312
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 34
-	Minor (reclaiming a frame) page faults: 1384680
-	Voluntary context switches: 17101
-	Involuntary context switches: 1399
+	Minor (reclaiming a frame) page faults: 1089710
+	Voluntary context switches: 10362
+	Involuntary context switches: 1829
 	Swaps: 0
 	File system inputs: 4240
 	File system outputs: 3279272
@@ -66,17 +66,17 @@ The cache for model files in Transformers v4.22.0 has been updated. Migrating yo
 	Page size (bytes): 4096
 	Exit status: 0
 total 1412
-drwxr-xr-x 2 runner runner    4096 Oct 31 05:43 .
-drwxr-xr-x 3 runner runner    4096 Oct 31 05:42 ..
--rw-r--r-- 1 runner runner 1436576 Oct 31 05:43 mesh.glb
+drwxr-xr-x 2 runner runner    4096 Oct 31 05:47 .
+drwxr-xr-x 3 runner runner    4096 Oct 31 05:46 ..
+-rw-r--r-- 1 runner runner 1436480 Oct 31 05:47 mesh.glb
 {
   "valid": true,
-  "bytes": 1436576,
+  "bytes": 1436480,
   "meshes": 1,
   "mesh_nodes": [
     "geometry_0"
   ],
-  "vertices": 35920,
+  "vertices": 35914,
   "triangles": 71736,
   "materials": [],
   "primitives_without_material": 1,
@@ -85,22 +85,22 @@ drwxr-xr-x 3 runner runner    4096 Oct 31 05:42 ..
   "skinned_primitives": 0,
   "generator": "https://github.com/mikedh/trimesh"
 }
-05:43:37 | INFO: Data are loaded, start creating Blender stuff
-05:43:37 | INFO: Blender create Mesh node geometry_0
-05:43:37 | INFO: glTF import finished in 0.04s
-05:43:37 | INFO: Starting glTF 2.0 export
-05:43:37 | INFO: Extracting primitive: geometry_0
-05:43:37 | INFO: Primitives created: 1
-05:43:37 | INFO: Finished glTF 2.0 export in 0.07343626022338867 s
+05:47:49 | INFO: Data are loaded, start creating Blender stuff
+05:47:49 | INFO: Blender create Mesh node geometry_0
+05:47:49 | INFO: glTF import finished in 0.05s
+05:47:49 | INFO: Starting glTF 2.0 export
+05:47:49 | INFO: Extracting primitive: geometry_0
+05:47:49 | INFO: Primitives created: 1
+05:47:49 | INFO: Finished glTF 2.0 export in 0.09162425994873047 s
 Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/lizard-warrior-triposr-front.png'
-Time: 00:17.98 (Saving: 00:00.05)
+Time: 00:23.31 (Saving: 00:00.07)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/lizard-warrior-triposr-three-quarter.png'
-Time: 00:18.45 (Saving: 00:00.04)
+Time: 00:23.80 (Saving: 00:00.05)
 
 Saved: '/home/runner/work/Android-3D-Model-Forge/Android-3D-Model-Forge/out/lizard-warrior-triposr-back.png'
-Time: 00:16.73 (Saving: 00:00.04)
+Time: 00:21.30 (Saving: 00:00.05)
 
 INFO Draco mesh compression is available, use library at /home/runner/blender/4.2/python/lib/python3.11/site-packages/libextern_draco.so
 
@@ -110,7 +110,7 @@ INFO Draco mesh compression is available, use library at /home/runner/blender/4.
     0.4217,
     1.0005
   ],
-  "vertices": 35920,
+  "vertices": 35914,
   "triangles": 71736,
   "vertex_colours": true,
   "previews": [
