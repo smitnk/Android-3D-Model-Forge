@@ -2,7 +2,8 @@
 
 Usage: blender -b --factory-startup --python-exit-code 1 --python scripts/preview_glb.py -- \
            --glb mesh.glb --out out --slug name [--height 1.8] [--rotate-x 90] [--rotate-z 0] [--save-glb fixed.glb]
-TripoSR meshes are Z-up with the camera on +X: use --rotate-x -90 --rotate-z -90.
+TripoSR meshes are Z-up with the camera on +X and sRGB vertex colours:
+  use --rotate-x -90 --rotate-z -90 --srgb-vertex-colours.
 Vertex colours (COLOR_0) are wired into the material so meshes without textures render in colour.
 Prints the mesh's size before normalising, so orientation problems are visible in the log.
 """
@@ -28,6 +29,7 @@ def main():
     p.add_argument("--rotate-x", type=float, default=0.0)
     p.add_argument("--rotate-z", type=float, default=0.0)
     p.add_argument("--save-glb", default="", help="also write the re-oriented, scaled mesh here")
+    p.add_argument("--srgb-vertex-colours", action="store_true", help="vertex colours were written as sRGB; convert")
     a = p.parse_args(sys.argv[sys.argv.index("--") + 1:])
     os.makedirs(a.out, exist_ok=True)
 
@@ -49,6 +51,10 @@ def main():
         for v in o.data.vertices:
             v.co = ((v.co.x - centre[0]) * k, (v.co.y - centre[1]) * k, (v.co.z - centre[2]) * k)
         me = o.data
+        if me.color_attributes and a.srgb_vertex_colours:
+            # TripoSR writes sRGB values into COLOR_0, which glTF defines as linear -> renders washed out
+            for d in me.color_attributes[0].data:
+                d.color = [((c + 0.055) / 1.055) ** 2.4 if c > 0.04045 else c / 12.92 for c in d.color[:3]] + [1.0]
         if me.color_attributes:
             mat = bpy.data.materials.new("VertexColour")
             mat.use_nodes = True
