@@ -100,7 +100,7 @@ def fit_axis(pts, v):
     """Column of the turntable axis: match silhouette centroids, then refine by IoU."""
     col, _ = image_xy(pts, v, 0.0)
     guess = np.where(v["mask"])[1].mean() - col.mean()
-    return max((silhouette_iou(pts, v, guess + d), guess + d) for d in range(-6, 7))[1]
+    return max((silhouette_iou(pts, v, guess + d), guess + d) for d in range(-15, 16))[1]
 
 
 # ---------------------------------------------------------------- template -> trimmed volume
@@ -147,15 +147,19 @@ def voxelise(v, faces):
 def trim_and_symmetrise(occ, lo, views):
     idx = np.argwhere(occ)
     pts = lo + (idx + 0.5) * VOX
-    keep = np.ones(len(pts), bool)
+    outside_count = np.zeros(len(pts), int)
+    report = []
     for v in views:
-        m = dilate(v["mask"], 2)                       # tolerance: masks are drawn, alignment is fitted
+        m = dilate(v["mask"], 3)                       # tolerance: masks are drawn, alignment is fitted
         col, row = image_xy(pts, v)
         ci, ri = np.round(col).astype(int), np.round(row).astype(int)
         ok = (ci >= 0) & (ci < v["w"]) & (ri >= 0) & (ri < v["h"])
         inside = np.zeros(len(pts), bool)
         inside[ok] = m[ri[ok], ci[ok]]
-        keep &= inside
+        outside_count += ~inside
+        report.append(f"{v['angle']}:{(~inside).mean():.0%}")
+    keep = outside_count < 2                            # robust: one slightly misaligned view cannot cut a limb
+    print("lizard_refined: share of template voxels outside each view: " + " ".join(report))
     # remove the template's blobby blades (replaced by clean daggers): voxels along the drawn blade below the fist
     blade_start = FIST + 0.07 * (TIP - FIST) / np.linalg.norm(TIP - FIST)
     blade = (seg_dist(np.stack([np.abs(pts[:, 0]), pts[:, 2]], 1), blade_start, TIP) < 0.06) & (np.abs(pts[:, 0]) > 0.25)
@@ -341,7 +345,7 @@ def build(a, material, part):
     shift = (fit_axis(v[::10], front) - torso_axis(front["mask"])) * front["s"]  # body axis -> x = 0
     v[:, 0] += shift
     for view in views:
-        view["axis"] = fit_axis(v[::10], view)
+        view["axis"] = fit_axis(v[::3], view)
     print("lizard_refined: view IoU " + " ".join(f"{view['angle']}:{silhouette_iou(v[::10], view, view['axis']):.2f}" for view in views))
 
     # 3. voxelise, trim with every view, mirror, remesh
@@ -356,6 +360,9 @@ def build(a, material, part):
     zmin = min(p.co.z for p in body.data.vertices)
     for vtx in body.data.vertices:
         vtx.co.z -= zmin
+
+    on_arm = sum(float(arm_weight(abs(q.co.x), q.co.z)) > 0.5 for q in body.data.vertices)
+    print(f"lizard_refined: {on_arm} body vertices on the hanging arms before posing")
 
     # 4. textures + 5. labels
     hw = torso_half_width(front)
