@@ -55,6 +55,7 @@ jobs:
           pip install -q torch==2.3.1 --index-url https://download.pytorch.org/whl/cpu
           pip install -q "numpy<2" omegaconf==2.3.0 Pillow einops==0.7.0 transformers==4.35.0 trimesh==4.0.5 \
             huggingface-hub imageio xatlas==0.0.9 moderngl==5.10.0
+          pip install -q scikit-build-core pybind11 cmake ninja   # torchmcubes build backend (no isolation: it must see torch)
           pip install --no-build-isolation git+https://github.com/tatsy/torchmcubes.git
           # run.py imports rembg even with --no-remove-bg; a stub avoids the onnxruntime dependency chain
           mkdir -p /tmp/stubs && printf 'def new_session(*a, **k):\n    return None\n\ndef remove(*a, **k):\n    raise RuntimeError("background removal disabled; supply a prepared image")\n' > /tmp/stubs/rembg.py
