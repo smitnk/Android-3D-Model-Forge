@@ -135,6 +135,40 @@ class Panel:
         return col / self.w, 1.0 - row / self.h
 
 
+def daggers(bone_m, fist_x, z):
+    """Two curved bone daggers held in T-pose fists at (+-fist_x, z): blade forward (-Y), grip + pommel behind."""
+    out = []
+    for s_, x in (("L", 1), ("R", -1)):
+        bm = bmesh.new()
+        base = Vector((fist_x * x, -0.05, z - 0.01))
+        segs, length = 5, 0.29
+        m = Matrix.Translation(base + Vector((0, 0.07, 0))) @ Vector((0, -1, 0)).to_track_quat("Z", "Y").to_matrix().to_4x4()
+        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10, radius1=0.018, radius2=0.018,
+                              depth=0.16, matrix=m)
+        bmesh.ops.create_uvsphere(bm, u_segments=10, v_segments=6, radius=0.026,
+                                  matrix=Matrix.Translation(base + Vector((0, 0.15, 0))))
+        for i in range(segs):  # curved blade: tapering cones, slightly curving out and down
+            t0, t1 = i / segs, (i + 1) / segs
+            p0 = base + Vector((0.03 * x * math.sin(t0 * 2.5), -length * t0, -0.06 * t0 ** 2))
+            p1 = base + Vector((0.03 * x * math.sin(t1 * 2.5), -length * t1, -0.06 * t1 ** 2))
+            d = p1 - p0
+            r0, r1 = 0.026 * (1 - t0) + 0.004, 0.026 * (1 - t1) + 0.004 * (i < segs - 1)
+            m = Matrix.Translation((p0 + p1) / 2) @ d.to_track_quat("Z", "Y").to_matrix().to_4x4()
+            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10, radius1=r0,
+                                  radius2=max(r1, 0.0), depth=d.length * 1.08, matrix=m)
+        me = bpy.data.meshes.new(f"Dagger_{s_}")
+        bm.to_mesh(me)
+        bm.free()
+        obj = bpy.data.objects.new(f"Dagger_{s_}", me)
+        bpy.context.scene.collection.objects.link(obj)
+        for poly in me.polygons:
+            poly.use_smooth = True
+        me.materials.append(bone_m)
+        obj["bone"] = f"hand.{s_}"
+        out.append(obj)
+    return out
+
+
 def build(a, material, part):
     front_img, front_px = load_rgba("front.png")
     back_img, back_px = load_rgba("back.png")
@@ -188,37 +222,6 @@ def build(a, material, part):
                     uv.data[li].uv = panel.body_uv(p, mirrored=is_back)
         o["bone"] = ""
 
-    parts = [body, arms_obj]
-    bone_m = material("Bone", "#D9B98C", 0.55)
-    for s_, x in (("L", 1), ("R", -1)):
-        bm = bmesh.new()
-        # curved blade: a chain of tapering cones from the fist, pointing forward (-Y) and slightly down
-        base = Vector((FIST_X * x, -0.05, SHOULDER_Z - 0.01))
-        segs, length = 5, 0.29
-        # grip + pommel through the fist, out the back of the hand
-        m = Matrix.Translation(base + Vector((0, 0.07, 0))) @ Vector((0, -1, 0)).to_track_quat("Z", "Y").to_matrix().to_4x4()
-        bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10, radius1=0.018, radius2=0.018,
-                              depth=0.16, matrix=m)
-        bmesh.ops.create_uvsphere(bm, u_segments=10, v_segments=6, radius=0.026,
-                                  matrix=Matrix.Translation(base + Vector((0, 0.15, 0))))
-        for i in range(segs):
-            t0, t1 = i / segs, (i + 1) / segs
-            p0 = base + Vector((0.03 * x * math.sin(t0 * 2.5), -length * t0, -0.06 * t0 ** 2))
-            p1 = base + Vector((0.03 * x * math.sin(t1 * 2.5), -length * t1, -0.06 * t1 ** 2))
-            d = p1 - p0
-            r0, r1 = 0.026 * (1 - t0) + 0.004, 0.026 * (1 - t1) + 0.004 * (i < segs - 1)
-            m = Matrix.Translation((p0 + p1) / 2) @ d.to_track_quat("Z", "Y").to_matrix().to_4x4()
-            bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=10, radius1=r0,
-                                  radius2=max(r1, 0.0), depth=d.length * 1.08, matrix=m)
-        me = bpy.data.meshes.new(f"Dagger_{s_}")
-        bm.to_mesh(me)
-        bm.free()
-        obj = bpy.data.objects.new(f"Dagger_{s_}", me)
-        bpy.context.scene.collection.objects.link(obj)
-        for poly in me.polygons:
-            poly.use_smooth = True
-        me.materials.append(bone_m)
-        obj["bone"] = f"hand.{s_}"
-        parts.append(obj)
+    parts = [body, arms_obj] + daggers(material("Bone", "#D9B98C", 0.55), FIST_X, SHOULDER_Z)
     print(f"lizard_warrior: body {len(body.data.vertices)} verts, arms {len(arms_obj.data.vertices)} verts")
     return parts

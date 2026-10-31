@@ -1,0 +1,161 @@
+{
+ "height_m": 1.9,
+ "views": [
+  {
+   "angle": 0,
+   "file": "v000.png",
+   "axis_col": 71.26732673267327,
+   "bottom_row": 336,
+   "top_row": 12,
+   "tex_offset": [
+    -484,
+    0
+   ],
+   "tex_corr": 0.538,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 30,
+   "file": "v030.png",
+   "axis_col": 90.0,
+   "bottom_row": 336,
+   "top_row": 12,
+   "tex_offset": [
+    -484,
+    0
+   ],
+   "tex_corr": 0.445,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 60,
+   "file": "v060.png",
+   "axis_col": 78.6162623539982,
+   "bottom_row": 336,
+   "top_row": 11,
+   "tex_offset": [
+    -485,
+    3
+   ],
+   "tex_corr": 0.394,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 90,
+   "file": "v090.png",
+   "axis_col": 80.0,
+   "bottom_row": 336,
+   "top_row": 6,
+   "tex_offset": [
+    -483,
+    2
+   ],
+   "tex_corr": 0.412,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 120,
+   "file": "v120.png",
+   "axis_col": 73.5,
+   "bottom_row": 336,
+   "top_row": 9,
+   "tex_offset": [
+    -487,
+    -1
+   ],
+   "tex_corr": 0.462,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 150,
+   "file": "v150.png",
+   "axis_col": 65.0,
+   "bottom_row": 336,
+   "top_row": 7,
+   "tex_offset": [
+    -482,
+    2
+   ],
+   "tex_corr": 0.412,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 180,
+   "file": "v180.png",
+   "axis_col": 71.3076923076923,
+   "bottom_row": 336,
+   "top_row": 6,
+   "tex_offset": [
+    -482,
+    1
+   ],
+   "tex_corr": 0.468,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 210,
+   "file": "v210.png",
+   "axis_col": 84.5,
+   "bottom_row": 336,
+   "top_row": 6,
+   "tex_offset": [
+    -485,
+    -1
+   ],
+   "tex_corr": 0.431,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 240,
+   "file": "v240.png",
+   "axis_col": 72.0,
+   "bottom_row": 336,
+   "top_row": 8,
+   "tex_offset": [
+    -487,
+    0
+   ],
+   "tex_corr": 0.465,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 270,
+   "file": "v270.png",
+   "axis_col": 64.5,
+   "bottom_row": 336,
+   "top_row": 7,
+   "tex_offset": [
+    -486,
+    0
+   ],
+   "tex_corr": 0.492,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 300,
+   "file": "v300.png",
+   "axis_col": 63.625,
+   "bottom_row": 336,
+   "top_row": 12,
+   "tex_offset": [
+    -486,
+    0
+   ],
+   "tex_corr": 0.419,
+   "m_per_px": 0.00578386605783866
+  },
+  {
+   "angle": 330,
+   "file": "v330.png",
+   "axis_col": 64.81889763779527,
+   "bottom_row": 336,
+   "top_row": 16,
+   "tex_offset": [
+    -489,
+    0
+   ],
+   "tex_corr": 0.407,
+   "m_per_px": 0.00578386605783866
+  }
+ ]
+}

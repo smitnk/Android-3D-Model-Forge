@@ -6,7 +6,7 @@ on:
       model_type:
         description: "Model type"
         type: choice
-        options: [chibi_humanoid, clay_chibi, gorilla, round_buddy, snow_buddy, lizard_warrior]
+        options: [chibi_humanoid, clay_chibi, gorilla, round_buddy, snow_buddy, lizard_warrior, lizard_refined]
         default: chibi_humanoid
       character_name:
         description: "Character name for file names (empty = the model's default name)"
