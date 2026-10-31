@@ -181,7 +181,7 @@ def project_and_label(obj, views, hw):
     bm.free()
     uv = me.uv_layers.new(name="UVMap")
     co = np.array([v.co[:] for v in me.vertices])
-    labels = []
+    labels, bone_like = [], []
     for poly in me.polygons:
         n, c = np.array(poly.normal[:]), np.array(poly.center[:])
         order = sorted(range(len(views)), key=lambda k: -float(n @ views[k]["cam"]))
@@ -201,6 +201,8 @@ def project_and_label(obj, views, hw):
         cc, rr = image_xy(c[None], v)
         r, g, b = v["rgb"][int(np.clip(rr[0], 0, v["h"] - 1)), int(np.clip(cc[0], 0, v["w"] - 1))] * 255
         luma, chroma, ax, z = 0.299 * r + 0.587 * g + 0.114 * b, max(r, g, b) - min(r, g, b), abs(c[0]), c[2]
+        if luma > 125 and r - b > 30:
+            bone_like.append((round(z, 2), round(ax, 2), round(hw(z), 2), v["angle"]))
         if luma > 125 and r - b > 30 and z < 0.62 * H and ax > hw(z) - 0.02:
             labels.append("dagger")
         elif ARMOUR_Z[0] < z < ARMOUR_Z[1] and ax <= hw(z) + 0.02 and chroma < 32:
@@ -209,6 +211,7 @@ def project_and_label(obj, views, hw):
             labels.append("cloth")
         else:
             labels.append("skin")
+    print(f"lizard_refined: {len(bone_like)} bone-coloured faces (z, |x|, torso half-width, view): {bone_like[:12]}")
     return smooth_labels(me, labels)
 
 
@@ -276,7 +279,7 @@ def raise_arms(objs, hw):
     for o in objs:
         for vtx in o.data.vertices:
             x, y, z = vtx.co
-            if z > SH[1] + 0.08 or z < 0.55:
+            if z > SH[1] + 0.08 or z < 0.3:  # above the feet: the hanging dagger tips reach ~0.39 m
                 continue
             w = min(1.0, max(0.0, (abs(x) - hw(z)) / 0.06))
             if w == 0:
