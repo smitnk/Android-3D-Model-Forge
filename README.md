@@ -16,6 +16,7 @@ No PC, no local Blender, no API keys, no paid services.
 
 | | Model | Download (ZIP: GLB + BLEND + previews + report) | Single files |
 |---|---|---|---|
+| <img src="docs/preview/lizard-warrior-refined-front.png" width="160" alt="Lizard Warrior Refined preview"> | **Lizard Warrior Refined** — TripoSR template (free, CPU) trimmed by all 12 sheet views, drawing projected from every side, separate Armour + Loincloth parts, arms posed at voxel level, clean daggers | [lizard-warrior-refined.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/lizard-warrior-refined.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/lizard-warrior-refined.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/lizard-warrior-refined.blend) · [report](docs/preview/lizard-warrior-refined-REPORT.md) |
 | <img src="docs/preview/lizard-warrior-front.png" width="160" alt="Lizard Warrior preview"> | **Lizard Warrior** — carved from a 12-view turnaround (wireframe row for shape, textured row for colour), T-pose arms, bone daggers | [lizard-warrior.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/lizard-warrior.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/lizard-warrior.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/lizard-warrior.blend) · [report](docs/preview/lizard-warrior-REPORT.md) |
 | <img src="docs/preview/round-buddy-front.png" width="160" alt="Round Buddy preview"> | **Round Buddy** — built from a 24-view turnaround sheet: measured proportions, T-pose arms, face projected from the drawing | [round-buddy.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/round-buddy.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/round-buddy.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/round-buddy.blend) · [report](docs/preview/round-buddy-REPORT.md) |
 | <img src="docs/preview/snow-buddy-front.png" width="160" alt="Snow Buddy preview"> | **Snow Buddy** — white round cartoon character with dot eyes, open smile and red tongue, generated from procedural geometry | [snow-buddy.zip](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/snow-buddy.zip) | [GLB](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/snow-buddy.glb) · [BLEND](https://github.com/smitnk/Android-3D-Model-Forge/releases/download/model-latest/snow-buddy.blend) · [report](docs/preview/snow-buddy-REPORT.md) |
@@ -29,6 +30,10 @@ replaced each time a model is published.
 
 <details><summary>More views</summary>
 
+<p align="center">
+  <img src="docs/preview/lizard-warrior-refined-three-quarter.png" width="31%" alt="Lizard Warrior Refined three-quarter">
+  <img src="docs/preview/lizard-warrior-refined-back.png" width="31%" alt="Lizard Warrior Refined back">
+</p>
 <p align="center">
   <img src="docs/preview/lizard-warrior-three-quarter.png" width="31%" alt="Lizard Warrior three-quarter">
   <img src="docs/preview/lizard-warrior-back.png" width="31%" alt="Lizard Warrior back">
@@ -87,7 +92,8 @@ Patterns the agent can copy: `scripts/round_buddy.py` (measured shapes + project
 **Actions → AI Template (TripoSR, CPU) → Run workflow** turns one prepared image (gray background, figure centred,
 e.g. `assets/ai-input/lizard-warrior.png`) into a rough textured 3D mesh in about a minute on GitHub's free runner
 (peak ~3.7 GB RAM, no GPU). The mesh is one fused surface in the pose of the image: useful as a 3D reference for
-building a proper model, not a finished, rigged character. Result: the run's artifact and
+building a proper model, not a finished, rigged character. `scripts/lizard_refined.py` shows the full refinement
+(fit to the sheet, trim with all views, project the drawing, split parts, pose, rig). Result: the run's artifact and
 [`ci-results/latest/triposr`](https://github.com/smitnk/Android-3D-Model-Forge/tree/ci-results/latest/triposr).
 
 ## Features
