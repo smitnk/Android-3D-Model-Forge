@@ -49,15 +49,16 @@ jobs:
 
       - name: Install CPU dependencies
         run: |
-          set -o pipefail
+          set -eo pipefail
+          exec > >(tee -a logs.txt) 2>&1
           python -m pip install -q --upgrade pip
           pip install -q torch==2.3.1 --index-url https://download.pytorch.org/whl/cpu
           pip install -q "numpy<2" omegaconf==2.3.0 Pillow einops==0.7.0 transformers==4.35.0 trimesh==4.0.5 \
             huggingface-hub imageio xatlas==0.0.9 moderngl==5.10.0
-          pip install -q --no-build-isolation git+https://github.com/tatsy/torchmcubes.git
+          pip install --no-build-isolation git+https://github.com/tatsy/torchmcubes.git
           # run.py imports rembg even with --no-remove-bg; a stub avoids the onnxruntime dependency chain
           mkdir -p /tmp/stubs && printf 'def new_session(*a, **k):\n    return None\n\ndef remove(*a, **k):\n    raise RuntimeError("background removal disabled; supply a prepared image")\n' > /tmp/stubs/rembg.py
-          python -c "import torch, torchmcubes; print('torch', torch.__version__)" 2>&1 | tee -a logs.txt
+          python -c "import torch, torchmcubes; print('torch', torch.__version__)"
 
       - name: Run TripoSR on CPU
         env:
