@@ -28,16 +28,17 @@ test_filter_strips_unsafe_chars (test_timeline.TimelineTest.test_filter_strips_u
 test_shots_cover_all_frames_without_gaps (test_timeline.TimelineTest.test_shots_cover_all_frames_without_gaps) ... ok
 
 ----------------------------------------------------------------------
-Ran 15 tests in 0.001s
+Ran 15 tests in 0.002s
 
 OK (skipped=3)
-06:11:13 | INFO: Data are loaded, start creating Blender stuff
-06:11:13 | INFO: Blender create Mesh node geometry_0
-06:11:13 | INFO: glTF import finished in 0.07s
+06:13:00 | INFO: Data are loaded, start creating Blender stuff
+06:13:00 | INFO: Blender create Mesh node geometry_0
+06:13:00 | INFO: glTF import finished in 0.09s
 Blender 4.2.3 LTS (hash 0e22e4fcea03 built 2024-10-14 23:31:34)
-T-pose self-check failed: {'arm_angle_deg_L': 48.633, 'arm_angle_deg_R': 48.716, 'pass': False}
+T-pose self-check failed: {'arm_angle_deg_L': 48.633, 'arm_angle_deg_R': 48.673, 'pass': False}
 lizard_refined: template fit IoU 0.755 with width x0.90, depth x0.95
 lizard_refined: view IoU 0:0.37 30:0.36 60:0.33 90:0.41 120:0.41 150:0.34 180:0.37 210:0.36 240:0.44 270:0.42 300:0.36 330:0.36
 lizard_refined: trim kept 73.5% of 211829 voxels
-lizard_refined: face labels {'skin': 13194, 'armour': 6858, 'cloth': 11263, 'dagger': 11}
-lizard_refined: body 31331 verts, armour 15670, loincloth 22874
+lizard_refined: 1760 bone-coloured faces (z, |x|, torso half-width, view): [(0.74, 0.25, 0.3, 330), (0.81, 0.21, 0.3, 330), (0.03, 0.18, 0.4, 30), (1.37, 0.12, 0.4, 330), (0.92, 0.07, 0.29, 0), (1.62, 0.14, 0.24, 270), (1.64, 0.14, 0.24, 270), (1.64, 0.14, 0.24, 270), (1.64, 0.16, 0.24, 300), (1.65, 0.14, 0.2, 300), (1.61, 0.14, 0.25, 300), (1.65, 0.14, 0.2, 300)]
+lizard_refined: face labels {'skin': 13191, 'armour': 6859, 'cloth': 11260, 'dagger': 16}
+lizard_refined: body 31331 verts, armour 15672, loincloth 22872
