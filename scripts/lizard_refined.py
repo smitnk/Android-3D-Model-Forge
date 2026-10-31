@@ -156,6 +156,11 @@ def trim_and_symmetrise(occ, lo, views):
         inside = np.zeros(len(pts), bool)
         inside[ok] = m[ri[ok], ci[ok]]
         keep &= inside
+    # remove the template's blobby blades (replaced by clean daggers): voxels along the drawn blade below the fist
+    blade_start = FIST + 0.07 * (TIP - FIST) / np.linalg.norm(TIP - FIST)
+    blade = (seg_dist(np.stack([np.abs(pts[:, 0]), pts[:, 2]], 1), blade_start, TIP) < 0.06) & (np.abs(pts[:, 0]) > 0.25)
+    keep &= ~blade
+    print(f"lizard_refined: removed {blade.sum()} blade voxels")
     out = np.zeros_like(occ)
     out[tuple(idx[keep].T)] = True
     print(f"lizard_refined: trim kept {keep.mean():.1%} of {len(pts)} voxels")
@@ -213,7 +218,7 @@ def project_and_label(obj, views, hw):
     bm.free()
     uv = me.uv_layers.new(name="UVMap")
     co = np.array([v.co[:] for v in me.vertices])
-    labels, bone_like = [], []
+    labels = []
     for poly in me.polygons:
         n, c = np.array(poly.normal[:]), np.array(poly.center[:])
         order = sorted(range(len(views)), key=lambda k: -float(n @ views[k]["cam"]))
@@ -233,13 +238,7 @@ def project_and_label(obj, views, hw):
         cc, rr = image_xy(c[None], v)
         r, g, b = v["rgb"][int(np.clip(rr[0], 0, v["h"] - 1)), int(np.clip(cc[0], 0, v["w"] - 1))] * 255
         luma, chroma, ax, z = 0.299 * r + 0.587 * g + 0.114 * b, max(r, g, b) - min(r, g, b), abs(c[0]), c[2]
-        if luma > 125 and r - b > 30:
-            bone_like.append((round(z, 2), round(ax, 2), round(hw(z), 2), v["angle"]))
-        on_arm = float(arm_weight(ax, z)) > 0.5
-        near_blade = float(seg_dist(np.array([ax, z]), FIST, TIP)) < 0.08
-        if luma > 125 and r - b > 30 and near_blade:
-            labels.append("dagger")
-        elif on_arm:
+        if float(arm_weight(ax, z)) > 0.5:
             labels.append("skin")
         elif ARMOUR_Z[0] < z < ARMOUR_Z[1] and ax <= hw(z) + 0.02 and chroma < 32:
             labels.append("armour")
@@ -247,7 +246,6 @@ def project_and_label(obj, views, hw):
             labels.append("cloth")
         else:
             labels.append("skin")
-    print(f"lizard_refined: {len(bone_like)} bone-coloured faces (z, |x|, torso half-width, view): {bone_like[:12]}")
     return smooth_labels(me, labels)
 
 
@@ -364,23 +362,19 @@ def build(a, material, part):
     labels = project_and_label(body, views, hw)
     for m in material_set(views, "Skin", 0.0, 0.8):
         body.data.materials.append(m)
-    counts = {k: labels.count(k) for k in ("skin", "armour", "cloth", "dagger")}
+    counts = {k: labels.count(k) for k in ("skin", "armour", "cloth")}
     print(f"lizard_refined: face labels {counts}")
     armour = shell(body, labels, "armour", "Armour", 0.004, 0.008, material_set(views, "Armour", 0.55, 0.35))
     cloth = shell(body, labels, "cloth", "Loincloth", 0.003, 0.005, material_set(views, "Cloth", 0.0, 0.95))
-    bm = bmesh.new()                                     # body: drop the blobby template daggers, close the holes
-    bm.from_mesh(body.data)
-    bm.faces.ensure_lookup_table()
-    bmesh.ops.delete(bm, geom=[f for f in bm.faces if labels[f.index] == "dagger"], context="FACES")
-    bmesh.ops.holes_fill(bm, edges=[e for e in bm.edges if e.is_boundary], sides=0)
-    bm.to_mesh(body.data)
-    bm.free()
     for p in body.data.polygons:
         p.use_smooth = True
 
     # 6. T-pose, clean daggers
     raise_arms([body, armour, cloth])
     fist_x = SH[0] + float(np.linalg.norm(FIST - SH))
+    xs = np.array([abs(vv.co.x) for vv in body.data.vertices if abs(vv.co.z - SH[1]) < 0.15])
+    print("lizard_refined: body |x| near shoulder height, counts per 0.1 m: "
+          + " ".join(f"{b0:.1f}:{int(((xs >= b0) & (xs < b0 + 0.1)).sum())}" for b0 in np.arange(0, 1.4, 0.1)))
     parts = [body, armour, cloth] + daggers(material("Bone", "#D9B98C", 0.55), fist_x, SH[1])
     for o in (body, armour, cloth):
         o["bone"] = ""
