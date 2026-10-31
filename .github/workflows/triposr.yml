@@ -68,6 +68,7 @@ jobs:
         run: |
           set -o pipefail
           cp "$IMAGE" /tmp/input.png
+          mkdir -p /tmp/tsr-out/0   # run.py only creates it when it removes the background itself
           cd /tmp/TripoSR
           PYTHONPATH=/tmp/stubs /usr/bin/time -v python run.py /tmp/input.png --device cpu --no-remove-bg \
             --model-save-format glb --mc-resolution "$RES" --output-dir /tmp/tsr-out 2>&1 | tee -a "$GITHUB_WORKSPACE/logs.txt"
