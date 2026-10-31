@@ -14,7 +14,7 @@ Pipeline (img2threejs: reconstruct from the reference, verify against it):
   6. T-pose    - the sheet's hanging arms are rotated about the shoulder to horizontal (blended at the
                  armpit), clean procedural daggers go in the fists, the usual 17-bone rig follows.
 Hanging-pose arm landmarks measured on the 0-degree view (|x|, z in metres, H = 1.9): shoulder (0.26, 1.44),
-wrist (0.40, 0.88), fist centre (0.41, 0.82). Legs at x +-0.175, crotch z 0.39.
+wrist (0.40, 0.88), fist centre (0.41, 0.82), dagger tip (0.38, 0.42). Legs at x +-0.175, crotch z 0.39.
 """
 import json
 import math
@@ -35,6 +35,7 @@ REF = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "
 SH = np.array([0.26, 1.44])
 WR = np.array([0.40, 0.88])
 FIST = np.array([0.41, 0.82])
+TIP = np.array([0.38, 0.42])        # hanging dagger tip (blade points down from the fist)
 ARMOUR_Z = (0.58 * H, 0.86 * H)
 CLOTH_Z = (0.24 * H, 0.53 * H)
 
@@ -161,6 +162,37 @@ def trim_and_symmetrise(occ, lo, views):
     return out | out[::-1]                             # T-pose policy: left/right symmetric
 
 
+# ---------------------------------------------------------------- arm membership
+def seg_dist(p, a, b):
+    ab = b - a
+    t = np.clip(((p - a) @ ab) / (ab @ ab), 0.0, 1.0)
+    return np.linalg.norm(p - (a + np.outer(t, ab) if p.ndim == 2 else a + t * ab), axis=-1)
+
+
+def arm_weight(ax, z):
+    """0..1: how much a point (|x|, z) belongs to the hanging arm (shoulder -> fist -> dagger tip).
+    Distance-based because in the drawing the fists touch the loincloth, so silhouettes cannot separate them."""
+    p = np.stack([np.asarray(ax, float), np.asarray(z, float)], -1)
+    d = np.minimum(seg_dist(p, SH, FIST), seg_dist(p, FIST, TIP))
+    w_line = np.clip((0.11 - d) / 0.04, 0.0, 1.0)
+    w_shoulder = np.clip((SH[1] - 0.02 - np.asarray(z, float)) / 0.12, 0.0, 1.0)  # fade under the pad
+    return w_line * w_shoulder * (np.asarray(ax, float) > 0.17)
+
+
+def torso_axis(mask):
+    """Body-axis column from the torso rows (armpit..waist), where the arms are separate runs."""
+    rows = np.where(mask.any(1))[0]
+    t, b = rows.min(), rows.max()
+    cols = []
+    for r in range(int(t + 0.28 * (b - t)), int(t + 0.45 * (b - t))):
+        xs = np.where(mask[r])[0]
+        runs = np.split(xs, np.where(np.diff(xs) > 1)[0] + 1)
+        mid = mask.shape[1] / 2
+        run = min(runs, key=lambda q: abs((q.min() + q.max()) / 2 - mid))
+        cols.append((run.min() + run.max()) / 2)
+    return float(np.median(cols))
+
+
 # ---------------------------------------------------------------- texture + labels
 def torso_half_width(front):
     """Half-width (m) of the body WITHOUT the hanging arms, per front-view row."""
@@ -203,8 +235,12 @@ def project_and_label(obj, views, hw):
         luma, chroma, ax, z = 0.299 * r + 0.587 * g + 0.114 * b, max(r, g, b) - min(r, g, b), abs(c[0]), c[2]
         if luma > 125 and r - b > 30:
             bone_like.append((round(z, 2), round(ax, 2), round(hw(z), 2), v["angle"]))
-        if luma > 125 and r - b > 30 and z < 0.62 * H and ax > hw(z) - 0.02:
+        on_arm = float(arm_weight(ax, z)) > 0.5
+        near_blade = float(seg_dist(np.array([ax, z]), FIST, TIP)) < 0.08
+        if luma > 125 and r - b > 30 and near_blade:
             labels.append("dagger")
+        elif on_arm:
+            labels.append("skin")
         elif ARMOUR_Z[0] < z < ARMOUR_Z[1] and ax <= hw(z) + 0.02 and chroma < 32:
             labels.append("armour")
         elif CLOTH_Z[0] < z < CLOTH_Z[1] and ax <= hw(z) + 0.02:
@@ -271,17 +307,15 @@ def shell(src, labels, which, name, offset, thickness, mats):
 
 
 # ---------------------------------------------------------------- pose
-def raise_arms(objs, hw):
-    """Rotate the hanging arms about the shoulder to horizontal; blend over 6 cm outside the torso."""
+def raise_arms(objs):
+    """Rotate the hanging arms about the shoulder to horizontal, weighted by arm_weight (blends at the armpit)."""
     d = WR - SH
     theta = -math.atan2(d[1], d[0])                    # angle that maps shoulder->wrist onto +x
     c, s = math.cos(theta), math.sin(theta)
     for o in objs:
         for vtx in o.data.vertices:
             x, y, z = vtx.co
-            if z > SH[1] + 0.08 or z < 0.3:  # above the feet: the hanging dagger tips reach ~0.39 m
-                continue
-            w = min(1.0, max(0.0, (abs(x) - hw(z)) / 0.06))
+            w = float(arm_weight(abs(x), z))
             if w == 0:
                 continue
             u, t = abs(x) - SH[0], z - SH[1]
@@ -306,7 +340,7 @@ def build(a, material, part):
     print(f"lizard_refined: template fit IoU {best[0]:.3f} with width x{best[1]:.2f}, depth x{best[2]:.2f}")
     v = v * [best[1], best[2], 1]
     front = views[0]
-    shift = (fit_axis(v[::10], front) - front["axis_col"]) * front["s"]  # put the body axis (hips) at x = 0
+    shift = (fit_axis(v[::10], front) - torso_axis(front["mask"])) * front["s"]  # body axis -> x = 0
     v[:, 0] += shift
     for view in views:
         view["axis"] = fit_axis(v[::10], view)
@@ -345,7 +379,7 @@ def build(a, material, part):
         p.use_smooth = True
 
     # 6. T-pose, clean daggers
-    raise_arms([body, armour, cloth], hw)
+    raise_arms([body, armour, cloth])
     fist_x = SH[0] + float(np.linalg.norm(FIST - SH))
     parts = [body, armour, cloth] + daggers(material("Bone", "#D9B98C", 0.55), fist_x, SH[1])
     for o in (body, armour, cloth):
