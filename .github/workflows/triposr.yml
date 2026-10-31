@@ -1,0 +1,127 @@
+name: AI Template (TripoSR, CPU)
+
+# Experimental: run TripoSR (MIT, https://github.com/VAST-AI-Research/TripoSR) on a free GitHub runner (CPU only)
+# to turn one image into a rough textured mesh that can serve as a 3D reference. Not a published model.
+on:
+  workflow_dispatch:
+    inputs:
+      image:
+        description: "Input image in the repo (gray background, figure centred)"
+        type: string
+        default: "assets/ai-input/lizard-warrior.png"
+      mc_resolution:
+        description: "Marching-cubes resolution (higher = finer mesh, slower)"
+        type: string
+        default: "256"
+  push:
+    branches: [main]
+    paths:
+      - "assets/ai-input/**"
+      - ".github/workflows/triposr.yml"
+
+permissions:
+  contents: write   # push the result snapshot to the ci-results branch
+
+concurrency:
+  group: triposr
+  cancel-in-progress: false
+
+env:
+  TRIPOSR_COMMIT: 107cefdc244c39106fa830359024f6a2f1c78871
+  BLENDER_VERSION: "4.2.3"
+  BLENDER_SERIES: "4.2"
+
+jobs:
+  triposr:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Get TripoSR (pinned)
+        run: |
+          git clone -q https://github.com/VAST-AI-Research/TripoSR /tmp/TripoSR
+          git -C /tmp/TripoSR checkout -q "$TRIPOSR_COMMIT"
+
+      - name: Install CPU dependencies
+        run: |
+          set -o pipefail
+          python -m pip install -q --upgrade pip
+          pip install -q torch==2.3.1 --index-url https://download.pytorch.org/whl/cpu
+          pip install -q "numpy<2" omegaconf==2.3.0 Pillow einops==0.7.0 transformers==4.35.0 trimesh==4.0.5 \
+            huggingface-hub imageio xatlas==0.0.9 moderngl==5.10.0
+          pip install -q --no-build-isolation git+https://github.com/tatsy/torchmcubes.git
+          # run.py imports rembg even with --no-remove-bg; a stub avoids the onnxruntime dependency chain
+          mkdir -p /tmp/stubs && printf 'def new_session(*a, **k):\n    return None\n\ndef remove(*a, **k):\n    raise RuntimeError("background removal disabled; supply a prepared image")\n' > /tmp/stubs/rembg.py
+          python -c "import torch, torchmcubes; print('torch', torch.__version__)" 2>&1 | tee -a logs.txt
+
+      - name: Run TripoSR on CPU
+        env:
+          IMAGE: ${{ inputs.image || 'assets/ai-input/lizard-warrior.png' }}
+          RES: ${{ inputs.mc_resolution || '256' }}
+        run: |
+          set -o pipefail
+          cp "$IMAGE" /tmp/input.png
+          cd /tmp/TripoSR
+          PYTHONPATH=/tmp/stubs /usr/bin/time -v python run.py /tmp/input.png --device cpu --no-remove-bg \
+            --model-save-format glb --mc-resolution "$RES" --output-dir /tmp/tsr-out 2>&1 | tee -a "$GITHUB_WORKSPACE/logs.txt"
+          ls -la /tmp/tsr-out/0 | tee -a "$GITHUB_WORKSPACE/logs.txt"
+          mkdir -p "$GITHUB_WORKSPACE/out"
+          slug=$(basename "$IMAGE" .png)
+          echo "SLUG=$slug" >> "$GITHUB_ENV"
+          cp /tmp/tsr-out/0/mesh.glb "$GITHUB_WORKSPACE/out/$slug-triposr.glb"
+
+      - name: Structural check
+        run: python3 scripts/glb_inspect.py "out/$SLUG-triposr.glb" | tee -a logs.txt
+
+      - name: Restore cached Blender
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/blender
+          key: blender-${{ env.BLENDER_VERSION }}-linux-x64
+
+      - name: Download pinned Blender
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          file="blender-${BLENDER_VERSION}-linux-x64.tar.xz"
+          curl -fsSL --retry 3 -o "/tmp/$file" "https://download.blender.org/release/Blender${BLENDER_SERIES}/$file"
+          mkdir -p ~/blender && tar -xf "/tmp/$file" -C ~/blender --strip-components=1
+
+      - name: Render previews
+        run: |
+          set -o pipefail
+          sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libxkbcommon0 libsm6 libice6 libegl1 > /dev/null
+          ~/blender/blender -b --factory-startup --python-exit-code 1 --python scripts/preview_glb.py -- \
+            --glb "out/$SLUG-triposr.glb" --out out --slug "$SLUG-triposr" 2>&1 | grep -v "^Fra:" | tee -a logs.txt
+
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: triposr-${{ github.run_number }}
+          path: out/
+          retention-days: 30
+
+      - name: Save results snapshot
+        if: always()
+        env:
+          STATUS: ${{ job.status }}
+        run: |
+          set +e
+          rm -rf /tmp/ci && mkdir -p /tmp/ci
+          cp logs.txt out/* /tmp/ci/ 2>/dev/null
+          echo "run=${{ github.run_number }} type=triposr status=$STATUS sha=${{ github.sha }}" > /tmp/ci/STATUS.txt
+          git fetch origin ci-results
+          git worktree add -B ci-results /tmp/wt origin/ci-results
+          d=/tmp/wt/latest/triposr; rm -rf "$d" && mkdir -p "$d" && cp /tmp/ci/* "$d"/
+          cd /tmp/wt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "TripoSR results run ${{ github.run_number }}: $STATUS"
+          for i in 1 2 3; do git pull -q --rebase origin ci-results && git push -q origin ci-results && break; sleep 5; done
